@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" fill="none">
-  <rect width="1200" height="630" fill="#1A2744"/>
-  <text x="600" y="280" text-anchor="middle" fill="white" font-family="Inter, system-ui, sans-serif" font-weight="700" font-size="72">novshi</text>
-  <text x="600" y="370" text-anchor="middle" fill="#BAC8FF" font-family="system-ui, sans-serif" font-weight="400" font-size="28">豊かさを、描きなおす。</text>
+  <rect width="1200" height="630" fill="#0E1F33"/>
+  <text x="600" y="280" text-anchor="middle" fill="white" font-family="Inter, system-ui, sans-serif" font-weight="700" font-size="64">novshi</text>
+  <text x="600" y="370" text-anchor="middle" fill="#A9BDD7" font-family="system-ui, sans-serif" font-weight="400" font-size="24">豊かさを、描きなおす。</text>
 </svg>

@@ -1,6 +1,5 @@
 ---
 const currentPath = Astro.url.pathname;
-
 const navItems = [
   { href: '/services', label: 'サービス' },
   { href: '/about', label: '会社概要' },
@@ -10,21 +9,24 @@ const navItems = [
 ---
 
 <header id="site-header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
-  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex items-center justify-between h-16 lg:h-20">
-      <a href="/" class="text-2xl lg:text-3xl font-bold tracking-tight text-gray-900 hover:text-accent transition-colors" style="font-family: 'Inter', sans-serif;">
-        novshi
+  <div class="max-w-[1120px] mx-auto px-5 sm:px-8">
+    <div class="flex items-center justify-between h-16 lg:h-[72px]">
+      <a href="/" class="block">
+        <picture>
+          <source srcset="/logo-black-sm.webp" type="image/webp" />
+          <img src="/logo-black-sm.png" alt="novshi" class="h-7 lg:h-8 w-auto" />
+        </picture>
       </a>
 
-      <nav class="hidden md:flex items-center gap-8">
+      <nav class="hidden md:flex items-center gap-10">
         {navItems.map((item) => (
           <a
             href={item.href}
             class:list={[
-              'text-sm font-medium transition-colors hover:text-accent',
+              'text-[13px] font-medium tracking-wide transition-colors duration-200',
               currentPath === item.href || currentPath === item.href + '/'
-                ? 'text-accent'
-                : 'text-text-secondary',
+                ? 'text-gray-900'
+                : 'text-gray-500 hover:text-gray-900',
             ]}
           >
             {item.label}
@@ -32,29 +34,22 @@ const navItems = [
         ))}
       </nav>
 
-      <button
-        id="mobile-menu-btn"
-        class="md:hidden flex flex-col justify-center items-center w-10 h-10 gap-1.5"
-        aria-label="メニューを開く"
-        aria-expanded="false"
-      >
-        <span class="block w-6 h-0.5 bg-gray-900 transition-all duration-300 origin-center" id="bar1"></span>
-        <span class="block w-6 h-0.5 bg-gray-900 transition-all duration-300" id="bar2"></span>
-        <span class="block w-6 h-0.5 bg-gray-900 transition-all duration-300 origin-center" id="bar3"></span>
+      <button id="mobile-menu-btn" class="md:hidden flex flex-col justify-center items-center w-10 h-10 gap-[5px]" aria-label="メニュー" aria-expanded="false">
+        <span class="block w-5 h-[1.5px] bg-gray-900 transition-all duration-300 origin-center" id="bar1"></span>
+        <span class="block w-5 h-[1.5px] bg-gray-900 transition-all duration-300" id="bar2"></span>
+        <span class="block w-5 h-[1.5px] bg-gray-900 transition-all duration-300 origin-center" id="bar3"></span>
       </button>
     </div>
   </div>
 
-  <div id="mobile-menu" class="md:hidden fixed inset-0 top-16 bg-white/98 backdrop-blur-sm z-40 hidden">
-    <nav class="flex flex-col items-center justify-center gap-8 pt-20">
+  <div id="mobile-menu" class="md:hidden fixed inset-0 top-16 bg-white z-40 hidden">
+    <nav class="flex flex-col items-center gap-8 pt-24">
       {navItems.map((item) => (
         <a
           href={item.href}
           class:list={[
-            'text-lg font-medium transition-colors hover:text-accent',
-            currentPath === item.href || currentPath === item.href + '/'
-              ? 'text-accent'
-              : 'text-gray-900',
+            'text-base font-medium tracking-wide transition-colors duration-200',
+            currentPath === item.href || currentPath === item.href + '/' ? 'text-gray-900' : 'text-gray-500 hover:text-gray-900',
           ]}
         >
           {item.label}
@@ -64,7 +59,7 @@ const navItems = [
   </div>
 </header>
 
-<div class="h-16 lg:h-20"></div>
+<div class="h-16 lg:h-[72px]"></div>
 
 <script>
   const header = document.getElementById('site-header')!;
@@ -73,33 +68,23 @@ const navItems = [
   const bar1 = document.getElementById('bar1')!;
   const bar2 = document.getElementById('bar2')!;
   const bar3 = document.getElementById('bar3')!;
-
   let menuOpen = false;
 
   window.addEventListener('scroll', () => {
-    if (window.scrollY > 10) {
-      header.classList.add('bg-white/95', 'backdrop-blur-sm', 'shadow-sm');
-    } else {
-      header.classList.remove('bg-white/95', 'backdrop-blur-sm', 'shadow-sm');
-    }
+    header.classList.toggle('bg-white/90', window.scrollY > 10);
+    header.classList.toggle('backdrop-blur-md', window.scrollY > 10);
+    header.classList.toggle('border-b', window.scrollY > 10);
+    header.classList.toggle('border-gray-200/60', window.scrollY > 10);
   });
 
   mobileMenuBtn.addEventListener('click', () => {
     menuOpen = !menuOpen;
     mobileMenu.classList.toggle('hidden');
     mobileMenuBtn.setAttribute('aria-expanded', String(menuOpen));
-
-    if (menuOpen) {
-      bar1.style.transform = 'rotate(45deg) translate(3px, 3px)';
-      bar2.style.opacity = '0';
-      bar3.style.transform = 'rotate(-45deg) translate(3px, -3px)';
-      document.body.style.overflow = 'hidden';
-    } else {
-      bar1.style.transform = '';
-      bar2.style.opacity = '';
-      bar3.style.transform = '';
-      document.body.style.overflow = '';
-    }
+    bar1.style.transform = menuOpen ? 'rotate(45deg) translate(2px, 2px)' : '';
+    bar2.style.opacity = menuOpen ? '0' : '';
+    bar3.style.transform = menuOpen ? 'rotate(-45deg) translate(2px, -2px)' : '';
+    document.body.style.overflow = menuOpen ? 'hidden' : '';
   });
 
   mobileMenu.querySelectorAll('a').forEach((link) => {

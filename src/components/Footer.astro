@@ -1,6 +1,5 @@
 ---
 const currentYear = new Date().getFullYear();
-
 const footerLinks = [
   { href: '/services', label: 'サービス' },
   { href: '/about', label: '会社概要' },
@@ -11,47 +10,40 @@ const footerLinks = [
 ---
 
 <footer class="bg-navy-950 text-white">
-  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+  <div class="max-w-[1120px] mx-auto px-5 sm:px-8 py-20">
+    <div class="grid grid-cols-1 md:grid-cols-[1fr_auto_auto] gap-16">
       <div>
-        <a href="/" class="text-2xl font-bold tracking-tight text-white" style="font-family: 'Inter', sans-serif;">
-          novshi
+        <a href="/">
+          <picture>
+            <source srcset="/logo-white-sm.webp" type="image/webp" />
+            <img src="/logo-white-sm.png" alt="novshi" class="h-8 w-auto" />
+          </picture>
         </a>
-        <p class="mt-4 text-sm text-gray-400 leading-relaxed">
-          株式会社novshi（ノブシ）<br />
-          福岡県・熊本県
+        <p class="mt-5 text-sm text-gray-500 leading-relaxed max-w-xs">
+          九州に根ざし、テクノロジーの力で<br />地域の「はたらく」を変える。
         </p>
       </div>
 
       <div>
-        <h3 class="text-sm font-semibold uppercase tracking-wider text-gray-500 mb-4">ページ</h3>
         <ul class="space-y-3">
           {footerLinks.map((link) => (
             <li>
-              <a href={link.href} class="text-sm text-gray-400 hover:text-white transition-colors">
-                {link.label}
-              </a>
+              <a href={link.href} class="text-sm text-gray-500 hover:text-white transition-colors duration-200">{link.label}</a>
             </li>
           ))}
         </ul>
       </div>
 
-      <div>
-        <h3 class="text-sm font-semibold uppercase tracking-wider text-gray-500 mb-4">お問い合わせ</h3>
-        <p class="text-sm text-gray-400 leading-relaxed">
-          サービスに関するご質問・ご相談は<br />お気軽にお問い合わせください。
+      <div class="max-w-[200px]">
+        <p class="text-xs text-gray-600 leading-relaxed">
+          株式会社novshi<br />
+          福岡県・熊本県
         </p>
-        <a
-          href="/contact"
-          class="inline-block mt-4 px-5 py-2 text-sm font-medium border border-gray-600 text-gray-300 rounded-lg hover:border-white hover:text-white transition-all"
-        >
-          お問い合わせ
-        </a>
       </div>
     </div>
 
-    <div class="mt-12 pt-8 border-t border-gray-800 text-center">
-      <p class="text-xs text-gray-600">&copy; {currentYear} novshi Inc. All rights reserved.</p>
+    <div class="mt-16 pt-8 border-t border-white/10">
+      <p class="text-xs text-gray-600">&copy; {currentYear} novshi Inc.</p>
     </div>
   </div>
 </footer>

@@ -1,18 +1,18 @@
 @import "tailwindcss";
 
-/* ===== v2 Design System: Monotone + Navy Accent ===== */
+/* ===== v3 Design System: Monotone + Dark Navy ===== */
 
 @theme {
-  /* Navy Scale */
-  --color-navy-50: #F0F4FF;
-  --color-navy-100: #DBE4FF;
-  --color-navy-200: #BAC8FF;
-  --color-navy-500: #4C6EF5;
-  --color-navy-600: #3B5BDB;
-  --color-navy-700: #364FC7;
-  --color-navy-800: #1E3A5F;
-  --color-navy-900: #1A2744;
-  --color-navy-950: #0F172A;
+  /* Navy Scale — deep, authoritative navy */
+  --color-navy-50: #EEF2F7;
+  --color-navy-100: #D4DEEB;
+  --color-navy-200: #A9BDD7;
+  --color-navy-400: #4A6D8C;
+  --color-navy-600: #2C4F6E;
+  --color-navy-700: #1E3A5F;
+  --color-navy-800: #152C48;
+  --color-navy-900: #0E1F33;
+  --color-navy-950: #091520;
 
   /* Gray Scale */
   --color-gray-50: #FAFAFA;
@@ -25,10 +25,11 @@
   --color-gray-700: #404040;
   --color-gray-900: #171717;
 
-  /* Semantic Aliases */
-  --color-accent: #364FC7;
-  --color-accent-hover: #3B5BDB;
-  --color-accent-light: #F0F4FF;
+  /* Semantic */
+  --color-accent: #1E3A5F;
+  --color-accent-hover: #2C4F6E;
+  --color-accent-light: #EEF2F7;
+  --color-accent-dark: #0E1F33;
   --color-text-primary: #171717;
   --color-text-secondary: #525252;
   --color-text-muted: #737373;
@@ -58,8 +59,8 @@
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-display);
     font-weight: 700;
-    line-height: 1.4;
-    letter-spacing: 0;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
     color: var(--color-gray-900);
   }
 
@@ -69,36 +70,32 @@
   }
 }
 
-/* Scroll animations */
 @layer utilities {
   .fade-in-up {
     opacity: 0;
     transform: translateY(20px);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
   }
-
   .fade-in-up.visible {
     opacity: 1;
     transform: translateY(0);
   }
-
-  /* Staggered children */
-  .stagger-children > * {
+  .stagger > * {
     opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    transform: translateY(16px);
+    transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1), transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
   }
-
-  .stagger-children.visible > *:nth-child(1) { transition-delay: 0ms; opacity: 1; transform: translateY(0); }
-  .stagger-children.visible > *:nth-child(2) { transition-delay: 100ms; opacity: 1; transform: translateY(0); }
-  .stagger-children.visible > *:nth-child(3) { transition-delay: 200ms; opacity: 1; transform: translateY(0); }
-  .stagger-children.visible > *:nth-child(4) { transition-delay: 300ms; opacity: 1; transform: translateY(0); }
+  .stagger.visible > *:nth-child(1) { transition-delay: 0ms; opacity: 1; transform: none; }
+  .stagger.visible > *:nth-child(2) { transition-delay: 80ms; opacity: 1; transform: none; }
+  .stagger.visible > *:nth-child(3) { transition-delay: 160ms; opacity: 1; transform: none; }
+  .stagger.visible > *:nth-child(4) { transition-delay: 240ms; opacity: 1; transform: none; }
+  .stagger.visible > *:nth-child(5) { transition-delay: 320ms; opacity: 1; transform: none; }
+  .stagger.visible > *:nth-child(6) { transition-delay: 400ms; opacity: 1; transform: none; }
+  .stagger.visible > *:nth-child(7) { transition-delay: 480ms; opacity: 1; transform: none; }
 }
 
-/* Accessibility: respect reduced motion */
 @media (prefers-reduced-motion: reduce) {
-  .fade-in-up,
-  .stagger-children > * {
+  .fade-in-up, .stagger > * {
     opacity: 1;
     transform: none;
     transition: none;

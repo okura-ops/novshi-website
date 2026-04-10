@@ -5,63 +5,42 @@ import CTASection from '../components/CTASection.astro';
 ---
 
 <Layout title="サービス | 株式会社novshi" description="採用戦略・運用支援、外国人採用・定着支援、AI活用支援。九州の地方中小企業の採用課題を一気通貫で解決します。">
-  <Hero
-    title="採用の上流から下流まで、一気通貫で支援"
-    subtitle="九州×エッセンシャルワーカーの採用を、戦略設計から実行・改善まで。"
-    compact={true}
-  />
+  <Hero title="採用の上流から下流まで、一気通貫で支援" subtitle="九州×エッセンシャルワーカーの採用を、戦略設計から実行・改善まで。" compact={true} />
 
-  <!-- 3-channel strategy -->
-  <section class="py-16 lg:py-20 bg-bg-secondary">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-12 fade-in-up">
-        <h2 class="text-2xl lg:text-3xl font-bold text-gray-900">3チャネル認知戦略</h2>
-        <p class="mt-3 text-text-secondary">求職者の接点を多角的に設計し、採用力を最大化します。</p>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto stagger-children">
-        <div class="p-6 bg-white border border-border rounded-xl text-center">
-          <div class="w-10 h-10 mx-auto mb-3 flex items-center justify-center bg-accent-light text-accent rounded-lg">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+  <!-- 3 Channel -->
+  <section class="py-20 lg:py-24 bg-bg-secondary">
+    <div class="max-w-[1120px] mx-auto px-5 sm:px-8">
+      <h2 class="text-2xl font-bold text-gray-900 mb-4 fade-in-up">3チャネル認知戦略</h2>
+      <p class="text-text-secondary mb-12 fade-in-up">求職者の接点を多角的に設計し、採用力を最大化します。</p>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-px bg-gray-200 border border-gray-200 rounded-xl overflow-hidden stagger">
+        {[
+          { label: 'Indeed', desc: 'スポンサー求人のCPC最適化で応募単価を削減' },
+          { label: 'Meta広告', desc: 'Instagram/Facebookで潜在層にリーチ' },
+          { label: '自社採用HP', desc: 'AIO対応の構造化情報でAIにも求職者にも見つかる' },
+        ].map((ch) => (
+          <div class="bg-white p-8 lg:p-10">
+            <p class="text-base font-bold text-gray-900 mb-2">{ch.label}</p>
+            <p class="text-sm text-text-secondary">{ch.desc}</p>
           </div>
-          <h3 class="font-bold text-gray-900 mb-1">Indeed</h3>
-          <p class="text-xs text-text-secondary">スポンサー求人のCPC最適化で応募単価を削減</p>
-        </div>
-        <div class="p-6 bg-white border border-border rounded-xl text-center">
-          <div class="w-10 h-10 mx-auto mb-3 flex items-center justify-center bg-accent-light text-accent rounded-lg">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg>
-          </div>
-          <h3 class="font-bold text-gray-900 mb-1">Meta広告</h3>
-          <p class="text-xs text-text-secondary">Instagram/Facebookで潜在層にリーチ</p>
-        </div>
-        <div class="p-6 bg-white border border-border rounded-xl text-center">
-          <div class="w-10 h-10 mx-auto mb-3 flex items-center justify-center bg-accent-light text-accent rounded-lg">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9" /></svg>
-          </div>
-          <h3 class="font-bold text-gray-900 mb-1">自社採用HP</h3>
-          <p class="text-xs text-text-secondary">AIO対応の構造化情報でAIにも求職者にも見つかる</p>
-        </div>
+        ))}
       </div>
     </div>
   </section>
 
   <!-- 柱1 -->
-  <section id="recruitment" class="py-20 lg:py-28 scroll-mt-20">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="max-w-3xl fade-in-up">
-        <div class="flex items-center gap-3 mb-6">
-          <div class="w-10 h-10 flex items-center justify-center bg-accent text-white rounded-lg">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
-          </div>
-          <h2 class="text-2xl lg:text-3xl font-bold text-gray-900">採用戦略・運用支援</h2>
-        </div>
-        <p class="text-text-secondary leading-relaxed mb-10">
+  <section id="recruitment" class="py-24 lg:py-32 scroll-mt-20">
+    <div class="max-w-[1120px] mx-auto px-5 sm:px-8">
+      <div class="max-w-2xl fade-in-up">
+        <p class="text-xs font-semibold text-accent uppercase tracking-[0.15em] mb-4">Service 01</p>
+        <h2 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-6">採用戦略・運用支援</h2>
+        <p class="text-text-secondary leading-relaxed">
           「媒体に求人を出す」だけでは、人は来ません。
-          限られた母集団に対して、誰に・何を・どう届けるかを戦略的に設計し、データドリブンで改善し続ける——。
+          限られた母集団に対して、誰に・何を・どう届けるかを戦略的に設計し、データドリブンで改善し続ける。
           novshiは、その一連のプロセスを丸ごとお引き受けします。
         </p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 stagger-children">
+      <div class="mt-14 grid grid-cols-1 md:grid-cols-2 gap-y-8 gap-x-16 stagger">
         {[
           { title: 'EVP（採用強み）の言語化', desc: '貴社が選ばれる理由を構造的に整理し、採用メッセージとして言語化します。' },
           { title: 'AI求人最適化', desc: 'AirWork Hubを活用し、AI時代の検索行動に最適化された求人を作成します。' },
@@ -69,10 +48,9 @@ import CTASection from '../components/CTASection.astro';
           { title: 'Meta広告運用', desc: 'Instagram/Facebook採用広告で潜在求職者にリーチ。クリエイティブ制作から運用まで。' },
           { title: '採用HP構築・運用', desc: 'AIO対応の採用専用サイトを構築。求職者にもAIにも選ばれる情報設計を実現します。' },
           { title: 'KPIモニタリング・改善', desc: '応募数・表示数・CTR・CPAを可視化し、データに基づく継続的な改善を実施します。' },
-          { title: '組織・人事コンサルティング', desc: '採用だけでなく、定着・組織設計まで。貴社の課題に応じてスコープを設計します。' },
         ].map((item) => (
-          <div class="p-6 border border-border rounded-xl hover:border-navy-200 transition-colors duration-200">
-            <h3 class="font-bold text-gray-900 mb-2">{item.title}</h3>
+          <div class="border-l-2 border-gray-200 pl-6">
+            <h3 class="text-sm font-bold text-gray-900 mb-1">{item.title}</h3>
             <p class="text-sm text-text-secondary">{item.desc}</p>
           </div>
         ))}
@@ -81,35 +59,28 @@ import CTASection from '../components/CTASection.astro';
   </section>
 
   <!-- 柱2 -->
-  <section id="global" class="py-20 lg:py-28 bg-bg-secondary scroll-mt-20">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="max-w-3xl fade-in-up">
-        <div class="flex items-center gap-3 mb-6">
-          <div class="w-10 h-10 flex items-center justify-center bg-accent text-white rounded-lg">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" /></svg>
-          </div>
-          <h2 class="text-2xl lg:text-3xl font-bold text-gray-900">外国人採用・定着支援</h2>
-        </div>
-        <p class="text-text-secondary leading-relaxed mb-10">
+  <section id="global" class="py-24 lg:py-32 bg-bg-secondary scroll-mt-20">
+    <div class="max-w-[1120px] mx-auto px-5 sm:px-8">
+      <div class="max-w-2xl fade-in-up">
+        <p class="text-xs font-semibold text-accent uppercase tracking-[0.15em] mb-4">Service 02</p>
+        <h2 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-6">外国人採用・定着支援</h2>
+        <p class="text-text-secondary leading-relaxed">
           外国人材の採用は「紹介して終わり」ではありません。
-          住まい・在留資格・生活基盤の整備まで一貫してサポートすることで、
-          本当の意味での「定着」を実現します。
+          住まい・在留資格・生活基盤の整備まで一貫してサポートすることで、本当の意味での定着を実現します。
         </p>
       </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 stagger-children">
+      <div class="mt-14 grid grid-cols-1 sm:grid-cols-2 gap-8 stagger">
         {[
-          { title: '住居付き人材紹介', desc: 'novshiの空き家再生事業と連携し、住居とセットで人材をご紹介。有料職業紹介免許取得済み。', badge: '空き家事業連携' },
-          { title: '住宅確保支援', desc: '外国人材が安心して暮らせる住まいを確保。保証人問題・契約サポートも対応します。', badge: '空き家事業連携' },
-          { title: '在留資格・行政手続サポート', desc: 'ビザの取得・更新、各種届出など、煩雑な行政手続をサポートします。', badge: null },
-          { title: '定着支援', desc: '生活オリエンテーション、日本語サポート、文化適応支援で長期定着を促進します。', badge: null },
+          { title: '住居付き人材紹介', desc: '空き家再生事業と連携し、住居とセットで人材をご紹介。有料職業紹介免許取得済み。', note: '空き家事業連携' },
+          { title: '住宅確保支援', desc: '外国人材が安心して暮らせる住まいを確保。保証人問題・契約サポートも対応。', note: '空き家事業連携' },
+          { title: '在留資格・行政手続サポート', desc: 'ビザの取得・更新、各種届出など煩雑な行政手続をサポートします。', note: null },
+          { title: '定着支援', desc: '生活オリエンテーション、日本語サポート、文化適応支援で長期定着を促進。', note: null },
         ].map((item) => (
-          <div class="p-6 bg-white border border-border rounded-xl hover:border-navy-200 transition-colors duration-200">
+          <div class="bg-white p-8 border border-gray-200 rounded-lg">
             <div class="flex items-start justify-between mb-2">
-              <h3 class="font-bold text-gray-900">{item.title}</h3>
-              {item.badge && (
-                <span class="text-xs px-2 py-0.5 bg-accent-light text-accent rounded-full whitespace-nowrap">{item.badge}</span>
-              )}
+              <h3 class="text-sm font-bold text-gray-900">{item.title}</h3>
+              {item.note && <span class="text-[10px] font-medium text-accent bg-accent-light px-2 py-0.5 rounded-full whitespace-nowrap">{item.note}</span>}
             </div>
             <p class="text-sm text-text-secondary">{item.desc}</p>
           </div>
@@ -118,41 +89,31 @@ import CTASection from '../components/CTASection.astro';
     </div>
   </section>
 
-  <!-- AI活用支援 -->
-  <section id="ai" class="py-20 lg:py-28 scroll-mt-20">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="max-w-3xl mx-auto fade-in-up">
-        <div class="flex items-center gap-3 mb-6">
-          <div class="w-10 h-10 flex items-center justify-center bg-accent text-white rounded-lg">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
-          </div>
-          <h2 class="text-2xl lg:text-3xl font-bold text-gray-900">AI活用支援・研修</h2>
-        </div>
-
-        <p class="text-text-secondary leading-relaxed mb-8">
-          novshiは創業初日から「社員ゼロ・AI駆動型経営」を実践しています。
+  <!-- AI -->
+  <section id="ai" class="py-24 lg:py-32 scroll-mt-20">
+    <div class="max-w-[1120px] mx-auto px-5 sm:px-8">
+      <div class="max-w-2xl fade-in-up">
+        <p class="text-xs font-semibold text-accent uppercase tracking-[0.15em] mb-4">Appendix</p>
+        <h2 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-6">AI活用支援・研修</h2>
+        <p class="text-text-secondary leading-relaxed mb-10">
+          novshiは創業初日から社員ゼロ・AI駆動型経営を実践しています。
           その実践で培ったナレッジを体系化し、中小企業のAI導入を支援します。
         </p>
 
-        <div class="space-y-4">
+        <ul class="space-y-4">
           {[
             'AI-Driven経営の設計・導入コンサルティング',
-            '業務プロセスのAI化支援（ドキュメント生成・データ分析・ワークフロー自動化）',
+            '業務プロセスのAI化支援',
             '社内AI研修（プロンプト設計・ツール選定・セキュリティ）',
             'novshiの運用実績に基づく実践的なアドバイス',
           ].map((item) => (
-            <div class="flex items-start gap-3 p-4 bg-bg-secondary rounded-lg">
-              <svg class="w-5 h-5 text-accent mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-              </svg>
-              <span class="text-sm text-gray-900">{item}</span>
-            </div>
+            <li class="text-sm text-text-secondary pl-4 border-l-2 border-gray-200">{item}</li>
           ))}
-        </div>
+        </ul>
 
-        <div class="mt-8 p-6 border border-navy-100 bg-accent-light rounded-xl">
-          <p class="text-sm text-navy-800">
-            <strong>novshi自身がAIで経営を回している実績</strong>が、最大の提案材料です。
+        <div class="mt-10 p-6 bg-accent-light border border-navy-100 rounded-lg">
+          <p class="text-sm text-accent-dark leading-relaxed">
+            <span class="font-bold">novshi自身がAIで経営を回している実績</span>が、最大の提案材料です。
             このコーポレートサイトもAIで構築しています。
           </p>
         </div>
