@@ -1,0 +1,19 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import ContactForm from '../components/ContactForm.astro';
+---
+
+<Layout title="お問い合わせ | 株式会社novshi" description="株式会社novshiへのお問い合わせ。サービスに関するご質問・ご相談はお気軽にどうぞ。">
+  <Hero
+    title="お問い合わせ"
+    subtitle="サービスに関するご質問・ご相談はお気軽にどうぞ。"
+    compact={true}
+  />
+
+  <section class="py-16 lg:py-20">
+    <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 fade-in-up">
+      <ContactForm />
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,150 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+import CTASection from '../components/CTASection.astro';
+---
+
+<Layout title="株式会社novshi | 豊かさを、描きなおす。">
+  <!-- Hero -->
+  <Hero
+    title="豊かさを、描きなおす。"
+    subtitle="九州 × エッセンシャルワーカー × AI。採用から定着まで、一気通貫で支援する。"
+    showCTA={true}
+  />
+
+  <!-- Section 1: novshiとは -->
+  <section class="py-20 lg:py-28 bg-offwhite">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto text-center fade-in-up">
+        <p class="text-sm font-medium text-teal tracking-widest uppercase mb-4">Vision</p>
+        <h2 class="text-3xl lg:text-4xl font-bold text-navy">九州に、人が来る理由を100つくる。</h2>
+        <p class="mt-6 text-text-muted leading-relaxed">
+          novshiは、九州の地方中小企業が抱える「人手不足」という構造的課題に正面から向き合います。<br class="hidden lg:inline" />
+          HR事業と空き家再生事業の2軸で、「採用」と「住まい」の両面から地域の課題を解決します。
+        </p>
+      </div>
+
+      <!-- 2-business structure -->
+      <div class="mt-16 grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto fade-in-up">
+        <div class="p-8 bg-white border border-border rounded-2xl text-center">
+          <div class="w-14 h-14 mx-auto flex items-center justify-center bg-teal-light/30 text-teal rounded-xl text-2xl mb-4">
+            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
+          </div>
+          <h3 class="text-lg font-bold text-navy mb-2">HR事業</h3>
+          <p class="text-sm text-text-muted">採用戦略設計・運用支援・外国人採用定着支援。エッセンシャルワーカーの「採る」を科学する。</p>
+        </div>
+        <div class="p-8 bg-white border border-border rounded-2xl text-center">
+          <div class="w-14 h-14 mx-auto flex items-center justify-center bg-teal-light/30 text-teal rounded-xl text-2xl mb-4">
+            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
+          </div>
+          <h3 class="text-lg font-bold text-navy mb-2">空き家再生 × 社宅事業</h3>
+          <p class="text-sm text-text-muted">九州の空き家を再生し、エッセンシャルワーカー向け社宅として運用。「住む」を支える。</p>
+        </div>
+      </div>
+
+      <!-- Connection arrow -->
+      <div class="mt-8 text-center fade-in-up">
+        <div class="inline-flex items-center gap-3 px-6 py-3 bg-teal/5 border border-teal/10 rounded-full">
+          <svg class="w-5 h-5 text-teal" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" /></svg>
+          <span class="text-sm font-medium text-teal">2つの事業が相互に接続し、地域課題を構造的に解決</span>
+        </div>
+      </div>
+
+      <div class="mt-6 text-center text-xs text-text-muted">
+        設立 2025年10月 ／ 拠点：福岡・熊本
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2: サービス概要 -->
+  <section class="py-20 lg:py-28">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-14 fade-in-up">
+        <p class="text-sm font-medium text-teal tracking-widest uppercase mb-4">Services</p>
+        <h2 class="text-3xl lg:text-4xl font-bold text-navy">提供サービス</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 fade-in-up">
+        <ServiceCard
+          icon='<svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>'
+          title="採用戦略・運用支援"
+          description="Indeed運用・Meta広告・採用HP構築まで。データドリブンな採用を実現します。"
+          href="/services#recruitment"
+        />
+        <ServiceCard
+          icon='<svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" /></svg>'
+          title="外国人採用・定着支援"
+          description="住居付き人材紹介で採用から定着まで。在留資格・生活基盤も一括サポート。"
+          href="/services#global"
+        />
+        <ServiceCard
+          icon='<svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>'
+          title="AI活用支援・研修"
+          description="novshi自身のAI-Driven経営の実践ナレッジを体系化。中小企業のAI導入を支援します。"
+          href="/services#ai"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: 代表メッセージ -->
+  <section class="py-20 lg:py-28 bg-offwhite">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto fade-in-up">
+        <p class="text-sm font-medium text-teal tracking-widest uppercase mb-4">CEO Message</p>
+        <h2 class="text-3xl lg:text-4xl font-bold text-navy mb-8">代表メッセージ</h2>
+
+        <div class="space-y-4 text-text-muted leading-relaxed">
+          <p>
+            丸紅での事業投資、リクルートでの6年間（中途採用営業・Indeed事業企画）、スタートアップ執行役員——。
+            これまでのキャリアで1,000社以上の採用を支援してきました。
+          </p>
+          <p>
+            その経験の中で感じたのは、「地方の中小企業ほど、本来必要な支援が届いていない」ということ。
+            テクノロジーとデータの力で、この構造的なギャップを埋めたい。
+          </p>
+          <p>
+            novshiは、九州を拠点に「採用」と「住まい」の両面から地域の課題に向き合います。
+          </p>
+        </div>
+
+        <div class="mt-8 flex items-center gap-4">
+          <div class="w-14 h-14 bg-teal rounded-full flex items-center justify-center text-white font-bold text-lg" style="font-family: 'Outfit', sans-serif;">
+            YO
+          </div>
+          <div>
+            <p class="font-bold text-navy">大倉 佑介</p>
+            <p class="text-sm text-text-muted">株式会社novshi 代表取締役</p>
+          </div>
+        </div>
+
+        <div class="mt-6">
+          <a href="/about" class="inline-flex items-center text-sm font-medium text-teal hover:gap-2 transition-all">
+            詳しく見る
+            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: 採用バナー -->
+  <section class="py-16 lg:py-20 border-y border-border">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center fade-in-up">
+      <h2 class="text-2xl lg:text-3xl font-bold text-navy">novshiで働く</h2>
+      <p class="mt-3 text-text-muted">AIと協働する新しい働き方に興味がある方へ</p>
+      <a
+        href="/careers"
+        class="inline-flex items-center justify-center mt-6 px-8 py-3 text-sm font-medium text-teal border-2 border-teal rounded-lg hover:bg-teal hover:text-white transition-all"
+      >
+        採用情報を見る
+      </a>
+    </div>
+  </section>
+
+  <!-- Section 5: CTA -->
+  <CTASection />
+</Layout>

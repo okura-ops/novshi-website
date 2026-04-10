@@ -1,0 +1,160 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import CTASection from '../components/CTASection.astro';
+---
+
+<Layout title="サービス | 株式会社novshi" description="採用戦略・運用支援、外国人採用・定着支援、AI活用支援。九州の地方中小企業の採用課題を一気通貫で解決します。">
+  <Hero
+    title="採用の上流から下流まで、一気通貫で支援"
+    subtitle="九州×エッセンシャルワーカーの採用を、戦略設計から実行・改善まで。"
+    compact={true}
+  />
+
+  <!-- 3-channel strategy overview -->
+  <section class="py-16 lg:py-20 bg-offwhite">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12 fade-in-up">
+        <h2 class="text-2xl lg:text-3xl font-bold text-navy">3チャネル認知戦略</h2>
+        <p class="mt-3 text-text-muted">求職者の接点を多角的に設計し、採用力を最大化します。</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto fade-in-up">
+        <div class="p-6 bg-white border border-border rounded-xl text-center">
+          <div class="text-3xl mb-3">🔍</div>
+          <h3 class="font-bold text-navy mb-1">Indeed</h3>
+          <p class="text-xs text-text-muted">スポンサー求人のCPC最適化で応募単価を削減</p>
+        </div>
+        <div class="p-6 bg-white border border-border rounded-xl text-center">
+          <div class="text-3xl mb-3">📱</div>
+          <h3 class="font-bold text-navy mb-1">Meta広告</h3>
+          <p class="text-xs text-text-muted">Instagram/Facebookで潜在層にリーチ</p>
+        </div>
+        <div class="p-6 bg-white border border-border rounded-xl text-center">
+          <div class="text-3xl mb-3">🌐</div>
+          <h3 class="font-bold text-navy mb-1">自社採用HP</h3>
+          <p class="text-xs text-text-muted">AIO対応の構造化情報でAIにも求職者にも見つかる</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 柱1: 採用戦略・運用支援 -->
+  <section id="recruitment" class="py-20 lg:py-28 scroll-mt-20">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl fade-in-up">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-10 h-10 flex items-center justify-center bg-teal text-white rounded-lg">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
+          </div>
+          <h2 class="text-2xl lg:text-3xl font-bold text-navy">採用戦略・運用支援</h2>
+        </div>
+
+        <p class="text-text-muted leading-relaxed mb-10">
+          「媒体に求人を出す」だけでは、人は来ません。
+          限られた母集団に対して、誰に・何を・どう届けるかを戦略的に設計し、データドリブンで改善し続ける——。
+          novshiは、その一連のプロセスを丸ごとお引き受けします。
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 fade-in-up">
+        {[
+          { title: 'EVP（採用強み）の言語化', desc: '貴社が選ばれる理由を構造的に整理し、採用メッセージとして言語化します。' },
+          { title: 'AI求人最適化', desc: 'AirWork Hubを活用し、AI時代の検索行動に最適化された求人を作成します。' },
+          { title: 'Indeed運用代行', desc: 'スポンサー求人のCPC最適化、A/Bテスト、効果測定を一括代行します。' },
+          { title: 'Meta広告運用', desc: 'Instagram/Facebook採用広告で潜在求職者にリーチ。クリエイティブ制作から運用まで。' },
+          { title: '採用HP構築・運用', desc: 'AIO対応の採用専用サイトを構築。求職者にもAIにも選ばれる情報設計を実現します。' },
+          { title: 'KPIモニタリング・改善', desc: '応募数・表示数・CTR・CPAを可視化し、データに基づく継続的な改善を実施します。' },
+          { title: '組織・人事コンサルティング', desc: '採用だけでなく、定着・組織設計まで。貴社の課題に応じてスコープを設計します。' },
+        ].map((item) => (
+          <div class="p-6 border border-border rounded-xl">
+            <h3 class="font-bold text-navy mb-2">{item.title}</h3>
+            <p class="text-sm text-text-muted">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 柱2: 外国人採用・定着支援 -->
+  <section id="global" class="py-20 lg:py-28 bg-offwhite scroll-mt-20">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl fade-in-up">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-10 h-10 flex items-center justify-center bg-teal text-white rounded-lg">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" /></svg>
+          </div>
+          <h2 class="text-2xl lg:text-3xl font-bold text-navy">外国人採用・定着支援</h2>
+        </div>
+
+        <p class="text-text-muted leading-relaxed mb-10">
+          外国人材の採用は「紹介して終わり」ではありません。
+          住まい・在留資格・生活基盤の整備まで一貫してサポートすることで、
+          本当の意味での「定着」を実現します。
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 fade-in-up">
+        {[
+          { title: '住居付き人材紹介', desc: 'novshiの空き家再生事業と連携し、住居とセットで人材をご紹介。有料職業紹介免許取得済み。', badge: '空き家事業連携' },
+          { title: '住宅確保支援', desc: '外国人材が安心して暮らせる住まいを確保。保証人問題・契約サポートも対応します。', badge: '空き家事業連携' },
+          { title: '在留資格・行政手続サポート', desc: 'ビザの取得・更新、各種届出など、煩雑な行政手続をサポートします。', badge: null },
+          { title: '定着支援', desc: '生活オリエンテーション、日本語サポート、文化適応支援で長期定着を促進します。', badge: null },
+        ].map((item) => (
+          <div class="p-6 bg-white border border-border rounded-xl">
+            <div class="flex items-start justify-between mb-2">
+              <h3 class="font-bold text-navy">{item.title}</h3>
+              {item.badge && (
+                <span class="text-xs px-2 py-0.5 bg-teal-light/40 text-teal-dark rounded-full whitespace-nowrap">{item.badge}</span>
+              )}
+            </div>
+            <p class="text-sm text-text-muted">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Appendix: AI活用支援 -->
+  <section id="ai" class="py-20 lg:py-28 scroll-mt-20">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto fade-in-up">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-10 h-10 flex items-center justify-center bg-teal text-white rounded-lg">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+          </div>
+          <h2 class="text-2xl lg:text-3xl font-bold text-navy">AI活用支援・研修</h2>
+        </div>
+
+        <p class="text-text-muted leading-relaxed mb-8">
+          novshiは創業初日から「社員ゼロ・AI駆動型経営」を実践しています。
+          その実践で培ったナレッジを体系化し、中小企業のAI導入を支援します。
+        </p>
+
+        <div class="space-y-4">
+          {[
+            'AI-Driven経営の設計・導入コンサルティング',
+            '業務プロセスのAI化支援（ドキュメント生成・データ分析・ワークフロー自動化）',
+            '社内AI研修（プロンプト設計・ツール選定・セキュリティ）',
+            'novshiの運用実績に基づく実践的なアドバイス',
+          ].map((item) => (
+            <div class="flex items-start gap-3 p-4 bg-offwhite rounded-lg">
+              <svg class="w-5 h-5 text-teal mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span class="text-sm text-navy">{item}</span>
+            </div>
+          ))}
+        </div>
+
+        <div class="mt-8 p-6 border border-teal/20 bg-teal/5 rounded-xl">
+          <p class="text-sm text-teal-dark">
+            <strong>novshi自身がAIで経営を回している実績</strong>が、最大の提案材料です。
+            このコーポレートサイトもAIで構築しています。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CTASection />
+</Layout>

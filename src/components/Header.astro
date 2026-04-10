@@ -1,0 +1,124 @@
+---
+const currentPath = Astro.url.pathname;
+
+const navItems = [
+  { href: '/services', label: 'サービス' },
+  { href: '/about', label: '会社概要' },
+  { href: '/careers', label: '採用情報' },
+  { href: '/contact', label: 'お問い合わせ' },
+];
+---
+
+<header id="site-header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16 lg:h-20">
+      <!-- Logo -->
+      <a href="/" class="text-2xl lg:text-3xl font-bold tracking-tight text-teal hover:opacity-80 transition-opacity" style="font-family: 'Outfit', sans-serif;">
+        novshi
+      </a>
+
+      <!-- Desktop Navigation -->
+      <nav class="hidden md:flex items-center gap-8">
+        {navItems.map((item) => (
+          <a
+            href={item.href}
+            class:list={[
+              'text-sm font-medium transition-colors hover:text-teal',
+              currentPath === item.href || currentPath === item.href + '/'
+                ? 'text-teal'
+                : 'text-text-muted',
+            ]}
+          >
+            {item.label}
+          </a>
+        ))}
+      </nav>
+
+      <!-- Mobile Menu Button -->
+      <button
+        id="mobile-menu-btn"
+        class="md:hidden flex flex-col justify-center items-center w-10 h-10 gap-1.5"
+        aria-label="メニューを開く"
+        aria-expanded="false"
+      >
+        <span class="block w-6 h-0.5 bg-navy transition-all duration-300 origin-center" id="bar1"></span>
+        <span class="block w-6 h-0.5 bg-navy transition-all duration-300" id="bar2"></span>
+        <span class="block w-6 h-0.5 bg-navy transition-all duration-300 origin-center" id="bar3"></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="md:hidden fixed inset-0 top-16 bg-white/98 backdrop-blur-sm z-40 hidden">
+    <nav class="flex flex-col items-center justify-center gap-8 pt-20">
+      {navItems.map((item) => (
+        <a
+          href={item.href}
+          class:list={[
+            'text-lg font-medium transition-colors hover:text-teal',
+            currentPath === item.href || currentPath === item.href + '/'
+              ? 'text-teal'
+              : 'text-navy',
+          ]}
+        >
+          {item.label}
+        </a>
+      ))}
+    </nav>
+  </div>
+</header>
+
+<!-- Spacer for fixed header -->
+<div class="h-16 lg:h-20"></div>
+
+<script>
+  const header = document.getElementById('site-header')!;
+  const mobileMenuBtn = document.getElementById('mobile-menu-btn')!;
+  const mobileMenu = document.getElementById('mobile-menu')!;
+  const bar1 = document.getElementById('bar1')!;
+  const bar2 = document.getElementById('bar2')!;
+  const bar3 = document.getElementById('bar3')!;
+
+  let menuOpen = false;
+
+  // Sticky header background on scroll
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 10) {
+      header.classList.add('bg-white/95', 'backdrop-blur-sm', 'shadow-sm');
+    } else {
+      header.classList.remove('bg-white/95', 'backdrop-blur-sm', 'shadow-sm');
+    }
+  });
+
+  // Mobile menu toggle
+  mobileMenuBtn.addEventListener('click', () => {
+    menuOpen = !menuOpen;
+    mobileMenu.classList.toggle('hidden');
+    mobileMenuBtn.setAttribute('aria-expanded', String(menuOpen));
+
+    if (menuOpen) {
+      bar1.style.transform = 'rotate(45deg) translate(3px, 3px)';
+      bar2.style.opacity = '0';
+      bar3.style.transform = 'rotate(-45deg) translate(3px, -3px)';
+      document.body.style.overflow = 'hidden';
+    } else {
+      bar1.style.transform = '';
+      bar2.style.opacity = '';
+      bar3.style.transform = '';
+      document.body.style.overflow = '';
+    }
+  });
+
+  // Close menu on link click
+  mobileMenu.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => {
+      mobileMenu.classList.add('hidden');
+      menuOpen = false;
+      mobileMenuBtn.setAttribute('aria-expanded', 'false');
+      bar1.style.transform = '';
+      bar2.style.opacity = '';
+      bar3.style.transform = '';
+      document.body.style.overflow = '';
+    });
+  });
+</script>
