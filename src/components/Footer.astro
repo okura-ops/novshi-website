@@ -10,12 +10,11 @@ const footerLinks = [
 ];
 ---
 
-<footer class="bg-navy text-white">
+<footer class="bg-navy-950 text-white">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
     <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
-      <!-- Company Info -->
       <div>
-        <a href="/" class="text-2xl font-bold tracking-tight text-teal-light" style="font-family: 'Outfit', sans-serif;">
+        <a href="/" class="text-2xl font-bold tracking-tight text-white" style="font-family: 'Inter', sans-serif;">
           novshi
         </a>
         <p class="mt-4 text-sm text-gray-400 leading-relaxed">
@@ -24,13 +23,12 @@ const footerLinks = [
         </p>
       </div>
 
-      <!-- Navigation -->
       <div>
-        <h3 class="text-sm font-semibold uppercase tracking-wider text-gray-400 mb-4">ページ</h3>
+        <h3 class="text-sm font-semibold uppercase tracking-wider text-gray-500 mb-4">ページ</h3>
         <ul class="space-y-3">
           {footerLinks.map((link) => (
             <li>
-              <a href={link.href} class="text-sm text-gray-300 hover:text-teal-light transition-colors">
+              <a href={link.href} class="text-sm text-gray-400 hover:text-white transition-colors">
                 {link.label}
               </a>
             </li>
@@ -38,23 +36,22 @@ const footerLinks = [
         </ul>
       </div>
 
-      <!-- Contact -->
       <div>
-        <h3 class="text-sm font-semibold uppercase tracking-wider text-gray-400 mb-4">お問い合わせ</h3>
-        <p class="text-sm text-gray-300 leading-relaxed">
+        <h3 class="text-sm font-semibold uppercase tracking-wider text-gray-500 mb-4">お問い合わせ</h3>
+        <p class="text-sm text-gray-400 leading-relaxed">
           サービスに関するご質問・ご相談は<br />お気軽にお問い合わせください。
         </p>
         <a
           href="/contact"
-          class="inline-block mt-4 px-5 py-2 text-sm font-medium border border-teal-light text-teal-light rounded-lg hover:bg-teal-light hover:text-navy transition-all"
+          class="inline-block mt-4 px-5 py-2 text-sm font-medium border border-gray-600 text-gray-300 rounded-lg hover:border-white hover:text-white transition-all"
         >
           お問い合わせ
         </a>
       </div>
     </div>
 
-    <div class="mt-12 pt-8 border-t border-gray-700 text-center">
-      <p class="text-xs text-gray-500">&copy; {currentYear} novshi Inc. All rights reserved.</p>
+    <div class="mt-12 pt-8 border-t border-gray-800 text-center">
+      <p class="text-xs text-gray-600">&copy; {currentYear} novshi Inc. All rights reserved.</p>
     </div>
   </div>
 </footer>

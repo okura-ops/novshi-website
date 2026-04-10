@@ -31,10 +31,10 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://novshi.c
     <meta property="og:locale" content="ja_JP" />
     <meta name="twitter:card" content="summary_large_image" />
 
-    <!-- Fonts -->
+    <!-- Fonts: Noto Sans JP + Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet" />
 
     <!-- JSON-LD -->
     <script type="application/ld+json" set:html={JSON.stringify({
@@ -46,15 +46,8 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://novshi.c
       "logo": "https://novshi.co.jp/favicon.svg",
       "description": "九州×エッセンシャルワーカー×AI。採用から定着まで、一気通貫で支援する。",
       "foundingDate": "2025-10",
-      "founder": {
-        "@type": "Person",
-        "name": "大倉佑介"
-      },
-      "address": {
-        "@type": "PostalAddress",
-        "addressRegion": "福岡県",
-        "addressCountry": "JP"
-      },
+      "founder": { "@type": "Person", "name": "大倉佑介" },
+      "address": { "@type": "PostalAddress", "addressRegion": "福岡県", "addressCountry": "JP" },
       "areaServed": {
         "@type": "GeoCircle",
         "geoMidpoint": { "@type": "GeoCoordinates", "latitude": 33.59, "longitude": 130.40 },
@@ -73,7 +66,6 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://novshi.c
     <Footer />
 
     <script>
-      // Intersection Observer for fade-in animations
       const observer = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
@@ -83,10 +75,10 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://novshi.c
             }
           });
         },
-        { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+        { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
       );
 
-      document.querySelectorAll('.fade-in-up').forEach((el) => {
+      document.querySelectorAll('.fade-in-up, .stagger-children').forEach((el) => {
         observer.observe(el);
       });
     </script>
