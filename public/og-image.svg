@@ -1,5 +1,41 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" fill="none">
-  <rect width="1200" height="630" fill="#0E1F33"/>
-  <text x="600" y="280" text-anchor="middle" fill="white" font-family="Inter, system-ui, sans-serif" font-weight="700" font-size="64">novshi</text>
-  <text x="600" y="370" text-anchor="middle" fill="#A9BDD7" font-family="system-ui, sans-serif" font-weight="400" font-size="24">豊かさを、描きなおす。</text>
+  <!-- Background warm white -->
+  <rect width="1200" height="630" fill="#FAF8F5"/>
+
+  <!-- Large subtle 志 watermark on the right -->
+  <text x="900" y="540" text-anchor="middle"
+        fill="#1E3A5F" fill-opacity="0.06"
+        font-family="'Noto Serif JP', serif" font-weight="500" font-size="540">志</text>
+
+  <!-- Top eyebrow label -->
+  <text x="80" y="130" fill="#1E3A5F"
+        font-family="'Noto Serif JP', serif" font-weight="500" font-size="20" letter-spacing="6">KYUSHU × ESSENTIAL WORKERS × AI</text>
+
+  <!-- Main headline -->
+  <text x="80" y="260" fill="#171717"
+        font-family="'Noto Sans JP', sans-serif" font-weight="700" font-size="88">豊かさを、</text>
+  <text x="80" y="370" fill="#171717"
+        font-family="'Noto Sans JP', sans-serif" font-weight="700" font-size="88">描きなおす。</text>
+
+  <!-- Thin navy rule -->
+  <line x1="80" y1="430" x2="240" y2="430" stroke="#1E3A5F" stroke-width="2"/>
+
+  <!-- Subtitle -->
+  <text x="80" y="475" fill="#525252"
+        font-family="'Noto Sans JP', sans-serif" font-weight="400" font-size="22">九州 × エッセンシャルワーカー × AI。採用から定着まで、一気通貫で支援する。</text>
+
+  <!-- Company mark (bottom left) -->
+  <text x="80" y="560" fill="#171717"
+        font-family="'Inter', sans-serif" font-weight="700" font-size="24">novshi</text>
+  <text x="80" y="585" fill="#737373"
+        font-family="'Noto Sans JP', sans-serif" font-weight="400" font-size="14">株式会社novshi — 福岡 / 熊本</text>
+
+  <!-- Mini Kyushu map (right bottom, ultra minimal) -->
+  <g transform="translate(970, 340)" stroke="#1E3A5F" stroke-width="1.5" fill="none" opacity="0.5" stroke-linejoin="round">
+    <path d="M 40 0 Q 55 -10, 80 -5 L 115 0 Q 135 5, 150 20 Q 165 35, 160 60 Q 162 90, 170 120 Q 165 145, 155 165 Q 145 185, 125 195 Q 105 200, 85 195 Q 65 185, 55 165 Q 48 140, 50 115 Q 42 90, 35 65 Q 30 40, 40 0 Z"/>
+  </g>
+  <!-- Fukuoka marker -->
+  <circle cx="1060" cy="355" r="4" fill="#1E3A5F"/>
+  <!-- Kumamoto marker -->
+  <circle cx="1050" cy="440" r="4" fill="#1E3A5F"/>
 </svg>

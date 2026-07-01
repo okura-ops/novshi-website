@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
+import PhotoSlot from '../components/PhotoSlot.astro';
 import CTASection from '../components/CTASection.astro';
 ---
 
@@ -12,15 +13,20 @@ import CTASection from '../components/CTASection.astro';
     <div class="max-w-[1120px] mx-auto px-5 sm:px-8">
       <h2 class="text-2xl font-bold text-gray-900 mb-4 fade-in-up">3チャネル認知戦略</h2>
       <p class="text-text-secondary mb-12 fade-in-up">求職者の接点を多角的に設計し、採用力を最大化します。</p>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-px bg-gray-200 border border-gray-200 rounded-xl overflow-hidden stagger">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 stagger">
         {[
-          { label: 'Indeed', desc: 'スポンサー求人のCPC最適化で応募単価を削減' },
-          { label: 'Meta広告', desc: 'Instagram/Facebookで潜在層にリーチ' },
-          { label: '自社採用HP', desc: 'AIO対応の構造化情報でAIにも求職者にも見つかる' },
+          { label: 'Indeed', icon: 'M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z', desc: 'スポンサー求人のCPC最適化で応募単価を削減' },
+          { label: 'Meta広告', icon: 'M10.34 15.84c-.688-.06-1.386-.09-2.09-.09H7.5a4.5 4.5 0 110-9h.75c.704 0 1.402-.03 2.09-.09m0 9.18c.253.962.584 1.892.985 2.783.247.55.06 1.21-.463 1.511l-.657.38c-.551.318-1.26.117-1.527-.461a20.845 20.845 0 01-1.44-4.282m3.102.069a18.03 18.03 0 01-.59-4.59c0-1.586.205-3.124.59-4.59m0 9.18a23.848 23.848 0 018.835 2.535M10.34 6.66a23.847 23.847 0 008.835-2.535m0 0A23.74 23.74 0 0018.795 3m.38 1.125a23.91 23.91 0 011.014 5.395m-1.014 8.855c-.118.38-.245.754-.38 1.125m.38-1.125a23.91 23.91 0 001.014-5.395m0-3.46c.495.413.811 1.035.811 1.73 0 .695-.316 1.317-.811 1.73m0-3.46a24.347 24.347 0 010 3.46', desc: 'Instagram/Facebookで潜在層にリーチ' },
+          { label: '自社採用HP', icon: 'M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418', desc: 'AIO対応の構造化情報でAIにも求職者にも見つかる' },
         ].map((ch) => (
-          <div class="bg-white p-8 lg:p-10">
+          <div class="bg-white p-8 lg:p-10 rounded-xl border border-gray-200 card-lift">
+            <div class="w-10 h-10 rounded-lg bg-navy-50 flex items-center justify-center mb-5">
+              <svg class="w-5 h-5 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d={ch.icon} />
+              </svg>
+            </div>
             <p class="text-base font-bold text-gray-900 mb-2">{ch.label}</p>
-            <p class="text-sm text-text-secondary">{ch.desc}</p>
+            <p class="text-sm text-text-secondary leading-relaxed">{ch.desc}</p>
           </div>
         ))}
       </div>
@@ -30,30 +36,39 @@ import CTASection from '../components/CTASection.astro';
   <!-- 柱1 -->
   <section id="recruitment" class="py-24 lg:py-32 scroll-mt-20">
     <div class="max-w-[1120px] mx-auto px-5 sm:px-8">
-      <div class="max-w-2xl fade-in-up">
-        <p class="text-xs font-semibold text-accent uppercase tracking-[0.15em] mb-4">Service 01</p>
-        <h2 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-6">採用戦略・運用支援</h2>
-        <p class="text-text-secondary leading-relaxed">
-          「媒体に求人を出す」だけでは、人は来ません。
-          限られた母集団に対して、誰に・何を・どう届けるかを戦略的に設計し、データドリブンで改善し続ける。
-          novshiは、その一連のプロセスを丸ごとお引き受けします。
-        </p>
-      </div>
-
-      <div class="mt-14 grid grid-cols-1 md:grid-cols-2 gap-y-8 gap-x-16 stagger">
-        {[
-          { title: 'EVP（採用強み）の言語化', desc: '貴社が選ばれる理由を構造的に整理し、採用メッセージとして言語化します。' },
-          { title: 'AI求人最適化', desc: 'AirWork Hubを活用し、AI時代の検索行動に最適化された求人を作成します。' },
-          { title: 'Indeed運用代行', desc: 'スポンサー求人のCPC最適化、A/Bテスト、効果測定を一括代行します。' },
-          { title: 'Meta広告運用', desc: 'Instagram/Facebook採用広告で潜在求職者にリーチ。クリエイティブ制作から運用まで。' },
-          { title: '採用HP構築・運用', desc: 'AIO対応の採用専用サイトを構築。求職者にもAIにも選ばれる情報設計を実現します。' },
-          { title: 'KPIモニタリング・改善', desc: '応募数・表示数・CTR・CPAを可視化し、データに基づく継続的な改善を実施します。' },
-        ].map((item) => (
-          <div class="border-l-2 border-gray-200 pl-6">
-            <h3 class="text-sm font-bold text-gray-900 mb-1">{item.title}</h3>
-            <p class="text-sm text-text-secondary">{item.desc}</p>
+      <div class="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-16 items-start">
+        <div>
+          <div class="fade-in-up">
+            <p class="text-xs font-semibold text-accent uppercase tracking-[0.15em] mb-4">Service 01</p>
+            <h2 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-6">採用戦略・運用支援</h2>
+            <p class="text-text-secondary leading-relaxed">
+              「媒体に求人を出す」だけでは、人は来ません。
+              限られた母集団に対して、誰に・何を・どう届けるかを戦略的に設計し、データドリブンで改善し続ける。
+              novshiは、その一連のプロセスを丸ごとお引き受けします。
+            </p>
           </div>
-        ))}
+
+          <div class="mt-14 grid grid-cols-1 md:grid-cols-2 gap-y-8 gap-x-12 stagger">
+            {[
+              { title: 'EVP（採用強み）の言語化', desc: '貴社が選ばれる理由を構造的に整理し、採用メッセージとして言語化します。' },
+              { title: 'AI求人最適化', desc: 'AirWork Hubを活用し、AI時代の検索行動に最適化された求人を作成します。' },
+              { title: 'Indeed運用代行', desc: 'スポンサー求人のCPC最適化、A/Bテスト、効果測定を一括代行します。' },
+              { title: 'Meta広告運用', desc: 'Instagram/Facebook採用広告で潜在求職者にリーチ。クリエイティブ制作から運用まで。' },
+              { title: '採用HP構築・運用', desc: 'AIO対応の採用専用サイトを構築。求職者にもAIにも選ばれる情報設計を実現します。' },
+              { title: 'KPIモニタリング・改善', desc: '応募数・表示数・CTR・CPAを可視化し、データに基づく継続的な改善を実施します。' },
+            ].map((item) => (
+              <div class="border-l-2 border-navy-200 pl-6">
+                <h3 class="text-sm font-bold text-gray-900 mb-1">{item.title}</h3>
+                <p class="text-sm text-text-secondary leading-relaxed">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- Photo slot: 建設現場の作業員 or placeholder -->
+        <div class="hidden lg:block fade-in-up">
+          <PhotoSlot mode="placeholder" label="HR事業" aspect="aspect-[3/4]" class="sticky top-24" />
+        </div>
       </div>
     </div>
   </section>
@@ -61,30 +76,39 @@ import CTASection from '../components/CTASection.astro';
   <!-- 柱2 -->
   <section id="global" class="py-24 lg:py-32 bg-bg-secondary scroll-mt-20">
     <div class="max-w-[1120px] mx-auto px-5 sm:px-8">
-      <div class="max-w-2xl fade-in-up">
-        <p class="text-xs font-semibold text-accent uppercase tracking-[0.15em] mb-4">Service 02</p>
-        <h2 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-6">外国人採用・定着支援</h2>
-        <p class="text-text-secondary leading-relaxed">
-          外国人材の採用は「紹介して終わり」ではありません。
-          住まい・在留資格・生活基盤の整備まで一貫してサポートすることで、本当の意味での定着を実現します。
-        </p>
-      </div>
+      <div class="grid grid-cols-1 lg:grid-cols-[320px_1fr] gap-16 items-start">
+        <!-- Photo slot: 外国人材 or placeholder -->
+        <div class="hidden lg:block fade-in-up">
+          <PhotoSlot mode="placeholder" label="外国人採用" aspect="aspect-[3/4]" class="sticky top-24" />
+        </div>
 
-      <div class="mt-14 grid grid-cols-1 sm:grid-cols-2 gap-8 stagger">
-        {[
-          { title: '住居付き人材紹介', desc: '空き家再生事業と連携し、住居とセットで人材をご紹介。有料職業紹介免許取得済み。', note: '空き家事業連携' },
-          { title: '住宅確保支援', desc: '外国人材が安心して暮らせる住まいを確保。保証人問題・契約サポートも対応。', note: '空き家事業連携' },
-          { title: '在留資格・行政手続サポート', desc: 'ビザの取得・更新、各種届出など煩雑な行政手続をサポートします。', note: null },
-          { title: '定着支援', desc: '生活オリエンテーション、日本語サポート、文化適応支援で長期定着を促進。', note: null },
-        ].map((item) => (
-          <div class="bg-white p-8 border border-gray-200 rounded-lg">
-            <div class="flex items-start justify-between mb-2">
-              <h3 class="text-sm font-bold text-gray-900">{item.title}</h3>
-              {item.note && <span class="text-[10px] font-medium text-accent bg-accent-light px-2 py-0.5 rounded-full whitespace-nowrap">{item.note}</span>}
-            </div>
-            <p class="text-sm text-text-secondary">{item.desc}</p>
+        <div>
+          <div class="fade-in-up">
+            <p class="text-xs font-semibold text-accent uppercase tracking-[0.15em] mb-4">Service 02</p>
+            <h2 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-6">外国人採用・定着支援</h2>
+            <p class="text-text-secondary leading-relaxed">
+              外国人材の採用は「紹介して終わり」ではありません。
+              住まい・在留資格・生活基盤の整備まで一貫してサポートすることで、本当の意味での定着を実現します。
+            </p>
           </div>
-        ))}
+
+          <div class="mt-14 grid grid-cols-1 sm:grid-cols-2 gap-6 stagger">
+            {[
+              { title: '住居付き人材紹介', desc: '空き家再生事業と連携し、住居とセットで人材をご紹介。有料職業紹介免許取得済み。', note: '空き家事業連携' },
+              { title: '住宅確保支援', desc: '外国人材が安心して暮らせる住まいを確保。保証人問題・契約サポートも対応。', note: '空き家事業連携' },
+              { title: '在留資格・行政手続サポート', desc: 'ビザの取得・更新、各種届出など煩雑な行政手続をサポートします。', note: null },
+              { title: '定着支援', desc: '生活オリエンテーション、日本語サポート、文化適応支援で長期定着を促進。', note: null },
+            ].map((item) => (
+              <div class="bg-white p-8 border border-gray-200 rounded-xl card-lift">
+                <div class="flex items-start justify-between mb-3">
+                  <h3 class="text-sm font-bold text-gray-900">{item.title}</h3>
+                  {item.note && <span class="text-[10px] font-medium text-accent bg-accent-light px-2 py-0.5 rounded-full whitespace-nowrap ml-2">{item.note}</span>}
+                </div>
+                <p class="text-sm text-text-secondary leading-relaxed">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -100,20 +124,33 @@ import CTASection from '../components/CTASection.astro';
           その実践で培ったナレッジを体系化し、中小企業のAI導入を支援します。
         </p>
 
-        <ul class="space-y-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 stagger">
           {[
-            'AI-Driven経営の設計・導入コンサルティング',
-            '業務プロセスのAI化支援',
-            '社内AI研修（プロンプト設計・ツール選定・セキュリティ）',
-            'novshiの運用実績に基づく実践的なアドバイス',
+            { title: '経営設計', desc: 'AI-Driven経営の設計・導入コンサルティング' },
+            { title: '業務AI化', desc: '業務プロセスのAI化支援' },
+            { title: '社内研修', desc: 'プロンプト設計・ツール選定・セキュリティの実践研修' },
+            { title: '実績ベース', desc: 'novshiの運用実績に基づく実践的なアドバイス' },
           ].map((item) => (
-            <li class="text-sm text-text-secondary pl-4 border-l-2 border-gray-200">{item}</li>
+            <div class="p-6 border border-gray-200 rounded-xl">
+              <h3 class="text-sm font-bold text-gray-900 mb-1">{item.title}</h3>
+              <p class="text-sm text-text-secondary">{item.desc}</p>
+            </div>
           ))}
-        </ul>
+        </div>
 
-        <div class="mt-10 p-6 bg-accent-light border border-navy-100 rounded-lg">
-          <p class="text-sm text-accent-dark leading-relaxed">
-            <span class="font-bold">novshi自身がAIで経営を回している実績</span>が、最大の提案材料です。
+        <div class="mt-10 p-6 bg-navy-900 rounded-xl relative overflow-hidden">
+          <div class="absolute inset-0 opacity-[0.06]">
+            <svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <pattern id="ai-grid" width="24" height="24" patternUnits="userSpaceOnUse">
+                  <path d="M 24 0 L 0 0 0 24" fill="none" stroke="#4A7FB5" stroke-width="0.5"/>
+                </pattern>
+              </defs>
+              <rect width="100%" height="100%" fill="url(#ai-grid)" />
+            </svg>
+          </div>
+          <p class="relative z-10 text-sm text-navy-100 leading-relaxed">
+            <span class="font-bold text-white">novshi自身がAIで経営を回している実績</span>が、最大の提案材料です。
             このコーポレートサイトもAIで構築しています。
           </p>
         </div>

@@ -1,0 +1,78 @@
+---
+/**
+ * Photo slot component with built-in CSS filter treatments.
+ * Drop in an image file and choose a filter mode.
+ *
+ * Usage:
+ *   <PhotoSlot src="/images/hr-scene.webp" alt="建設現場" mode="duotone" />
+ *   <PhotoSlot src="/images/akiya.webp" alt="古民家" mode="grayscale-hover" />
+ *   <PhotoSlot mode="placeholder" label="HR事業" />  ← no image yet
+ */
+interface Props {
+  src?: string;
+  alt?: string;
+  mode?: 'duotone' | 'grayscale' | 'grayscale-hover' | 'overlay' | 'placeholder';
+  label?: string;
+  aspect?: string;
+  class?: string;
+}
+
+const {
+  src,
+  alt = '',
+  mode = 'placeholder',
+  label,
+  aspect = 'aspect-[4/3]',
+  class: className = '',
+} = Astro.props;
+
+const hasImage = src && mode !== 'placeholder';
+---
+
+<div class:list={[
+  'photo-slot relative overflow-hidden rounded-xl',
+  aspect,
+  className,
+]}>
+  {hasImage ? (
+    <>
+      {mode === 'duotone' && (
+        <div class="duotone-navy w-full h-full">
+          <img src={src} alt={alt} class="w-full h-full object-cover" loading="lazy" decoding="async" />
+        </div>
+      )}
+
+      {mode === 'grayscale' && (
+        <img src={src} alt={alt} class="w-full h-full object-cover grayscale contrast-[1.1]" loading="lazy" decoding="async" />
+      )}
+
+      {mode === 'grayscale-hover' && (
+        <img src={src} alt={alt} class="w-full h-full object-cover grayscale hover:grayscale-0 transition-[filter] duration-500 contrast-[1.1]" loading="lazy" decoding="async" />
+      )}
+
+      {mode === 'overlay' && (
+        <>
+          <img src={src} alt={alt} class="w-full h-full object-cover" loading="lazy" decoding="async" />
+          <div class="absolute inset-0 bg-gradient-to-b from-navy-900/60 to-navy-900/30"></div>
+        </>
+      )}
+    </>
+  ) : (
+    <!-- Placeholder: abstract pattern when no photo is available -->
+    <div class="w-full h-full bg-gradient-to-br from-navy-50 to-gray-100 flex items-center justify-center">
+      <div class="absolute inset-0 opacity-[0.04]">
+        <svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern id={`ph-${Math.random().toString(36).slice(2, 8)}`} width="24" height="24" patternUnits="userSpaceOnUse">
+              <circle cx="12" cy="12" r="1" fill="#1E3A5F" />
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill={`url(#ph-${Math.random().toString(36).slice(2, 8)})`} />
+        </svg>
+      </div>
+      {label && (
+        <span class="relative z-10 text-sm font-medium text-navy-400/60 tracking-wide">{label}</span>
+      )}
+    </div>
+  )}
+</div>

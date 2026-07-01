@@ -15,6 +15,7 @@ const timelineItems = [
 <Layout title="会社概要 | 株式会社novshi" description="株式会社novshiの会社概要、代表紹介、MVV。">
   <Hero title="会社概要" subtitle="九州に根ざし、テクノロジーの力で地域課題を解決する。" compact={true} />
 
+  <!-- Company Info -->
   <section class="py-20 lg:py-24">
     <div class="max-w-[1120px] mx-auto px-5 sm:px-8">
       <div class="max-w-3xl fade-in-up">
@@ -37,21 +38,36 @@ const timelineItems = [
     </div>
   </section>
 
+  <!-- CEO Profile -->
   <section class="py-24 lg:py-32 bg-bg-secondary">
     <div class="max-w-[1120px] mx-auto px-5 sm:px-8">
-      <div class="max-w-2xl fade-in-up">
-        <p class="text-xs font-semibold text-accent uppercase tracking-[0.2em] mb-5">CEO Profile</p>
-        <h2 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-3">大倉 佑介</h2>
-        <p class="text-sm text-text-muted mb-12">Yusuke Okura — 代表取締役</p>
+      <div class="grid grid-cols-1 lg:grid-cols-[1fr_280px] gap-16 items-start">
+        <div class="fade-in-up">
+          <p class="text-xs font-semibold text-accent uppercase tracking-[0.2em] mb-5">CEO Profile</p>
+          <h2 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-3">大倉 佑介</h2>
+          <p class="text-sm text-text-muted mb-12">Yusuke Okura — 代表取締役</p>
 
-        <div class="mb-14">
-          <Timeline items={timelineItems} />
+          <div class="mb-14">
+            <Timeline items={timelineItems} />
+          </div>
+
+          <div class="space-y-5 text-text-secondary leading-[1.9] text-[15px]">
+            <p>丸紅での事業投資、リクルートでの1,000社以上の採用支援、スタートアップでの経営企画。それぞれの現場で学んだことを掛け合わせ、novshiを創業しました。</p>
+            <p>九州の地方中小企業は、日本経済を下支えするエッセンシャルワーカーを数多く雇用しています。しかし、その採用・定着を支える仕組みは驚くほど整っていません。</p>
+            <p>「媒体に求人を出す」だけでは人は来ない時代に、戦略とテクノロジーを届けたい。さらに、外国人材の「住まい」の問題を空き家再生で解決することで、採用と定着を構造的に接続する。novshiだからできる価値提供を追求していきます。</p>
+          </div>
         </div>
 
-        <div class="space-y-5 text-text-secondary leading-[1.9] text-[15px]">
-          <p>丸紅での事業投資、リクルートでの1,000社以上の採用支援、スタートアップでの経営企画。それぞれの現場で学んだことを掛け合わせ、novshiを創業しました。</p>
-          <p>九州の地方中小企業は、日本経済を下支えするエッセンシャルワーカーを数多く雇用しています。しかし、その採用・定着を支える仕組みは驚くほど整っていません。</p>
-          <p>「媒体に求人を出す」だけでは人は来ない時代に、戦略とテクノロジーを届けたい。さらに、外国人材の「住まい」の問題を空き家再生で解決することで、採用と定着を構造的に接続する。novshiだからできる価値提供を追求していきます。</p>
+        <!-- Photo slot: CEO portrait -->
+        <div class="hidden lg:flex flex-col gap-6 fade-in-up">
+          <div class="w-full aspect-[3/4] rounded-xl bg-gradient-to-br from-navy-50 to-gray-100 flex items-center justify-center sticky top-24">
+            <div class="text-center">
+              <div class="w-20 h-20 rounded-full bg-navy-100 mx-auto mb-3 flex items-center justify-center">
+                <span class="text-2xl font-bold text-accent" style="font-family: Inter, sans-serif;">YO</span>
+              </div>
+              <p class="text-xs text-navy-400/60">Photo coming soon</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -60,30 +76,40 @@ const timelineItems = [
   <!-- MVV -->
   <section class="py-24 lg:py-32">
     <div class="max-w-[1120px] mx-auto px-5 sm:px-8">
-      <div class="max-w-2xl mb-20 fade-in-up">
+      <div class="mb-20 fade-in-up">
         <p class="text-xs font-semibold text-accent uppercase tracking-[0.2em] mb-5">MVV</p>
       </div>
 
-      <div class="space-y-20 stagger">
-        <div>
-          <p class="text-xs font-semibold text-text-muted uppercase tracking-[0.15em] mb-4">Mission</p>
-          <h3 class="text-3xl lg:text-[2.75rem] lg:leading-[1.15] font-bold text-gray-900">豊かさを、描きなおす。</h3>
+      <div class="space-y-24 stagger">
+        <!-- Mission: large typography -->
+        <div class="fade-in-up">
+          <p class="text-xs font-semibold text-text-muted uppercase tracking-[0.15em] mb-6">Mission</p>
+          <h3 class="text-4xl lg:text-[3.5rem] lg:leading-[1.1] font-bold text-gray-900">
+            豊かさを、描きなおす。
+          </h3>
         </div>
-        <div>
-          <p class="text-xs font-semibold text-text-muted uppercase tracking-[0.15em] mb-4">Vision</p>
-          <h3 class="text-2xl lg:text-[2rem] font-bold text-gray-900">九州に、人が来る理由を100つくる。</h3>
+
+        <!-- Vision -->
+        <div class="fade-in-up">
+          <p class="text-xs font-semibold text-text-muted uppercase tracking-[0.15em] mb-6">Vision</p>
+          <h3 class="text-2xl lg:text-[2.5rem] lg:leading-[1.15] font-bold text-gray-900">
+            九州に、人が来る理由を100つくる。
+          </h3>
         </div>
-        <div>
-          <p class="text-xs font-semibold text-text-muted uppercase tracking-[0.15em] mb-8">Values</p>
-          <div class="space-y-8">
+
+        <!-- Values: cards -->
+        <div class="fade-in-up">
+          <p class="text-xs font-semibold text-text-muted uppercase tracking-[0.15em] mb-10">Values</p>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
-              { value: '志ドリブン', desc: '利益ではなく志が意思決定の起点。何のためにやるのかを常に問い続ける。' },
-              { value: '見えにくい価値を、見に行く', desc: '表面的なデータだけでなく、現場の声・文脈・背景にある本質的な課題を見る。' },
-              { value: '利益は燃料、目的地ではない', desc: '利益は持続的な価値提供のための手段。目的と手段を取り違えない。' },
+              { num: '01', value: '志ドリブン', desc: '利益ではなく志が意思決定の起点。何のためにやるのかを常に問い続ける。' },
+              { num: '02', value: '見えにくい価値を、見に行く', desc: '表面的なデータだけでなく、現場の声・文脈・背景にある本質的な課題を見る。' },
+              { num: '03', value: '利益は燃料、目的地ではない', desc: '利益は持続的な価値提供のための手段。目的と手段を取り違えない。' },
             ].map((item) => (
-              <div class="border-l-2 border-gray-200 pl-6">
-                <h4 class="text-base font-bold text-gray-900 mb-1">{item.value}</h4>
-                <p class="text-sm text-text-secondary">{item.desc}</p>
+              <div class="p-8 border border-gray-200 rounded-xl">
+                <span class="flex items-center justify-center w-8 h-8 rounded-md bg-navy-50 text-xs font-bold text-accent mb-5">{item.num}</span>
+                <h4 class="text-base font-bold text-gray-900 mb-2">{item.value}</h4>
+                <p class="text-sm text-text-secondary leading-relaxed">{item.desc}</p>
               </div>
             ))}
           </div>

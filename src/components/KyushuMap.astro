@@ -1,0 +1,97 @@
+---
+/**
+ * Kyushu skeleton map SVG component.
+ * Simplified outline of the 7 Kyushu prefectures with novshi base markers.
+ * Designed as a decorative hero element — monoline stroke, no fill.
+ */
+interface Props {
+  class?: string;
+}
+const { class: className = '' } = Astro.props;
+---
+
+<div class:list={['kyushu-map', className]}>
+  <svg
+    viewBox="0 0 400 520"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    class="w-full h-full"
+    aria-hidden="true"
+  >
+    <!-- Kyushu outer outline (simplified) -->
+    <g stroke="currentColor" stroke-width="1" opacity="0.35" stroke-linejoin="round">
+      <!-- Fukuoka -->
+      <path d="M180 40 L220 30 L260 35 L290 50 L310 75 L300 100 L280 110 L260 105 L240 115 L220 105 L200 110 L180 100 L160 80 L155 55 Z" />
+      <!-- Saga -->
+      <path d="M155 55 L160 80 L180 100 L170 120 L150 130 L125 125 L110 110 L105 90 L115 70 L135 60 Z" />
+      <!-- Nagasaki -->
+      <path d="M105 90 L110 110 L125 125 L120 145 L105 165 L90 175 L75 168 L65 150 L60 125 L70 105 L85 95 Z" />
+      <!-- Oita -->
+      <path d="M300 100 L310 75 L340 85 L360 105 L355 135 L340 155 L315 160 L290 150 L280 130 L280 110 Z" />
+      <!-- Kumamoto -->
+      <path d="M170 120 L180 100 L200 110 L220 105 L240 115 L260 105 L280 110 L280 130 L290 150 L270 170 L250 195 L230 200 L210 195 L190 180 L165 165 L150 150 L150 130 Z" />
+      <!-- Miyazaki -->
+      <path d="M290 150 L315 160 L340 155 L345 180 L340 210 L330 245 L315 275 L295 295 L275 290 L260 270 L255 245 L250 220 L250 195 L270 170 Z" />
+      <!-- Kagoshima -->
+      <path d="M165 165 L190 180 L210 195 L230 200 L250 220 L255 245 L260 270 L275 290 L265 310 L250 330 L235 345 L215 355 L195 350 L175 335 L160 310 L150 285 L140 255 L135 225 L140 195 L150 175 Z" />
+      <!-- Kagoshima southern islands (Yakushima area) -->
+      <path d="M200 390 L220 385 L235 395 L230 410 L215 418 L200 412 Z" opacity="0.25" />
+      <path d="M165 405 L180 400 L190 410 L182 420 L168 418 Z" opacity="0.2" />
+    </g>
+
+    <!-- Prefecture labels (very subtle) -->
+    <g fill="currentColor" opacity="0.15" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="500" text-anchor="middle">
+      <text x="220" y="75">福岡</text>
+      <text x="132" y="105">佐賀</text>
+      <text x="85" y="140">長崎</text>
+      <text x="335" y="125">大分</text>
+      <text x="215" y="155">熊本</text>
+      <text x="305" y="230">宮崎</text>
+      <text x="210" y="290">鹿児島</text>
+    </g>
+
+    <!-- novshi base markers -->
+    <!-- Fukuoka -->
+    <g class="map-marker" data-city="fukuoka">
+      <circle cx="235" cy="60" r="6" fill="currentColor" opacity="0.9" />
+      <circle cx="235" cy="60" r="10" fill="none" stroke="currentColor" stroke-width="0.8" opacity="0.4" class="marker-pulse" />
+      <text x="235" y="50" fill="currentColor" opacity="0.7" font-family="Inter, system-ui, sans-serif" font-size="9" font-weight="600" text-anchor="middle">福岡</text>
+    </g>
+
+    <!-- Kumamoto -->
+    <g class="map-marker" data-city="kumamoto">
+      <circle cx="200" cy="160" r="6" fill="currentColor" opacity="0.9" />
+      <circle cx="200" cy="160" r="10" fill="none" stroke="currentColor" stroke-width="0.8" opacity="0.4" class="marker-pulse" />
+      <text x="200" y="150" fill="currentColor" opacity="0.7" font-family="Inter, system-ui, sans-serif" font-size="9" font-weight="600" text-anchor="middle">熊本</text>
+    </g>
+
+    <!-- Connection line between bases -->
+    <line x1="235" y1="66" x2="204" y2="154" stroke="currentColor" stroke-width="0.6" opacity="0.2" stroke-dasharray="4 3" />
+  </svg>
+</div>
+
+<style>
+  .kyushu-map {
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  @keyframes pulse-ring {
+    0% { r: 10; opacity: 0.4; }
+    70% { r: 18; opacity: 0; }
+    100% { r: 18; opacity: 0; }
+  }
+
+  .marker-pulse {
+    animation: pulse-ring 3s ease-out infinite;
+  }
+
+  .map-marker:nth-child(2) .marker-pulse {
+    animation-delay: 1.5s;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .marker-pulse {
+      animation: none;
+    }
+  }
+</style>

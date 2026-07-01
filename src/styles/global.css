@@ -1,13 +1,15 @@
 @import "tailwindcss";
 
-/* ===== v3 Design System: Monotone + Dark Navy ===== */
+/* ===== v3 Design System: Monotone + Deep Navy ===== */
 
 @theme {
-  /* Navy Scale — deep, authoritative navy */
+  /* Navy Scale — deep, authoritative navy (#1E3A5F primary) */
   --color-navy-50: #EEF2F7;
   --color-navy-100: #D4DEEB;
   --color-navy-200: #A9BDD7;
-  --color-navy-400: #4A6D8C;
+  --color-navy-300: #7E9EC3;
+  --color-navy-400: #5A82AC;
+  --color-navy-500: #3A6896;
   --color-navy-600: #2C4F6E;
   --color-navy-700: #1E3A5F;
   --color-navy-800: #152C48;
@@ -39,6 +41,18 @@
   /* Fonts */
   --font-sans: "Noto Sans JP", "Inter", system-ui, sans-serif;
   --font-display: "Inter", "Noto Sans JP", system-ui, sans-serif;
+
+  /* Typography tokens (Manus recommendations) */
+  --text-hero: 3.5rem;
+  --text-hero--line-height: 1.15;
+  --text-hero--letter-spacing: -0.02em;
+
+  --text-section: 2rem;
+  --text-section--line-height: 1.3;
+  --text-section--letter-spacing: 0em;
+
+  --text-body: 1rem;
+  --text-body--line-height: 1.75;
 }
 
 @layer base {
@@ -52,8 +66,9 @@
     font-family: var(--font-sans);
     color: var(--color-text-primary);
     background-color: #ffffff;
-    line-height: 1.7;
+    line-height: 1.75;
     letter-spacing: 0.02em;
+    font-size: 16px;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -71,6 +86,7 @@
 }
 
 @layer utilities {
+  /* ---- Scroll animations ---- */
   .fade-in-up {
     opacity: 0;
     transform: translateY(20px);
@@ -92,6 +108,56 @@
   .stagger.visible > *:nth-child(5) { transition-delay: 320ms; opacity: 1; transform: none; }
   .stagger.visible > *:nth-child(6) { transition-delay: 400ms; opacity: 1; transform: none; }
   .stagger.visible > *:nth-child(7) { transition-delay: 480ms; opacity: 1; transform: none; }
+
+  /* ---- Photo filters (for future photo integration) ---- */
+  .photo-grayscale {
+    filter: grayscale(100%);
+    transition: filter 0.5s ease;
+  }
+  .photo-grayscale:hover {
+    filter: grayscale(0%);
+  }
+  .photo-desaturated {
+    filter: grayscale(60%) contrast(1.1);
+  }
+
+  /* ---- Duotone navy overlay ---- */
+  .duotone-navy {
+    position: relative;
+    overflow: hidden;
+  }
+  .duotone-navy img {
+    filter: grayscale(100%) contrast(1.2);
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .duotone-navy::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #1E3A5F 0%, #4A7FB5 100%);
+    mix-blend-mode: color;
+    pointer-events: none;
+  }
+
+  /* ---- Hero mesh gradient background ---- */
+  .hero-mesh {
+    background-color: #0B1A2A;
+    background-image:
+      radial-gradient(ellipse at 20% 50%, rgba(30, 58, 95, 0.6) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 20%, rgba(42, 90, 143, 0.4) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 80%, rgba(21, 38, 50, 0.5) 0%, transparent 50%);
+  }
+
+  /* ---- Card hover lift ---- */
+  .card-lift {
+    transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+  }
+  .card-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px -8px rgba(14, 31, 51, 0.12);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -99,5 +165,8 @@
     opacity: 1;
     transform: none;
     transition: none;
+  }
+  .card-lift:hover {
+    transform: none;
   }
 }
