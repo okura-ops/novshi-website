@@ -26,7 +26,7 @@ const timelineItems = [
             ['代表者', '大倉 佑介'],
             ['設立', '2025年10月'],
             ['所在地', '福岡県・熊本県'],
-            ['事業内容', '採用戦略・運用支援 / 外国人採用・定着支援 / AI活用支援 / 空き家再生×社宅事業'],
+            ['事業内容', '採用支援 / BPO / 空き家再生×社宅事業'],
           ].map(([label, value]) => (
             <div class="flex flex-col sm:flex-row py-4 gap-1 sm:gap-0">
               <dt class="sm:w-1/4 text-xs font-medium text-text-muted uppercase tracking-wider">{label}</dt>
@@ -51,8 +51,9 @@ const timelineItems = [
             <Timeline items={timelineItems} />
           </div>
 
+          {/* TODO:COPY about-ceo-bio */}
           <div class="space-y-5 text-text-secondary leading-[1.9] text-[15px]">
-            <p>丸紅での事業投資、リクルートでの1,000社以上の採用支援、スタートアップでの経営企画。それぞれの現場で学んだことを掛け合わせ、novshiを創業しました。</p>
+            <p>丸紅での事業投資、リクルートでの<span class="font-num text-gray-900">1,000</span>社以上の採用支援、スタートアップでの経営企画。それぞれの現場で学んだことを掛け合わせ、novshiを創業しました。</p>
             <p>九州の地方中小企業は、日本経済を下支えするエッセンシャルワーカーを数多く雇用しています。しかし、その採用・定着を支える仕組みは驚くほど整っていません。</p>
             <p>「媒体に求人を出す」だけでは人は来ない時代に、戦略とテクノロジーを届けたい。さらに、外国人材の「住まい」の問題を空き家再生で解決することで、採用と定着を構造的に接続する。novshiだからできる価値提供を追求していきます。</p>
           </div>
@@ -60,12 +61,12 @@ const timelineItems = [
 
         <!-- Photo slot: CEO portrait -->
         <div class="hidden lg:flex flex-col gap-6 fade-in-up">
-          <div class="w-full aspect-[3/4] rounded-xl bg-gradient-to-br from-navy-50 to-gray-100 flex items-center justify-center sticky top-24">
+          <div class="w-full aspect-[3/4] rounded-xl bg-[#F2F2F2] flex items-center justify-center sticky top-24">
             <div class="text-center">
-              <div class="w-20 h-20 rounded-full bg-navy-100 mx-auto mb-3 flex items-center justify-center">
-                <span class="text-2xl font-bold text-accent" style="font-family: Inter, sans-serif;">YO</span>
+              <div class="w-20 h-20 rounded-full bg-white border border-gray-200 mx-auto mb-3 flex items-center justify-center">
+                <span class="font-num text-2xl font-bold text-gray-900">YO</span>
               </div>
-              <p class="text-xs text-navy-400/60">Photo coming soon</p>
+              <p class="text-xs text-text-muted">Photo coming soon</p>
             </div>
           </div>
         </div>
@@ -83,7 +84,8 @@ const timelineItems = [
       <div class="space-y-24 stagger">
         <!-- Mission: large typography -->
         <div class="fade-in-up">
-          <p class="text-xs font-semibold text-text-muted uppercase tracking-[0.15em] mb-6">Mission</p>
+          <p class="font-display text-xs font-semibold text-text-muted uppercase tracking-[0.15em] mb-6">Mission</p>
+          {/* TODO:COPY about-mission */}
           <h3 class="text-4xl lg:text-[3.5rem] lg:leading-[1.1] font-bold text-gray-900">
             豊かさを、描きなおす。
           </h3>
@@ -91,15 +93,17 @@ const timelineItems = [
 
         <!-- Vision -->
         <div class="fade-in-up">
-          <p class="text-xs font-semibold text-text-muted uppercase tracking-[0.15em] mb-6">Vision</p>
+          <p class="font-display text-xs font-semibold text-text-muted uppercase tracking-[0.15em] mb-6">Vision</p>
+          {/* TODO:COPY about-vision */}
           <h3 class="text-2xl lg:text-[2.5rem] lg:leading-[1.15] font-bold text-gray-900">
-            九州に、人が来る理由を100つくる。
+            九州に、人が来る理由を<span class="font-num">1,000</span>つくる。
           </h3>
         </div>
 
         <!-- Values: cards -->
         <div class="fade-in-up">
-          <p class="text-xs font-semibold text-text-muted uppercase tracking-[0.15em] mb-10">Values</p>
+          <p class="font-display text-xs font-semibold text-text-muted uppercase tracking-[0.15em] mb-10">Values</p>
+          {/* TODO:COPY about-values */}
           <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
               { num: '01', value: '志ドリブン', desc: '利益ではなく志が意思決定の起点。何のためにやるのかを常に問い続ける。' },

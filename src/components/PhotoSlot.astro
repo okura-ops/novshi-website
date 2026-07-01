@@ -27,6 +27,7 @@ const {
 } = Astro.props;
 
 const hasImage = src && mode !== 'placeholder';
+const patternId = `ph-${Math.random().toString(36).slice(2, 8)}`;
 ---
 
 <div class:list={[
@@ -52,26 +53,26 @@ const hasImage = src && mode !== 'placeholder';
 
       {mode === 'overlay' && (
         <>
-          <img src={src} alt={alt} class="w-full h-full object-cover" loading="lazy" decoding="async" />
-          <div class="absolute inset-0 bg-gradient-to-b from-navy-900/60 to-navy-900/30"></div>
+          <img src={src} alt={alt} class="w-full h-full object-cover grayscale contrast-[1.1]" loading="lazy" decoding="async" />
+          <div class="absolute inset-0 bg-[#1A1A1A]/45"></div>
         </>
       )}
     </>
   ) : (
     <!-- Placeholder: abstract pattern when no photo is available -->
-    <div class="w-full h-full bg-gradient-to-br from-navy-50 to-gray-100 flex items-center justify-center">
-      <div class="absolute inset-0 opacity-[0.04]">
+    <div class="w-full h-full bg-[#F2F2F2] flex items-center justify-center">
+      <div class="absolute inset-0 opacity-[0.05]">
         <svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
           <defs>
-            <pattern id={`ph-${Math.random().toString(36).slice(2, 8)}`} width="24" height="24" patternUnits="userSpaceOnUse">
-              <circle cx="12" cy="12" r="1" fill="#1E3A5F" />
+            <pattern id={patternId} width="24" height="24" patternUnits="userSpaceOnUse">
+              <circle cx="12" cy="12" r="1" fill="#1A1A1A" />
             </pattern>
           </defs>
-          <rect width="100%" height="100%" fill={`url(#ph-${Math.random().toString(36).slice(2, 8)})`} />
+          <rect width="100%" height="100%" fill={`url(#${patternId})`} />
         </svg>
       </div>
       {label && (
-        <span class="relative z-10 text-sm font-medium text-navy-400/60 tracking-wide">{label}</span>
+        <span class="relative z-10 text-sm font-medium text-text-muted tracking-wide">{label}</span>
       )}
     </div>
   )}

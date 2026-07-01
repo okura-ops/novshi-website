@@ -1,48 +1,52 @@
 @import "tailwindcss";
 
-/* ===== v3 Design System: Monotone + Deep Navy ===== */
+/* ===== v4 Design System: Monotone (Black / Gray / White) ===== */
+/* Source of truth: 05_content/brand/novshi_design_system_v4.md            */
+/* Ink #1A1A1A / Secondary #666666 / Border #E5E5E5 / Pale #F2F2F2 / White  */
 
 @theme {
-  /* Navy Scale — deep, authoritative navy (#1E3A5F primary) */
-  --color-navy-50: #EEF2F7;
-  --color-navy-100: #D4DEEB;
-  --color-navy-200: #A9BDD7;
-  --color-navy-300: #7E9EC3;
-  --color-navy-400: #5A82AC;
-  --color-navy-500: #3A6896;
-  --color-navy-600: #2C4F6E;
-  --color-navy-700: #1E3A5F;
-  --color-navy-800: #152C48;
-  --color-navy-900: #0E1F33;
-  --color-navy-950: #091520;
+  /* --- Neutral "navy-*" remap ---
+     Legacy utilities (navy-50 … navy-950) are remapped to pure grays so no
+     blue can survive anywhere in the markup. R=G=B on every stop. */
+  --color-navy-50: #F2F2F2;
+  --color-navy-100: #E5E5E5;
+  --color-navy-200: #D4D4D4;
+  --color-navy-300: #B8B8B8;
+  --color-navy-400: #999999;
+  --color-navy-500: #808080;
+  --color-navy-600: #4D4D4D;
+  --color-navy-700: #333333;
+  --color-navy-800: #262626;
+  --color-navy-900: #1A1A1A;
+  --color-navy-950: #111111;
 
   /* Gray Scale */
   --color-gray-50: #FAFAFA;
-  --color-gray-100: #F5F5F5;
+  --color-gray-100: #F2F2F2;
   --color-gray-200: #E5E5E5;
   --color-gray-300: #D4D4D4;
-  --color-gray-400: #A3A3A3;
-  --color-gray-500: #737373;
-  --color-gray-600: #525252;
-  --color-gray-700: #404040;
-  --color-gray-900: #171717;
+  --color-gray-400: #999999;
+  --color-gray-500: #666666;
+  --color-gray-600: #4D4D4D;
+  --color-gray-700: #333333;
+  --color-gray-900: #1A1A1A;
 
-  /* Semantic */
-  --color-accent: #1E3A5F;
-  --color-accent-hover: #2C4F6E;
-  --color-accent-light: #EEF2F7;
-  --color-accent-dark: #0E1F33;
-  --color-text-primary: #171717;
-  --color-text-secondary: #525252;
-  --color-text-muted: #737373;
+  /* Semantic — monotone */
+  --color-accent: #1A1A1A;
+  --color-accent-hover: #333333;
+  --color-accent-light: #F2F2F2;
+  --color-accent-dark: #111111;
+  --color-text-primary: #1A1A1A;
+  --color-text-secondary: #666666;
+  --color-text-muted: #999999;
   --color-border: #E5E5E5;
-  --color-bg-secondary: #FAFAFA;
+  --color-bg-secondary: #F2F2F2;
 
-  /* Fonts */
-  --font-sans: "Noto Sans JP", "Inter", system-ui, sans-serif;
-  --font-display: "Inter", "Noto Sans JP", system-ui, sans-serif;
+  /* Fonts — 和文 Noto Sans JP / 欧文・数値 Montserrat (NO Inter) */
+  --font-sans: "Noto Sans JP", system-ui, sans-serif;
+  --font-display: "Montserrat", "Noto Sans JP", system-ui, sans-serif;
 
-  /* Typography tokens (Manus recommendations) */
+  /* Typography tokens */
   --text-hero: 3.5rem;
   --text-hero--line-height: 1.15;
   --text-hero--letter-spacing: -0.02em;
@@ -53,6 +57,14 @@
 
   --text-body: 1rem;
   --text-body--line-height: 1.75;
+
+  /* Radius — cards 2px, buttons/chips 4px, no soft corners */
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 4px;
+  --radius-xl: 2px;
+  --radius-2xl: 2px;
+  --radius-3xl: 2px;
 }
 
 @layer base {
@@ -76,12 +88,19 @@
     font-weight: 700;
     line-height: 1.3;
     letter-spacing: -0.01em;
-    color: var(--color-gray-900);
+    color: var(--color-text-primary);
+  }
+
+  /* Montserrat for Latin numerals / stat figures (jump-ratio emphasis) */
+  .font-num {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.01em;
   }
 
   ::selection {
-    background-color: var(--color-navy-100);
-    color: var(--color-navy-900);
+    background-color: #1A1A1A;
+    color: #ffffff;
   }
 }
 
@@ -109,25 +128,26 @@
   .stagger.visible > *:nth-child(6) { transition-delay: 400ms; opacity: 1; transform: none; }
   .stagger.visible > *:nth-child(7) { transition-delay: 480ms; opacity: 1; transform: none; }
 
-  /* ---- Photo filters (for future photo integration) ---- */
+  /* ---- Photo treatment: grayscale only (no color/duotone) ---- */
   .photo-grayscale {
-    filter: grayscale(100%);
+    filter: grayscale(100%) contrast(1.05);
     transition: filter 0.5s ease;
   }
-  .photo-grayscale:hover {
+  .photo-grayscale-hover {
+    filter: grayscale(100%) contrast(1.05);
+    transition: filter 0.5s ease;
+  }
+  .photo-grayscale-hover:hover {
     filter: grayscale(0%);
   }
-  .photo-desaturated {
-    filter: grayscale(60%) contrast(1.1);
-  }
 
-  /* ---- Duotone navy overlay ---- */
+  /* ---- Monotone duotone: grayscale + flat ink overlay (no gradient) ---- */
   .duotone-navy {
     position: relative;
     overflow: hidden;
   }
   .duotone-navy img {
-    filter: grayscale(100%) contrast(1.2);
+    filter: grayscale(100%) contrast(1.15);
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -136,27 +156,16 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg, #1E3A5F 0%, #4A7FB5 100%);
-    mix-blend-mode: color;
+    background: rgba(26, 26, 26, 0.22);
     pointer-events: none;
   }
 
-  /* ---- Hero mesh gradient background ---- */
-  .hero-mesh {
-    background-color: #0B1A2A;
-    background-image:
-      radial-gradient(ellipse at 20% 50%, rgba(30, 58, 95, 0.6) 0%, transparent 50%),
-      radial-gradient(ellipse at 80% 20%, rgba(42, 90, 143, 0.4) 0%, transparent 50%),
-      radial-gradient(ellipse at 50% 80%, rgba(21, 38, 50, 0.5) 0%, transparent 50%);
-  }
-
-  /* ---- Card hover lift ---- */
+  /* ---- Card hover: border emphasis, NO drop shadow ---- */
   .card-lift {
-    transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+    transition: border-color 0.25s ease-out;
   }
   .card-lift:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 40px -8px rgba(14, 31, 51, 0.12);
+    border-color: #1A1A1A;
   }
 }
 
@@ -165,8 +174,5 @@
     opacity: 1;
     transform: none;
     transition: none;
-  }
-  .card-lift:hover {
-    transform: none;
   }
 }
