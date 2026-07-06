@@ -7,7 +7,7 @@ import CTASection from '../components/CTASection.astro';
 
 <Layout title="サービス | 株式会社novshi" description="採用支援とBPO。九州の中小企業の採用と、その周辺業務を月額で引き受けます。">
   {/* TODO:COPY services-hero */}
-  <Hero title="求人づくりから入社後の定着まで、月額で。" subtitle="九州の中小企業の採用と、その周辺の業務を引き受けます。柱は「採用支援」と「BPO」の2本です。" compact={true} />
+  <Hero title="求人づくりから入社後の定着まで、月額で。" subtitle="九州の中小企業の採用と、その周辺の業務まで担います。「採用支援」と「BPO」の二本柱です。" compact={true} />
 
   <!-- 3 Channel -->
   <section class="py-20 lg:py-24 bg-bg-secondary">
@@ -19,7 +19,7 @@ import CTASection from '../components/CTASection.astro';
         {[
           { label: 'Indeed', num: '01', desc: 'スポンサー求人の単価を調整し、応募単価を抑えます' },
           { label: 'Meta広告', num: '02', desc: 'Instagram・Facebookで、転職をまだ考えていない人に届けます' },
-          { label: '自社採用HP', num: '03', desc: '検索されやすい構造で、求職者に見つかる採用ページに' },
+          { label: '自社採用HP', num: '03', desc: '検索されやすい構造で、求職者に見つかる採用ページをつくります' },
         ].map((ch) => (
           <div class="bg-white p-8 lg:p-10 rounded-xl border border-gray-200 card-lift">
             <span class="font-num inline-flex items-center justify-center w-9 h-9 rounded-md bg-[#F2F2F2] text-sm font-bold text-gray-900 mb-5">{ch.num}</span>
@@ -42,7 +42,7 @@ import CTASection from '../components/CTASection.astro';
             {/* TODO:COPY services-recruitment-lead */}
             <p class="text-lg font-bold text-gray-900 mb-4">「もう一人の経営者。」</p>
             <p class="text-text-secondary leading-[1.9]">
-              求人を出すだけでは、人は来ません。誰に何をどう届けるかを一緒に決め、面接、入社後の定着まで見ます。採用と組織を、月額で一緒に回します。
+              求人を出すだけでは、人は来ません。誰に何をどう届けるかを一緒に決め、面接、入社後の定着まで担当します。採用と組織づくりを、月額で一緒に進めます。
             </p>
           </div>
 
@@ -67,11 +67,11 @@ import CTASection from '../components/CTASection.astro';
             <h3 class="text-xl font-bold text-gray-900 mb-4 fade-in-up">外国人採用・定着支援</h3>
             {/* TODO:COPY services-global-lead */}
             <p class="text-text-secondary leading-[1.9] fade-in-up mb-8">
-              外国人材は「紹介して終わり」ではありません。住まい・在留資格・生活の立ち上げまで見て、長く働ける状態をつくります。
+              外国人材は「紹介して終わり」ではありません。住まい・在留資格・生活の立ち上げまで支え、長く働ける状態をつくります。
             </p>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 stagger">
               {[
-                { title: '住居付き人材紹介', desc: '空き家再生と組み合わせ、住まいとセットで人材を紹介します。', note: '空き家事業と連携' },
+                { title: '住居付き人材紹介', desc: '空き家再生と組み合わせ、住まいとセットで人材を紹介します。（有料職業紹介事業許可 40-ユ-301708）', note: '空き家事業と連携' },
                 { title: '住宅確保支援', desc: '安心して暮らせる住まいを確保。保証人・契約まわりもサポートします。', note: '空き家事業と連携' },
                 { title: '在留資格・行政手続サポート', desc: 'ビザの取得・更新、各種届出など、煩雑な手続きをサポートします。', note: null },
                 { title: '定着支援', desc: '生活の立ち上げ、日本語、文化への慣れまで支え、長期の定着を後押しします。', note: null },
@@ -89,7 +89,7 @@ import CTASection from '../components/CTASection.astro';
 
           {/* TODO:COPY services-ai-note */}
           <p class="mt-10 text-sm text-text-muted leading-relaxed">
-            これらの業務は、AIを道具として使いながら、速く正確に回しています。
+            これらの業務は、AIを道具として使いながら、速く正確に処理しています。
           </p>
         </div>
 
@@ -116,15 +116,15 @@ import CTASection from '../components/CTASection.astro';
             <h2 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-6">BPO（業務運用代行）</h2>
             {/* TODO:COPY services-bpo-lead */}
             <p class="text-text-secondary leading-[1.9]">
-              人手が足りず回らない業務、担当者が辞めて止まった業務を引き受けます。採用まわりを中心に、月額で預かり、実務を回します。
+              人手が足りず止まっている業務、担当者が辞めて動かなくなった業務を引き受けます。採用まわりを中心に、月額でお預かりし、実務を止めずに進めます。
             </p>
           </div>
 
           <div class="mt-14 grid grid-cols-1 sm:grid-cols-2 gap-6 stagger">
             {[
               { title: '採用事務・応募対応', desc: '応募者への連絡、日程調整、選考の事務まわりを代行します。' },
-              { title: '人事労務・バックオフィス', desc: '入退社手続き、勤怠、各種事務の定型業務を引き受けます。' },
-              { title: 'カスタマーサポート', desc: '問い合わせ対応など、止められない業務を安定して回します。' },
+              { title: '人事労務・バックオフィス', desc: '入退社手続き、勤怠、各種事務の定型業務を代行します。' },
+              { title: 'カスタマーサポート', desc: '問い合わせ対応など、止められない業務を安定して続けます。' },
               { title: '月次レポート・改善提案', desc: '業務量と品質を見える化し、毎月の改善につなげます。' },
             ].map((item) => (
               <div class="bg-white p-8 border border-gray-200 rounded-xl card-lift">
