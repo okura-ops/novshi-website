@@ -7,6 +7,7 @@ Phase B では識別子で該当箇所を機械的に辿り、確定コピーへ
 - 総数: 27 ブロック
 - 記法: ソース内マーカー `{/* TODO:COPY <id> */}`（.astro の JSX コメント）
 - 「暫定文言」は 2026-07 時点で流し込んだテキスト。最終文言は未確定。
+- **2026-07-04 追記**：`home-ceo-message` / `home-careers-banner` / `about-ceo-bio` / `careers-intro` はAI感排除（`writing_style.md`）でリライト済み。下表の一部「暫定文言」は旧版のため、**各ソースの `TODO:COPY` マーカー直後を正**とすること。
 
 ---
 
