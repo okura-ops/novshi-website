@@ -11,9 +11,10 @@ const navItems = [
 <header id="site-header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300" data-header>
   <div class="max-w-[1120px] mx-auto px-5 sm:px-8">
     <div class="flex items-center justify-between h-16 lg:h-[72px]">
-      <!-- Logo: switches between white (on dark hero) and dark -->
-      <a href="/" class="flex items-center gap-2.5 group">
-        <span class="header-logo-text text-xl lg:text-[22px] font-bold tracking-tight transition-colors duration-300" style="font-family: 'Montserrat', sans-serif;">novshi</span>
+      <!-- Logo: brand mark (swaps black/white with header state) -->
+      <a href="/" class="flex items-center" aria-label="novshi ホーム">
+        <img src="/logo-black.png" alt="novshi" width="881" height="327" class="header-logo-dark h-7 lg:h-8 w-auto" />
+        <img src="/logo-white.png" alt="novshi" width="881" height="327" class="header-logo-light h-7 lg:h-8 w-auto" aria-hidden="true" />
       </a>
 
       <nav class="hidden md:flex items-center gap-10">
@@ -60,6 +61,13 @@ const navItems = [
 <div class="h-16 lg:h-[72px]"></div>
 
 <style>
+  /* Logo swap: black by default, white over dark hero, black when scrolled */
+  .header-logo-light { display: none; }
+  [data-header].is-over-hero .header-logo-dark { display: none; }
+  [data-header].is-over-hero .header-logo-light { display: block; }
+  [data-header].is-scrolled .header-logo-light { display: none; }
+  [data-header].is-scrolled .header-logo-dark { display: block; }
+
   /* Default state: dark text (for light pages) */
   .header-logo-text { color: var(--color-gray-900); }
   .header-nav-link { color: var(--color-gray-500); }
