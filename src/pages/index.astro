@@ -77,41 +77,35 @@ import CTASection from '../components/CTASection.astro';
         <h2 class="text-3xl lg:text-[2.5rem] font-bold text-gray-900">提供サービス</h2>
         {/* TODO:COPY home-services-intro */}
         <p class="mt-6 text-text-secondary leading-[1.9] max-w-2xl">
-          事業は「採用支援」と「BPO」の2本です。採用の設計から日々の運用、外国人採用、入社後の業務まで一手に担います。
+          novshiはふたつの事業を営みます。九州の中小企業向けの採用支援・BPOと、空き家を働く人の社宅に変える事業です。採用支援の顧客から空き家の情報が届き、社宅は採用した人の定着に使われます。
         </p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 stagger">
-        {/* TODO:COPY home-service-recruitment */}
-        <a href="/services#recruitment" class="group bg-white p-10 lg:p-12 rounded-xl border border-gray-200 card-lift">
-          <div class="flex items-center gap-3 mb-4">
-            <span class="font-num flex items-center justify-center w-9 h-9 rounded-md bg-[#F2F2F2] text-sm font-bold text-gray-900">01</span>
-            <p class="font-display text-xs font-semibold text-text-muted uppercase tracking-wide">Recruitment</p>
-          </div>
-          <h3 class="text-lg font-bold text-gray-900 mb-3">採用支援</h3>
+        {/* TODO:COPY home-services-card-recruit */}
+        <a href="/services#recruitment" class="group bg-white p-10 lg:p-12 rounded-xl border border-gray-200 card-lift flex flex-col">
+          <p class="font-display text-xs font-semibold text-text-muted uppercase tracking-wide mb-4">Recruiting</p>
+          <h3 class="text-lg font-bold text-gray-900 mb-3">もう一人の経営者。</h3>
           <p class="text-sm text-text-secondary leading-[1.9]">
-            求人の設計、媒体運用、面接、入社後の定着まで。外国人採用も含めて、採用と組織づくりを月額で支えます。
+            採用戦略の設計から求人媒体の運用、面接、入社後の定着まで、代表・大倉が直接担います。大倉はリクルートで<span class="font-num text-gray-900">6</span>年、<span class="font-num text-gray-900">1,000</span>社以上の採用に関わりました。外国人採用は、在留資格の手続きと住まいの手配も含みます。
           </p>
           <span class="mt-6 inline-flex items-center text-sm font-medium text-gray-900 opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0 transition-all duration-200">
-            くわしく
+            採用支援の詳細へ
             <svg class="ml-1 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
             </svg>
           </span>
         </a>
 
-        {/* TODO:COPY home-service-bpo */}
-        <a href="/services#bpo" class="group bg-white p-10 lg:p-12 rounded-xl border border-gray-200 card-lift">
-          <div class="flex items-center gap-3 mb-4">
-            <span class="font-num flex items-center justify-center w-9 h-9 rounded-md bg-[#F2F2F2] text-sm font-bold text-gray-900">02</span>
-            <p class="font-display text-xs font-semibold text-text-muted uppercase tracking-wide">BPO</p>
-          </div>
-          <h3 class="text-lg font-bold text-gray-900 mb-3">BPO（業務運用代行）</h3>
+        {/* TODO:COPY home-services-card-bpo */}
+        <a href="/services#bpo" class="group bg-white p-10 lg:p-12 rounded-xl border border-gray-200 card-lift flex flex-col">
+          <p class="font-display text-xs font-semibold text-text-muted uppercase tracking-wide mb-4">BPO</p>
+          <h3 class="text-lg font-bold text-gray-900 mb-3">止まった業務を、月額で引き受ける</h3>
           <p class="text-sm text-text-secondary leading-[1.9]">
-            採用まわりを中心に、人手が足りず回らない業務を引き受けます。応募者対応や給与計算など、止められない仕事を月額でお預かりします。
+            担当者の退職や兼任で滞った業務を月<span class="font-num text-gray-900">10</span>万円から代行します。中心は採用まわり。範囲は事前に文書で決め、月次で報告します。
           </p>
           <span class="mt-6 inline-flex items-center text-sm font-medium text-gray-900 opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0 transition-all duration-200">
-            くわしく
+            BPOの詳細へ
             <svg class="ml-1 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
             </svg>
@@ -119,9 +113,16 @@ import CTASection from '../components/CTASection.astro';
         </a>
       </div>
 
+      {/* TODO:COPY home-services-akiya-note */}
+      <div class="mt-6 border-l-2 border-gray-300 pl-6 py-1 fade-in-up max-w-3xl">
+        <p class="text-sm text-text-secondary leading-[1.9]">
+          このほかに、空き家を買い取って改修し、働く人の社宅として貸す事業を始めています。現在は<span class="font-num text-gray-900">1</span>棟目の実証段階です。
+        </p>
+      </div>
+
       {/* TODO:COPY home-services-ai-note */}
       <p class="mt-8 text-sm text-text-muted leading-relaxed max-w-2xl">
-        AIは、これらの業務を速く正確に処理するための道具として使っています。
+        社員ゼロの運営です。定型業務はAIに任せ、判断と対話は大倉が行います。
       </p>
     </div>
   </section>

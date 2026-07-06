@@ -1,101 +1,92 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
-import PhotoSlot from '../components/PhotoSlot.astro';
 import CTASection from '../components/CTASection.astro';
+
+const recruitItems = [
+  { title: '採用戦略の設計', desc: '誰を、いつまでに、いくらで採るか。まず数字で決めます。' },
+  { title: '求人原稿の作成', desc: '応募者が入社後を想像できる粒度で、仕事と待遇を書きます。' },
+  { title: '媒体運用', desc: 'Indeed・Meta広告・自社採用HPの3つを、応募単価を見ながら配分します。' },
+  { title: '面接の設計と同席', desc: '評価項目を先に揃え、求めがあれば面接にも同席します。' },
+  { title: '内定から入社まで', desc: '条件提示から入社日まで連絡を切らさず、辞退が出やすい局面で先に動きます。' },
+  { title: '定着支援', desc: '入社後1・3・6か月を目安に面談し、離職の兆候を経営者へ伝えます。' },
+];
+const channels = [
+  { num: '01', label: 'Indeed', desc: '仕事を探す人の検索結果に載る、応募獲得の中心媒体です。' },
+  { num: '02', label: 'Meta広告', desc: '転職を考えはじめる前の層に、求人を先に見せます。' },
+  { num: '03', label: '自社採用HP', desc: '社名で検索した応募者の疑問に、一次情報で答える場所です。' },
+];
+const globalCards = [
+  { title: '人材紹介', desc: '職種要件と在留資格の適合を確認してから紹介します。' },
+  { title: '在留資格支援', desc: '必要書類と手続きを、入社日から逆算した工程表にします。' },
+  { title: '住まいの確保', desc: '社宅として貸せる住居を自社で用意します。空き家再生事業が受け皿です。' },
+  { title: '定着フォロー', desc: '入社後の生活相談を受け、気になる変化を企業へ共有します。' },
+];
+const bpoItems = [
+  { title: '応募者への連絡代行', desc: '応募への一次連絡と面接日程の調整を、依頼元の企業名義で行います。' },
+  { title: '求人媒体の運用代行', desc: '原稿の更新と広告費の配分を、応募状況に合わせて見直します。' },
+  { title: '採用事務', desc: '内定通知や入社書類など、書類まわりの作成と送付を担います。' },
+  { title: 'その他の定型業務', desc: '請求書発行やデータ入力など、採用以外も相談できます。' },
+];
 ---
 
-<Layout title="サービス | 株式会社novshi" description="採用支援とBPO。九州の中小企業の採用と、その周辺業務を月額で引き受けます。">
+<Layout title="サービス | 株式会社novshi" description="採用支援・BPOと、空き家を社宅に変える事業。九州の中小企業の採用と定着を、代表が直接支えます。">
   {/* TODO:COPY services-hero */}
-  <Hero title="求人づくりから入社後の定着まで、月額で。" subtitle="九州の中小企業の採用と、その周辺の業務まで担います。「採用支援」と「BPO」の二本柱です。" compact={true} />
-
-  <!-- 3 Channel -->
-  <section class="py-20 lg:py-24 bg-bg-secondary">
-    <div class="max-w-[1120px] mx-auto px-5 sm:px-8">
-      {/* TODO:COPY services-channels-intro */}
-      <h2 class="text-2xl font-bold text-gray-900 mb-4 fade-in-up">3つの入り口で、応募を増やす</h2>
-      <p class="text-text-secondary mb-12 fade-in-up">求職者と出会う入り口を増やし、応募につなげます。</p>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 stagger">
-        {[
-          { label: 'Indeed', num: '01', desc: 'スポンサー求人の単価を調整し、応募単価を抑えます' },
-          { label: 'Meta広告', num: '02', desc: 'Instagram・Facebookで、転職をまだ考えていない人に届けます' },
-          { label: '自社採用HP', num: '03', desc: '検索されやすい構造で、求職者に見つかる採用ページをつくります' },
-        ].map((ch) => (
-          <div class="bg-white p-8 lg:p-10 rounded-xl border border-gray-200 card-lift">
-            <span class="font-num inline-flex items-center justify-center w-9 h-9 rounded-md bg-[#F2F2F2] text-sm font-bold text-gray-900 mb-5">{ch.num}</span>
-            <p class="text-base font-bold text-gray-900 mb-2">{ch.label}</p>
-            <p class="text-sm text-text-secondary leading-[1.9]">{ch.desc}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
+  <Hero title="novshiのふたつの事業" subtitle="novshiは、九州の中小企業の採用支援・BPOと、空き家を社宅に変える事業を並行しています。顧客は共通です。採用支援の顧客が空き家の情報をもたらし、社宅は採用した人の住まいになります。" compact={true} />
 
   <!-- 柱1: 採用支援 -->
   <section id="recruitment" class="py-24 lg:py-32 scroll-mt-20 bg-white">
     <div class="max-w-[1120px] mx-auto px-5 sm:px-8">
-      <div class="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-16 items-start">
-        <div>
-          <div class="fade-in-up">
-            <p class="font-display text-xs font-semibold text-text-muted uppercase tracking-[0.15em] mb-4">Service 01</p>
-            <h2 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-6">採用支援</h2>
-            {/* TODO:COPY services-recruitment-lead */}
-            <p class="text-lg font-bold text-gray-900 mb-4">「もう一人の経営者。」</p>
-            <p class="text-text-secondary leading-[1.9]">
-              求人を出すだけでは、人は来ません。誰に何をどう届けるかを一緒に決め、面接、入社後の定着まで担当します。採用と組織づくりを、月額で一緒に進めます。
-            </p>
-          </div>
+      <div class="max-w-2xl fade-in-up">
+        {/* TODO:COPY services-recruit-head */}
+        <p class="font-display text-xs font-semibold text-text-muted uppercase tracking-[0.15em] mb-4">Service 01</p>
+        <h2 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-6">採用支援</h2>
+        <p class="text-lg font-bold text-gray-900 mb-4">「もう一人の経営者。」</p>
+        {/* TODO:COPY services-recruit-lead */}
+        <p class="text-text-secondary leading-[1.9]">
+          採用担当がいない会社の、採用担当になります。実務代行ではなく、経営者の隣で採否を一緒に決める立場です。担当は代表・大倉。丸紅で事業投資を経験し、リクルートで<span class="font-num text-gray-900">6</span>年、中途採用営業とIndeedの事業企画として<span class="font-num text-gray-900">1,000</span>社以上の採用に関わりました。
+        </p>
+      </div>
 
-          <div class="mt-14 grid grid-cols-1 md:grid-cols-2 gap-y-8 gap-x-12 stagger">
-            {[
-              { title: 'EVP（採用の強み）の言語化', desc: '自社が選ばれる理由を整理し、求職者に伝わる言葉にします。' },
-              { title: '求人原稿の作成', desc: '媒体ごとに刺さる求人原稿を書き、検索と応募につなげます。' },
-              { title: 'Indeed運用代行', desc: 'スポンサー求人の単価調整、A/Bテスト、効果測定をまとめて代行します。' },
-              { title: 'Meta広告運用', desc: 'Instagram・Facebookの採用広告を、クリエイティブ制作から運用まで。' },
-              { title: '採用HPの構築・運用', desc: '検索されやすい構造の採用サイトを構築し、運用します。' },
-              { title: '採用KPIの管理', desc: '応募数・表示数・CTR・CPAを見える化し、数字を見て打ち手を変えます。' },
-            ].map((item) => (
-              <div class="border-l-2 border-gray-200 pl-6">
-                <h3 class="text-sm font-bold text-gray-900 mb-1">{item.title}</h3>
-                <p class="text-sm text-text-secondary leading-[1.9]">{item.desc}</p>
-              </div>
-            ))}
+      <div class="mt-14 grid grid-cols-1 md:grid-cols-2 gap-y-8 gap-x-12 stagger">
+        {recruitItems.map((item) => (
+          <div class="border-l-2 border-gray-200 pl-6">
+            <h3 class="text-sm font-bold text-gray-900 mb-1">{item.title}</h3>
+            <p class="text-sm text-text-secondary leading-[1.9]">{item.desc}</p>
           </div>
+        ))}
+      </div>
 
-          <!-- 外国人採用（採用支援の中に内包） -->
-          <div class="mt-16 pt-12 border-t border-gray-200">
-            <h3 class="text-xl font-bold text-gray-900 mb-4 fade-in-up">外国人採用・定着支援</h3>
-            {/* TODO:COPY services-global-lead */}
-            <p class="text-text-secondary leading-[1.9] fade-in-up mb-8">
-              外国人材は「紹介して終わり」ではありません。住まい・在留資格・生活の立ち上げまで支え、長く働ける状態をつくります。
-            </p>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 stagger">
-              {[
-                { title: '住居付き人材紹介', desc: '空き家再生と組み合わせ、住まいとセットで人材を紹介します。（有料職業紹介事業許可 40-ユ-301708）', note: '空き家事業と連携' },
-                { title: '住宅確保支援', desc: '安心して暮らせる住まいを確保。保証人・契約まわりもサポートします。', note: '空き家事業と連携' },
-                { title: '在留資格・行政手続サポート', desc: 'ビザの取得・更新、各種届出など、煩雑な手続きをサポートします。', note: null },
-                { title: '定着支援', desc: '生活の立ち上げ、日本語、文化への慣れまで支え、長期の定着を後押しします。', note: null },
-              ].map((item) => (
-                <div class="bg-white p-8 border border-gray-200 rounded-xl card-lift">
-                  <div class="flex items-start justify-between mb-3">
-                    <h4 class="text-sm font-bold text-gray-900">{item.title}</h4>
-                    {item.note && <span class="text-[10px] font-medium text-gray-900 bg-[#F2F2F2] px-2 py-0.5 rounded-full whitespace-nowrap ml-2">{item.note}</span>}
-                  </div>
-                  <p class="text-sm text-text-secondary leading-[1.9]">{item.desc}</p>
-                </div>
-              ))}
+      <!-- 運用する3つのチャネル -->
+      <div class="mt-16 pt-12 border-t border-gray-200">
+        {/* TODO:COPY services-recruit-channels-head */}
+        <h3 class="text-xl font-bold text-gray-900 mb-2 fade-in-up">運用する3つのチャネル</h3>
+        <p class="text-text-secondary mb-8 fade-in-up">媒体ごとに役割を分けて使います。</p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 stagger">
+          {channels.map((ch) => (
+            <div class="bg-white p-8 border border-gray-200 rounded-xl card-lift">
+              <span class="font-num inline-flex items-center justify-center w-9 h-9 rounded-md bg-[#F2F2F2] text-sm font-bold text-gray-900 mb-5">{ch.num}</span>
+              <p class="text-base font-bold text-gray-900 mb-2">{ch.label}</p>
+              <p class="text-sm text-text-secondary leading-[1.9]">{ch.desc}</p>
             </div>
-          </div>
-
-          {/* TODO:COPY services-ai-note */}
-          <p class="mt-10 text-sm text-text-muted leading-relaxed">
-            これらの業務は、AIを道具として使いながら、速く正確に処理しています。
-          </p>
+          ))}
         </div>
+      </div>
 
-        <!-- Photo slot -->
-        <div class="hidden lg:block fade-in-up">
-          <PhotoSlot mode="placeholder" label="採用支援" aspect="aspect-[3/4]" class="sticky top-24" />
+      <!-- 外国人採用・定着支援 -->
+      <div class="mt-16 pt-12 border-t border-gray-200">
+        <h3 class="text-xl font-bold text-gray-900 mb-4 fade-in-up">外国人採用・定着支援</h3>
+        {/* TODO:COPY services-global-lead */}
+        <p class="text-text-secondary leading-[1.9] fade-in-up mb-8 max-w-2xl">
+          外国人採用でよくあるつまずきは、内定後に住まいが決まらないことです。novshiは人材紹介（有料職業紹介事業許可 40-ユ-301708）に、在留資格手続きの支援と社宅の用意を組み合わせています。
+        </p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 stagger">
+          {globalCards.map((item) => (
+            <div class="bg-white p-8 border border-gray-200 rounded-xl card-lift">
+              <h4 class="text-sm font-bold text-gray-900 mb-2">{item.title}</h4>
+              <p class="text-sm text-text-secondary leading-[1.9]">{item.desc}</p>
+            </div>
+          ))}
         </div>
       </div>
     </div>
@@ -104,41 +95,48 @@ import CTASection from '../components/CTASection.astro';
   <!-- 柱2: BPO -->
   <section id="bpo" class="py-24 lg:py-32 bg-bg-secondary scroll-mt-20">
     <div class="max-w-[1120px] mx-auto px-5 sm:px-8">
-      <div class="grid grid-cols-1 lg:grid-cols-[320px_1fr] gap-16 items-start">
-        <!-- Photo slot -->
-        <div class="hidden lg:block fade-in-up">
-          <PhotoSlot mode="placeholder" label="BPO" aspect="aspect-[3/4]" class="sticky top-24" />
-        </div>
+      <div class="max-w-2xl fade-in-up">
+        {/* TODO:COPY services-bpo-head */}
+        <p class="font-display text-xs font-semibold text-text-muted uppercase tracking-[0.15em] mb-4">Service 02</p>
+        <h2 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-6">BPO</h2>
+        {/* TODO:COPY services-bpo-lead */}
+        <p class="text-text-secondary leading-[1.9]">
+          担当者の退職や兼任で止まった業務を、月額で請け負います。中心は採用まわりです。範囲は事前に文書で確定します。
+        </p>
+      </div>
 
-        <div>
-          <div class="fade-in-up">
-            <p class="font-display text-xs font-semibold text-text-muted uppercase tracking-[0.15em] mb-4">Service 02</p>
-            <h2 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-6">BPO（業務運用代行）</h2>
-            {/* TODO:COPY services-bpo-lead */}
-            <p class="text-text-secondary leading-[1.9]">
-              人手が足りず止まっている業務、担当者が辞めて動かなくなった業務を引き受けます。採用まわりを中心に、月額でお預かりし、実務を止めずに進めます。
-            </p>
+      <div class="mt-14 grid grid-cols-1 sm:grid-cols-2 gap-6 stagger">
+        {bpoItems.map((item) => (
+          <div class="bg-white p-8 border border-gray-200 rounded-xl card-lift">
+            <h3 class="text-sm font-bold text-gray-900 mb-2">{item.title}</h3>
+            <p class="text-sm text-text-secondary leading-[1.9]">{item.desc}</p>
           </div>
+        ))}
+      </div>
 
-          <div class="mt-14 grid grid-cols-1 sm:grid-cols-2 gap-6 stagger">
-            {[
-              { title: '採用事務・応募対応', desc: '応募者への連絡、日程調整、選考の事務まわりを代行します。' },
-              { title: '人事労務・バックオフィス', desc: '入退社手続き、勤怠、各種事務の定型業務を代行します。' },
-              { title: 'カスタマーサポート', desc: '問い合わせ対応など、止められない業務を安定して続けます。' },
-              { title: '月次レポート・改善提案', desc: '業務量と品質を見える化し、毎月の改善につなげます。' },
-            ].map((item) => (
-              <div class="bg-white p-8 border border-gray-200 rounded-xl card-lift">
-                <h3 class="text-sm font-bold text-gray-900 mb-2">{item.title}</h3>
-                <p class="text-sm text-text-secondary leading-[1.9]">{item.desc}</p>
-              </div>
-            ))}
-          </div>
+      {/* TODO:COPY services-bpo-price-note */}
+      <p class="mt-10 text-sm text-text-muted leading-relaxed">
+        月額<span class="font-num">10</span>万円から。業務の範囲と量を確認したうえで見積もります。
+      </p>
+    </div>
+  </section>
 
-          {/* TODO:COPY services-bpo-price */}
-          <p class="mt-10 text-sm text-text-muted leading-relaxed">
-            月額制・個別お見積り。まずは業務の棚卸しから始めます。
-          </p>
-        </div>
+  <!-- 柱3: 空き家再生×社宅（準備・実証フェーズ） -->
+  <section id="akiya" class="py-24 lg:py-32 scroll-mt-20 bg-white">
+    <div class="max-w-[1120px] mx-auto px-5 sm:px-8">
+      <div class="max-w-2xl fade-in-up">
+        {/* TODO:COPY services-akiya-head */}
+        <p class="font-display text-xs font-semibold text-text-muted uppercase tracking-[0.15em] mb-4">Service 03 ｜ 準備・実証フェーズ</p>
+        <h2 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-6">空き家再生×社宅</h2>
+        {/* TODO:COPY services-akiya-lead */}
+        <p class="text-text-secondary leading-[1.9]">
+          空き家を買い取り、改修し、介護・建設・飲食の現場で働く人や外国人材の社宅として長期で貸します。現在は<span class="font-num text-gray-900">1</span>棟目の実証段階です。物件の情報は、採用支援で付き合いのある地場企業から届きます。社宅は採用した人材の定着に使われます。
+        </p>
+
+        {/* TODO:COPY services-ai-note */}
+        <p class="mt-12 pt-8 border-t border-gray-200 text-sm text-text-muted leading-relaxed">
+          novshiは社員ゼロで運営しています。定型業務はAIに任せ、判断と対話は代表・大倉が行います。
+        </p>
       </div>
     </div>
   </section>
