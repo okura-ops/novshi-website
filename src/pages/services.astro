@@ -7,18 +7,18 @@ import CTASection from '../components/CTASection.astro';
 
 <Layout title="サービス | 株式会社novshi" description="採用支援とBPO。九州の中小企業の採用と、その周辺業務を月額で引き受けます。">
   {/* TODO:COPY services-hero */}
-  <Hero title="採用の上流から下流まで、月額で。" subtitle="九州の中小企業の採用と、その周辺の業務を引き受けます。柱は「採用支援」と「BPO」の2本です。" compact={true} />
+  <Hero title="求人づくりから入社後の定着まで、月額で。" subtitle="九州の中小企業の採用と、その周辺の業務を引き受けます。柱は「採用支援」と「BPO」の2本です。" compact={true} />
 
   <!-- 3 Channel -->
   <section class="py-20 lg:py-24 bg-bg-secondary">
     <div class="max-w-[1120px] mx-auto px-5 sm:px-8">
       {/* TODO:COPY services-channels-intro */}
-      <h2 class="text-2xl font-bold text-gray-900 mb-4 fade-in-up">3チャネル認知戦略</h2>
-      <p class="text-text-secondary mb-12 fade-in-up">求職者との接点を複数つくり、採用の母集団を広げます。</p>
+      <h2 class="text-2xl font-bold text-gray-900 mb-4 fade-in-up">3つの入り口で、応募を増やす</h2>
+      <p class="text-text-secondary mb-12 fade-in-up">求職者と出会う入り口を増やし、応募につなげます。</p>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6 stagger">
         {[
           { label: 'Indeed', num: '01', desc: 'スポンサー求人の単価を調整し、応募単価を抑えます' },
-          { label: 'Meta広告', num: '02', desc: 'Instagram・Facebookで、まだ動いていない層に届けます' },
+          { label: 'Meta広告', num: '02', desc: 'Instagram・Facebookで、転職をまだ考えていない人に届けます' },
           { label: '自社採用HP', num: '03', desc: '検索されやすい構造で、求職者に見つかる採用ページに' },
         ].map((ch) => (
           <div class="bg-white p-8 lg:p-10 rounded-xl border border-gray-200 card-lift">
@@ -49,11 +49,11 @@ import CTASection from '../components/CTASection.astro';
           <div class="mt-14 grid grid-cols-1 md:grid-cols-2 gap-y-8 gap-x-12 stagger">
             {[
               { title: 'EVP（採用の強み）の言語化', desc: '自社が選ばれる理由を整理し、求職者に伝わる言葉にします。' },
-              { title: '求人媒体の運用最適化', desc: '媒体ごとに求人を調整し、検索されやすく、応募につながる形に整えます。' },
+              { title: '求人原稿の作成', desc: '媒体ごとに刺さる求人原稿を書き、検索と応募につなげます。' },
               { title: 'Indeed運用代行', desc: 'スポンサー求人の単価調整、A/Bテスト、効果測定をまとめて代行します。' },
               { title: 'Meta広告運用', desc: 'Instagram・Facebookの採用広告を、クリエイティブ制作から運用まで。' },
-              { title: '採用HP構築・運用', desc: '検索されやすい構造の採用サイトを構築し、運用します。' },
-              { title: 'KPIモニタリング・改善', desc: '応募数・表示数・CTR・CPAを見える化し、数字を見て改善し続けます。' },
+              { title: '採用HPの構築・運用', desc: '検索されやすい構造の採用サイトを構築し、運用します。' },
+              { title: '採用KPIの管理', desc: '応募数・表示数・CTR・CPAを見える化し、数字を見て打ち手を変えます。' },
             ].map((item) => (
               <div class="border-l-2 border-gray-200 pl-6">
                 <h3 class="text-sm font-bold text-gray-900 mb-1">{item.title}</h3>
@@ -71,7 +71,7 @@ import CTASection from '../components/CTASection.astro';
             </p>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 stagger">
               {[
-                { title: '住居付き人材紹介', desc: '空き家再生と組み合わせ、住まいとセットで人材を紹介します。有料職業紹介免許取得済み。', note: '空き家事業と連携' },
+                { title: '住居付き人材紹介', desc: '空き家再生と組み合わせ、住まいとセットで人材を紹介します。', note: '空き家事業と連携' },
                 { title: '住宅確保支援', desc: '安心して暮らせる住まいを確保。保証人・契約まわりもサポートします。', note: '空き家事業と連携' },
                 { title: '在留資格・行政手続サポート', desc: 'ビザの取得・更新、各種届出など、煩雑な手続きをサポートします。', note: null },
                 { title: '定着支援', desc: '生活の立ち上げ、日本語、文化への慣れまで支え、長期の定着を後押しします。', note: null },
@@ -116,7 +116,7 @@ import CTASection from '../components/CTASection.astro';
             <h2 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-6">BPO（業務運用代行）</h2>
             {/* TODO:COPY services-bpo-lead */}
             <p class="text-text-secondary leading-[1.9]">
-              人手が足りず回らない業務、人が辞めて止まっている業務を引き受けます。採用まわりを中心に、月額で安定して業務を前に進めます。
+              人手が足りず回らない業務、担当者が辞めて止まった業務を引き受けます。採用まわりを中心に、月額で預かり、実務を回します。
             </p>
           </div>
 

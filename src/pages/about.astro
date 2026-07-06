@@ -5,10 +5,10 @@ import Timeline from '../components/Timeline.astro';
 import CTASection from '../components/CTASection.astro';
 
 const timelineItems = [
-  { period: '—', company: '丸紅株式会社', role: '事業投資', detail: '大企業での事業投資経験を通じて、事業構造の設計力を習得' },
-  { period: '6年間', company: '株式会社リクルート', role: '中途採用営業 / 営業MGR → Indeed事業 企画MGR', detail: '1,000社以上の採用を支援。採用市場の構造と実務を深く理解' },
-  { period: '—', company: 'スタートアップ（執行役員）', role: '人事・経営企画・事業開発', detail: '大規模エンジニア採用、組織設計、経営企画を一手に担当' },
-  { period: '2025.10', company: '株式会社novshi 創業', role: '代表取締役', detail: '九州を拠点に、HR事業と空き家再生事業を立ち上げ' },
+  { period: '—', company: '丸紅株式会社', role: '事業投資', detail: '事業投資の実務を通じて、事業のつくり方を学ぶ' },
+  { period: '6年間', company: '株式会社リクルート', role: '中途採用営業 / 営業MGR → Indeed事業 企画MGR', detail: '中途採用の営業とIndeed事業の企画。1,000社以上の採用に関わる' },
+  { period: '—', company: 'スタートアップ（執行役員）', role: '人事・経営企画・事業開発', detail: 'エンジニア採用、組織づくり、経営企画を担当' },
+  { period: '2025.10', company: '株式会社novshi 創業', role: '代表取締役', detail: '九州で、採用支援と空き家再生の二事業を立ち上げる' },
 ];
 ---
 
@@ -55,7 +55,7 @@ const timelineItems = [
           <div class="space-y-5 text-text-secondary leading-[1.9] text-[15px]">
             <p>丸紅での事業投資、リクルートでの<span class="font-num text-gray-900">1,000</span>社以上の採用支援、スタートアップでの人事・経営企画。これらの経験をもとに、2025年にnovshiを創業しました。</p>
             <p>九州の中小企業は、介護・建設・飲食など生活を支える現場で多くの人を雇っています。その採用と定着を支える仕組みは、まだ十分に整っていません。</p>
-            <p>求人を出すだけでは応募は集まりません。誰に何を届けるかを設計し、面接から入社後の定着まで一緒に見ます。外国人材には、空き家を直した社宅を用意し、住まいと仕事の両方を手当てします。</p>
+            <p>求人を出すだけでは応募は集まりません。誰に何を届けるかを設計し、面接から入社後の定着まで一緒に見ます。外国人材には、空き家を直した社宅を用意し、住まいと仕事をまとめて支えます。</p>
           </div>
         </div>
 
@@ -107,8 +107,8 @@ const timelineItems = [
           <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
               { num: '01', value: '志ドリブン', desc: '利益ではなく志が意思決定の起点。何のためにやるのかを常に問い続ける。' },
-              { num: '02', value: '見えにくい価値を、見に行く', desc: '表面的なデータだけでなく、現場の声・文脈・背景にある本質的な課題を見る。' },
-              { num: '03', value: '利益は燃料、目的地ではない', desc: '利益は持続的な価値提供のための手段。目的と手段を取り違えない。' },
+              { num: '02', value: '見えにくい価値を、見に行く', desc: '数字だけでなく、現場の声や背景にある課題まで見に行く。' },
+              { num: '03', value: '利益は燃料、目的地ではない', desc: '利益は事業を続けるための手段であって、目的ではない。' },
             ].map((item) => (
               <div class="p-8 border border-gray-200 rounded-xl">
                 <span class="flex items-center justify-center w-8 h-8 rounded-md bg-navy-50 text-xs font-bold text-accent mb-5">{item.num}</span>
