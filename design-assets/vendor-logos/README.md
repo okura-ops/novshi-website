@@ -12,15 +12,15 @@
 
 | 区分 | 件数 | ツール |
 |:---|:---|:---|
-| ✅ 取得済み（DOWNLOADED） | 12 | anthropic / google-drive / gmail / google-calendar / google-meet / vercel / github / cloudsign / manus / notta / freee / money-forward |
+| ✅ 取得済み（DOWNLOADED） | 13 | anthropic / google-drive / gmail / google-calendar / google-meet / vercel / github / cloudsign / manus / notta / freee / money-forward / notion |
 | 🖐 Chrome委譲（要ブラウザ操作） | 0 | （なし・全て取得完了） |
-| ✍️ モノグラム代替（FALLBACK） | 2 | notion / airwork |
+| ✍️ モノグラム代替（FALLBACK） | 1 | airwork |
 
 **明確にOK**: vercel, manus, notta（notta=2026-07-10 メール許諾受領）。
 **大倉判断で限定配布物での使用を承認（2026-07-10）**: google-drive, gmail, google-calendar, google-meet（公式許諾スコープは社内向けだが、対外連携マップは限定配布物として大倉が承認）。
 **S10（会計SaaS選定）確定まで両方保持**: freee, money-forward（確定後、不採用側をアーカイブへ移動）。
 **⚠️ なお要判断（公開前に確認）**: anthropic, github, cloudsign（下表「利用可否」列を参照）。
-**使用は大倉判断・限定配布のみ／第一候補はテキストワードマーク**: notion（公式が第三者の単独ロゴ利用を明示禁止）。
+**使用は大倉判断・限定配布のみ／第一候補はテキストワードマーク**: notion（公式ロゴを2026-07-10に取得したが、公式ガイドラインは第三者の単独ロゴ利用を明示禁止。使用する場合に限り大倉判断・限定配布のみ）。
 
 ---
 
@@ -40,7 +40,7 @@
 | **notta** | ✅取得済 | https://www.notta.ai/media-kit | 2026-07-10 | PNG | notta-app-logo.png | 最小:規定なし／クリアスペース:規定なし／改変:不可・転載転用不可／モノクロ:規定なし／用途:メディア・SNSでの紹介目的に限定／表記:「Notta株式会社」「Notta」 | **明確にOK**（2026-07-10 メール許諾受領・限定配布での掲載可。連絡先 contact@notta.ai） |
 | **freee** | ✅取得済 | 大倉が手動取得（2026-07-10）・freee公式ブランドキット（コーポレート/プロダクトロゴのRGB版一式）・配布元URL未記録 | 2026-07-10 | SVG+PNG | freee_kaikei_color.svg（freee会計＝novshi利用製品）, freee_corporate_horizontal_color.png, freee_corporate_horizontal_white.png（コーポレート横組） | 最小:同梱ロゴガイドラインPDF未読のため未確認／クリアスペース:同上・未確認／改変:一般原則として禁止（原本のまま使用）／モノクロ:可（black/white版あり） | **S10（会計SaaS選定）確定まで両方保持**（確定後、不採用側をアーカイブへ移動） |
 | **money-forward (マネーフォワード)** | ✅取得済 | 大倉が手動取得（2026-07-10）・Money Forward公式プレスキット（ファイル名 MoneyForward_PressKit.zip）・配布元URL未記録 | 2026-07-10 | SVG+PNG | money-forward-color.svg, money-forward-color.png, money-forward-white.png（コーポレート「マネーフォワード」ロゴ） | 最小:同梱LogoGuideline.pdf未読のため未確認／クリアスペース:同上・未確認／改変:一般原則として禁止（原本のまま使用）／モノクロ:可（White版あり）／（既往Web調査: 利用は「MFサービス紹介」目的・提携/協業は事前許諾要） | **S10（会計SaaS選定）確定まで両方保持**（確定後、不採用側をアーカイブへ移動） |
-| **notion** | ✍️モノグラム代替 | https://notion.notion.site/Notion-s-brand-usage-guidelines-689045e1761348f887a3c5c80295e00f （2026-07-10の手動DLは404で失敗＝有効な公式ロゴ未取得） | — | — | 公式が第三者のロゴ単独利用を明示禁止（手動取得のnotion-color.svgは中身が「404: Not Found」の空ファイルのため不採用） | **使用は大倉判断・限定配布のみ／第一候補はテキストワードマーク表記**（公式ガイドラインは第三者による単独ロゴ利用を明示禁止。使用する場合に限り大倉判断・限定配布のみ） |
+| **notion** | ✅取得済 | 大倉が手動取得（2026-07-10・URL未記録）。公式ガイドライン: https://notion.notion.site/Notion-s-brand-usage-guidelines-689045e1761348f887a3c5c80295e00f | 2026-07-10 | PNG | Notion_Logo_White_Background.png（1600×900・**白背景/非透過**） | 最小:バッジは48px以上（画面）／クリアスペース:規定あり／改変:不可（角度変更・アニメ化・単独ロゴ化不可）／モノクロ:公式は単独ロゴ使用自体を制限 | **使用は大倉判断・限定配布のみ／第一候補はテキストワードマーク**（公式ガイドラインは第三者による単独ロゴ利用を明示禁止。ロゴを使う場合に限り大倉判断・限定配布のみ。取得済ファイルは白背景・非透過のため、非白背景での合成には不向き） |
 | **airwork** | ✍️モノグラム代替 | https://airregi.jp/work/recruitment/ | — | — | 公式にDL可能なロゴ資産が存在せず | **要判断**（Airワークの公式ロゴDL・商標ガイドラインなし。規約のロゴ言及は「リクルートが契約企業ロゴを使う」方向のみ。リクルート商標は一般に事前申請/許諾制。→ 自製モノグラム代替、現物要時はリクルートへ商標利用申請） |
 
 ---
@@ -59,8 +59,9 @@
 
 | ツール | 理由 | 代替案 |
 |:---|:---|:---|
-| notion | 公式が第三者の単独ロゴ利用を明示禁止（2026-07-10の手動DLも404で失敗） | **第一候補=テキストワードマーク表記**（自社タイプで「Notion」）。ロゴを使用する場合に限り大倉判断・限定配布のみ |
 | airwork | 公式DL資産なし・リクルート商標は許諾制 | モノトーンの「AirWORK」ワードマーク or 「A」モノグラム |
+
+> notion は 2026-07-10 に公式ロゴPNG（白背景）を取得済みで台帳「取得済」に移動。ただし公式ガイドラインが第三者の単独ロゴ利用を明示禁止しているため、**第一候補は引き続きテキストワードマーク表記**（自社タイプで「Notion」）。ロゴ画像を使う場合に限り大倉判断・限定配布のみ。
 
 ---
 
