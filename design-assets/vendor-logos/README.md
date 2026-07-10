@@ -12,11 +12,11 @@
 
 | 区分 | 件数 | ツール |
 |:---|:---|:---|
-| ✅ 取得済み（DOWNLOADED） | 9 | anthropic / google-drive / gmail / google-calendar / google-meet / vercel / github / cloudsign / manus |
-| 🖐 Chrome委譲（要ブラウザ操作） | 3 | notta / freee / money-forward |
+| ✅ 取得済み（DOWNLOADED） | 10 | anthropic / google-drive / gmail / google-calendar / google-meet / vercel / github / cloudsign / manus / notta |
+| 🖐 Chrome委譲（要ブラウザ操作） | 2 | freee / money-forward |
 | ✍️ モノグラム代替（FALLBACK） | 2 | notion / airwork |
 
-**⚠️ 公開前に大倉さんの確認が必要（利用可否＝要判断）**: anthropic, google-drive, gmail, google-calendar, google-meet, github, cloudsign（下表「利用可否」列を参照）。**明確にOK**: vercel, manus。
+**⚠️ 公開前に大倉さんの確認が必要（利用可否＝要判断）**: anthropic, google-drive, gmail, google-calendar, google-meet, github, cloudsign, notta（下表「利用可否」列を参照）。**明確にOK**: vercel, manus。
 
 ---
 
@@ -33,7 +33,7 @@
 | **github** | ✅取得済 | https://brand.github.com/foundations/logo | 2026-07-09 | SVG+PNG | GitHub_Invertocat_{Black,White}.svg/.png, GitHub_Lockup_{Black,White}.svg/.png | 最小:規定なし／クリアスペース:専用Clearspace版あり（本フォルダは通常版）／改変:再配置・影/グラデ・変形・色変更・他要素結合すべて不可／モノクロ:可（白/黒、まれに灰/緑） | **要判断**（記名的/参照利用は明示許可＝連携表示は該当するが、brand.github.comは「事前の書面許可なく使用不可」の包括条項も併記。対外公開は大倉確認 or 二次的・非推奨的配置を徹底） |
 | **cloudsign (クラウドサイン)** | ✅取得済 | https://www.cloudsign.jp/presskit | 2026-07-09 | PNG（SVGはプレスキット未収録・AI形式のみ要問合せ） | CloudSign_logos_horizontal{,_white}.png, CloudSignSeries_logo_{horizontal,vertical}{,_white}_RGB.png | 最小:Web横40px以上/印刷横12mm以上／クリアスペース:近傍に大きな文字/図形を置かない・濃色/写真背景は白枠か白抜き／改変:書体/色/変形/アウトライン化/他マーク結合/単色⇔フルカラー転用すべて不可／モノクロ:専用白版あり（勝手な再配色不可） | **要判断**（プレスキットはユーザー企業/メディア向けに同意/申請なしで公開配布。novshiはクラウドサインのユーザー企業。ただし利用はガイドライン規約遵守が条件、対外公開Web掲載は念のため弁護士ドットコムへ確認推奨） |
 | **manus** | ✅取得済 | https://manus.im/brand | 2026-07-09 | SVG+PNG | Manus-Glyph-{Black,White}.svg/.png, Manus-Icon.svg/.png | 最小:明記なし（背景に対し常に判読可能に）／クリアスペース:パートナーロゴ併置時は十分な間隔・非改変／改変:他色/回転/反転/アウトライン化/塗り変更を明確に禁止／モノクロ:可（白/灰/黒がプライマリ、暗背景=白版・明背景=黒版） | **OK**（申請/ログイン/同意なしで公開DL。"Brand partnerships"節でパートナーロゴ併置=第三者利用を明示想定。改変禁止を守り原本掲載する限り可） |
-| **notta** | 🖐Chrome委譲 | https://www.notta.ai/en/brand-assets （JP: https://www.notta.ai/media-kit ） | — | — | JSゲートで取得不可（規約本文も未取得） | **要判断**（「正確にブランドを表現するための公式ロゴDL」と案内あるが、ガイドライン全文がSPA内。第三者「利用ツール表示」の可否は要確認。連絡先 contact@notta.ai） |
+| **notta** | ✅取得済 | https://www.notta.ai/media-kit | 2026-07-10 | PNG | notta-app-logo.png | 最小:規定なし／クリアスペース:規定なし／改変:不可・転載転用不可／モノクロ:規定なし／用途:メディア・SNSでの紹介目的に限定／表記:「Notta株式会社」「Notta」 | **要判断**（限定配布での使用は許諾確認中→回答受領で更新。連絡先 contact@notta.ai） |
 | **freee** | 🖐Chrome委譲 | https://brand.freee.co.jp/designelements/logo/ （規約: https://brand.freee.co.jp/terms/ ） | — | — | JSゲートで取得不可（6KBの空シェル） | **要判断**（法人/製品ロゴをAI+PNG提供だが一部は鍵アイコン=NDA/委託先限定・pr@freee.co.jp配布。公開ロゴの規約本文がfetch不可、連携マップ用途の可否を自己判断不可） |
 | **money-forward (マネーフォワード)** | 🖐Chrome委譲 | https://corp.moneyforward.com/news/press/ | — | — | 規約同意ゲートで取得不可 | **要判断**（法人/個人事業主が「ロゴ使用ルール」同意で無償利用可・用途は「MFサービス紹介」限定、提携/協業利用は事前許諾要。DL前に同意ゲートあり=自動同意しない方針のため委譲。連絡先 pr@moneyforward.co.jp） |
 | **notion** | ✍️モノグラム代替 | https://notion.notion.site/Notion-s-brand-usage-guidelines-689045e1761348f887a3c5c80295e00f | — | — | 公式が第三者のロゴ単独利用を明示禁止 | **不可（原則）**（「標準ロゴ単独使用禁止」「自社アプリ宣伝への使用禁止」等を明記。唯一の公式配布物"Made for Notion"バッジもNotion製プロダクト向けで用途不一致。→ 自製の"Notion"ワードマーク/モノグラムで代替） |
@@ -47,9 +47,10 @@
 
 | ツール | 開くURL | 障壁 | 連絡先（許諾確認用） |
 |:---|:---|:---|:---|
-| notta | https://www.notta.ai/media-kit | JSゲート（DLボタンがJS） | contact@notta.ai |
 | freee | https://brand.freee.co.jp/designelements/logo/ | SPA＋一部NDA限定資産 | pr@freee.co.jp |
 | money-forward | https://corp.moneyforward.com/news/press/ | ロゴ使用ルール同意ゲート | pr@moneyforward.co.jp |
+
+> notta は 2026-07-10 に media-kit（notta.ai/media-kit）から手動取得済み（notta-app-logo.png）。上表からは削除。限定配布での連携マップ使用は contact@notta.ai へ許諾確認中で、回答受領後に台帳の利用可否を更新する。
 
 ## モノグラム代替リスト（自製）
 
