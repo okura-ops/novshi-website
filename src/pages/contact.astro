@@ -6,14 +6,46 @@ import ContactForm from '../components/ContactForm.astro';
 
 <Layout title="お問い合わせ | 株式会社novshi" description="株式会社novshiへのお問い合わせ。サービスに関するご質問・ご相談はお気軽にどうぞ。">
   <Hero
+    label="Contact"
     title="お問い合わせ"
     subtitle="サービスの内容や進め方について、代表が直接お答えします。"
     compact={true}
   />
 
-  <section class="py-16 lg:py-20">
-    <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 fade-in-up">
-      <ContactForm />
+  <section class="sec-lg bg-white border-t border-gray-100">
+    <div class="max-w-[1120px] mx-auto px-5 sm:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-14 lg:gap-20">
+        <div class="lg:col-span-7 fade-in-up">
+          <ContactForm />
+        </div>
+
+        <aside class="lg:col-span-5 fade-in-up">
+          <!-- 個人（入居希望）はLINEが最短 -->
+          <div class="border border-gray-200 p-7">
+            <p class="eyebrow text-text-muted mb-3">For Residents</p>
+            <h2 class="text-base font-bold text-gray-900">入居をお考えの方はLINEが早いです</h2>
+            <p class="mt-3 text-sm text-text-secondary leading-[1.9]">
+              空き状況の確認や内覧予約は、LINE公式アカウントで直接やり取りできます。
+            </p>
+            <a href="https://lin.ee/Ylj7svr" target="_blank" rel="noopener" class="mt-5 inline-flex items-center justify-center px-6 py-3 text-sm font-semibold text-white bg-[#06C755] rounded-md hover:opacity-85 transition-opacity duration-200">
+              LINEで相談する
+            </a>
+          </div>
+
+          <!-- 法人向け資料請求 -->
+          <div class="mt-6 border border-gray-200 p-7">
+            <p class="eyebrow text-text-muted mb-3">For Companies</p>
+            <h2 class="text-base font-bold text-gray-900">サービス資料のご請求</h2>
+            <p class="mt-3 text-sm text-text-secondary leading-[1.9]">
+              採用支援・BPO・社宅活用の資料をお送りします。フォームの種別で「資料請求」を選択してください。
+            </p>
+          </div>
+
+          <p class="mt-8 text-xs text-text-muted leading-relaxed">
+            フォームは既定のメールソフトを起動する方式です。起動しない場合は okura@novshi.co.jp 宛に直接ご連絡ください。
+          </p>
+        </aside>
+      </div>
     </div>
   </section>
 </Layout>

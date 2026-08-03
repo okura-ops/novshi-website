@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
 import CTASection from '../components/CTASection.astro';
+import { IMG } from '../data/images';
 
 const recruitItems = [
   { title: '採用戦略の設計', desc: '誰を、いつまでに、いくらで採るか。まず数字で決めます。' },
@@ -16,7 +17,7 @@ const channels = [
   { num: '02', label: 'Meta広告', desc: '転職を考えはじめる前の層に、求人を先に見せます。' },
   { num: '03', label: '自社採用HP', desc: '社名で検索した応募者の疑問に、一次情報で答える場所です。' },
 ];
-const globalCards = [
+const globalItems = [
   { title: '人材紹介', desc: '職種要件と在留資格の適合を確認してから紹介します。' },
   { title: '在留資格支援', desc: '必要書類と手続きを、入社日から逆算した工程表にします。' },
   { title: '住まいの確保', desc: '社宅として貸せる住居を自社で用意します。空き家再生事業が受け皿です。' },
@@ -32,14 +33,14 @@ const bpoItems = [
 
 <Layout title="サービス | 株式会社novshi" description="採用支援・BPOと、空き家を社宅に変える事業。九州の中小企業の採用と定着を、代表が直接支えます。">
   {/* TODO:COPY services-hero */}
-  <Hero title="novshiのふたつの事業" subtitle="novshiは、九州の中小企業の採用支援・BPOと、空き家を社宅に変える事業を並行しています。顧客は共通です。採用支援の顧客が空き家の情報をもたらし、社宅は採用した人の住まいになります。" compact={true} />
+  <Hero label="Services" title="novshiのふたつの事業" subtitle="novshiは、九州の中小企業の採用支援・BPOと、空き家を社宅に変える事業を並行しています。顧客は共通です。採用支援の顧客が空き家の情報をもたらし、社宅は採用した人の住まいになります。" compact={true} />
 
   <!-- 柱1: 採用支援 -->
-  <section id="recruitment" class="py-24 lg:py-32 scroll-mt-20 bg-white">
+  <section id="recruitment" class="sec-xl scroll-mt-20 bg-white border-t border-gray-100">
     <div class="max-w-[1120px] mx-auto px-5 sm:px-8">
       <div class="max-w-2xl fade-in-up">
         {/* TODO:COPY services-recruit-head */}
-        <p class="font-display text-xs font-semibold text-text-muted uppercase tracking-[0.15em] mb-4">Service 01</p>
+        <p class="eyebrow text-text-muted mb-4">Service 01</p>
         <h2 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-6">採用支援</h2>
         <p class="text-lg font-bold text-gray-900 mb-4">「もう一人の経営者。」</p>
         {/* TODO:COPY services-recruit-lead */}
@@ -48,43 +49,26 @@ const bpoItems = [
         </p>
       </div>
 
-      <div class="mt-14 grid grid-cols-1 md:grid-cols-2 gap-y-8 gap-x-12 stagger">
+      <div class="mt-14 grid grid-cols-1 md:grid-cols-2 gap-x-12 stagger">
         {recruitItems.map((item) => (
-          <div class="border-l-2 border-gray-200 pl-6">
+          <div class="border-t border-gray-200 py-6">
             <h3 class="text-sm font-bold text-gray-900 mb-1">{item.title}</h3>
             <p class="text-sm text-text-secondary leading-[1.9]">{item.desc}</p>
           </div>
         ))}
       </div>
 
-      <!-- 運用する3つのチャネル -->
+      <!-- 運用する3つのチャネル: 均等3カラムカードをやめて行リストに -->
       <div class="mt-16 pt-12 border-t border-gray-200">
         {/* TODO:COPY services-recruit-channels-head */}
         <h3 class="text-xl font-bold text-gray-900 mb-2 fade-in-up">運用する3つのチャネル</h3>
         <p class="text-text-secondary mb-8 fade-in-up">媒体ごとに役割を分けて使います。</p>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 stagger">
+        <div class="stagger max-w-3xl">
           {channels.map((ch) => (
-            <div class="bg-white p-8 border border-gray-200 rounded-xl card-lift">
-              <span class="font-num inline-flex items-center justify-center w-9 h-9 rounded-md bg-[#F2F2F2] text-sm font-bold text-gray-900 mb-5">{ch.num}</span>
-              <p class="text-base font-bold text-gray-900 mb-2">{ch.label}</p>
-              <p class="text-sm text-text-secondary leading-[1.9]">{ch.desc}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <!-- 外国人採用・定着支援 -->
-      <div class="mt-16 pt-12 border-t border-gray-200">
-        <h3 class="text-xl font-bold text-gray-900 mb-4 fade-in-up">外国人採用・定着支援</h3>
-        {/* TODO:COPY services-global-lead */}
-        <p class="text-text-secondary leading-[1.9] fade-in-up mb-8 max-w-2xl">
-          外国人採用でよくあるつまずきは、内定後に住まいが決まらないことです。novshiは人材紹介（有料職業紹介事業許可 40-ユ-301708）に、在留資格手続きの支援と社宅の用意を組み合わせています。
-        </p>
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 stagger">
-          {globalCards.map((item) => (
-            <div class="bg-white p-8 border border-gray-200 rounded-xl card-lift">
-              <h4 class="text-sm font-bold text-gray-900 mb-2">{item.title}</h4>
-              <p class="text-sm text-text-secondary leading-[1.9]">{item.desc}</p>
+            <div class="grid grid-cols-[3rem_10rem_1fr] max-sm:grid-cols-[3rem_1fr] items-baseline gap-3 py-5 border-b border-gray-200">
+              <span class="font-num text-sm text-text-muted">{ch.num}</span>
+              <p class="text-base font-bold text-gray-900">{ch.label}</p>
+              <p class="text-sm text-text-secondary leading-[1.9] max-sm:col-span-2 max-sm:pl-12">{ch.desc}</p>
             </div>
           ))}
         </div>
@@ -92,12 +76,43 @@ const bpoItems = [
     </div>
   </section>
 
+  <!-- 外国人採用・定着支援: 写真5 : テキスト7 の非対称 -->
+  <section class="sec-lg bg-bg-secondary">
+    <div class="max-w-[1120px] mx-auto px-5 sm:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+        <div class="lg:col-span-5 fade-in-up lg:order-2 lg:pt-2">
+          <img src={IMG.svGenkan.webp} alt={IMG.svGenkan.alt} class="w-full object-cover" loading="lazy" width="1000" height="750" />
+          <p class="mt-2 text-[11px] text-text-muted">社宅として用意する保有物件（福岡県遠賀町）</p>
+        </div>
+        <div class="lg:col-span-7 fade-in-up lg:order-1">
+          <h3 class="text-xl font-bold text-gray-900 mb-4">外国人採用・定着支援</h3>
+          {/* TODO:COPY services-global-lead */}
+          <p class="text-text-secondary leading-[1.9] mb-8 max-w-xl">
+            外国人採用でよくあるつまずきは、内定後に住まいが決まらないことです。novshiは人材紹介（有料職業紹介事業許可 40-ユ-301708）に、在留資格手続きの支援と社宅の用意を組み合わせています。
+          </p>
+          <div class="stagger">
+            {globalItems.map((item) => (
+              <div class="border-t border-gray-300/70 py-5">
+                <h4 class="text-sm font-bold text-gray-900 mb-1">{item.title}</h4>
+                <p class="text-sm text-text-secondary leading-[1.9] max-w-lg">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+          <div class="mt-8 flex flex-wrap gap-3">
+            <a href="/contact" class="inline-flex items-center justify-center px-6 py-3 text-sm font-semibold text-white bg-[#1A1A1A] rounded-md hover:opacity-85 transition-opacity duration-200">相談する</a>
+            <a href="/contact?type=doc" class="inline-flex items-center justify-center px-6 py-3 text-sm font-semibold text-gray-900 border border-gray-900 rounded-md hover:bg-[#F2F2F2] transition-colors duration-200">資料を請求する</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- 柱2: BPO -->
-  <section id="bpo" class="py-24 lg:py-32 bg-bg-secondary scroll-mt-20">
+  <section id="bpo" class="sec-lg bg-white scroll-mt-20">
     <div class="max-w-[1120px] mx-auto px-5 sm:px-8">
       <div class="max-w-2xl fade-in-up">
         {/* TODO:COPY services-bpo-head */}
-        <p class="font-display text-xs font-semibold text-text-muted uppercase tracking-[0.15em] mb-4">Service 02</p>
+        <p class="eyebrow text-text-muted mb-4">Service 02</p>
         <h2 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-6">BPO</h2>
         {/* TODO:COPY services-bpo-lead */}
         <p class="text-text-secondary leading-[1.9]">
@@ -105,10 +120,10 @@ const bpoItems = [
         </p>
       </div>
 
-      <div class="mt-14 grid grid-cols-1 sm:grid-cols-2 gap-6 stagger">
+      <div class="mt-12 stagger max-w-3xl">
         {bpoItems.map((item) => (
-          <div class="bg-white p-8 border border-gray-200 rounded-xl card-lift">
-            <h3 class="text-sm font-bold text-gray-900 mb-2">{item.title}</h3>
+          <div class="border-t border-gray-200 py-6">
+            <h3 class="text-sm font-bold text-gray-900 mb-1">{item.title}</h3>
             <p class="text-sm text-text-secondary leading-[1.9]">{item.desc}</p>
           </div>
         ))}
@@ -121,22 +136,45 @@ const bpoItems = [
     </div>
   </section>
 
-  <!-- 柱3: 空き家再生×社宅（準備・実証フェーズ） -->
-  <section id="akiya" class="py-24 lg:py-32 scroll-mt-20 bg-white">
-    <div class="max-w-[1120px] mx-auto px-5 sm:px-8">
-      <div class="max-w-2xl fade-in-up">
-        {/* TODO:COPY services-akiya-head */}
-        <p class="font-display text-xs font-semibold text-text-muted uppercase tracking-[0.15em] mb-4">Service 03 ｜ 準備・実証フェーズ</p>
-        <h2 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-6">空き家再生×社宅</h2>
-        {/* TODO:COPY services-akiya-lead */}
-        <p class="text-text-secondary leading-[1.9]">
-          空き家を買い取り、改修し、介護・建設・飲食の現場で働く人や外国人材の社宅として長期で貸します。現在は<span class="font-num text-gray-900">1</span>棟目の実証段階です。物件の情報は、採用支援で付き合いのある地場企業から届きます。社宅は採用した人材の定着に使われます。
-        </p>
+  <!-- 写真全面の断ち落とし区切り -->
+  <section class="sec-flush relative">
+    <img src={IMG.svExterior.webp} alt={IMG.svExterior.alt} class="w-full h-[320px] lg:h-[420px] object-cover" loading="lazy" width="1000" height="750" />
+    <p class="absolute bottom-0 left-0 bg-[#1A1A1A] text-white/80 text-[11px] px-4 py-2">保有物件（福岡県遠賀町）— 再生前</p>
+  </section>
 
-        {/* TODO:COPY services-ai-note */}
-        <p class="mt-12 pt-8 border-t border-gray-200 text-sm text-text-muted leading-relaxed">
-          novshiは社員ゼロで運営しています。定型業務はAIに任せ、判断と対話は代表・大倉が行います。
-        </p>
+  <!-- 柱3: 空き家再生×社宅（準備・実証フェーズ） -->
+  <section id="akiya" class="sec-xl scroll-mt-20 bg-white">
+    <div class="max-w-[1120px] mx-auto px-5 sm:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+        <div class="lg:col-span-7 fade-in-up">
+          {/* TODO:COPY services-akiya-head */}
+          <p class="eyebrow text-text-muted mb-4">Service 03 / 準備・実証フェーズ</p>
+          <h2 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-6">空き家再生×社宅</h2>
+          {/* TODO:COPY services-akiya-lead */}
+          <p class="text-text-secondary leading-[1.9] max-w-xl">
+            空き家を買い取り、改修し、介護・建設・飲食の現場で働く人や外国人材の社宅として長期で貸します。現在は<span class="font-num text-gray-900">1</span>棟目の実証段階です。物件の情報は、採用支援で付き合いのある地場企業から届きます。社宅は採用した人材の定着に使われます。
+          </p>
+
+          <div class="mt-8 border border-gray-200 p-6 max-w-xl">
+            <p class="text-sm font-bold text-gray-900 mb-2">入居をお考えの個人の方へ</p>
+            <p class="text-sm text-text-secondary leading-[1.9]">
+              募集中の物件の内覧予約・空き状況は、LINEまたはお問い合わせフォームからご連絡ください。
+            </p>
+            <div class="mt-4 flex flex-wrap gap-3">
+              <a href="https://lin.ee/Ylj7svr" target="_blank" rel="noopener" class="inline-flex items-center justify-center px-5 py-2.5 text-sm font-semibold text-white bg-[#06C755] rounded-md hover:opacity-85 transition-opacity duration-200">LINEで相談する</a>
+              <a href="/contact" class="inline-flex items-center justify-center px-5 py-2.5 text-sm font-semibold text-gray-900 border border-gray-900 rounded-md hover:bg-[#F2F2F2] transition-colors duration-200">フォームで問い合わせる</a>
+            </div>
+          </div>
+
+          {/* TODO:COPY services-ai-note */}
+          <p class="mt-12 pt-8 border-t border-gray-200 text-sm text-text-muted leading-relaxed max-w-xl">
+            novshiは社員ゼロで運営しています。定型業務はAIに任せ、判断と対話は代表・大倉が行います。
+          </p>
+        </div>
+        <div class="lg:col-span-5 fade-in-up">
+          <img src={IMG.svCorridor.webp} alt={IMG.svCorridor.alt} class="w-full object-cover" loading="lazy" width="1000" height="1333" />
+          <p class="mt-2 text-[11px] text-text-muted">保有物件の玄関まわり（福岡県宮若市）</p>
+        </div>
       </div>
     </div>
   </section>

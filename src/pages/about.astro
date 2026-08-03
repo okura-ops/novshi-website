@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
 import Timeline from '../components/Timeline.astro';
 import CTASection from '../components/CTASection.astro';
+import { IMG } from '../data/images';
 
 const timelineItems = [
   { period: '—', company: '丸紅株式会社', role: '事業投資', detail: '事業投資の実務を通じて、事業のつくり方を学ぶ' },
@@ -13,10 +14,10 @@ const timelineItems = [
 ---
 
 <Layout title="会社概要 | 株式会社novshi" description="株式会社novshiの会社概要、代表紹介、MVV。">
-  <Hero title="会社概要" subtitle="九州の中小企業の採用と、空き家を使った住まいづくりを事業にしています。" compact={true} />
+  <Hero label="About" title="会社概要" subtitle="九州の中小企業の採用と、空き家を使った住まいづくりを事業にしています。" compact={true} />
 
   <!-- Company Info -->
-  <section class="py-20 lg:py-24">
+  <section class="sec-tight bg-white border-t border-gray-100">
     <div class="max-w-[1120px] mx-auto px-5 sm:px-8">
       <div class="max-w-3xl fade-in-up">
         <h2 class="text-xl font-bold text-gray-900 mb-8">基本情報</h2>
@@ -30,7 +31,7 @@ const timelineItems = [
             ['許認可', '有料職業紹介事業許可 40-ユ-301708'],
           ].map(([label, value]) => (
             <div class="flex flex-col sm:flex-row py-4 gap-1 sm:gap-0">
-              <dt class="sm:w-1/4 text-xs font-medium text-text-muted uppercase tracking-wider">{label}</dt>
+              <dt class="sm:w-1/4 text-xs font-medium text-text-muted tracking-wider">{label}</dt>
               <dd class="sm:w-3/4 text-sm text-gray-900">{value}</dd>
             </div>
           ))}
@@ -40,11 +41,11 @@ const timelineItems = [
   </section>
 
   <!-- CEO Profile -->
-  <section class="py-24 lg:py-32 bg-bg-secondary">
+  <section class="sec-xl bg-bg-secondary">
     <div class="max-w-[1120px] mx-auto px-5 sm:px-8">
-      <div class="grid grid-cols-1 lg:grid-cols-[1fr_280px] gap-16 items-start">
+      <div class="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-16 items-start">
         <div class="fade-in-up">
-          <p class="text-xs font-semibold text-accent uppercase tracking-[0.2em] mb-5">CEO Profile</p>
+          <p class="eyebrow text-text-muted mb-5">CEO Profile</p>
           <h2 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-3">大倉 佑介</h2>
           <p class="text-sm text-text-muted mb-12">Yusuke Okura — 代表取締役</p>
 
@@ -60,61 +61,54 @@ const timelineItems = [
           </div>
         </div>
 
-        <!-- Photo slot: CEO portrait -->
-        <div class="hidden lg:flex flex-col gap-6 fade-in-up">
-          <div class="w-full aspect-[3/4] rounded-xl bg-[#F2F2F2] flex items-center justify-center sticky top-24">
-            <div class="text-center">
-              <div class="w-20 h-20 rounded-full bg-white border border-gray-200 mx-auto mb-3 flex items-center justify-center">
-                <span class="font-num text-2xl font-bold text-gray-900">YO</span>
-              </div>
-              <p class="text-xs text-text-muted">Photo coming soon</p>
-            </div>
-          </div>
+        <!-- CEO portrait: 実写（撮り下ろし） -->
+        <div class="flex flex-col gap-4 fade-in-up lg:sticky lg:top-24">
+          <img src={IMG.aboutPortrait.webp} alt={IMG.aboutPortrait.alt} class="w-full aspect-[3/4] object-cover object-top" loading="lazy" width="1200" height="1800" />
+          <img src={IMG.aboutDog.webp} alt={IMG.aboutDog.alt} class="hidden lg:block w-full object-cover" loading="lazy" width="1000" height="667" />
+          <p class="text-[11px] text-text-muted">福岡市内にて。相棒のボーダーコリーと</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- MVV -->
-  <section class="py-24 lg:py-32">
+  <section class="sec-xl bg-white">
     <div class="max-w-[1120px] mx-auto px-5 sm:px-8">
-      <div class="mb-20 fade-in-up">
-        <p class="text-xs font-semibold text-accent uppercase tracking-[0.2em] mb-5">MVV</p>
-      </div>
-
-      <div class="space-y-24 stagger">
+      <div class="space-y-20 lg:space-y-24">
         <!-- Mission: large typography -->
         <div class="fade-in-up">
-          <p class="font-display text-xs font-semibold text-text-muted uppercase tracking-[0.15em] mb-6">Mission</p>
+          <p class="eyebrow text-text-muted mb-6">Mission</p>
           {/* TODO:COPY about-mission */}
-          <h3 class="text-4xl lg:text-[3.5rem] lg:leading-[1.1] font-bold text-gray-900">
+          <h3 class="text-4xl lg:text-[3.5rem] lg:leading-[1.25] font-bold text-gray-900">
             豊かさを、描きなおす。
           </h3>
         </div>
 
-        <!-- Vision -->
-        <div class="fade-in-up">
-          <p class="font-display text-xs font-semibold text-text-muted uppercase tracking-[0.15em] mb-6">Vision</p>
+        <!-- Vision: 少しサイズを落として階層をつける -->
+        <div class="fade-in-up lg:pl-24">
+          <p class="eyebrow text-text-muted mb-6">Vision</p>
           {/* TODO:COPY about-vision */}
-          <h3 class="text-2xl lg:text-[2.5rem] lg:leading-[1.15] font-bold text-gray-900">
-            九州に、人が来る理由を<span class="font-num">1,000</span>つくる。
+          <h3 class="text-2xl lg:text-[2.25rem] lg:leading-[1.3] font-bold text-gray-900">
+            九州に、人が来る理由を<span class="whitespace-nowrap"><span class="font-num">1,000</span>つくる。</span>
           </h3>
         </div>
 
-        <!-- Values: cards -->
+        <!-- Values: 均等3カラムカードをやめて行リストに -->
         <div class="fade-in-up">
-          <p class="font-display text-xs font-semibold text-text-muted uppercase tracking-[0.15em] mb-10">Values</p>
+          <p class="eyebrow text-text-muted mb-8">Values</p>
           {/* TODO:COPY about-values */}
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="border-t border-gray-200 max-w-3xl">
             {[
               { num: '01', value: '志ドリブン', desc: '利益ではなく志が意思決定の起点。何のためにやるのかを常に問い続ける。' },
               { num: '02', value: '見えにくい価値を、見に行く', desc: '数字だけでなく、現場の声や背景にある課題まで見に行く。' },
               { num: '03', value: '利益は燃料、目的地ではない', desc: '利益は事業を続けるための手段であって、目的ではない。' },
             ].map((item) => (
-              <div class="p-8 border border-gray-200 rounded-xl">
-                <span class="flex items-center justify-center w-8 h-8 rounded-md bg-navy-50 text-xs font-bold text-accent mb-5">{item.num}</span>
-                <h4 class="text-base font-bold text-gray-900 mb-2">{item.value}</h4>
-                <p class="text-sm text-text-secondary leading-relaxed">{item.desc}</p>
+              <div class="grid grid-cols-[3rem_1fr] items-baseline gap-4 py-6 border-b border-gray-200">
+                <span class="font-num text-sm text-text-muted">{item.num}</span>
+                <div>
+                  <h4 class="text-base lg:text-lg font-bold text-gray-900 mb-1">{item.value}</h4>
+                  <p class="text-sm text-text-secondary leading-[1.9]">{item.desc}</p>
+                </div>
               </div>
             ))}
           </div>

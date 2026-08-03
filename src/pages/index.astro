@@ -2,9 +2,10 @@
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
 import CTASection from '../components/CTASection.astro';
+import { IMG } from '../data/images';
 ---
 
-<Layout title="株式会社novshi | 豊かさを、描きなおす。">
+<Layout title="株式会社novshi | 豊かさを、描きなおす。" preloadImage={IMG.heroEngawa.webp}>
   {/* TODO:COPY home-hero */}
   <Hero
     title="豊かさを、描きなおす。"
@@ -12,112 +13,168 @@ import CTASection from '../components/CTASection.astro';
     showCTA={true}
   />
 
-  <!-- Story -->
-  <section class="py-24 lg:py-32 bg-white">
+  <!-- Story: 非対称2分割（テキスト7 : カード5） -->
+  <section class="sec-xl bg-white">
     <div class="max-w-[1120px] mx-auto px-5 sm:px-8">
-      <div class="max-w-2xl fade-in-up">
-        <p class="font-display text-xs font-semibold text-text-muted uppercase tracking-[0.2em] mb-5">Story</p>
-        {/* TODO:COPY home-story-heading */}
-        <h2 class="text-3xl lg:text-[2.5rem] lg:leading-[1.25] font-bold text-gray-900">
-          なぜ、採用支援と空き家再生を<br class="hidden sm:inline" />両方やるのか。
-        </h2>
-        {/* TODO:COPY home-story-body */}
-        <p class="mt-6 text-text-secondary leading-[1.9]">
-          九州では、会社は人を採れず、地域には空き家が増えています。働く場所があっても、住む場所がなければ人は定着しません。片方だけでは足りません。だから、両方をやっています。
-        </p>
-      </div>
-
-      <div class="mt-16 grid grid-cols-1 md:grid-cols-2 gap-6 stagger">
-        {/* TODO:COPY home-card-employment */}
-        <div class="bg-white p-10 lg:p-12 rounded-xl border border-gray-200 card-lift">
-          <p class="font-display text-xs font-semibold text-text-muted uppercase tracking-[0.18em] mb-4">Employment</p>
-          <h3 class="text-xl font-bold text-gray-900">採用支援・BPO</h3>
-          <p class="mt-4 text-base font-bold text-gray-900">「経営者のとなりで、採用を決める。」</p>
-          <p class="mt-3 text-sm text-text-secondary leading-[1.9]">
-            求人の設計から面接、入社後の定着まで。九州の中小企業の採用を、月額で一緒に進めます。
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+        <div class="lg:col-span-7 fade-in-up">
+          <p class="eyebrow text-text-muted mb-5">Story</p>
+          {/* TODO:COPY home-story-heading */}
+          <h2 class="text-3xl lg:text-[2.5rem] lg:leading-[1.35] font-bold text-gray-900">
+            なぜ、採用支援と空き家再生を<br class="hidden sm:inline" />両方やるのか。
+          </h2>
+          {/* TODO:COPY home-story-body */}
+          <p class="mt-7 text-text-secondary leading-[1.9] max-w-xl">
+            九州では、会社は人を採れず、地域には空き家が増えています。働く場所があっても、住む場所がなければ人は定着しません。片方だけでは足りません。だから、両方をやっています。
           </p>
+          <p class="mt-10 text-xs text-text-muted">設立 2025年10月 — 福岡・熊本</p>
         </div>
 
-        {/* TODO:COPY home-card-housing */}
-        <div class="bg-white p-10 lg:p-12 rounded-xl border border-gray-200 card-lift">
-          <p class="font-display text-xs font-semibold text-text-muted uppercase tracking-[0.18em] mb-4">Housing</p>
-          <h3 class="text-xl font-bold text-gray-900">空き家再生</h3>
-          <p class="mt-4 text-base font-bold text-gray-900">「空いた家を、また人が住める家にする。」</p>
-          <p class="mt-3 text-sm text-text-secondary leading-[1.9]">
-            使われなくなった家を買い取り、直して、長く貸す。住む場所に困る人の、選択肢になります。
-          </p>
-          <p class="mt-3 text-sm text-text-muted leading-[1.9]">
-            いまは1棟目で、やり方を確かめている段階です。
-          </p>
+        <div class="lg:col-span-5 flex flex-col justify-center gap-px bg-gray-200 border border-gray-200 fade-in-up">
+          {/* TODO:COPY home-card-employment */}
+          <div class="bg-white p-8 lg:p-10">
+            <p class="eyebrow text-text-muted mb-3">Employment</p>
+            <h3 class="text-lg font-bold text-gray-900">採用支援・BPO</h3>
+            <p class="mt-3 text-sm text-text-secondary leading-[1.9]">
+              求人の設計から面接、入社後の定着まで。九州の中小企業の採用を、月額で一緒に進めます。
+            </p>
+          </div>
+          {/* TODO:COPY home-card-housing */}
+          <div class="bg-[#F2F2F2] p-8 lg:p-10">
+            <p class="eyebrow text-text-muted mb-3">Housing</p>
+            <h3 class="text-lg font-bold text-gray-900">空き家再生</h3>
+            <p class="mt-3 text-sm text-text-secondary leading-[1.9]">
+              使われなくなった家を買い取り、直して、長く貸す。いまは1棟目で、やり方を確かめている段階です。
+            </p>
+          </div>
         </div>
       </div>
-
-      <p class="mt-6 text-xs text-text-muted">設立 2025年10月 — 福岡・熊本</p>
     </div>
   </section>
 
-  <!-- Vision band (emphasis: black full-width) -->
-  <section class="py-24 lg:py-28 bg-[#1A1A1A]">
+  <!-- 写真全面の断ち落とし区切り（Web DS §3-2 sec-flush） -->
+  <section class="sec-flush relative">
+    <picture>
+      <source type="image/webp" srcset={`${IMG.storyGaikan.webp} 1920w, ${IMG.storyGaikan.webp.replace('.webp', '-1280.webp')} 1280w, ${IMG.storyGaikan.webp.replace('.webp', '-768.webp')} 768w`} sizes="100vw" />
+      <img src={IMG.storyGaikan.jpg} alt={IMG.storyGaikan.alt} class="w-full h-[360px] lg:h-[480px] object-cover" loading="lazy" width="1920" height="1440" />
+    </picture>
+    <p class="absolute bottom-0 left-0 bg-[#1A1A1A] text-white/80 text-[11px] px-4 py-2">
+      保有物件（福岡県遠賀町）— 再生前
+    </p>
+  </section>
+
+  <!-- Vision band (emphasis: black full-width / ink帯 1つ目) -->
+  <section class="sec-lg bg-[#1A1A1A]">
     <div class="max-w-[1120px] mx-auto px-5 sm:px-8">
       <div class="max-w-3xl fade-in-up">
-        <p class="font-display text-xs font-semibold text-white/50 uppercase tracking-[0.2em] mb-6">Vision</p>
+        <p class="eyebrow text-white/50 mb-6">Vision</p>
         {/* TODO:COPY home-vision-band */}
-        <h2 class="text-3xl lg:text-[2.75rem] lg:leading-[1.2] font-bold text-white">
-          九州に、人が来る理由を<span class="font-num">1,000</span>つくる。
+        <h2 class="text-3xl lg:text-[2.75rem] lg:leading-[1.3] font-bold text-white">
+          九州に、人が来る理由を<span class="whitespace-nowrap"><span class="font-num">1,000</span>つくる。</span>
         </h2>
       </div>
     </div>
   </section>
 
-  <!-- Services -->
-  <section class="py-24 lg:py-32 bg-bg-secondary">
+  <!-- 3導線ナビゲーション枠: 個人／法人／企業向け採用支援（非対称 7:5） -->
+  <section class="sec-lg bg-bg-secondary">
     <div class="max-w-[1120px] mx-auto px-5 sm:px-8">
-      <div class="mb-16 fade-in-up">
-        <p class="font-display text-xs font-semibold text-text-muted uppercase tracking-[0.2em] mb-5">Services</p>
-        <h2 class="text-3xl lg:text-[2.5rem] font-bold text-gray-900">提供サービス</h2>
+      <div class="mb-14 fade-in-up">
+        <p class="eyebrow text-text-muted mb-5">Guide</p>
+        <h2 class="text-3xl lg:text-[2.25rem] font-bold text-gray-900">お探しの内容から選ぶ</h2>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 fade-in-up">
+        <!-- 個人: 大きく1枚 -->
+        <a href="/services#akiya" class="lg:col-span-7 group bg-white border border-gray-200 card-lift flex flex-col">
+          <div class="overflow-hidden">
+            <img src={IMG.laneKojin.webp} alt={IMG.laneKojin.alt} class="w-full h-[240px] lg:h-[300px] object-cover" loading="lazy" width="1000" height="1333" />
+          </div>
+          <div class="p-8 lg:p-10 flex-1 flex flex-col">
+            <p class="eyebrow text-text-muted mb-3">For Residents</p>
+            <h3 class="text-xl font-bold text-gray-900">入居をお考えの方へ</h3>
+            <p class="mt-3 text-sm text-text-secondary leading-[1.9] max-w-md">
+              庭付き・駐車場付きの戸建てを、初期費用を抑えて借りられます。内覧の予約や空き状況は、LINEで気軽に聞けます。
+            </p>
+            <p class="mt-auto pt-6 text-sm font-medium text-gray-900">物件と借り方を見る →</p>
+          </div>
+        </a>
+
+        <!-- 法人2枚: 縦積み -->
+        <div class="lg:col-span-5 flex flex-col gap-6">
+          <a href="/services#akiya" class="group bg-white border border-gray-200 card-lift flex">
+            <img src={IMG.laneHojin.webp} alt={IMG.laneHojin.alt} class="w-32 lg:w-40 object-cover shrink-0" loading="lazy" width="843" height="632" />
+            <div class="p-6 lg:p-7">
+              <p class="eyebrow text-text-muted mb-2">For Companies</p>
+              <h3 class="text-base font-bold text-gray-900">社宅・空き家活用をお考えの法人の方へ</h3>
+              <p class="mt-2 text-[13px] text-text-secondary leading-[1.8]">
+                外国人材の住居確保支援や社宅の手当てを、物件からご用意します。
+              </p>
+              <p class="mt-3 text-[13px] font-medium text-gray-900">詳しく見る →</p>
+            </div>
+          </a>
+          <a href="/services#recruitment" class="group bg-white border border-gray-200 card-lift flex">
+            <img src={IMG.laneHr.webp} alt={IMG.laneHr.alt} class="w-32 lg:w-40 object-cover object-top shrink-0" loading="lazy" width="1000" height="1500" />
+            <div class="p-6 lg:p-7">
+              <p class="eyebrow text-text-muted mb-2">Recruiting</p>
+              <h3 class="text-base font-bold text-gray-900">採用にお困りの企業の方へ</h3>
+              <p class="mt-2 text-[13px] text-text-secondary leading-[1.8]">
+                求人設計から定着まで、代表が直接伴走します。BPOも月10万円から。
+              </p>
+              <p class="mt-3 text-[13px] font-medium text-gray-900">採用支援を見る →</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services: 均等カードをやめて番号付きリスト行に -->
+  <section class="sec-lg bg-white">
+    <div class="max-w-[1120px] mx-auto px-5 sm:px-8">
+      <div class="mb-12 fade-in-up">
+        <p class="eyebrow text-text-muted mb-5">Services</p>
+        <h2 class="text-3xl lg:text-[2.25rem] font-bold text-gray-900">提供サービス</h2>
         {/* TODO:COPY home-services-intro */}
         <p class="mt-6 text-text-secondary leading-[1.9] max-w-2xl">
           novshiはふたつの事業を営みます。九州の中小企業向けの採用支援・BPOと、空き家を働く人の社宅に変える事業です。採用支援の顧客から空き家の情報が届き、社宅は採用した人の定着に使われます。
         </p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 stagger">
+      <div class="border-t border-gray-200 stagger">
         {/* TODO:COPY home-services-card-recruit */}
-        <a href="/services#recruitment" class="group bg-white p-10 lg:p-12 rounded-xl border border-gray-200 card-lift flex flex-col">
-          <p class="font-display text-xs font-semibold text-text-muted uppercase tracking-wide mb-4">Recruiting</p>
-          <h3 class="text-lg font-bold text-gray-900 mb-3">もう一人の経営者。</h3>
-          <p class="text-sm text-text-secondary leading-[1.9]">
-            採用戦略の設計から求人媒体の運用、面接、入社後の定着まで、代表・大倉が直接担います。大倉はリクルートで<span class="font-num text-gray-900">6</span>年、<span class="font-num text-gray-900">1,000</span>社以上の採用に関わりました。外国人採用は、在留資格の手続きと住まいの手配も含みます。
-          </p>
-          <span class="mt-6 inline-flex items-center text-sm font-medium text-gray-900 opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0 transition-all duration-200">
-            採用支援の詳細へ
-            <svg class="ml-1 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
-            </svg>
-          </span>
+        <a href="/services#recruitment" class="group grid grid-cols-[auto_1fr_auto] items-baseline gap-5 lg:gap-10 py-8 lg:py-9 border-b border-gray-200 hover:bg-[#FAFAFA] transition-colors duration-200 px-2 lg:px-4">
+          <span class="font-num text-sm text-text-muted">01</span>
+          <div>
+            <h3 class="text-lg lg:text-xl font-bold text-gray-900">採用支援 — もう一人の経営者。</h3>
+            <p class="mt-2 text-sm text-text-secondary leading-[1.9] max-w-2xl">
+              採用戦略の設計から求人媒体の運用、面接、入社後の定着まで、代表・大倉が直接担います。大倉はリクルートで<span class="font-num text-gray-900">6</span>年、<span class="font-num text-gray-900">1,000</span>社以上の採用に関わりました。外国人採用は、在留資格の手続きと住まいの手配も含みます。
+            </p>
+          </div>
+          <span class="text-sm text-gray-900 opacity-40 group-hover:opacity-100 transition-opacity duration-200">→</span>
         </a>
-
         {/* TODO:COPY home-services-card-bpo */}
-        <a href="/services#bpo" class="group bg-white p-10 lg:p-12 rounded-xl border border-gray-200 card-lift flex flex-col">
-          <p class="font-display text-xs font-semibold text-text-muted uppercase tracking-wide mb-4">BPO</p>
-          <h3 class="text-lg font-bold text-gray-900 mb-3">止まった業務を、月額で引き受ける</h3>
-          <p class="text-sm text-text-secondary leading-[1.9]">
-            担当者の退職や兼任で滞った業務を月<span class="font-num text-gray-900">10</span>万円から代行します。中心は採用まわり。範囲は事前に文書で決め、月次で報告します。
-          </p>
-          <span class="mt-6 inline-flex items-center text-sm font-medium text-gray-900 opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0 transition-all duration-200">
-            BPOの詳細へ
-            <svg class="ml-1 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
-            </svg>
-          </span>
+        <a href="/services#bpo" class="group grid grid-cols-[auto_1fr_auto] items-baseline gap-5 lg:gap-10 py-8 lg:py-9 border-b border-gray-200 hover:bg-[#FAFAFA] transition-colors duration-200 px-2 lg:px-4">
+          <span class="font-num text-sm text-text-muted">02</span>
+          <div>
+            <h3 class="text-lg lg:text-xl font-bold text-gray-900">BPO — 止まった業務を、月額で引き受ける</h3>
+            <p class="mt-2 text-sm text-text-secondary leading-[1.9] max-w-2xl">
+              担当者の退職や兼任で滞った業務を月<span class="font-num text-gray-900">10</span>万円から代行します。中心は採用まわり。範囲は事前に文書で決め、月次で報告します。
+            </p>
+          </div>
+          <span class="text-sm text-gray-900 opacity-40 group-hover:opacity-100 transition-opacity duration-200">→</span>
         </a>
-      </div>
-
-      {/* TODO:COPY home-services-akiya-note */}
-      <div class="mt-6 border-l-2 border-gray-300 pl-6 py-1 fade-in-up max-w-3xl">
-        <p class="text-sm text-text-secondary leading-[1.9]">
-          このほかに、空き家を買い取って改修し、働く人の社宅として貸す事業を始めています。現在は<span class="font-num text-gray-900">1</span>棟目の実証段階です。
-        </p>
+        {/* TODO:COPY home-services-akiya-note */}
+        <a href="/services#akiya" class="group grid grid-cols-[auto_1fr_auto] items-baseline gap-5 lg:gap-10 py-8 lg:py-9 border-b border-gray-200 hover:bg-[#FAFAFA] transition-colors duration-200 px-2 lg:px-4">
+          <span class="font-num text-sm text-text-muted">03</span>
+          <div>
+            <h3 class="text-lg lg:text-xl font-bold text-gray-900">空き家再生 × 社宅</h3>
+            <p class="mt-2 text-sm text-text-secondary leading-[1.9] max-w-2xl">
+              空き家を買い取って改修し、働く人の社宅として貸します。現在は<span class="font-num text-gray-900">1</span>棟目の実証段階です。
+            </p>
+          </div>
+          <span class="text-sm text-gray-900 opacity-40 group-hover:opacity-100 transition-opacity duration-200">→</span>
+        </a>
       </div>
 
       {/* TODO:COPY home-services-ai-note */}
@@ -127,51 +184,55 @@ import CTASection from '../components/CTASection.astro';
     </div>
   </section>
 
-  <!-- CEO -->
-  <section class="py-24 lg:py-32 bg-white">
+  <!-- CEO: 写真5 : テキスト7 の非対称 -->
+  <section class="sec-xl bg-white border-t border-gray-100">
     <div class="max-w-[1120px] mx-auto px-5 sm:px-8">
-      <div class="max-w-2xl fade-in-up">
-        <p class="font-display text-xs font-semibold text-text-muted uppercase tracking-[0.2em] mb-5">CEO Message</p>
-        <h2 class="text-3xl lg:text-[2.5rem] font-bold text-gray-900 mb-10">代表メッセージ</h2>
-
-        {/* TODO:COPY home-ceo-message */}
-        <div class="space-y-5 text-text-secondary leading-[1.9]">
-          <p>
-            丸紅で事業投資、リクルートで6年間の中途採用営業とIndeed事業の企画、スタートアップで人事と経営企画を担ってきました。この間に関わった採用支援は<span class="font-num text-gray-900">1,000</span>社を超えます。
-          </p>
-          <p>
-            共通して見えたのは、地方の中小企業ほど、採用にかける人手も予算も足りていないことです。採用がうまくいっても、住む場所がなく定着に至らないこともあります。だから、採用支援と空き家再生の二つを事業にしています。
-          </p>
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+        <div class="lg:col-span-5 fade-in-up">
+          <img src={IMG.ceoBench.webp} alt={IMG.ceoBench.alt} class="w-full max-w-md object-cover" loading="lazy" width="1200" height="1800" />
         </div>
+        <div class="lg:col-span-7 fade-in-up">
+          <p class="eyebrow text-text-muted mb-5">CEO Message</p>
+          <h2 class="text-3xl lg:text-[2.25rem] font-bold text-gray-900 mb-9">代表メッセージ</h2>
 
-        <div class="mt-10 pt-8 border-t border-gray-200">
-          <p class="text-sm font-bold text-gray-900">大倉 佑介</p>
-          <p class="text-xs text-text-muted mt-1">株式会社novshi 代表取締役</p>
+          {/* TODO:COPY home-ceo-message */}
+          <div class="space-y-5 text-text-secondary leading-[1.9] max-w-xl">
+            <p>
+              丸紅で事業投資、リクルートで6年間の中途採用営業とIndeed事業の企画、スタートアップで人事と経営企画を担ってきました。この間に関わった採用支援は<span class="font-num text-gray-900">1,000</span>社を超えます。
+            </p>
+            <p>
+              共通して見えたのは、地方の中小企業ほど、採用にかける人手も予算も足りていないことです。採用がうまくいっても、住む場所がなく定着に至らないこともあります。だから、採用支援と空き家再生の二つを事業にしています。
+            </p>
+          </div>
+
+          <div class="mt-10 pt-8 border-t border-gray-200 max-w-xl">
+            <p class="text-sm font-bold text-gray-900">大倉 佑介</p>
+            <p class="text-xs text-text-muted mt-1">株式会社novshi 代表取締役</p>
+          </div>
+
+          <a href="/about" class="inline-flex items-center mt-8 text-sm font-medium text-gray-900 hover:underline underline-offset-4 transition-all duration-200">
+            会社概要を見る →
+          </a>
         </div>
-
-        <a href="/about" class="inline-flex items-center mt-8 text-sm font-medium text-gray-900 hover:underline underline-offset-4 transition-all duration-200">
-          会社概要を見る
-          <svg class="ml-1 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
-          </svg>
-        </a>
       </div>
     </div>
   </section>
 
-  <!-- Careers Banner -->
-  <section class="py-20 lg:py-24 bg-white">
+  <!-- Careers Banner: ink帯をやめて写真＋枠線（ink帯はVisionとCTAの2箇所まで） -->
+  <section class="sec-tight bg-white">
     <div class="max-w-[1120px] mx-auto px-5 sm:px-8 fade-in-up">
-      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6 py-12 px-10 lg:px-14 bg-[#1A1A1A] text-white rounded-xl">
+      <a href="/careers" class="group grid grid-cols-1 md:grid-cols-[1fr_280px] border border-gray-200 card-lift overflow-hidden">
         {/* TODO:COPY home-careers-banner */}
-        <div>
-          <h2 class="text-2xl font-bold">novshiで働く</h2>
-          <p class="mt-2 text-sm text-white/60">少人数の組織で、一人が採用支援と空き家再生の両方に関わります。九州で一緒に働く仲間を探しています。</p>
+        <div class="p-10 lg:p-12 flex flex-col justify-center">
+          <p class="eyebrow text-text-muted mb-3">Careers</p>
+          <h2 class="text-xl lg:text-2xl font-bold text-gray-900">novshiで働く</h2>
+          <p class="mt-3 text-sm text-text-secondary leading-[1.9] max-w-lg">
+            少人数の組織で、一人が採用支援と空き家再生の両方に関わります。九州で一緒に働く仲間を探しています。
+          </p>
+          <p class="mt-5 text-sm font-medium text-gray-900">採用情報を見る →</p>
         </div>
-        <a href="/careers" class="inline-flex items-center justify-center px-7 py-3 text-sm font-semibold text-white border border-white/30 rounded-md hover:bg-white/10 transition-colors duration-200 whitespace-nowrap">
-          採用情報を見る
-        </a>
-      </div>
+        <img src={IMG.careersView.webp} alt={IMG.careersView.alt} class="hidden md:block w-full h-full object-cover" loading="lazy" width="1000" height="1333" />
+      </a>
     </div>
   </section>
 

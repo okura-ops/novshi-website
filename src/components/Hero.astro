@@ -1,19 +1,41 @@
 ---
+import { IMG } from '../data/images';
+
 interface Props {
   title: string;
   subtitle?: string;
   showCTA?: boolean;
   compact?: boolean;
+  /** 下層ページ用: 欧文セクションラベル */
+  label?: string;
+  /** A/B試作用: ヒーロー見出し書体（gothic=Zen Kaku / mincho=Shippori Mincho） */
+  headingFont?: 'gothic' | 'mincho';
+  /** A/B試作用: CTA色（ink=黒 / cv=柿渋#B5502A） */
+  ctaColor?: 'ink' | 'cv';
 }
 
-const { title, subtitle, showCTA = false, compact = false } = Astro.props;
+const {
+  title,
+  subtitle,
+  showCTA = false,
+  compact = false,
+  label,
+  headingFont = 'gothic',
+  ctaColor = 'ink',
+} = Astro.props;
+
+const hero = IMG.heroEngawa;
+const srcset = (hero.widths || [])
+  .map((w, i) => (i === 0 ? `${hero.webp} ${w}w` : `${hero.webp.replace('.webp', `-${w}.webp`)} ${w}w`))
+  .join(', ');
 ---
 
 {compact ? (
   <!-- Compact hero for sub-pages (light background) -->
-  <section class="pt-16 pb-20 lg:pt-20 lg:pb-28 bg-white">
+  <section class="pt-14 pb-16 lg:pt-20 lg:pb-24 bg-white">
     <div class="max-w-[1120px] mx-auto px-5 sm:px-8">
-      <h1 class="text-2xl lg:text-[2.25rem] font-bold text-gray-900 fade-in-up">
+      {label && <p class="eyebrow text-text-muted mb-5 fade-in-up">{label}</p>}
+      <h1 class="text-[1.75rem] lg:text-[2.5rem] font-bold text-gray-900 fade-in-up">
         {title}
       </h1>
       {subtitle && (
@@ -24,41 +46,51 @@ const { title, subtitle, showCTA = false, compact = false } = Astro.props;
     </div>
   </section>
 ) : (
-  <!-- Homepage hero: dark editorial full-bleed (monotone v4).
-       data-hero-dark → Header overlays with white text (see Header.astro).
-       Negative top margin cancels the fixed-header spacer so the hero sits
-       behind the transparent header (starts at y=0). -->
+  <!-- Homepage hero: full-bleed photo (実物件・遠賀町の和室) + ink veil + 左下寄せコピー.
+       Web DS v1.0 §6-2: 中央揃えヒーロー禁止 → 非対称（左下寄せ・右上に写真の光）.
+       data-hero-dark → Header overlays with white text (see Header.astro). -->
   <section data-hero-dark class="relative overflow-hidden bg-[#1A1A1A] -mt-16 lg:-mt-[72px]">
-    <!-- 「志」 watermark: monotone, low opacity -->
-    <span
-      aria-hidden="true"
-      class="pointer-events-none select-none absolute right-[1%] -bottom-[8%] text-[16rem] sm:text-[24rem] lg:text-[34rem] leading-none text-white/[0.055]"
-      style="font-family: 'Noto Serif JP', serif;"
-    >志</span>
+    <picture>
+      <source type="image/webp" srcset={srcset} sizes="100vw" />
+      <img
+        src={hero.jpg}
+        alt={hero.alt}
+        class="absolute inset-0 w-full h-full object-cover"
+        fetchpriority="high"
+        width="1920"
+        height="1440"
+      />
+    </picture>
+    <!-- 単色ベール（グラデ禁止・Web DS §5-4） -->
+    <div aria-hidden="true" class="absolute inset-0 bg-[#1A1A1A]/60"></div>
 
-    <div class="relative z-10 max-w-[1120px] mx-auto px-5 sm:px-8 min-h-[88vh] flex flex-col justify-center pt-28 pb-24 lg:pt-32 lg:pb-28">
-      <p class="text-[11px] lg:text-xs font-medium text-white/90 tracking-[0.3em] mb-6 fade-in-up" style="font-family: 'Noto Serif JP', serif;">
-        採用支援と空き家再生 ｜ 九州
-      </p>
+    <div class="relative z-10 max-w-[1120px] mx-auto px-5 sm:px-8 min-h-[86vh] flex flex-col justify-end pt-32 pb-20 lg:pb-24">
+      <p class="eyebrow text-white/70 mb-6 fade-in-up">Kyushu / Work &amp; Live</p>
 
       <h1
-        class="text-[2.5rem] leading-[1.12] sm:text-[3rem] lg:text-[4.25rem] lg:leading-[1.1] font-bold text-white tracking-tight fade-in-up"
+        class:list={[
+          'text-[2.4rem] leading-[1.25] sm:text-[3rem] lg:text-[3.5rem] lg:leading-[1.3] font-bold text-white fade-in-up max-w-3xl',
+          headingFont === 'mincho' ? 'hero-mincho' : '',
+        ]}
         style="word-break: keep-all;"
       >
         {title}
       </h1>
 
       {subtitle && (
-        <p class="mt-7 lg:mt-8 text-base lg:text-lg text-white/80 max-w-xl leading-relaxed fade-in-up">
+        <p class="mt-6 lg:mt-7 text-base lg:text-lg text-white/85 max-w-xl leading-[1.9] fade-in-up">
           {subtitle}
         </p>
       )}
 
       {showCTA && (
-        <div class="mt-9 lg:mt-11 flex flex-wrap gap-3 fade-in-up">
+        <div class="mt-9 lg:mt-10 flex flex-wrap gap-3 fade-in-up">
           <a
             href="/services"
-            class="inline-flex items-center justify-center px-7 py-3.5 text-sm font-semibold text-[#1A1A1A] bg-white rounded-md hover:opacity-85 transition-opacity duration-200"
+            class:list={[
+              'inline-flex items-center justify-center px-7 py-3.5 text-sm font-semibold rounded-md transition-opacity duration-200 hover:opacity-85',
+              ctaColor === 'cv' ? 'text-white bg-[#B5502A]' : 'text-[#1A1A1A] bg-white',
+            ]}
           >
             サービスを見る
           </a>
@@ -70,6 +102,16 @@ const { title, subtitle, showCTA = false, compact = false } = Astro.props;
           </a>
         </div>
       )}
+
+      <p class="mt-10 text-[11px] text-white/45 fade-in-up">写真: 保有物件（福岡県遠賀町）/ 再生前</p>
     </div>
   </section>
 )}
+
+<style>
+  .hero-mincho {
+    font-family: 'Shippori Mincho', 'Noto Serif JP', serif;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+</style>
