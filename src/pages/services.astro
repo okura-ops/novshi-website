@@ -2,7 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
 import CTASection from '../components/CTASection.astro';
-import { IMG } from '../data/images';
+import { PROPERTIES } from '../data/properties';
 
 const recruitItems = [
   { title: '採用戦略の設計', desc: '誰を、いつまでに、いくらで採るか。まず数字で決めます。' },
@@ -76,32 +76,26 @@ const bpoItems = [
     </div>
   </section>
 
-  <!-- 外国人採用・定着支援: 写真5 : テキスト7 の非対称 -->
+  <!-- 外国人採用・定着支援 -->
   <section class="sec-lg bg-bg-secondary">
     <div class="max-w-[1120px] mx-auto px-5 sm:px-8">
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-        <div class="lg:col-span-5 fade-in-up lg:order-2 lg:pt-2">
-          <img src={IMG.svGenkan.webp} alt={IMG.svGenkan.alt} class="w-full object-cover" loading="lazy" width="1000" height="750" />
-          <p class="mt-2 text-[11px] text-text-muted">社宅として用意する保有物件（福岡県遠賀町）</p>
+      <div class="max-w-3xl fade-in-up">
+        <h3 class="text-xl font-bold text-gray-900 mb-4">外国人採用・定着支援</h3>
+        {/* TODO:COPY services-global-lead */}
+        <p class="text-text-secondary leading-[1.9] mb-8 max-w-xl">
+          外国人採用でよくあるつまずきは、内定後に住まいが決まらないことです。novshiは人材紹介（有料職業紹介事業許可 40-ユ-301708）に、在留資格手続きの支援と社宅の用意を組み合わせています。
+        </p>
+        <div class="stagger">
+          {globalItems.map((item) => (
+            <div class="border-t border-gray-300/70 py-5">
+              <h4 class="text-sm font-bold text-gray-900 mb-1">{item.title}</h4>
+              <p class="text-sm text-text-secondary leading-[1.9] max-w-lg">{item.desc}</p>
+            </div>
+          ))}
         </div>
-        <div class="lg:col-span-7 fade-in-up lg:order-1">
-          <h3 class="text-xl font-bold text-gray-900 mb-4">外国人採用・定着支援</h3>
-          {/* TODO:COPY services-global-lead */}
-          <p class="text-text-secondary leading-[1.9] mb-8 max-w-xl">
-            外国人採用でよくあるつまずきは、内定後に住まいが決まらないことです。novshiは人材紹介（有料職業紹介事業許可 40-ユ-301708）に、在留資格手続きの支援と社宅の用意を組み合わせています。
-          </p>
-          <div class="stagger">
-            {globalItems.map((item) => (
-              <div class="border-t border-gray-300/70 py-5">
-                <h4 class="text-sm font-bold text-gray-900 mb-1">{item.title}</h4>
-                <p class="text-sm text-text-secondary leading-[1.9] max-w-lg">{item.desc}</p>
-              </div>
-            ))}
-          </div>
-          <div class="mt-8 flex flex-wrap gap-3">
-            <a href="/contact" class="inline-flex items-center justify-center px-6 py-3 text-sm font-semibold text-white bg-[#1A1A1A] rounded-md hover:opacity-85 transition-opacity duration-200">相談する</a>
-            <a href="/contact?type=doc" class="inline-flex items-center justify-center px-6 py-3 text-sm font-semibold text-gray-900 border border-gray-900 rounded-md hover:bg-[#F2F2F2] transition-colors duration-200">資料を請求する</a>
-          </div>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href="/contact" class="inline-flex items-center justify-center px-6 py-3 text-sm font-semibold text-white bg-[#1A1A1A] rounded-md hover:opacity-85 transition-opacity duration-200">相談する</a>
+          <a href="/contact?type=doc" class="inline-flex items-center justify-center px-6 py-3 text-sm font-semibold text-gray-900 border border-gray-900 rounded-md hover:bg-[#F2F2F2] transition-colors duration-200">資料を請求する</a>
         </div>
       </div>
     </div>
@@ -136,46 +130,63 @@ const bpoItems = [
     </div>
   </section>
 
-  <!-- 写真全面の断ち落とし区切り -->
-  <section class="sec-flush relative">
-    <img src={IMG.svExterior.webp} alt={IMG.svExterior.alt} class="w-full h-[320px] lg:h-[420px] object-cover" loading="lazy" width="1000" height="750" />
-    <p class="absolute bottom-0 left-0 bg-[#1A1A1A] text-white/80 text-[11px] px-4 py-2">保有物件（福岡県遠賀町）— 再生前</p>
-  </section>
-
   <!-- 柱3: 空き家再生×社宅（準備・実証フェーズ） -->
   <section id="akiya" class="sec-xl scroll-mt-20 bg-white">
     <div class="max-w-[1120px] mx-auto px-5 sm:px-8">
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-        <div class="lg:col-span-7 fade-in-up">
-          {/* TODO:COPY services-akiya-head */}
-          <p class="eyebrow text-text-muted mb-4">Service 03 / 準備・実証フェーズ</p>
-          <h2 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-6">空き家再生×社宅</h2>
-          {/* TODO:COPY services-akiya-lead */}
-          <p class="text-text-secondary leading-[1.9] max-w-xl">
-            空き家を買い取り、改修し、介護・建設・飲食の現場で働く人や外国人材の社宅として長期で貸します。現在は<span class="font-num text-gray-900">1</span>棟目の実証段階です。物件の情報は、採用支援で付き合いのある地場企業から届きます。社宅は採用した人材の定着に使われます。
-          </p>
+      <div class="max-w-2xl fade-in-up">
+        {/* TODO:COPY services-akiya-head */}
+        <p class="eyebrow text-text-muted mb-4">Service 03 / 準備・実証フェーズ</p>
+        <h2 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-6">空き家再生×社宅</h2>
+        {/* TODO:COPY services-akiya-lead */}
+        <p class="text-text-secondary leading-[1.9]">
+          空き家を買い取り、改修し、介護・建設・飲食の現場で働く人や外国人材の社宅として長期で貸します。物件の情報は、採用支援で付き合いのある地場企業から届きます。社宅は採用した人材の定着に使われます。
+        </p>
+      </div>
 
-          <div class="mt-8 border border-gray-200 p-6 max-w-xl">
-            <p class="text-sm font-bold text-gray-900 mb-2">入居をお考えの個人の方へ</p>
-            <p class="text-sm text-text-secondary leading-[1.9]">
-              募集中の物件の内覧予約・空き状況は、LINEまたはお問い合わせフォームからご連絡ください。
-            </p>
-            <div class="mt-4 flex flex-wrap gap-3">
-              <a href="https://lin.ee/Ylj7svr" target="_blank" rel="noopener" class="inline-flex items-center justify-center px-5 py-2.5 text-sm font-semibold text-white bg-[#06C755] rounded-md hover:opacity-85 transition-opacity duration-200">LINEで相談する</a>
-              <a href="/contact" class="inline-flex items-center justify-center px-5 py-2.5 text-sm font-semibold text-gray-900 border border-gray-900 rounded-md hover:bg-[#F2F2F2] transition-colors duration-200">フォームで問い合わせる</a>
+      <!-- 物件一覧: 情報として掲載（募集中／稼働中のみ。正本=Notion取得物件管理DB） -->
+      <div class="mt-14">
+        <h3 class="text-xl font-bold text-gray-900 mb-8 fade-in-up">物件情報</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 stagger">
+          {PROPERTIES.map((p) => (
+            <div class="bg-white border border-gray-200 card-lift flex flex-col">
+              {p.img ? (
+                <img src={`/images/site/${p.img}.webp`} alt={p.alt} class="w-full aspect-[4/3] object-cover" loading="lazy" width="800" height="600" />
+              ) : (
+                <div class="relative w-full aspect-[4/3] bg-[#1A1A1A] overflow-hidden">
+                  <img aria-hidden="true" src="/images/site/mark-enso-white.png" alt="" width="888" height="981" class="absolute -right-[16%] -bottom-[40%] w-[240px] max-w-none opacity-[0.12] select-none pointer-events-none" loading="lazy" />
+                </div>
+              )}
+              <div class="p-5 flex items-start justify-between gap-3">
+                <div>
+                  <p class="text-sm font-bold text-gray-900">{p.name}</p>
+                  {p.spec && <p class="mt-1 text-xs text-text-muted">{p.spec}</p>}
+                </div>
+                <span class:list={[
+                  'shrink-0 text-[11px] font-semibold px-2.5 py-1 rounded-sm',
+                  p.status === '募集中' ? 'bg-[#1A1A1A] text-white' : 'bg-[#F2F2F2] text-text-secondary',
+                ]}>{p.status}</span>
+              </div>
             </div>
-          </div>
-
-          {/* TODO:COPY services-ai-note */}
-          <p class="mt-12 pt-8 border-t border-gray-200 text-sm text-text-muted leading-relaxed max-w-xl">
-            novshiは社員ゼロで運営しています。定型業務はAIに任せ、判断と対話は代表・大倉が行います。
-          </p>
+          ))}
         </div>
-        <div class="lg:col-span-5 fade-in-up">
-          <img src={IMG.svCorridor.webp} alt={IMG.svCorridor.alt} class="w-full object-cover" loading="lazy" width="1000" height="1333" />
-          <p class="mt-2 text-[11px] text-text-muted">保有物件の玄関まわり（福岡県宮若市）</p>
+        <p class="mt-4 text-xs text-text-muted fade-in-up">賃料・入居条件は物件ごとに異なります。最新の空き状況はLINEでお答えします。</p>
+      </div>
+
+      <div class="mt-10 border border-gray-200 p-6 max-w-xl fade-in-up">
+        <p class="text-sm font-bold text-gray-900 mb-2">入居をお考えの個人の方へ</p>
+        <p class="text-sm text-text-secondary leading-[1.9]">
+          募集中の物件の内覧予約・空き状況は、LINEまたはお問い合わせフォームからご連絡ください。
+        </p>
+        <div class="mt-4 flex flex-wrap gap-3">
+          <a href="https://lin.ee/Ylj7svr" target="_blank" rel="noopener" class="inline-flex items-center justify-center px-5 py-2.5 text-sm font-semibold text-white bg-[#06C755] rounded-md hover:opacity-85 transition-opacity duration-200">LINEで相談する</a>
+          <a href="/contact" class="inline-flex items-center justify-center px-5 py-2.5 text-sm font-semibold text-gray-900 border border-gray-900 rounded-md hover:bg-[#F2F2F2] transition-colors duration-200">フォームで問い合わせる</a>
         </div>
       </div>
+
+      {/* TODO:COPY services-ai-note */}
+      <p class="mt-12 pt-8 border-t border-gray-200 text-sm text-text-muted leading-relaxed max-w-xl fade-in-up">
+        novshiは社員ゼロで運営しています。定型業務はAIに任せ、判断と対話は代表・大倉が行います。
+      </p>
     </div>
   </section>
 

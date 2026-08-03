@@ -45,23 +45,12 @@ import { IMG } from '../data/images';
             <p class="eyebrow text-text-muted mb-3">Housing</p>
             <h3 class="text-lg font-bold text-gray-900">空き家再生</h3>
             <p class="mt-3 text-sm text-text-secondary leading-[1.9]">
-              使われなくなった家を買い取り、直して、長く貸す。いまは1棟目で、やり方を確かめている段階です。
+              使われなくなった家を買い取り、直して、長く貸す。福岡県内で戸建ての入居者募集を始めています。
             </p>
           </div>
         </div>
       </div>
     </div>
-  </section>
-
-  <!-- 写真全面の断ち落とし区切り（Web DS §3-2 sec-flush） -->
-  <section class="sec-flush relative">
-    <picture>
-      <source type="image/webp" srcset={`${IMG.storyGaikan.webp} 1920w, ${IMG.storyGaikan.webp.replace('.webp', '-1280.webp')} 1280w, ${IMG.storyGaikan.webp.replace('.webp', '-768.webp')} 768w`} sizes="100vw" />
-      <img src={IMG.storyGaikan.jpg} alt={IMG.storyGaikan.alt} class="w-full h-[360px] lg:h-[480px] object-cover" loading="lazy" width="1920" height="1440" />
-    </picture>
-    <p class="absolute bottom-0 left-0 bg-[#1A1A1A] text-white/80 text-[11px] px-4 py-2">
-      保有物件（福岡県遠賀町）— 再生前
-    </p>
   </section>
 
   <!-- Vision band (emphasis: black full-width / ink帯 1つ目。円相を白8%で敷きヒーローと呼応) -->
@@ -87,44 +76,37 @@ import { IMG } from '../data/images';
       </div>
 
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 fade-in-up">
-        <!-- 個人: 大きく1枚 -->
-        <a href="/services#akiya" class="lg:col-span-7 group bg-white border border-gray-200 card-lift flex flex-col">
-          <div class="overflow-hidden">
-            <img src={IMG.laneKojin.webp} alt={IMG.laneKojin.alt} class="w-full h-[240px] lg:h-[300px] object-cover" loading="lazy" width="1000" height="1333" />
+        <!-- 個人: 黒面カード（円相白8%）で階層の主役に -->
+        <div class="lg:col-span-7 relative overflow-hidden bg-[#1A1A1A] p-9 lg:p-12 flex flex-col min-h-[300px] lg:min-h-[360px]">
+          <img aria-hidden="true" src="/images/site/mark-enso-white.png" alt="" width="888" height="981" class="absolute -right-[18%] -bottom-[42%] w-[340px] max-w-none opacity-[0.1] select-none pointer-events-none" loading="lazy" />
+          <p class="eyebrow text-white/50 mb-4">For Residents</p>
+          <h3 class="text-xl lg:text-2xl font-bold text-white">住まいを探している方へ</h3>
+          <p class="mt-4 text-sm text-white/75 leading-[1.9] max-w-md">
+            福岡県内で、庭と駐車場のある戸建てを貸しています。初期費用0円の物件もあります。空き状況の確認と内覧予約はLINEでできます。
+          </p>
+          <div class="relative mt-auto pt-8 flex flex-wrap items-center gap-4">
+            <a href="https://lin.ee/Ylj7svr" target="_blank" rel="noopener" class="inline-flex items-center justify-center px-5 py-2.5 text-[13px] font-semibold text-white bg-[#06C755] rounded-md hover:opacity-85 transition-opacity duration-200">LINEで相談する</a>
+            <a href="/services#akiya" class="text-sm font-medium text-white/90 hover:translate-x-1 transition-transform duration-200">募集中の物件を見る →</a>
           </div>
-          <div class="p-8 lg:p-10 flex-1 flex flex-col">
-            <p class="eyebrow text-text-muted mb-3">For Residents</p>
-            <h3 class="text-xl font-bold text-gray-900">住まいを探している方へ</h3>
-            <p class="mt-3 text-sm text-text-secondary leading-[1.9] max-w-md">
-              福岡県内で、庭と駐車場のある戸建てを貸しています。初期費用0円の物件もあります。空き状況の確認と内覧予約はLINEでできます。
-            </p>
-            <p class="mt-auto pt-6 text-sm font-medium text-gray-900">物件と借り方を見る →</p>
-          </div>
-        </a>
+        </div>
 
-        <!-- 法人2枚: 縦積み -->
+        <!-- 法人2枚: 縦積み（罫線カード） -->
         <div class="lg:col-span-5 flex flex-col gap-6">
-          <a href="/services#akiya" class="group bg-white border border-gray-200 card-lift flex">
-            <img src={IMG.laneHojin.webp} alt={IMG.laneHojin.alt} class="w-32 lg:w-40 object-cover shrink-0" loading="lazy" width="843" height="632" />
-            <div class="p-6 lg:p-7">
-              <p class="eyebrow text-text-muted mb-2">For Companies</p>
-              <h3 class="text-base font-bold text-gray-900">社宅・空き家活用を考える法人へ</h3>
-              <p class="mt-2 text-[13px] text-text-secondary leading-[1.8]">
-                特定技能の受け入れで求められる住居の確保を、自社保有の戸建てで支えます。
-              </p>
-              <p class="mt-3 text-[13px] font-medium text-gray-900">詳しく見る →</p>
-            </div>
+          <a href="/services#akiya" class="group flex-1 bg-white border border-gray-200 card-lift p-7 lg:p-8 flex flex-col">
+            <p class="eyebrow text-text-muted mb-3">For Companies</p>
+            <h3 class="text-base lg:text-lg font-bold text-gray-900">社宅・空き家活用を考える法人へ</h3>
+            <p class="mt-2 text-[13px] text-text-secondary leading-[1.8]">
+              特定技能の受け入れで求められる住居の確保を、自社保有の戸建てで支えます。
+            </p>
+            <p class="mt-auto pt-4 text-[13px] font-medium text-gray-900 group-hover:translate-x-1 transition-transform duration-200">詳しく見る →</p>
           </a>
-          <a href="/services#recruitment" class="group bg-white border border-gray-200 card-lift flex">
-            <img src={IMG.laneHr.webp} alt={IMG.laneHr.alt} class="w-32 lg:w-40 object-cover object-top shrink-0" loading="lazy" width="1000" height="1500" />
-            <div class="p-6 lg:p-7">
-              <p class="eyebrow text-text-muted mb-2">Recruiting</p>
-              <h3 class="text-base font-bold text-gray-900">人が採れずに困っている会社へ</h3>
-              <p class="mt-2 text-[13px] text-text-secondary leading-[1.8]">
-                求人原稿の設計から入社後の定着まで、代表が直接担当します。BPOは月10万円から。
-              </p>
-              <p class="mt-3 text-[13px] font-medium text-gray-900">採用支援を見る →</p>
-            </div>
+          <a href="/services#recruitment" class="group flex-1 bg-white border border-gray-200 card-lift p-7 lg:p-8 flex flex-col">
+            <p class="eyebrow text-text-muted mb-3">Recruiting</p>
+            <h3 class="text-base lg:text-lg font-bold text-gray-900">人が採れずに困っている会社へ</h3>
+            <p class="mt-2 text-[13px] text-text-secondary leading-[1.8]">
+              求人原稿の設計から入社後の定着まで、代表が直接担当します。BPOは月10万円から。
+            </p>
+            <p class="mt-auto pt-4 text-[13px] font-medium text-gray-900 group-hover:translate-x-1 transition-transform duration-200">採用支援を見る →</p>
           </a>
         </div>
       </div>
@@ -172,7 +154,7 @@ import { IMG } from '../data/images';
           <div>
             <h3 class="text-lg lg:text-xl font-bold text-gray-900">空き家再生 × 社宅</h3>
             <p class="mt-2 text-sm text-text-secondary leading-[1.9] max-w-2xl">
-              空き家を買い取って改修し、働く人の社宅として貸します。現在は<span class="font-num text-gray-900">1</span>棟目の実証段階です。
+              空き家を買い取って改修し、働く人の社宅として貸します。福岡県内で入居者を募集中です。
             </p>
           </div>
           <span class="text-sm text-gray-900 opacity-40 group-hover:opacity-100 transition-opacity duration-200">→</span>
@@ -220,20 +202,19 @@ import { IMG } from '../data/images';
     </div>
   </section>
 
-  <!-- Careers Banner: ink帯をやめて写真＋枠線（ink帯はVisionとCTAの2箇所まで） -->
+  <!-- Careers Banner: 罫線バナー（写真なし・ink帯はVisionとCTAの2箇所まで） -->
   <section class="sec-tight bg-white">
     <div class="max-w-[1120px] mx-auto px-5 sm:px-8 fade-in-up">
-      <a href="/careers" class="group grid grid-cols-1 md:grid-cols-[1fr_280px] border border-gray-200 card-lift overflow-hidden">
+      <a href="/careers" class="group flex flex-col md:flex-row md:items-center md:justify-between gap-6 border border-gray-200 card-lift p-10 lg:px-12">
         {/* TODO:COPY home-careers-banner */}
-        <div class="p-10 lg:p-12 flex flex-col justify-center">
+        <div>
           <p class="eyebrow text-text-muted mb-3">Careers</p>
           <h2 class="text-xl lg:text-2xl font-bold text-gray-900">novshiで働く</h2>
           <p class="mt-3 text-sm text-text-secondary leading-[1.9] max-w-lg">
             少人数の組織で、一人が採用支援と空き家再生の両方に関わります。九州で一緒に働く仲間を探しています。
           </p>
-          <p class="mt-5 text-sm font-medium text-gray-900">採用情報を見る →</p>
         </div>
-        <img src={IMG.careersView.webp} alt={IMG.careersView.alt} class="hidden md:block w-full h-full object-cover" loading="lazy" width="1000" height="1333" />
+        <p class="text-sm font-medium text-gray-900 whitespace-nowrap group-hover:translate-x-1 transition-transform duration-200">採用情報を見る →</p>
       </a>
     </div>
   </section>

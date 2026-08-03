@@ -2,7 +2,6 @@
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
 import CTASection from '../components/CTASection.astro';
-import { IMG } from '../data/images';
 ---
 
 <Layout title="採用情報 | 株式会社novshi" description="novshiの採用情報。少人数で採用支援・BPOと空き家再生を進めています。カジュアル面談を受け付けています。">
@@ -10,35 +9,28 @@ import { IMG } from '../data/images';
 
   <section class="sec-xl bg-white border-t border-gray-100">
     <div class="max-w-[1120px] mx-auto px-5 sm:px-8">
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-        <div class="lg:col-span-7 fade-in-up">
-          {/* TODO:COPY careers-intro */}
-          <div class="space-y-6 text-text-secondary leading-[1.9]">
-            <p>novshiは少人数の会社です。定型業務はAIで効率化し、一人が採用支援と空き家再生の両方に関わります。</p>
-            <p>九州の中小企業の採用を支える採用支援・BPOと、空き家を直して社宅に戻す不動産事業を手がけています。いまは立ち上げの途中です。現場に足を運び、必要なら自分で仕組みをつくれる人を探しています。</p>
-          </div>
-
-          <!-- アイコンカードをやめて番号付き行リストに（Web DS §4） -->
-          <div class="mt-14 border-t border-gray-200 stagger">
-            {[
-              { num: '01', label: '採用と不動産、両方に関わる', desc: '採用支援と空き家再生の両方に関わり、事業の立ち上げを一気に経験できます。' },
-              { num: '02', label: '裁量の大きさ', desc: '少人数なので、提案から実行まで一人で持てます。意思決定が事業に直結します。' },
-              { num: '03', label: '福岡・熊本が現場', desc: '地場の経営者と直接会い、現場に足を運びながら進めます。' },
-            ].map((item) => (
-              <div class="grid grid-cols-[3rem_1fr] items-baseline gap-4 py-6 border-b border-gray-200">
-                <span class="font-num text-sm text-text-muted">{item.num}</span>
-                <div>
-                  <p class="text-base font-bold text-gray-900 mb-1">{item.label}</p>
-                  <p class="text-sm text-text-secondary leading-[1.9]">{item.desc}</p>
-                </div>
-              </div>
-            ))}
-          </div>
+      <div class="max-w-2xl fade-in-up">
+        {/* TODO:COPY careers-intro */}
+        <div class="space-y-6 text-text-secondary leading-[1.9]">
+          <p>novshiは少人数の会社です。定型業務はAIで効率化し、一人が採用支援と空き家再生の両方に関わります。</p>
+          <p>九州の中小企業の採用を支える採用支援・BPOと、空き家を直して社宅に戻す不動産事業を手がけています。いまは立ち上げの途中です。現場に足を運び、必要なら自分で仕組みをつくれる人を探しています。</p>
         </div>
 
-        <div class="lg:col-span-5 fade-in-up">
-          <img src={IMG.careersView.webp} alt={IMG.careersView.alt} class="w-full aspect-[3/4] object-cover" loading="lazy" width="1000" height="1333" />
-          <p class="mt-2 text-[11px] text-text-muted">保有物件の2階から見た遠賀町の街並み</p>
+        <!-- アイコンカードをやめて番号付き行リストに（Web DS §4） -->
+        <div class="mt-14 border-t border-gray-200 stagger">
+          {[
+            { num: '01', label: '採用と不動産、両方に関わる', desc: '採用支援と空き家再生の両方に関わり、事業の立ち上げを一気に経験できます。' },
+            { num: '02', label: '裁量の大きさ', desc: '少人数なので、提案から実行まで一人で持てます。意思決定が事業に直結します。' },
+            { num: '03', label: '福岡・熊本が現場', desc: '地場の経営者と直接会い、現場に足を運びながら進めます。' },
+          ].map((item) => (
+            <div class="grid grid-cols-[3rem_1fr] items-baseline gap-4 py-6 border-b border-gray-200">
+              <span class="font-num text-sm text-text-muted">{item.num}</span>
+              <div>
+                <p class="text-base font-bold text-gray-900 mb-1">{item.label}</p>
+                <p class="text-sm text-text-secondary leading-[1.9]">{item.desc}</p>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </div>
