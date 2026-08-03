@@ -44,7 +44,45 @@ const steps = [
 
 <Layout title="サービス | 株式会社novshi" description="採用支援・組織改善と、空き家を社宅に変える事業。九州の中小企業の採用と定着を、代表が直接支えます。">
   {/* TODO:COPY services-hero */}
-  <Hero label="Services" title="novshiの事業" subtitle="九州の中小企業の採用と組織を支える仕事と、空き家を働く人の社宅に変える仕事をしています。採用支援の顧客から空き家の情報が届き、社宅は採用した人の住まいになります。" compact={true} />
+  <Hero label="Services" title="novshiの事業" subtitle="九州の中小企業の採用と組織を支える仕事と、空き家を働く人の社宅に変える仕事をしています。" compact={true} />
+
+  <!-- 二つの事業のつながり: 図解（企業・人・家のトライアングル） -->
+  <section class="sec-tight bg-white">
+    <div class="max-w-[1120px] mx-auto px-5 sm:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center border-t border-gray-200 pt-12">
+        <div class="lg:col-span-5 fade-in-up">
+          <h2 class="text-xl lg:text-2xl font-bold text-gray-900 mb-5">二つの事業は、つながっています</h2>
+          <p class="text-sm text-text-secondary leading-[1.9] max-w-md">
+            採用支援の顧客から空き家の情報が届き、再生した家は採用した人の社宅になります。住まいが決まると、人は辞めにくくなります。この循環をつくることが、novshiの事業設計です。
+          </p>
+        </div>
+        <div class="lg:col-span-7 fade-in-up">
+          <svg viewBox="0 0 640 360" class="w-full max-w-xl mx-auto" role="img" aria-label="企業・働く人・空き家の三者をnovshiがつなぐ図。企業へは採用支援、働く人へは社宅の提供、企業から空き家の情報が届く">
+            <defs>
+              <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                <path d="M 0 1 L 9 5 L 0 9" fill="none" stroke="#1A1A1A" stroke-width="1.4" />
+              </marker>
+            </defs>
+            <!-- 辺（企業→人 / 家→人 / 企業→家） -->
+            <line x1="200" y1="86" x2="440" y2="86" stroke="#1A1A1A" stroke-width="1.2" marker-end="url(#ah)" />
+            <line x1="472" y1="120" x2="352" y2="268" stroke="#1A1A1A" stroke-width="1.2" marker-start="url(#ah)" />
+            <line x1="168" y1="120" x2="288" y2="268" stroke="#999999" stroke-width="1.2" stroke-dasharray="4 5" marker-end="url(#ah)" />
+            <!-- 節点 -->
+            <circle cx="160" cy="86" r="7" fill="#1A1A1A" />
+            <circle cx="480" cy="86" r="7" fill="#1A1A1A" />
+            <circle cx="320" cy="292" r="7" fill="none" stroke="#1A1A1A" stroke-width="1.6" />
+            <text x="120" y="56" font-size="17" font-weight="bold" fill="#1A1A1A">地場企業</text>
+            <text x="448" y="56" font-size="17" font-weight="bold" fill="#1A1A1A">働く人</text>
+            <text x="284" y="330" font-size="17" font-weight="bold" fill="#1A1A1A">空き家 → 社宅</text>
+            <!-- 辺ラベル -->
+            <text x="320" y="74" font-size="12.5" fill="#666666" text-anchor="middle">採用を支援する</text>
+            <text x="452" y="204" font-size="12.5" fill="#666666">住まいを提供する</text>
+            <text x="140" y="204" font-size="12.5" fill="#999999">空き家の情報が届く</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- 柱1: 採用支援 -->
   <section id="recruitment" class="sec-xl scroll-mt-20 bg-white border-t border-gray-100">
@@ -79,6 +117,31 @@ const steps = [
         ))}
       </div>
 
+      <!-- 役割分担の対比（委託できる範囲を先に見せる） -->
+      <div class="mt-16 pt-12 border-t border-gray-200">
+        <h3 class="text-xl font-bold text-gray-900 mb-8 fade-in-up">役割分担</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 max-w-4xl fade-in-up">
+          <div class="bg-[#1A1A1A] p-8 lg:p-9">
+            <p class="text-sm font-bold text-white mb-5">novshiが担うこと</p>
+            <ul class="space-y-3 text-sm text-white/80 leading-[1.8]">
+              <li>採用戦略の設計と数値目標づくり</li>
+              <li>求人原稿の作成・改稿とA/Bテスト</li>
+              <li>媒体運用と応募単価の管理</li>
+              <li>面接の設計、応募者への連絡</li>
+              <li>内定後のフォローと定着面談</li>
+            </ul>
+          </div>
+          <div class="bg-[#F2F2F2] p-8 lg:p-9">
+            <p class="text-sm font-bold text-gray-900 mb-5">お客様にお願いすること</p>
+            <ul class="space-y-3 text-sm text-text-secondary leading-[1.8]">
+              <li>採否の最終決定</li>
+              <li>労働条件・待遇の決定</li>
+              <li>面接の実施（novshiの同席は可能です）</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
       <!-- 運用する3つのチャネル: 均等3カラムカードをやめて行リストに -->
       <div class="mt-16 pt-12 border-t border-gray-200">
         {/* TODO:COPY services-recruit-channels-head */}
@@ -98,13 +161,16 @@ const steps = [
       <!-- 進め方: 3ステップ（複雑さを見せない） -->
       <div class="mt-16 pt-12 border-t border-gray-200">
         <h3 class="text-xl font-bold text-gray-900 mb-8 fade-in-up">ご依頼から開始まで</h3>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-x-10 gap-y-6 max-w-4xl stagger">
-          {steps.map((s) => (
-            <div class="border-t-2 border-gray-900 pt-5">
-              <p class="font-num text-2xl font-medium text-gray-300 leading-none mb-3">{s.num}</p>
-              <p class="text-base font-bold text-gray-900">{s.title}</p>
-              <p class="mt-2 text-sm text-text-secondary leading-[1.8]">{s.desc}</p>
-            </div>
+        <div class="flex flex-col md:flex-row md:items-stretch gap-y-6 max-w-4xl stagger">
+          {steps.map((s, i) => (
+            <>
+              {i > 0 && <div class="hidden md:flex items-center px-4 text-gray-300 text-xl" aria-hidden="true">→</div>}
+              <div class="flex-1 border-t-2 border-gray-900 pt-5">
+                <p class="font-num text-2xl font-medium text-gray-300 leading-none mb-3">{s.num}</p>
+                <p class="text-base font-bold text-gray-900">{s.title}</p>
+                <p class="mt-2 text-sm text-text-secondary leading-[1.8]">{s.desc}</p>
+              </div>
+            </>
           ))}
         </div>
       </div>
@@ -139,14 +205,34 @@ const steps = [
   <!-- 柱2: 組織・事業・経営の改善支援 -->
   <section id="consulting" class="sec-lg bg-white scroll-mt-20">
     <div class="max-w-[1120px] mx-auto px-5 sm:px-8">
-      <div class="max-w-2xl fade-in-up">
-        {/* TODO:COPY services-kaizen-head */}
-        <p class="font-num text-5xl lg:text-6xl font-medium text-gray-200 leading-none mb-5" aria-hidden="true">02</p>
-        <h2 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-6">組織・事業・経営の改善支援</h2>
-        {/* TODO:COPY services-kaizen-lead */}
-        <p class="text-text-secondary leading-[1.9]">
-          人を起点に、組織・事業・経営の課題を整理し、改善の実行まで担います。採用を入り口に、評価の仕組みや業務の回し方まで踏み込むことが多いサービスです。スタートアップで人事・経営企画・事業開発を執行役員として担った経験がもとになっています。
-        </p>
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <div class="lg:col-span-7 fade-in-up">
+          {/* TODO:COPY services-kaizen-head */}
+          <p class="font-num text-5xl lg:text-6xl font-medium text-gray-200 leading-none mb-5" aria-hidden="true">02</p>
+          <h2 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-6">組織・事業・経営の改善支援</h2>
+          {/* TODO:COPY services-kaizen-lead */}
+          <p class="text-text-secondary leading-[1.9] max-w-xl">
+            人を起点に、組織・事業・経営の課題を整理し、改善の実行まで担います。入り口はほとんどの場合、採用です。人が採れない理由を追いかけると、評価の仕組みや業務の回し方、投資判断の順序に行き着きます。novshiはそこまで一緒に踏み込みます。スタートアップで人事・経営企画・事業開発を執行役員として担った経験がもとになっています。
+          </p>
+        </div>
+        <div class="lg:col-span-5 fade-in-up">
+          <!-- 同心円図: 人を起点に組織・事業・経営へ広がる -->
+          <svg viewBox="0 0 480 510" class="w-full max-w-md mx-auto" role="img" aria-label="中心の「人」から、組織・事業・経営へ支援が広がる同心円の図">
+            <circle cx="240" cy="272" r="198" fill="none" stroke="#D4D4D4" stroke-width="1.2" stroke-dasharray="1130 115" transform="rotate(-64 240 272)" />
+            <circle cx="240" cy="272" r="144" fill="none" stroke="#999999" stroke-width="1.2" stroke-dasharray="815 90" transform="rotate(-58 240 272)" />
+            <circle cx="240" cy="272" r="90" fill="none" stroke="#1A1A1A" stroke-width="1.4" stroke-dasharray="510 55" transform="rotate(-50 240 272)" />
+            <circle cx="240" cy="272" r="38" fill="#1A1A1A" />
+            <text x="240" y="279" font-size="20" font-weight="bold" fill="#FFFFFF" text-anchor="middle">人</text>
+            <g style="paint-order: stroke; stroke: #FFFFFF; stroke-width: 10px; stroke-linejoin: round;">
+              <text x="240" y="187" font-size="16" font-weight="bold" fill="#1A1A1A" text-anchor="middle">組織</text>
+              <text x="240" y="133" font-size="16" font-weight="bold" fill="#555555" text-anchor="middle">事業</text>
+              <text x="240" y="79" font-size="16" font-weight="bold" fill="#8A8A8A" text-anchor="middle">経営</text>
+              <text x="240" y="207" font-size="11.5" fill="#999999" text-anchor="middle">評価・役割・定着</text>
+              <text x="240" y="153" font-size="11.5" fill="#999999" text-anchor="middle">業務・営業・仕組み化</text>
+              <text x="240" y="99" font-size="11.5" fill="#999999" text-anchor="middle">数値管理・投資判断</text>
+            </g>
+          </svg>
+        </div>
       </div>
 
       <div class="mt-12 stagger max-w-3xl">
@@ -156,6 +242,26 @@ const steps = [
             <p class="text-sm text-text-secondary leading-[1.9]">{item.desc}</p>
           </div>
         ))}
+      </div>
+
+      <!-- 支援の実例（守秘のため業種のみ） -->
+      <div class="mt-16 pt-12 border-t border-gray-200">
+        <h3 class="text-xl font-bold text-gray-900 mb-2 fade-in-up">支援の実例</h3>
+        <p class="text-sm text-text-muted mb-8 fade-in-up">守秘のため、社名を伏せて業種のみ記載しています。</p>
+        <div class="stagger max-w-3xl">
+          <div class="border-t border-gray-200 py-6">
+            <p class="text-sm font-bold text-gray-900 mb-1">不動産会社 — 採用から、人事制度の設計へ</p>
+            <p class="text-sm text-text-secondary leading-[1.9]">採用支援として始まり、応募者管理の仕組み（通知の自動化・管理シート）と人事制度の設計まで担当しています。</p>
+          </div>
+          <div class="border-t border-gray-200 py-6">
+            <p class="text-sm font-bold text-gray-900 mb-1">求人メディア運営会社 — 営業部門の立て直しへ</p>
+            <p class="text-sm text-text-secondary leading-[1.9]">支社の営業立て直しプロジェクトに外部アドバイザーとして参画。営業データの整備と、月次で数字を追う会議体を設計しています。</p>
+          </div>
+          <div class="border-t border-gray-200 py-6">
+            <p class="text-sm font-bold text-gray-900 mb-1">ITコンサルティング会社 — 採用投資の意思決定へ</p>
+            <p class="text-sm text-text-secondary leading-[1.9]">高額な採用媒体に出稿する前に、無料チャネルで応募の集まり方を検証する設計に変更。数字が出てから投資を判断する形にしました。</p>
+          </div>
+        </div>
       </div>
 
       {/* TODO:COPY services-kaizen-price-note */}
