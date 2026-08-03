@@ -5,10 +5,11 @@ import CTASection from '../components/CTASection.astro';
 import { IMG } from '../data/images';
 ---
 
-<Layout title="株式会社novshi | 豊かさを、描きなおす。" preloadImage={IMG.heroEngawa.webp}>
+<Layout title="株式会社novshi | 豊かさを、描きなおす。" preloadImage="/images/site/mark-enso-black.png">
   {/* TODO:COPY home-hero */}
   <Hero
-    title="豊かさを、描きなおす。"
+    title="豊かさを、"
+    title2="描きなおす。"
     subtitle="人が採れない会社の採用を立て直し、空いた家を人が住める家に戻す。九州の「働く」と「住む」を、まとめて引き受けます。"
     showCTA={true}
   />
@@ -63,9 +64,10 @@ import { IMG } from '../data/images';
     </p>
   </section>
 
-  <!-- Vision band (emphasis: black full-width / ink帯 1つ目) -->
-  <section class="sec-lg bg-[#1A1A1A]">
-    <div class="max-w-[1120px] mx-auto px-5 sm:px-8">
+  <!-- Vision band (emphasis: black full-width / ink帯 1つ目。円相を白8%で敷きヒーローと呼応) -->
+  <section class="sec-lg bg-[#1A1A1A] relative overflow-hidden">
+    <img aria-hidden="true" src="/images/site/mark-enso-white.png" alt="" width="888" height="981" class="absolute -right-[8%] -top-[60%] w-[420px] max-w-none opacity-[0.08] select-none pointer-events-none" loading="lazy" />
+    <div class="relative max-w-[1120px] mx-auto px-5 sm:px-8">
       <div class="max-w-3xl fade-in-up">
         <p class="eyebrow text-white/50 mb-6">Vision</p>
         {/* TODO:COPY home-vision-band */}
