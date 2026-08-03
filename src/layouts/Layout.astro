@@ -8,13 +8,11 @@ interface Props {
   description?: string;
   /** LCP対策: ファーストビュー画像を preload する（トップ等） */
   preloadImage?: string;
-  /** A/B試作ページ用: 検索避け */
+  /** 試作・非公開ページ用: 検索避け */
   noindex?: boolean;
-  /** A/B試作ページ用: Shippori Mincho を追加読込 */
-  minchoFont?: boolean;
 }
 
-const { title, description = '株式会社novshi — 九州の中小企業の採用支援・BPOと、空き家再生。「働く」と「住む」を支える会社です。', preloadImage, noindex = false, minchoFont = false } = Astro.props;
+const { title, description = '株式会社novshi — 九州の中小企業の採用支援・BPOと、空き家再生。「働く」と「住む」を支える会社です。', preloadImage, noindex = false } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://novshi.co.jp');
 ---
 
@@ -40,7 +38,6 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://novshi.c
     {/* Web DS v1.0 §1: Zen Kaku Gothic New(見出し) / Noto Sans JP(本文) / Montserrat(欧文・数値)。
         Google Fontsはunicode-rangeサブセット配信＋display=swapでFOIT回避 */}
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Noto+Sans+JP:wght@400;500;700&family=Zen+Kaku+Gothic+New:wght@500;700&display=swap" rel="stylesheet" />
-    {minchoFont && <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700&display=swap" rel="stylesheet" />}
     {preloadImage && <link rel="preload" as="image" href={preloadImage} />}
     {noindex && <meta name="robots" content="noindex, nofollow" />}
     <script type="application/ld+json" set:html={JSON.stringify({
