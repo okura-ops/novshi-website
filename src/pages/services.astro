@@ -57,27 +57,27 @@ const steps = [
           </p>
         </div>
         <div class="lg:col-span-7 fade-in-up">
-          <svg viewBox="0 0 640 360" class="w-full max-w-xl mx-auto" role="img" aria-label="企業・働く人・空き家の三者をnovshiがつなぐ図。企業へは採用支援、働く人へは社宅の提供、企業から空き家の情報が届く">
+          <svg viewBox="0 0 560 480" class="w-full max-w-lg mx-auto" role="img" aria-label="事業の循環図。企業から空き家の情報が届き、再生した家が社宅になり、働く人が定着して企業に戻る">
             <defs>
-              <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-                <path d="M 0 1 L 9 5 L 0 9" fill="none" stroke="#1A1A1A" stroke-width="1.4" />
+              <marker id="cyc-ah" viewBox="0 0 10 10" refX="7.5" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+                <path d="M 1.5 1.5 L 7.5 5 L 1.5 8.5" fill="none" stroke="#1A1A1A" stroke-width="1.5" />
               </marker>
             </defs>
-            <!-- 辺（企業→人 / 家→人 / 企業→家） -->
-            <line x1="200" y1="86" x2="440" y2="86" stroke="#1A1A1A" stroke-width="1.2" marker-end="url(#ah)" />
-            <line x1="472" y1="120" x2="352" y2="268" stroke="#1A1A1A" stroke-width="1.2" marker-start="url(#ah)" />
-            <line x1="168" y1="120" x2="288" y2="268" stroke="#999999" stroke-width="1.2" stroke-dasharray="4 5" marker-end="url(#ah)" />
-            <!-- 節点 -->
-            <circle cx="160" cy="86" r="7" fill="#1A1A1A" />
-            <circle cx="480" cy="86" r="7" fill="#1A1A1A" />
-            <circle cx="320" cy="292" r="7" fill="none" stroke="#1A1A1A" stroke-width="1.6" />
-            <text x="120" y="56" font-size="17" font-weight="bold" fill="#1A1A1A">地場企業</text>
-            <text x="448" y="56" font-size="17" font-weight="bold" fill="#1A1A1A">働く人</text>
-            <text x="284" y="330" font-size="17" font-weight="bold" fill="#1A1A1A">空き家 → 社宅</text>
-            <!-- 辺ラベル -->
-            <text x="320" y="74" font-size="12.5" fill="#666666" text-anchor="middle">採用を支援する</text>
-            <text x="452" y="204" font-size="12.5" fill="#666666">住まいを提供する</text>
-            <text x="140" y="204" font-size="12.5" fill="#999999">空き家の情報が届く</text>
+            <path d="M 200 96 A 170 170 0 0 0 118 340" fill="none" stroke="#1A1A1A" stroke-width="2" marker-end="url(#cyc-ah)" />
+            <path d="M 172 392 A 170 170 0 0 0 392 390" fill="none" stroke="#1A1A1A" stroke-width="2" marker-end="url(#cyc-ah)" />
+            <path d="M 440 336 A 170 170 0 0 0 352 94" fill="none" stroke="#1A1A1A" stroke-width="2" marker-end="url(#cyc-ah)" />
+            <circle cx="280" cy="80" r="48" fill="#1A1A1A" />
+            <text x="280" y="88" font-size="18" font-weight="bold" fill="#fff" text-anchor="middle">企業</text>
+            <circle cx="128" cy="368" r="48" fill="#fff" stroke="#1A1A1A" stroke-width="1.8" />
+            <text x="128" y="376" font-size="18" font-weight="bold" fill="#1A1A1A" text-anchor="middle">家</text>
+            <circle cx="432" cy="368" r="48" fill="#1A1A1A" />
+            <text x="432" y="376" font-size="18" font-weight="bold" fill="#fff" text-anchor="middle">人</text>
+            <g font-size="12.5" fill="#444444" style="paint-order: stroke; stroke: #FFFFFF; stroke-width: 9px; stroke-linejoin: round;">
+              <text x="96" y="210" text-anchor="middle">空き家の情報が届く</text>
+              <text x="280" y="448" text-anchor="middle">再生した家が社宅になる</text>
+              <text x="468" y="210" text-anchor="middle">働く人が定着する</text>
+            </g>
+            <text x="280" y="252" class="eyebrow" font-size="10" fill="#B5B5B5" text-anchor="middle" style="letter-spacing: 0.2em;">KYUSHU / WORK &amp; LIVE</text>
           </svg>
         </div>
       </div>
@@ -217,20 +217,24 @@ const steps = [
         </div>
         <div class="lg:col-span-5 fade-in-up">
           <!-- 同心円図: 人を起点に組織・事業・経営へ広がる -->
-          <svg viewBox="0 0 480 510" class="w-full max-w-md mx-auto" role="img" aria-label="中心の「人」から、組織・事業・経営へ支援が広がる同心円の図">
-            <circle cx="240" cy="272" r="198" fill="none" stroke="#D4D4D4" stroke-width="1.2" stroke-dasharray="1130 115" transform="rotate(-64 240 272)" />
-            <circle cx="240" cy="272" r="144" fill="none" stroke="#999999" stroke-width="1.2" stroke-dasharray="815 90" transform="rotate(-58 240 272)" />
-            <circle cx="240" cy="272" r="90" fill="none" stroke="#1A1A1A" stroke-width="1.4" stroke-dasharray="510 55" transform="rotate(-50 240 272)" />
-            <circle cx="240" cy="272" r="38" fill="#1A1A1A" />
-            <text x="240" y="279" font-size="20" font-weight="bold" fill="#FFFFFF" text-anchor="middle">人</text>
-            <g style="paint-order: stroke; stroke: #FFFFFF; stroke-width: 10px; stroke-linejoin: round;">
-              <text x="240" y="187" font-size="16" font-weight="bold" fill="#1A1A1A" text-anchor="middle">組織</text>
-              <text x="240" y="133" font-size="16" font-weight="bold" fill="#555555" text-anchor="middle">事業</text>
-              <text x="240" y="79" font-size="16" font-weight="bold" fill="#8A8A8A" text-anchor="middle">経営</text>
-              <text x="240" y="207" font-size="11.5" fill="#999999" text-anchor="middle">評価・役割・定着</text>
-              <text x="240" y="153" font-size="11.5" fill="#999999" text-anchor="middle">業務・営業・仕組み化</text>
-              <text x="240" y="99" font-size="11.5" fill="#999999" text-anchor="middle">数値管理・投資判断</text>
+          <svg viewBox="0 0 520 460" class="w-full max-w-md mx-auto" role="img" aria-label="中心の「人」から、組織・事業・経営へ支援が広がる同心円の図">
+            <circle cx="260" cy="244" r="200" fill="#F2F2F2" />
+            <circle cx="260" cy="244" r="148" fill="#E0E0E0" />
+            <circle cx="260" cy="244" r="96" fill="#BDBDBD" />
+            <circle cx="260" cy="244" r="44" fill="#1A1A1A" />
+            <text x="260" y="252" font-size="21" font-weight="bold" fill="#fff" text-anchor="middle">人</text>
+            <line x1="260" y1="196" x2="260" y2="40" stroke="#1A1A1A" stroke-width="1" />
+            <g style="paint-order: stroke; stroke: #FFFFFF; stroke-width: 9px; stroke-linejoin: round;">
+              <text x="274" y="130" font-size="15" font-weight="bold" fill="#1A1A1A">組織</text>
+              <text x="274" y="148" font-size="11" fill="#767676">評価・役割・定着</text>
+              <text x="274" y="78" font-size="15" font-weight="bold" fill="#1A1A1A">事業</text>
+              <text x="274" y="96" font-size="11" fill="#767676">業務・営業・仕組み化</text>
+              <text x="274" y="28" font-size="15" font-weight="bold" fill="#1A1A1A">経営</text>
+              <text x="274" y="46" font-size="11" fill="#767676">数値管理・投資判断</text>
             </g>
+            <circle cx="260" cy="122" r="3" fill="#1A1A1A" />
+            <circle cx="260" cy="70" r="3" fill="#1A1A1A" />
+            <circle cx="260" cy="22" r="3" fill="#1A1A1A" />
           </svg>
         </div>
       </div>
