@@ -57,27 +57,28 @@ const steps = [
           </p>
         </div>
         <div class="lg:col-span-7 fade-in-up">
-          <svg viewBox="0 0 560 480" class="w-full max-w-lg mx-auto" role="img" aria-label="事業の循環図。企業から空き家の情報が届き、再生した家が社宅になり、働く人が定着して企業に戻る">
-            <defs>
-              <marker id="cyc-ah" viewBox="0 0 10 10" refX="7.5" refY="5" markerWidth="8" markerHeight="8" orient="auto">
-                <path d="M 1.5 1.5 L 7.5 5 L 1.5 8.5" fill="none" stroke="#1A1A1A" stroke-width="1.5" />
-              </marker>
-            </defs>
-            <path d="M 200 96 A 170 170 0 0 0 118 340" fill="none" stroke="#1A1A1A" stroke-width="2" marker-end="url(#cyc-ah)" />
-            <path d="M 172 392 A 170 170 0 0 0 392 390" fill="none" stroke="#1A1A1A" stroke-width="2" marker-end="url(#cyc-ah)" />
-            <path d="M 440 336 A 170 170 0 0 0 352 94" fill="none" stroke="#1A1A1A" stroke-width="2" marker-end="url(#cyc-ah)" />
-            <circle cx="280" cy="80" r="48" fill="#1A1A1A" />
-            <text x="280" y="88" font-size="18" font-weight="bold" fill="#fff" text-anchor="middle">企業</text>
-            <circle cx="128" cy="368" r="48" fill="#fff" stroke="#1A1A1A" stroke-width="1.8" />
-            <text x="128" y="376" font-size="18" font-weight="bold" fill="#1A1A1A" text-anchor="middle">家</text>
-            <circle cx="432" cy="368" r="48" fill="#1A1A1A" />
-            <text x="432" y="376" font-size="18" font-weight="bold" fill="#fff" text-anchor="middle">人</text>
-            <g font-size="12.5" fill="#444444" style="paint-order: stroke; stroke: #FFFFFF; stroke-width: 9px; stroke-linejoin: round;">
-              <text x="96" y="210" text-anchor="middle">空き家の情報が届く</text>
-              <text x="280" y="448" text-anchor="middle">再生した家が社宅になる</text>
-              <text x="468" y="210" text-anchor="middle">働く人が定着する</text>
+          <!-- 循環図: 作図の正円でなく、ロゴの筆致の円相そのものを軌道に使う -->
+          <svg viewBox="0 0 1180 1090" class="w-full max-w-lg mx-auto" role="img" aria-label="事業の循環図。筆で描いた円の上に企業・家・人が並ぶ。企業から空き家の情報が届き、再生した家が社宅になり、働く人が定着して企業に戻る">
+            <image href="/images/site/mark-enso-black.png" x="200" y="50" width="888" height="981" opacity="0.92" />
+            <!-- 進行方向（反時計回り・黒い筆致の上に白で刻む） -->
+            <g stroke="#FFFFFF" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M -18 -18 L 22 0 L -18 18" transform="translate(302 294) rotate(120)" />
+              <path d="M -18 -18 L 22 0 L -18 18" transform="translate(642 886) rotate(0)" />
+              <path d="M -18 -18 L 22 0 L -18 18" transform="translate(836 143) rotate(-150)" />
             </g>
-            <text x="280" y="252" class="eyebrow" font-size="10" fill="#B5B5B5" text-anchor="middle" style="letter-spacing: 0.2em;">KYUSHU / WORK &amp; LIVE</text>
+            <!-- 節点: 円相の上に載る -->
+            <circle cx="642" cy="94" r="66" fill="#1A1A1A" />
+            <text x="642" y="105" font-size="27" font-weight="bold" fill="#fff" text-anchor="middle">企業</text>
+            <circle cx="300" cy="686" r="66" fill="#fff" stroke="#1A1A1A" stroke-width="2.5" />
+            <text x="300" y="697" font-size="27" font-weight="bold" fill="#1A1A1A" text-anchor="middle">家</text>
+            <circle cx="1037" cy="489" r="66" fill="#1A1A1A" />
+            <text x="1037" y="500" font-size="27" font-weight="bold" fill="#fff" text-anchor="middle">人</text>
+            <!-- 辺ラベル -->
+            <g font-size="26" fill="#444444" style="paint-order: stroke; stroke: #FFFFFF; stroke-width: 18px; stroke-linejoin: round;">
+              <text x="405" y="420" text-anchor="middle">空き家の情報が届く</text>
+              <text x="580" y="800" text-anchor="middle">再生した家が社宅になる</text>
+              <text x="760" y="255" text-anchor="middle">働く人が定着する</text>
+            </g>
           </svg>
         </div>
       </div>
@@ -217,12 +218,13 @@ const steps = [
         </div>
         <div class="lg:col-span-5 fade-in-up">
           <!-- 同心円図: 人を起点に組織・事業・経営へ広がる -->
+          <!-- 同心円: 作図の正円でなく、手で描いたような揺らぎのある輪郭で -->
           <svg viewBox="0 0 520 460" class="w-full max-w-md mx-auto" role="img" aria-label="中心の「人」から、組織・事業・経営へ支援が広がる同心円の図">
-            <circle cx="260" cy="244" r="200" fill="#F2F2F2" />
-            <circle cx="260" cy="244" r="148" fill="#E0E0E0" />
-            <circle cx="260" cy="244" r="96" fill="#BDBDBD" />
-            <circle cx="260" cy="244" r="44" fill="#1A1A1A" />
-            <text x="260" y="252" font-size="21" font-weight="bold" fill="#fff" text-anchor="middle">人</text>
+            <path fill="#F4F4F4" d="M 471.7 244.0 C 471.8 267.3 463.2 293.5 452.5 314.0 C 441.7 334.6 422.8 350.9 407.0 367.3 C 391.1 383.7 375.9 399.8 357.3 412.5 C 338.6 425.2 317.1 439.0 295.2 443.5 C 273.2 448.0 247.6 444.5 225.5 439.4 C 203.5 434.2 182.7 423.5 162.7 412.5 C 142.7 401.6 121.3 390.0 105.7 373.5 C 90.1 357.0 76.3 335.1 69.0 313.5 C 61.6 292.0 61.6 267.2 61.6 244.0 C 61.5 220.8 62.6 197.0 68.8 174.4 C 75.0 151.8 83.5 126.0 98.6 108.6 C 113.7 91.2 138.0 78.2 159.5 69.9 C 180.9 61.6 205.0 61.2 227.3 58.7 C 249.6 56.2 271.2 53.0 293.3 55.1 C 315.4 57.2 339.9 61.0 359.8 71.1 C 379.8 81.2 397.6 98.5 412.9 115.7 C 428.2 132.9 441.9 152.9 451.7 174.2 C 461.5 195.6 471.6 220.7 471.7 244.0 Z" />
+            <path fill="#E4E4E4" d="M 411.7 244.0 C 410.5 261.0 403.5 278.5 396.3 293.6 C 389.0 308.7 378.7 321.8 368.3 334.8 C 357.8 347.9 347.4 361.9 333.7 371.7 C 320.1 381.6 303.0 390.9 286.4 393.9 C 269.9 396.9 250.8 393.7 234.3 389.6 C 217.9 385.4 202.4 377.5 187.8 369.0 C 173.3 360.5 158.6 350.9 147.3 338.6 C 136.0 326.2 126.1 310.7 120.0 295.0 C 113.8 279.2 111.1 261.2 110.4 244.0 C 109.7 226.8 110.5 207.9 115.9 191.6 C 121.3 175.2 130.8 157.6 142.8 145.7 C 154.8 133.7 172.7 125.9 188.2 119.6 C 203.7 113.4 219.9 111.1 236.0 108.2 C 252.2 105.2 268.4 101.3 285.0 102.1 C 301.6 102.9 320.4 105.6 335.7 112.9 C 350.9 120.3 365.4 132.9 376.7 146.1 C 388.0 159.2 397.7 175.5 403.5 191.8 C 409.3 208.1 412.9 227.0 411.7 244.0 Z" />
+            <path fill="#C6C6C6" d="M 365.3 244.0 C 365.0 255.3 358.7 268.2 352.4 277.6 C 346.1 287.1 335.2 292.9 327.5 300.6 C 319.7 308.3 314.4 316.8 306.0 323.6 C 297.6 330.5 287.6 339.3 277.2 341.7 C 266.8 344.0 254.0 340.6 243.5 337.6 C 233.0 334.5 223.9 328.5 214.2 323.3 C 204.6 318.1 193.4 314.0 185.6 306.4 C 177.9 298.8 170.9 288.1 167.5 277.7 C 164.1 267.3 165.4 255.3 165.2 244.0 C 165.0 232.7 164.0 221.2 166.4 209.9 C 168.8 198.7 172.0 184.7 179.6 176.6 C 187.3 168.5 201.3 163.9 212.2 161.2 C 223.1 158.5 234.7 161.1 245.2 160.2 C 255.8 159.3 265.0 155.9 275.5 155.8 C 286.1 155.8 298.6 155.9 308.4 160.2 C 318.2 164.5 326.5 173.5 334.1 181.8 C 341.7 190.1 348.9 199.4 354.1 209.8 C 359.3 220.1 365.6 232.7 365.3 244.0 Z" />
+            <path fill="#1A1A1A" d="M 308.7 244.0 C 309.2 249.3 307.6 255.8 305.0 260.4 C 302.3 264.9 296.7 268.2 292.7 271.4 C 288.6 274.6 284.9 277.2 280.7 279.9 C 276.5 282.5 272.3 285.9 267.6 287.1 C 262.9 288.2 257.3 287.8 252.5 286.8 C 247.7 285.7 243.2 283.1 238.8 280.7 C 234.4 278.4 229.5 276.1 226.0 272.5 C 222.5 269.0 219.2 264.1 217.8 259.4 C 216.3 254.6 217.0 249.1 217.2 244.0 C 217.3 238.9 217.5 234.0 218.5 228.9 C 219.5 223.7 220.2 217.3 223.2 213.1 C 226.2 208.9 231.8 205.3 236.7 203.6 C 241.6 201.9 247.7 202.9 252.8 202.9 C 257.8 203.0 262.3 203.2 267.0 204.0 C 271.8 204.8 276.8 205.5 281.0 207.6 C 285.2 209.8 288.9 213.4 292.3 216.9 C 295.8 220.4 299.0 224.3 301.7 228.8 C 304.5 233.3 308.1 238.7 308.7 244.0 Z" />
+            <text x="262" y="252" font-size="21" font-weight="bold" fill="#fff" text-anchor="middle">人</text>
             <line x1="260" y1="196" x2="260" y2="40" stroke="#1A1A1A" stroke-width="1" />
             <g style="paint-order: stroke; stroke: #FFFFFF; stroke-width: 9px; stroke-linejoin: round;">
               <text x="274" y="130" font-size="15" font-weight="bold" fill="#1A1A1A">組織</text>
