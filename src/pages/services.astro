@@ -23,30 +23,51 @@ const globalItems = [
   { title: '住まいの確保', desc: '社宅として貸せる住居を自社で用意します。空き家再生事業が受け皿です。' },
   { title: '定着フォロー', desc: '入社後の生活相談を受け、気になる変化を企業へ共有します。' },
 ];
-const bpoItems = [
-  { title: '応募者への連絡代行', desc: '応募への一次連絡と面接日程の調整を、依頼元の企業名義で行います。' },
-  { title: '求人媒体の運用代行', desc: '原稿の更新と広告費の配分を、応募状況に合わせて見直します。' },
-  { title: '採用事務', desc: '内定通知や入社書類など、書類まわりの作成と送付を担います。' },
-  { title: 'その他の定型業務', desc: '請求書発行やデータ入力など、採用以外も相談できます。' },
+const kaizenItems = [
+  { title: '組織づくり', desc: '評価・役割分担・会議体など、人が動く仕組みを整えます。' },
+  { title: '業務の仕組み化', desc: '属人化した業務を棚卸しし、手順化からAI活用まで進めます。' },
+  { title: '経営の数値管理', desc: '売上・採用・定着の指標を設計し、月次で回る形にします。' },
+  { title: '実行支援', desc: '計画づくりで終わらせず、現場での実行まで一緒に担います。' },
+];
+const troubles = [
+  '応募対応が兼任で後回しになり、辞退が続いている',
+  '担当者の退職で、採用がそのまま止まっている',
+  '媒体に出しても応募が来ず、どこから直すべきか分からない',
+  '採用できても住まいが決まらず、入社に至らない（外国人採用）',
+];
+const steps = [
+  { num: '1', title: 'ヒアリング', desc: '採用と組織の現状を伺います。相談は無料です。' },
+  { num: '2', title: '支援範囲の設計', desc: '何をどこまで任せるかを文書で確定します。' },
+  { num: '3', title: '運用開始', desc: '実務を開始し、月次で数字と論点を報告します。' },
 ];
 ---
 
-<Layout title="サービス | 株式会社novshi" description="採用支援・BPOと、空き家を社宅に変える事業。九州の中小企業の採用と定着を、代表が直接支えます。">
+<Layout title="サービス | 株式会社novshi" description="採用支援・組織改善と、空き家を社宅に変える事業。九州の中小企業の採用と定着を、代表が直接支えます。">
   {/* TODO:COPY services-hero */}
-  <Hero label="Services" title="novshiのふたつの事業" subtitle="novshiは、九州の中小企業の採用支援・BPOと、空き家を社宅に変える事業を並行しています。顧客は共通です。採用支援の顧客が空き家の情報をもたらし、社宅は採用した人の住まいになります。" compact={true} />
+  <Hero label="Services" title="novshiの事業" subtitle="九州の中小企業の採用と組織を支える仕事と、空き家を働く人の社宅に変える仕事をしています。採用支援の顧客から空き家の情報が届き、社宅は採用した人の住まいになります。" compact={true} />
 
   <!-- 柱1: 採用支援 -->
   <section id="recruitment" class="sec-xl scroll-mt-20 bg-white border-t border-gray-100">
     <div class="max-w-[1120px] mx-auto px-5 sm:px-8">
       <div class="max-w-2xl fade-in-up">
         {/* TODO:COPY services-recruit-head */}
-        <p class="eyebrow text-text-muted mb-4">Service 01</p>
+        <p class="font-num text-5xl lg:text-6xl font-medium text-gray-200 leading-none mb-5" aria-hidden="true">01</p>
         <h2 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-6">採用支援</h2>
         <p class="text-lg font-bold text-gray-900 mb-4">「もう一人の経営者。」</p>
         {/* TODO:COPY services-recruit-lead */}
         <p class="text-text-secondary leading-[1.9]">
           採用担当がいない会社の、採用担当になります。実務代行ではなく、経営者の隣で採否を一緒に決める立場です。担当は代表・大倉。丸紅で事業投資を経験し、リクルートで<span class="font-num text-gray-900">6</span>年、中途採用営業とIndeedの事業企画として<span class="font-num text-gray-900">1,000</span>社以上の採用に関わりました。
         </p>
+
+        {/* 課題の言語化（RPOサービスページの定石: 悩みを先に置く） */}
+        <div class="mt-10">
+          <p class="text-sm font-bold text-gray-900 mb-4">こんな状態の会社を支えています</p>
+          <ul class="space-y-2.5 text-sm text-text-secondary leading-[1.8]">
+            {troubles.map((t) => (
+              <li class="pl-5 relative before:content-['—'] before:absolute before:left-0 before:text-gray-400">{t}</li>
+            ))}
+          </ul>
+        </div>
       </div>
 
       <div class="mt-14 grid grid-cols-1 md:grid-cols-2 gap-x-12 stagger">
@@ -65,10 +86,24 @@ const bpoItems = [
         <p class="text-text-secondary mb-8 fade-in-up">媒体ごとに役割を分けて使います。</p>
         <div class="stagger max-w-3xl">
           {channels.map((ch) => (
-            <div class="grid grid-cols-[3rem_10rem_1fr] max-sm:grid-cols-[3rem_1fr] items-baseline gap-3 py-5 border-b border-gray-200">
-              <span class="font-num text-sm text-text-muted">{ch.num}</span>
+            <div class="grid grid-cols-[3.5rem_10rem_1fr] max-sm:grid-cols-[3.5rem_1fr] items-baseline gap-3 py-5 border-b border-gray-200">
+              <span class="font-num text-2xl font-medium text-gray-300">{ch.num}</span>
               <p class="text-base font-bold text-gray-900">{ch.label}</p>
-              <p class="text-sm text-text-secondary leading-[1.9] max-sm:col-span-2 max-sm:pl-12">{ch.desc}</p>
+              <p class="text-sm text-text-secondary leading-[1.9] max-sm:col-span-2 max-sm:pl-14">{ch.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- 進め方: 3ステップ（複雑さを見せない） -->
+      <div class="mt-16 pt-12 border-t border-gray-200">
+        <h3 class="text-xl font-bold text-gray-900 mb-8 fade-in-up">ご依頼から開始まで</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-x-10 gap-y-6 max-w-4xl stagger">
+          {steps.map((s) => (
+            <div class="border-t-2 border-gray-900 pt-5">
+              <p class="font-num text-2xl font-medium text-gray-300 leading-none mb-3">{s.num}</p>
+              <p class="text-base font-bold text-gray-900">{s.title}</p>
+              <p class="mt-2 text-sm text-text-secondary leading-[1.8]">{s.desc}</p>
             </div>
           ))}
         </div>
@@ -101,21 +136,21 @@ const bpoItems = [
     </div>
   </section>
 
-  <!-- 柱2: BPO -->
-  <section id="bpo" class="sec-lg bg-white scroll-mt-20">
+  <!-- 柱2: 組織・事業・経営の改善支援 -->
+  <section id="consulting" class="sec-lg bg-white scroll-mt-20">
     <div class="max-w-[1120px] mx-auto px-5 sm:px-8">
       <div class="max-w-2xl fade-in-up">
-        {/* TODO:COPY services-bpo-head */}
-        <p class="eyebrow text-text-muted mb-4">Service 02</p>
-        <h2 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-6">BPO</h2>
-        {/* TODO:COPY services-bpo-lead */}
+        {/* TODO:COPY services-kaizen-head */}
+        <p class="font-num text-5xl lg:text-6xl font-medium text-gray-200 leading-none mb-5" aria-hidden="true">02</p>
+        <h2 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-6">組織・事業・経営の改善支援</h2>
+        {/* TODO:COPY services-kaizen-lead */}
         <p class="text-text-secondary leading-[1.9]">
-          担当者の退職や兼任で止まった業務を、月額で請け負います。中心は採用まわりです。範囲は事前に文書で確定します。
+          人を起点に、組織・事業・経営の課題を整理し、改善の実行まで担います。採用を入り口に、評価の仕組みや業務の回し方まで踏み込むことが多いサービスです。スタートアップで人事・経営企画・事業開発を執行役員として担った経験がもとになっています。
         </p>
       </div>
 
       <div class="mt-12 stagger max-w-3xl">
-        {bpoItems.map((item) => (
+        {kaizenItems.map((item) => (
           <div class="border-t border-gray-200 py-6">
             <h3 class="text-sm font-bold text-gray-900 mb-1">{item.title}</h3>
             <p class="text-sm text-text-secondary leading-[1.9]">{item.desc}</p>
@@ -123,9 +158,9 @@ const bpoItems = [
         ))}
       </div>
 
-      {/* TODO:COPY services-bpo-price-note */}
+      {/* TODO:COPY services-kaizen-price-note */}
       <p class="mt-10 text-sm text-text-muted leading-relaxed">
-        月額<span class="font-num">10</span>万円から。業務の範囲と量を確認したうえで見積もります。
+        内容と範囲を確認したうえで、個別に見積もります。
       </p>
     </div>
   </section>
@@ -135,7 +170,7 @@ const bpoItems = [
     <div class="max-w-[1120px] mx-auto px-5 sm:px-8">
       <div class="max-w-2xl fade-in-up">
         {/* TODO:COPY services-akiya-head */}
-        <p class="eyebrow text-text-muted mb-4">Service 03</p>
+        <p class="font-num text-5xl lg:text-6xl font-medium text-gray-200 leading-none mb-5" aria-hidden="true">03</p>
         <h2 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-6">空き家再生×社宅</h2>
         {/* TODO:COPY services-akiya-lead */}
         <p class="text-text-secondary leading-[1.9]">

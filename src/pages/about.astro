@@ -27,7 +27,7 @@ const timelineItems = [
             ['代表者', '大倉 佑介'],
             ['設立', '2025年10月'],
             ['所在地', '〒813-0017 福岡県福岡市東区香椎照葉6-2-51'],
-            ['事業内容', '採用支援 / BPO / 空き家再生×社宅事業'],
+            ['事業内容', '採用支援 / 組織・事業・経営の改善支援 / 空き家再生×社宅事業'],
             ['許認可', '有料職業紹介事業許可 40-ユ-301708'],
           ].map(([label, value]) => (
             <div class="flex flex-col sm:flex-row py-4 gap-1 sm:gap-0">
@@ -104,7 +104,7 @@ const timelineItems = [
               { num: '03', value: '利益は燃料、目的地ではない', desc: '利益は事業を続けるための手段であって、目的ではない。' },
             ].map((item) => (
               <div class="grid grid-cols-[3rem_1fr] items-baseline gap-4 py-6 border-b border-gray-200">
-                <span class="font-num text-sm text-text-muted">{item.num}</span>
+                <span class="font-num text-2xl font-medium text-gray-300">{item.num}</span>
                 <div>
                   <h4 class="text-base lg:text-lg font-bold text-gray-900 mb-1">{item.value}</h4>
                   <p class="text-sm text-text-secondary leading-[1.9]">{item.desc}</p>
