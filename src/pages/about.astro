@@ -6,8 +6,9 @@ import CTASection from '../components/CTASection.astro';
 import { IMG } from '../data/images';
 
 const timelineItems = [
+  { period: '—', company: '一橋大学 法学部法律学科', role: '卒業', detail: '' },
   { period: '—', company: '丸紅株式会社', role: '事業投資', detail: '事業投資の実務を通じて、事業のつくり方を学ぶ' },
-  { period: '6年間', company: '株式会社リクルート', role: '中途採用の営業 → Indeed事業の企画', detail: '1,000社以上の採用に関わる' },
+  { period: '—', company: '株式会社リクルート', role: '中途採用の営業 → Indeed事業の企画', detail: '1,000社以上の採用に関わる' },
   { period: '—', company: 'スタートアップ', role: '人事・経営企画・事業開発', detail: 'エンジニア採用、組織づくり、経営企画を担当' },
   { period: '2025.10', company: '株式会社novshi 創業', role: '代表取締役', detail: '九州で、採用支援と空き家再生の二事業を立ち上げる' },
 ];
@@ -47,7 +48,8 @@ const timelineItems = [
         <div class="fade-in-up">
           <p class="eyebrow text-text-muted mb-5">CEO Profile</p>
           <h2 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-3">大倉 佑介</h2>
-          <p class="text-sm text-text-muted mb-12">Yusuke Okura — 代表取締役</p>
+          <p class="text-sm text-text-muted mb-3">Yusuke Okura — 代表取締役</p>
+          <p class="text-sm text-text-secondary mb-12">1991年6月16日生まれ</p>
 
           <div class="mb-14">
             <Timeline items={timelineItems} />
@@ -63,7 +65,7 @@ const timelineItems = [
 
         <!-- CEO portrait: 実写（撮り下ろし） -->
         <div class="flex flex-col gap-4 fade-in-up lg:sticky lg:top-24">
-          <img src={IMG.aboutPortrait.webp} alt={IMG.aboutPortrait.alt} class="w-full aspect-[3/4] object-cover object-top" loading="lazy" width="1200" height="1800" />
+          <img src={IMG.aboutPortrait.webp} alt={IMG.aboutPortrait.alt} class="w-full aspect-[3/4] object-cover" loading="lazy" width="1200" height="1600" />
         </div>
       </div>
     </div>

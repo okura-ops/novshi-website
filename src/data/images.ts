@@ -18,6 +18,6 @@ export const IMG: Record<string, SiteImage> = {
   aboutPortrait: {
     webp: '/images/site/about-portrait.webp',
     jpg: '/images/site/about-portrait.jpg',
-    alt: '代表取締役・大倉佑介の立ち姿',
+    alt: '代表取締役・大倉佑介',
   },
 };

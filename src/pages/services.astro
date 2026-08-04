@@ -5,12 +5,12 @@ import CTASection from '../components/CTASection.astro';
 import { PROPERTIES } from '../data/properties';
 
 const recruitItems = [
-  { title: '採用戦略の設計', desc: '誰を、いつまでに、いくらで採るか。まず数字で決めます。' },
-  { title: '求人原稿の作成', desc: '応募者が入社後を想像できる粒度で、仕事と待遇を書きます。' },
-  { title: '媒体運用', desc: 'Indeed・Meta広告・自社採用HPの3つを、応募単価を見ながら配分します。' },
-  { title: '面接の設計と同席', desc: '評価項目を先に揃え、求めがあれば面接にも同席します。' },
-  { title: '内定から入社まで', desc: '条件提示から入社日まで連絡を切らさず、辞退が出やすい局面で先に動きます。' },
-  { title: '定着支援', desc: '入社後1・3・6か月を目安に面談し、離職の兆候を経営者へ伝えます。' },
+  { title: '採用戦略の設計', desc: '誰を、いつまでに、いくらで採るかを数字で決めます。' },
+  { title: '求人原稿の作成', desc: '入社後を想像できる粒度で仕事と待遇を書きます。' },
+  { title: '媒体運用', desc: 'Indeed・Meta広告・採用HPを応募単価で配分します。' },
+  { title: '面接の設計と同席', desc: '評価項目を先に揃えます。同席もできます。' },
+  { title: '内定から入社まで', desc: '辞退が出やすい局面で先に動きます。' },
+  { title: '定着支援', desc: '入社後1・3・6か月を目安に面談します。' },
 ];
 const channels = [
   { num: '01', label: 'Indeed', desc: '仕事を探す人の検索結果に載る、応募獲得の中心媒体です。' },
@@ -45,45 +45,6 @@ const steps = [
   {/* TODO:COPY services-hero */}
   <Hero label="Services" title="novshiの事業" subtitle="九州の中小企業の採用と組織を支える仕事と、空き家を働く人の社宅に変える仕事をしています。" compact={true} />
 
-  <!-- 二つの事業のつながり: 図解（企業・人・家のトライアングル） -->
-  <section class="sec-tight bg-white washi">
-    <div class="max-w-[1120px] mx-auto px-5 sm:px-8">
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center border-t border-gray-200 pt-12">
-        <div class="lg:col-span-5 fade-in-up">
-          <h2 class="text-xl lg:text-2xl font-bold text-gray-900 mb-5">二つの事業は、つながっています</h2>
-          <p class="text-sm text-text-secondary leading-[1.9] max-w-md">
-            採用支援の顧客から空き家の情報が届き、再生した家は採用した人の社宅になります。住まいが決まると、人は辞めにくくなります。この循環をつくることが、novshiの事業設計です。
-          </p>
-        </div>
-        <div class="lg:col-span-7 fade-in-up">
-          <!-- 循環図: 作図の正円でなく、ロゴの筆致の円相そのものを軌道に使う -->
-          <svg viewBox="0 0 1180 1090" class="w-full max-w-lg mx-auto" role="img" aria-label="事業の循環図。筆で描いた円の上に企業・家・人が並ぶ。企業から空き家の情報が届き、再生した家が社宅になり、働く人が定着して企業に戻る">
-            <image href="/images/site/mark-enso-black.png" x="200" y="50" width="888" height="981" opacity="0.92" />
-            <!-- 進行方向（反時計回り・黒い筆致の上に白で刻む） -->
-            <g stroke="#FFFFFF" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M -18 -18 L 22 0 L -18 18" transform="translate(302 294) rotate(120)" />
-              <path d="M -18 -18 L 22 0 L -18 18" transform="translate(642 886) rotate(0)" />
-              <path d="M -18 -18 L 22 0 L -18 18" transform="translate(836 143) rotate(-150)" />
-            </g>
-            <!-- 節点: 円相の上に載る -->
-            <circle cx="642" cy="94" r="66" fill="#1A1A1A" />
-            <text x="642" y="106" font-size="31" font-weight="bold" fill="#fff" text-anchor="middle">企業</text>
-            <circle cx="300" cy="686" r="66" fill="#fff" stroke="#1A1A1A" stroke-width="2.5" />
-            <text x="300" y="698" font-size="31" font-weight="bold" fill="#1A1A1A" text-anchor="middle">家</text>
-            <circle cx="1037" cy="489" r="66" fill="#1A1A1A" />
-            <text x="1037" y="501" font-size="31" font-weight="bold" fill="#fff" text-anchor="middle">人</text>
-            <!-- 辺ラベル -->
-            <g font-size="31" font-weight="bold" fill="#1A1A1A" style="paint-order: stroke; stroke: #FFFFFF; stroke-width: 20px; stroke-linejoin: round;">
-              <text x="405" y="420" text-anchor="middle">空き家の情報が届く</text>
-              <text x="580" y="800" text-anchor="middle">再生した家が社宅になる</text>
-              <text x="760" y="255" text-anchor="middle">働く人が定着する</text>
-            </g>
-          </svg>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- サービスタブ: 採用・経営支援 ／ 空き家再生 -->
   <div class="bg-white washi border-t border-gray-200 sticky top-16 lg:top-[72px] z-30" id="service-tabs">
     <div class="max-w-[1120px] mx-auto px-5 sm:px-8">
@@ -99,6 +60,8 @@ const steps = [
       </div>
     </div>
   </div>
+
+
 
   <div data-panel="shien">
   <!-- 柱1: 採用支援 -->
@@ -392,15 +355,45 @@ const steps = [
   </section>
   </div>
 
-  <!-- 共通注記 -->
+  <!-- 二つの事業のつながり: 図解（企業・人・家のトライアングル） -->
   <section class="sec-tight bg-white washi">
     <div class="max-w-[1120px] mx-auto px-5 sm:px-8">
-      {/* TODO:COPY services-ai-note */}
-      <p class="pt-8 border-t border-gray-200 text-sm text-text-muted leading-relaxed max-w-xl">
-        novshiは社員ゼロで運営しています。定型業務はAIに任せ、判断と対話は人が担います。
-      </p>
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+        <div class="lg:col-span-5 fade-in-up">
+          <h2 class="text-xl lg:text-2xl font-bold text-gray-900 mb-5">二つの事業は、つながっています</h2>
+          <p class="text-sm text-text-secondary leading-[1.9] max-w-md">
+            採用支援の顧客から空き家の情報が届き、再生した家は採用した人の社宅になります。住まいが決まると、人は辞めにくくなります。この循環をつくることが、novshiの事業設計です。
+          </p>
+        </div>
+        <div class="lg:col-span-7 fade-in-up">
+          <!-- 循環図: 作図の正円でなく、ロゴの筆致の円相そのものを軌道に使う -->
+          <svg viewBox="0 0 1180 1090" class="w-full max-w-lg mx-auto" role="img" aria-label="事業の循環図。筆で描いた円の上に企業・家・人が並ぶ。企業から空き家の情報が届き、再生した家が社宅になり、働く人が定着して企業に戻る">
+            <image href="/images/site/mark-enso-black.png" x="200" y="50" width="888" height="981" opacity="0.92" />
+            <!-- 進行方向（反時計回り・黒い筆致の上に白で刻む） -->
+            <g stroke="#FFFFFF" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M -18 -18 L 22 0 L -18 18" transform="translate(302 294) rotate(120)" />
+              <path d="M -18 -18 L 22 0 L -18 18" transform="translate(642 886) rotate(0)" />
+              <path d="M -18 -18 L 22 0 L -18 18" transform="translate(836 143) rotate(-150)" />
+            </g>
+            <!-- 節点: 円相の上に載る -->
+            <circle cx="642" cy="94" r="66" fill="#1A1A1A" />
+            <text x="642" y="106" font-size="31" font-weight="bold" fill="#fff" text-anchor="middle">企業</text>
+            <circle cx="300" cy="686" r="66" fill="#fff" stroke="#1A1A1A" stroke-width="2.5" />
+            <text x="300" y="698" font-size="31" font-weight="bold" fill="#1A1A1A" text-anchor="middle">家</text>
+            <circle cx="1037" cy="489" r="66" fill="#1A1A1A" />
+            <text x="1037" y="501" font-size="31" font-weight="bold" fill="#fff" text-anchor="middle">人</text>
+            <!-- 辺ラベル -->
+            <g font-size="31" font-weight="bold" fill="#1A1A1A" style="paint-order: stroke; stroke: #FFFFFF; stroke-width: 20px; stroke-linejoin: round;">
+              <text x="405" y="420" text-anchor="middle">空き家の情報が届く</text>
+              <text x="580" y="800" text-anchor="middle">再生した家が社宅になる</text>
+              <text x="760" y="255" text-anchor="middle">働く人が定着する</text>
+            </g>
+          </svg>
+        </div>
+      </div>
     </div>
   </section>
+
 
   <CTASection />
 
