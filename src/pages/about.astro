@@ -6,6 +6,7 @@ import CTASection from '../components/CTASection.astro';
 import { IMG } from '../data/images';
 
 const timelineItems = [
+  { period: '—', company: '熊本県立熊本高校', role: '卒業', detail: '' },
   { period: '—', company: '一橋大学 法学部法律学科', role: '卒業', detail: '' },
   { period: '—', company: '丸紅株式会社', role: '事業投資', detail: '事業投資の実務を通じて、事業のつくり方を学ぶ' },
   { period: '—', company: '株式会社リクルート', role: '中途採用の営業 → Indeed事業の企画', detail: '1,000社以上の採用に関わる' },
@@ -49,7 +50,7 @@ const timelineItems = [
           <p class="eyebrow text-text-muted mb-5">CEO Profile</p>
           <h2 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-3">大倉 佑介</h2>
           <p class="text-sm text-text-muted mb-3">Yusuke Okura — 代表取締役</p>
-          <p class="text-sm text-text-secondary mb-12">1991年6月16日生まれ</p>
+          <p class="text-sm text-text-secondary mb-12">1991年6月16日生まれ・熊本県出身</p>
 
           <div class="mb-14">
             <Timeline items={timelineItems} />
