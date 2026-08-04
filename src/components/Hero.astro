@@ -15,8 +15,9 @@ const { title, title2, subtitle, showCTA = false, compact = false, label } = Ast
 
 {compact ? (
   <!-- Compact hero for sub-pages (light background) -->
-  <section class="pt-14 pb-16 lg:pt-20 lg:pb-24 bg-white washi">
-    <div class="max-w-[1120px] mx-auto px-5 sm:px-8">
+  <section class="pt-14 pb-16 lg:pt-20 lg:pb-24 bg-white washi relative overflow-hidden">
+    <img aria-hidden="true" src="/images/brush/enso-6.png" alt="" width="1200" height="1213" class="absolute -right-[14%] -top-[40%] w-[420px] lg:w-[520px] max-w-none opacity-[0.05] select-none pointer-events-none" loading="lazy" />
+    <div class="relative max-w-[1120px] mx-auto px-5 sm:px-8">
       {label && <p class="eyebrow text-text-muted mb-5 fade-in-up">{label}</p>}
       <h1 class="text-[1.75rem] lg:text-[2.5rem] font-bold text-gray-900 fade-in-up">
         {title}

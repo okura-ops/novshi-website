@@ -175,6 +175,12 @@
     opacity: 0.035;
     pointer-events: none;
   }
+  /* 空き家（住まい）の世界観のみ青海波の型押し和紙 */
+  .washi-seigaiha::before {
+    background-image: url('/images/brush/washi-seigaiha.webp');
+    background-size: 640px auto;
+    opacity: 0.05;
+  }
 
   /* 構造罫の筆線化 (v1.1)。細い情報罫（リスト行のhairline）はUI罫として残す */
   .brush-rule {
