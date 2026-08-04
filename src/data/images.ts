@@ -20,9 +20,4 @@ export const IMG: Record<string, SiteImage> = {
     jpg: '/images/site/about-portrait.jpg',
     alt: '代表取締役・大倉佑介の立ち姿',
   },
-  aboutDog: {
-    webp: '/images/site/about-dog.webp',
-    jpg: '/images/site/about-dog.jpg',
-    alt: 'ベンチに座る大倉と愛犬のボーダーコリー',
-  },
 };

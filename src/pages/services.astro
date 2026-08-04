@@ -18,8 +18,7 @@ const channels = [
   { num: '03', label: '自社採用HP', desc: '社名で検索した応募者の疑問に、一次情報で答える場所です。' },
 ];
 const globalItems = [
-  { title: '人材紹介', desc: '職種要件と在留資格の適合を確認してから紹介します。' },
-  { title: '在留資格支援', desc: '必要書類と手続きを、入社日から逆算した工程表にします。' },
+  { title: '人材紹介', desc: '職種要件との適合を確認してから紹介します。' },
   { title: '住まいの確保', desc: '社宅として貸せる住居を自社で用意します。空き家再生事業が受け皿です。' },
   { title: '定着フォロー', desc: '入社後の生活相談を受け、気になる変化を企業へ共有します。' },
 ];
@@ -68,13 +67,13 @@ const steps = [
             </g>
             <!-- 節点: 円相の上に載る -->
             <circle cx="642" cy="94" r="66" fill="#1A1A1A" />
-            <text x="642" y="105" font-size="27" font-weight="bold" fill="#fff" text-anchor="middle">企業</text>
+            <text x="642" y="106" font-size="31" font-weight="bold" fill="#fff" text-anchor="middle">企業</text>
             <circle cx="300" cy="686" r="66" fill="#fff" stroke="#1A1A1A" stroke-width="2.5" />
-            <text x="300" y="697" font-size="27" font-weight="bold" fill="#1A1A1A" text-anchor="middle">家</text>
+            <text x="300" y="698" font-size="31" font-weight="bold" fill="#1A1A1A" text-anchor="middle">家</text>
             <circle cx="1037" cy="489" r="66" fill="#1A1A1A" />
-            <text x="1037" y="500" font-size="27" font-weight="bold" fill="#fff" text-anchor="middle">人</text>
+            <text x="1037" y="501" font-size="31" font-weight="bold" fill="#fff" text-anchor="middle">人</text>
             <!-- 辺ラベル -->
-            <g font-size="26" fill="#444444" style="paint-order: stroke; stroke: #FFFFFF; stroke-width: 18px; stroke-linejoin: round;">
+            <g font-size="31" font-weight="bold" fill="#1A1A1A" style="paint-order: stroke; stroke: #FFFFFF; stroke-width: 20px; stroke-linejoin: round;">
               <text x="405" y="420" text-anchor="middle">空き家の情報が届く</text>
               <text x="580" y="800" text-anchor="middle">再生した家が社宅になる</text>
               <text x="760" y="255" text-anchor="middle">働く人が定着する</text>
@@ -85,8 +84,25 @@ const steps = [
     </div>
   </section>
 
+  <!-- サービスタブ: 採用・経営支援 ／ 空き家再生 -->
+  <div class="bg-white washi border-t border-gray-200 sticky top-16 lg:top-[72px] z-30" id="service-tabs">
+    <div class="max-w-[1120px] mx-auto px-5 sm:px-8">
+      <div class="flex gap-10">
+        <button type="button" data-tab="shien" class="tab-btn relative py-5 text-base lg:text-lg font-bold text-gray-900 transition-colors duration-200" aria-selected="true">
+          採用・経営支援
+          <img src="/images/brush/line-sumi.png" alt="" aria-hidden="true" width="1118" height="103" class="tab-ink absolute bottom-0 left-0 w-full h-1.5 object-cover select-none" />
+        </button>
+        <button type="button" data-tab="akiya" class="tab-btn relative py-5 text-base lg:text-lg font-bold text-text-muted transition-colors duration-200" aria-selected="false">
+          空き家再生
+          <img src="/images/brush/line-sumi.png" alt="" aria-hidden="true" width="1118" height="103" class="tab-ink absolute bottom-0 left-0 w-full h-1.5 object-cover select-none hidden" />
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div data-panel="shien">
   <!-- 柱1: 採用支援 -->
-  <section id="recruitment" class="sec-xl scroll-mt-20 bg-white border-t border-gray-100 washi">
+  <section id="recruitment" class="sec-xl scroll-mt-32 bg-white border-t border-gray-100 washi">
     <div class="max-w-[1120px] mx-auto px-5 sm:px-8">
       <div class="max-w-2xl fade-in-up">
         {/* TODO:COPY services-recruit-head */}
@@ -95,9 +111,54 @@ const steps = [
         <p class="text-lg font-bold text-gray-900 mb-4">「もう一人の経営者。」</p>
         {/* TODO:COPY services-recruit-lead */}
         <p class="text-text-secondary leading-[1.9]">
-          採用担当がいない会社の、採用担当になります。実務代行ではなく、経営者の隣で採否を一緒に決める立場です。担当は代表・大倉。丸紅で事業投資を経験し、リクルートで<span class="font-num text-gray-900">6</span>年、中途採用営業とIndeedの事業企画として<span class="font-num text-gray-900">1,000</span>社以上の採用に関わりました。
+          採用担当がいない会社の、採用担当になります。実務代行ではなく、経営者の隣で採否を一緒に決める立場です。
         </p>
+      </div>
 
+      <!-- 戦略の階層: 採用戦略は事業戦略→組織戦略の順でしか立てられない -->
+      <div class="mt-14 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <div class="lg:col-span-5 fade-in-up">
+          <h3 class="text-xl lg:text-2xl font-bold text-gray-900 mb-5">採用は、経営から逆算する</h3>
+          <p class="text-sm text-text-secondary leading-[1.9] max-w-md">
+            採用戦略は、単独では立てられません。事業戦略が決まり、それを実行する組織のかたちが決まって、はじめて「誰を、いつ採るか」が決まります。この順番を飛ばした求人は、応募が来ても定着しません。
+          </p>
+          <p class="mt-4 text-sm text-text-secondary leading-[1.9] max-w-md">
+            だからnovshiの採用支援は、経営・事業のレイヤーに立てるメンバーのみで行います。求人の書き方ではなく、事業の勝ち筋から採用を設計します。
+          </p>
+        </div>
+        <div class="lg:col-span-7 fade-in-up" role="img" aria-label="事業戦略、組織戦略、採用戦略の順に決まる階層図。novshiは3層すべてを支援範囲とする">
+          <div class="max-w-xl mx-auto">
+            <div class="flex items-stretch gap-5">
+              <div class="flex-1">
+                <div class="bg-[#1A1A1A] px-6 py-5 lg:px-8">
+                  <p class="text-[11px] text-white/50 mb-1"><span class="font-num">1</span></p>
+                  <p class="text-base lg:text-lg font-bold text-white">事業戦略</p>
+                  <p class="mt-1 text-xs text-white/65">どの市場で、何で勝つか</p>
+                </div>
+                <div class="bg-[#4D4D4D] px-6 py-5 lg:px-8 w-[86%]">
+                  <p class="text-[11px] text-white/50 mb-1"><span class="font-num">2</span></p>
+                  <p class="text-base lg:text-lg font-bold text-white">組織戦略</p>
+                  <p class="mt-1 text-xs text-white/70">どんな組織と役割で実行するか</p>
+                </div>
+                <div class="bg-[#8A8A8A] px-6 py-5 lg:px-8 w-[72%]">
+                  <p class="text-[11px] text-white/60 mb-1"><span class="font-num">3</span></p>
+                  <p class="text-base lg:text-lg font-bold text-white">採用戦略</p>
+                  <p class="mt-1 text-xs text-white/75">誰を、いつ、どう採るか</p>
+                </div>
+              </div>
+              <div class="flex flex-col items-center shrink-0 pt-1 pb-1">
+                <img src="/images/brush/line-sumi.png" alt="" aria-hidden="true" class="h-full w-2 object-cover select-none" style="object-position: center;" />
+              </div>
+              <div class="flex items-center shrink-0">
+                <p class="text-sm font-bold text-gray-900" style="writing-mode: vertical-rl; letter-spacing: 0.18em;">novshiの支援範囲</p>
+              </div>
+            </div>
+            <p class="mt-4 text-xs text-text-muted">採用戦略は、この順番でしか立てられません。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="max-w-2xl">
         {/* 課題の言語化（RPOサービスページの定石: 悩みを先に置く） */}
         <div class="mt-10">
           <p class="text-sm font-bold text-gray-900 mb-4">こんな状態の会社を支えています</p>
@@ -186,7 +247,7 @@ const steps = [
         <h3 class="text-xl font-bold text-gray-900 mb-4">外国人採用・定着支援</h3>
         {/* TODO:COPY services-global-lead */}
         <p class="text-text-secondary leading-[1.9] mb-8 max-w-xl">
-          外国人採用でよくあるつまずきは、内定後に住まいが決まらないことです。novshiは人材紹介（有料職業紹介事業許可 40-ユ-301708）に、在留資格手続きの支援と社宅の用意を組み合わせています。
+          外国人採用でよくあるつまずきは、内定後に住まいが決まらないことです。novshiは人材紹介（有料職業紹介事業許可 40-ユ-301708）に、社宅の用意を組み合わせています。
         </p>
         <div class="stagger">
           {globalItems.map((item) => (
@@ -214,27 +275,24 @@ const steps = [
           <h2 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-6">組織・事業・経営の改善支援</h2>
           {/* TODO:COPY services-kaizen-lead */}
           <p class="text-text-secondary leading-[1.9] max-w-xl">
-            人を起点に、組織・事業・経営の課題を整理し、改善の実行まで担います。入り口はほとんどの場合、採用です。人が採れない理由を追いかけると、評価の仕組みや業務の回し方、投資判断の順序に行き着きます。novshiはそこまで一緒に踏み込みます。スタートアップで人事・経営企画・事業開発を自分の手で回してきた経験がもとになっています。
+            人を起点に、組織・事業・経営の課題を整理し、改善の実行まで担います。入り口はほとんどの場合、採用です。人が採れない理由を追いかけると、評価の仕組みや業務の回し方、投資判断の順序に行き着きます。novshiはそこまで一緒に踏み込みます。
           </p>
         </div>
         <div class="lg:col-span-5 fade-in-up">
           <!-- 同心円図: 人を起点に組織・事業・経営へ広がる -->
           <!-- 同心円: 購入した筆致円相（実スキャン由来）3輪で構成（Web DS v1.1 §4-2） -->
-          <svg viewBox="0 0 520 470" class="w-full max-w-md mx-auto" role="img" aria-label="中心の「人」から、組織・事業・経営へ支援が広がる筆致の同心円の図">
+          <svg viewBox="0 0 520 470" class="w-full max-w-sm mx-auto" role="img" aria-label="中心の「人」を、組織・事業・経営の3つの筆致の円が囲む図">
             <image href="/images/brush/enso-3-g300.png" x="35" y="35" width="450" height="425" />
             <image href="/images/brush/enso-5-g500.png" x="105" y="105" width="310" height="288" />
             <image href="/images/brush/enso-1.png" x="172" y="170" width="176" height="166" />
-            <circle cx="260" cy="250" r="40" fill="#1A1A1A" />
-            <text x="260" y="258" font-size="20" font-weight="bold" fill="#fff" text-anchor="middle">人</text>
-            <g style="paint-order: stroke; stroke: #FFFFFF; stroke-width: 9px; stroke-linejoin: round;">
-              <text x="274" y="192" font-size="15" font-weight="bold" fill="#1A1A1A">組織</text>
-              <text x="330" y="208" font-size="11" fill="#767676">評価・役割・定着</text>
-              <text x="274" y="122" font-size="15" font-weight="bold" fill="#555555">事業</text>
-              <text x="330" y="138" font-size="11" fill="#767676">業務・営業・仕組み化</text>
-              <text x="274" y="52" font-size="15" font-weight="bold" fill="#8A8A8A">経営</text>
-              <text x="330" y="68" font-size="11" fill="#767676">数値管理・投資判断</text>
-            </g>
+            <circle cx="260" cy="250" r="42" fill="#1A1A1A" />
+            <text x="260" y="259" font-size="22" font-weight="bold" fill="#fff" text-anchor="middle">人</text>
           </svg>
+          <div class="mt-6 max-w-sm mx-auto space-y-2.5">
+            <p class="text-sm leading-[1.8]"><span class="font-bold text-gray-900">● 組織</span><span class="text-text-secondary">　評価・役割・定着</span></p>
+            <p class="text-sm leading-[1.8]"><span class="font-bold" style="color:#8A8A8A">● 事業</span><span class="text-text-secondary">　業務・営業・仕組み化</span></p>
+            <p class="text-sm leading-[1.8]"><span class="font-bold" style="color:#C0C0C0">● 経営</span><span class="text-text-secondary">　数値管理・投資判断</span></p>
+          </div>
           
         </div>
       </div>
@@ -275,12 +333,14 @@ const steps = [
     </div>
   </section>
 
-  <!-- 柱3: 空き家再生×社宅（準備・実証フェーズ） -->
-  <section id="akiya" class="sec-xl scroll-mt-20 bg-white washi">
+  </div>
+
+  <div data-panel="akiya" class="hidden">
+  <!-- 空き家再生×社宅 -->
+  <section id="akiya" class="sec-xl scroll-mt-32 bg-white washi">
     <div class="max-w-[1120px] mx-auto px-5 sm:px-8">
       <div class="max-w-2xl fade-in-up">
         {/* TODO:COPY services-akiya-head */}
-        <p class="font-num text-5xl lg:text-6xl font-medium text-gray-200 leading-none mb-5" aria-hidden="true">03</p>
         <h2 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-6">空き家再生×社宅</h2>
         {/* TODO:COPY services-akiya-lead */}
         <p class="text-text-secondary leading-[1.9]">
@@ -328,12 +388,50 @@ const steps = [
         </div>
       </div>
 
+    </div>
+  </section>
+  </div>
+
+  <!-- 共通注記 -->
+  <section class="sec-tight bg-white washi">
+    <div class="max-w-[1120px] mx-auto px-5 sm:px-8">
       {/* TODO:COPY services-ai-note */}
-      <p class="mt-12 pt-8 border-t border-gray-200 text-sm text-text-muted leading-relaxed max-w-xl fade-in-up">
-        novshiは社員ゼロで運営しています。定型業務はAIに任せ、判断と対話は代表・大倉が行います。
+      <p class="pt-8 border-t border-gray-200 text-sm text-text-muted leading-relaxed max-w-xl">
+        novshiは社員ゼロで運営しています。定型業務はAIに任せ、判断と対話は人が担います。
       </p>
     </div>
   </section>
 
   <CTASection />
+
+  <script>
+    // サービスタブ切替（#recruitment/#consulting=採用・経営支援、#akiya=空き家再生）
+    const btns = document.querySelectorAll('.tab-btn');
+    const panels: Record<string, HTMLElement | null> = {
+      shien: document.querySelector('[data-panel="shien"]'),
+      akiya: document.querySelector('[data-panel="akiya"]'),
+    };
+    function select(tab: string, scrollTo?: string) {
+      btns.forEach((b) => {
+        const on = (b as HTMLElement).dataset.tab === tab;
+        b.setAttribute('aria-selected', String(on));
+        b.classList.toggle('text-gray-900', on);
+        b.classList.toggle('text-text-muted', !on);
+        b.querySelector('.tab-ink')!.classList.toggle('hidden', !on);
+      });
+      Object.entries(panels).forEach(([k, el]) => el && el.classList.toggle('hidden', k !== tab));
+      if (scrollTo) {
+        const t = document.getElementById(scrollTo);
+        if (t) t.scrollIntoView({ block: 'start' });
+      }
+    }
+    btns.forEach((b) => b.addEventListener('click', () => select((b as HTMLElement).dataset.tab!)));
+    function route() {
+      const h = location.hash.replace('#', '');
+      if (h === 'akiya') select('akiya', 'akiya');
+      else if (h === 'recruitment' || h === 'consulting') select('shien', h);
+    }
+    route();
+    window.addEventListener('hashchange', route);
+  </script>
 </Layout>
