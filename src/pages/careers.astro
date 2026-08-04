@@ -4,26 +4,31 @@ import Hero from '../components/Hero.astro';
 import CTASection from '../components/CTASection.astro';
 ---
 
-<Layout title="採用情報 | 株式会社novshi" description="novshiの採用情報。AIと協働する新しい働き方で、九州の地域課題を解決しませんか。">
-  <Hero title="novshiで働く" subtitle="AIと協働する新しい働き方で、九州から地域課題を解決する。" compact={true} />
+<Layout title="採用情報 | 株式会社novshi" description="novshiの採用情報。少人数で採用・組織支援と空き家再生を進めています。カジュアル面談を受け付けています。">
+  <Hero label="Careers" title="novshiで働く" subtitle="少人数で、経営支援と空き家再生を進めています。" compact={true} />
 
-  <section class="py-24 lg:py-32">
+  <section class="sec-lg bg-white border-t border-gray-100 washi">
     <div class="max-w-[1120px] mx-auto px-5 sm:px-8">
       <div class="max-w-2xl fade-in-up">
+        {/* TODO:COPY careers-intro */}
         <div class="space-y-6 text-text-secondary leading-[1.9]">
-          <p>novshiは社員ゼロ・AI駆動型経営を実践する、新しいタイプの会社です。AIをツールとしてではなく、経営の中核に据え、少人数で大きなインパクトを生み出しています。</p>
-          <p>九州を拠点に、地方中小企業の採用課題を解決するHR事業と、空き家を再生して社宅に転換する不動産事業を展開。テクノロジーと現場の両方を理解する人材を求めています。</p>
+          <p>novshiは少人数の会社です。一人が経営支援と空き家再生の両方に関わります。</p>
+          <p>経営支援と空き家再生の事業を通じて、九州の「働く」と「住む」に貢献しています。いまは立ち上げの途中です。現場に足を運び、必要なら自分で仕組みをつくれる人を探しています。</p>
         </div>
 
-        <div class="mt-16 grid grid-cols-1 sm:grid-cols-3 gap-px bg-gray-200 border border-gray-200 rounded-xl overflow-hidden stagger">
+        <!-- アイコンカードをやめて番号付き行リストに（Web DS §4） -->
+        <div class="mt-14 border-t border-gray-200 stagger">
           {[
-            { label: 'AIとの協働', desc: 'Claude、GPT、各種AIツールを日常的に活用する環境' },
-            { label: '裁量の大きさ', desc: '少人数組織だからこそ、一人ひとりの意思決定が事業に直結' },
-            { label: '九州 × 全国', desc: '九州を拠点に、全国の企業にサービスを提供' },
+            { num: '01', label: '経営支援と空き家再生、両方に関わる', desc: '二つの事業に関わり、立ち上げを一気に経験できます。' },
+            { num: '02', label: '裁量の大きさ', desc: '少人数なので、提案から実行まで一人で持てます。意思決定が事業に直結します。' },
+            { num: '03', label: '現場は九州、視野は全国', desc: '地場の経営者と直接会い、現場に足を運びながら進めます。' },
           ].map((item) => (
-            <div class="bg-white p-8">
-              <p class="text-sm font-bold text-gray-900 mb-2">{item.label}</p>
-              <p class="text-xs text-text-secondary leading-relaxed">{item.desc}</p>
+            <div class="grid grid-cols-[3rem_1fr] items-baseline gap-4 py-6 border-b border-gray-200">
+              <span class="font-num text-2xl font-medium text-gray-300">{item.num}</span>
+              <div>
+                <p class="text-base font-bold text-gray-900 mb-1">{item.label}</p>
+                <p class="text-sm text-text-secondary leading-[1.9]">{item.desc}</p>
+              </div>
             </div>
           ))}
         </div>
@@ -31,17 +36,18 @@ import CTASection from '../components/CTASection.astro';
     </div>
   </section>
 
-  <section class="py-24 lg:py-32 bg-bg-secondary">
+  <section class="sec-lg bg-bg-secondary washi">
     <div class="max-w-[1120px] mx-auto px-5 sm:px-8">
       <div class="max-w-2xl fade-in-up">
+        {/* TODO:COPY careers-positions */}
         <h2 class="text-2xl font-bold text-gray-900 mb-6">募集ポジション</h2>
-        <p class="text-text-secondary mb-8">具体的な募集ポジションは現在準備中です。カジュアル面談はいつでも受け付けていますので、お気軽にお問い合わせください。</p>
-        <a href="/contact" class="inline-flex items-center justify-center px-7 py-3.5 text-sm font-semibold text-white bg-accent rounded-md hover:bg-accent-hover transition-colors duration-200">
+        <p class="text-text-secondary mb-8">具体的な募集ポジションは準備中です。カジュアル面談はいつでも受け付けています。まずはお気軽にご連絡ください。</p>
+        <a href="/contact" class="inline-flex items-center justify-center px-7 py-3.5 text-sm font-semibold text-white bg-accent rounded-none hover:bg-accent-hover transition-colors duration-200">
           カジュアル面談を申し込む
         </a>
       </div>
     </div>
   </section>
 
-  <CTASection title="novshiに興味がありますか？" subtitle="まずはカジュアルにお話ししましょう。ポジションに関わらず、お気軽にご連絡ください。" />
+  <CTASection title="novshiに興味がありますか？" subtitle="まずは一度、話しませんか。ポジションが決まっていなくても構いません。" />
 </Layout>

@@ -13,12 +13,12 @@ const footerLinks = [
   <div class="max-w-[1120px] mx-auto px-5 sm:px-8 py-20">
     <div class="grid grid-cols-1 md:grid-cols-[1fr_auto_auto] gap-16">
       <div>
-        <a href="/" class="flex items-center gap-2.5">
-          <img src="/logo-white-lg.png" alt="" class="h-8 w-auto" aria-hidden="true" />
-          <span class="text-xl font-bold tracking-tight text-white" style="font-family: 'Inter', sans-serif;">novshi</span>
+        <a href="/" class="inline-flex items-center" aria-label="novshi ホーム">
+          <img src="/logo-white.png" alt="novshi" width="881" height="327" class="h-9 w-auto" />
         </a>
+        {/* TODO:COPY footer-tagline */}
         <p class="mt-5 text-sm text-gray-500 leading-relaxed max-w-xs">
-          九州に根ざし、テクノロジーの力で<br />地域の「はたらく」を変える。
+          九州で、仕事と住まいを<br />支える会社です。
         </p>
       </div>
 
@@ -35,13 +35,15 @@ const footerLinks = [
       <div class="max-w-[200px]">
         <p class="text-xs text-gray-600 leading-relaxed">
           株式会社novshi<br />
-          福岡県・熊本県
+          〒813-0017<br />
+          福岡県福岡市東区香椎照葉6-2-51
         </p>
       </div>
     </div>
 
-    <div class="mt-16 pt-8 border-t border-white/10">
+    <div class="mt-16 pt-8 border-t border-white/10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
       <p class="text-xs text-gray-600">&copy; {currentYear} novshi Inc.</p>
+      <p class="text-xs text-gray-600">有料職業紹介事業許可 40-ユ-301708</p>
     </div>
   </div>
 </footer>

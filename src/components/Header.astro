@@ -1,6 +1,7 @@
 ---
 const currentPath = Astro.url.pathname;
 const navItems = [
+  { href: '/', label: 'TOP' },
   { href: '/services', label: 'サービス' },
   { href: '/about', label: '会社概要' },
   { href: '/careers', label: '採用情報' },
@@ -8,12 +9,13 @@ const navItems = [
 ];
 ---
 
-<header id="site-header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+<header id="site-header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300" data-header>
   <div class="max-w-[1120px] mx-auto px-5 sm:px-8">
     <div class="flex items-center justify-between h-16 lg:h-[72px]">
-      <a href="/" class="flex items-center gap-2.5 group">
-        <img src="/logo-black-lg.png" alt="" class="h-7 lg:h-8 w-auto" aria-hidden="true" />
-        <span class="text-xl lg:text-[22px] font-bold tracking-tight text-gray-900" style="font-family: 'Inter', sans-serif;">novshi</span>
+      <!-- Logo: brand mark (swaps black/white with header state) -->
+      <a href="/" class="flex items-center" aria-label="novshi ホーム">
+        <img src="/logo-black.png" alt="novshi" width="881" height="327" class="header-logo-dark h-7 lg:h-8 w-auto" />
+        <img src="/logo-white.png" alt="novshi" width="881" height="327" class="header-logo-light h-7 lg:h-8 w-auto" aria-hidden="true" />
       </a>
 
       <nav class="hidden md:flex items-center gap-10">
@@ -21,10 +23,10 @@ const navItems = [
           <a
             href={item.href}
             class:list={[
-              'text-[13px] font-medium tracking-wide transition-colors duration-200',
+              'header-nav-link text-[13px] font-medium tracking-wide transition-colors duration-300',
               currentPath === item.href || currentPath === item.href + '/'
-                ? 'text-gray-900'
-                : 'text-gray-500 hover:text-gray-900',
+                ? 'is-active'
+                : '',
             ]}
           >
             {item.label}
@@ -33,9 +35,9 @@ const navItems = [
       </nav>
 
       <button id="mobile-menu-btn" class="md:hidden flex flex-col justify-center items-center w-10 h-10 gap-[5px]" aria-label="メニュー" aria-expanded="false">
-        <span class="block w-5 h-[1.5px] bg-gray-900 transition-all duration-300 origin-center" id="bar1"></span>
-        <span class="block w-5 h-[1.5px] bg-gray-900 transition-all duration-300" id="bar2"></span>
-        <span class="block w-5 h-[1.5px] bg-gray-900 transition-all duration-300 origin-center" id="bar3"></span>
+        <span class="header-bar block w-5 h-[1.5px] transition-all duration-300 origin-center" id="bar1"></span>
+        <span class="header-bar block w-5 h-[1.5px] transition-all duration-300" id="bar2"></span>
+        <span class="header-bar block w-5 h-[1.5px] transition-all duration-300 origin-center" id="bar3"></span>
       </button>
     </div>
   </div>
@@ -59,6 +61,35 @@ const navItems = [
 
 <div class="h-16 lg:h-[72px]"></div>
 
+<style>
+  /* Logo swap: black by default, white over dark hero, black when scrolled */
+  .header-logo-light { display: none; }
+  [data-header].is-over-hero .header-logo-dark { display: none; }
+  [data-header].is-over-hero .header-logo-light { display: block; }
+  [data-header].is-scrolled .header-logo-light { display: none; }
+  [data-header].is-scrolled .header-logo-dark { display: block; }
+
+  /* Default state: dark text (for light pages) */
+  .header-logo-text { color: var(--color-gray-900); }
+  .header-nav-link { color: var(--color-gray-500); }
+  .header-nav-link:hover, .header-nav-link.is-active { color: var(--color-gray-900); }
+  .header-bar { background-color: var(--color-gray-900); }
+
+  /* Over dark hero: white text */
+  [data-header].is-over-hero .header-logo-text { color: #fff; }
+  [data-header].is-over-hero .header-nav-link { color: rgba(255,255,255,0.6); }
+  [data-header].is-over-hero .header-nav-link:hover,
+  [data-header].is-over-hero .header-nav-link.is-active { color: #fff; }
+  [data-header].is-over-hero .header-bar { background-color: #fff; }
+
+  /* Scrolled state: solid white bg (always dark text) */
+  [data-header].is-scrolled .header-logo-text { color: var(--color-gray-900); }
+  [data-header].is-scrolled .header-nav-link { color: var(--color-gray-500); }
+  [data-header].is-scrolled .header-nav-link:hover,
+  [data-header].is-scrolled .header-nav-link.is-active { color: var(--color-gray-900); }
+  [data-header].is-scrolled .header-bar { background-color: var(--color-gray-900); }
+</style>
+
 <script>
   const header = document.getElementById('site-header')!;
   const mobileMenuBtn = document.getElementById('mobile-menu-btn')!;
@@ -68,12 +99,26 @@ const navItems = [
   const bar3 = document.getElementById('bar3')!;
   let menuOpen = false;
 
-  window.addEventListener('scroll', () => {
-    header.classList.toggle('bg-white/90', window.scrollY > 10);
-    header.classList.toggle('backdrop-blur-md', window.scrollY > 10);
-    header.classList.toggle('border-b', window.scrollY > 10);
-    header.classList.toggle('border-gray-200/60', window.scrollY > 10);
-  });
+  // Check if page has a dark hero
+  const darkHero = document.querySelector('[data-hero-dark]');
+
+  function updateHeader() {
+    const scrolled = window.scrollY > 10;
+
+    if (scrolled) {
+      header.classList.add('is-scrolled', 'bg-white/90', 'backdrop-blur-md', 'border-b', 'border-gray-200/60');
+      header.classList.remove('is-over-hero');
+    } else {
+      header.classList.remove('is-scrolled', 'bg-white/90', 'backdrop-blur-md', 'border-b', 'border-gray-200/60');
+      if (darkHero) {
+        header.classList.add('is-over-hero');
+      }
+    }
+  }
+
+  // Initialize
+  updateHeader();
+  window.addEventListener('scroll', updateHeader);
 
   mobileMenuBtn.addEventListener('click', () => {
     menuOpen = !menuOpen;
@@ -83,6 +128,15 @@ const navItems = [
     bar2.style.opacity = menuOpen ? '0' : '';
     bar3.style.transform = menuOpen ? 'rotate(-45deg) translate(2px, -2px)' : '';
     document.body.style.overflow = menuOpen ? 'hidden' : '';
+
+    // When mobile menu opens, force dark text
+    if (menuOpen) {
+      header.classList.remove('is-over-hero');
+      header.classList.add('bg-white');
+    } else {
+      header.classList.remove('bg-white');
+      updateHeader();
+    }
   });
 
   mobileMenu.querySelectorAll('a').forEach((link) => {
@@ -94,6 +148,8 @@ const navItems = [
       bar2.style.opacity = '';
       bar3.style.transform = '';
       document.body.style.overflow = '';
+      header.classList.remove('bg-white');
+      updateHeader();
     });
   });
 </script>

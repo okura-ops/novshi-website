@@ -1,44 +1,75 @@
 @import "tailwindcss";
 
-/* ===== v3 Design System: Monotone + Dark Navy ===== */
+/* ===== v4 Design System: Monotone (Black / Gray / White) ===== */
+/* Source of truth: 05_content/brand/novshi_design_system_v4.md            */
+/* Ink #1A1A1A / Secondary #666666 / Border #E5E5E5 / Pale #F2F2F2 / White  */
 
 @theme {
-  /* Navy Scale — deep, authoritative navy */
-  --color-navy-50: #EEF2F7;
-  --color-navy-100: #D4DEEB;
-  --color-navy-200: #A9BDD7;
-  --color-navy-400: #4A6D8C;
-  --color-navy-600: #2C4F6E;
-  --color-navy-700: #1E3A5F;
-  --color-navy-800: #152C48;
-  --color-navy-900: #0E1F33;
-  --color-navy-950: #091520;
+  /* --- Neutral "navy-*" remap ---
+     Legacy utilities (navy-50 … navy-950) are remapped to pure grays so no
+     blue can survive anywhere in the markup. R=G=B on every stop. */
+  --color-navy-50: #F2F2F2;
+  --color-navy-100: #E5E5E5;
+  --color-navy-200: #D4D4D4;
+  --color-navy-300: #B8B8B8;
+  --color-navy-400: #999999;
+  --color-navy-500: #808080;
+  --color-navy-600: #4D4D4D;
+  --color-navy-700: #333333;
+  --color-navy-800: #262626;
+  --color-navy-900: #1A1A1A;
+  --color-navy-950: #111111;
 
   /* Gray Scale */
   --color-gray-50: #FAFAFA;
-  --color-gray-100: #F5F5F5;
+  --color-gray-100: #F2F2F2;
   --color-gray-200: #E5E5E5;
   --color-gray-300: #D4D4D4;
-  --color-gray-400: #A3A3A3;
-  --color-gray-500: #737373;
-  --color-gray-600: #525252;
-  --color-gray-700: #404040;
-  --color-gray-900: #171717;
+  --color-gray-400: #999999;
+  --color-gray-500: #666666;
+  --color-gray-600: #4D4D4D;
+  --color-gray-700: #333333;
+  --color-gray-900: #1A1A1A;
 
-  /* Semantic */
-  --color-accent: #1E3A5F;
-  --color-accent-hover: #2C4F6E;
-  --color-accent-light: #EEF2F7;
-  --color-accent-dark: #0E1F33;
-  --color-text-primary: #171717;
-  --color-text-secondary: #525252;
-  --color-text-muted: #737373;
+  /* Semantic — monotone */
+  --color-accent: #1A1A1A;
+  --color-accent-hover: #333333;
+  --color-accent-light: #F2F2F2;
+  --color-accent-dark: #111111;
+  --color-text-primary: #1A1A1A;
+  --color-text-secondary: #666666;
+  --color-text-muted: #999999;
   --color-border: #E5E5E5;
-  --color-bg-secondary: #FAFAFA;
+  --color-bg-secondary: #F2F2F2;
 
-  /* Fonts */
-  --font-sans: "Noto Sans JP", "Inter", system-ui, sans-serif;
-  --font-display: "Inter", "Noto Sans JP", system-ui, sans-serif;
+  /* Fonts — Web DS v1.0 §1: 見出し Zen Kaku Gothic New / 本文 Noto Sans JP 調整版
+     / 欧文・数値 Montserrat (NO Inter) */
+  --font-sans: "Noto Sans JP", "BIZ UDPGothic", "Yu Gothic", system-ui, sans-serif;
+  --font-display: "Zen Kaku Gothic New", "Noto Sans JP", system-ui, sans-serif;
+  --font-en: "Montserrat", "Noto Sans JP", sans-serif;
+
+  /* CV accent — Web DS v1.0 §2（柿渋。A/B判定までは変種ページのみで使用） */
+  --color-cv: #B5502A;
+
+  /* Typography tokens */
+  --text-hero: 3.5rem;
+  --text-hero--line-height: 1.15;
+  --text-hero--letter-spacing: -0.02em;
+
+  --text-section: 2rem;
+  --text-section--line-height: 1.3;
+  --text-section--letter-spacing: 0em;
+
+  --text-body: 1rem;
+  --text-body--line-height: 1.75;
+
+  /* Radius — cards 2px, buttons/chips 4px, no soft corners */
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 4px;
+  --radius-xl: 2px;
+  --radius-2xl: 2px;
+  --radius-3xl: 2px;
 }
 
 @layer base {
@@ -52,35 +83,56 @@
     font-family: var(--font-sans);
     color: var(--color-text-primary);
     background-color: #ffffff;
-    line-height: 1.7;
-    letter-spacing: 0.02em;
+    line-height: 1.9;
+    letter-spacing: 0.05em;
+    font-size: 16px;
   }
 
+  /* Web DS v1.0 §1-3: 和文見出しは負字間禁止（0以上）・palt 適用 */
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-display);
     font-weight: 700;
-    line-height: 1.3;
+    line-height: 1.4;
+    letter-spacing: 0.03em;
+    font-feature-settings: "palt";
+    color: var(--color-text-primary);
+  }
+
+  /* Montserrat for Latin numerals / stat figures (jump-ratio emphasis) */
+  .font-num {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700;
     letter-spacing: -0.01em;
-    color: var(--color-gray-900);
+  }
+
+  /* 欧文セクションラベル（小さく・広く） */
+  .eyebrow {
+    font-family: var(--font-en);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
   }
 
   ::selection {
-    background-color: var(--color-navy-100);
-    color: var(--color-navy-900);
+    background-color: #1A1A1A;
+    color: #ffffff;
   }
 }
 
 @layer utilities {
-  .fade-in-up {
+  /* ---- Scroll animations ----
+     html.js が付いた時だけ初期非表示にする（JS無効環境で内容が消えるのを防ぐ） */
+  :root.js .fade-in-up {
     opacity: 0;
     transform: translateY(20px);
     transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
   }
   .fade-in-up.visible {
-    opacity: 1;
-    transform: translateY(0);
+    opacity: 1 !important;
+    transform: translateY(0) !important;
   }
-  .stagger > * {
+  :root.js .stagger > * {
     opacity: 0;
     transform: translateY(16px);
     transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1), transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
@@ -92,6 +144,71 @@
   .stagger.visible > *:nth-child(5) { transition-delay: 320ms; opacity: 1; transform: none; }
   .stagger.visible > *:nth-child(6) { transition-delay: 400ms; opacity: 1; transform: none; }
   .stagger.visible > *:nth-child(7) { transition-delay: 480ms; opacity: 1; transform: none; }
+
+  /* ---- Photo treatment (Web DS v1.0 §5) ----
+     Webはカラー実写（低彩度基準で事前補正済み）。グレースケール強制はスライド用
+     規定であり、Webでは適用しない。文字を載せる時は単色ベール（グラデ禁止）。 */
+  .veil {
+    position: relative;
+  }
+  .veil::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(26, 26, 26, 0.60);
+    pointer-events: none;
+  }
+  .veil-strong::after {
+    background: rgba(26, 26, 26, 0.66);
+  }
+
+  /* ---- 質感 (Web DS v1.1 §2-4): 和紙は実スキャン素材の低opacity重ね。本文・フォームUIには適用しない ---- */
+  .washi {
+    position: relative;
+  }
+  .washi::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url('/images/brush/washi.webp');
+    background-size: 760px auto;
+    opacity: 0.035;
+    pointer-events: none;
+  }
+  /* 空き家（住まい）の世界観のみ青海波の型押し和紙 */
+  .washi-seigaiha::before {
+    background-image: url('/images/brush/washi-seigaiha.webp');
+    background-size: 640px auto;
+    opacity: 0.05;
+  }
+
+  /* 構造罫の筆線化 (v1.1)。細い情報罫（リスト行のhairline）はUI罫として残す */
+  .brush-rule {
+    display: block;
+    width: 100%;
+    height: 10px;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  /* ---- Section rhythm (Web DS v1.0 §3-2): 均等反復の禁止。4種で緩急 ---- */
+  .sec-xl { padding-block: 160px; }
+  .sec-lg { padding-block: 120px; }
+  .sec-tight { padding-block: 72px; }
+  .sec-flush { padding-block: 0; }
+  @media (max-width: 1023px) {
+    .sec-xl { padding-block: 80px; }
+    .sec-lg { padding-block: 64px; }
+    .sec-tight { padding-block: 44px; }
+  }
+
+  /* ---- Card hover: border emphasis, NO drop shadow ---- */
+  .card-lift {
+    transition: border-color 0.25s ease-out;
+  }
+  .card-lift:hover {
+    border-color: #1A1A1A;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
