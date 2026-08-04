@@ -5,23 +5,23 @@ import CTASection from '../components/CTASection.astro';
 ---
 
 <Layout title="採用情報 | 株式会社novshi" description="novshiの採用情報。少人数で採用・組織支援と空き家再生を進めています。カジュアル面談を受け付けています。">
-  <Hero label="Careers" title="novshiで働く" subtitle="少人数で、九州の中小企業の採用と空き家再生を進めています。" compact={true} />
+  <Hero label="Careers" title="novshiで働く" subtitle="少人数で、経営支援と空き家再生を進めています。" compact={true} />
 
   <section class="sec-lg bg-white border-t border-gray-100 washi">
     <div class="max-w-[1120px] mx-auto px-5 sm:px-8">
       <div class="max-w-2xl fade-in-up">
         {/* TODO:COPY careers-intro */}
         <div class="space-y-6 text-text-secondary leading-[1.9]">
-          <p>novshiは少人数の会社です。定型業務はAIで効率化し、一人が採用支援と空き家再生の両方に関わります。</p>
-          <p>九州の中小企業の採用と組織を支える仕事と、空き家を直して社宅に戻す不動産事業を手がけています。いまは立ち上げの途中です。現場に足を運び、必要なら自分で仕組みをつくれる人を探しています。</p>
+          <p>novshiは少人数の会社です。一人が経営支援と空き家再生の両方に関わります。</p>
+          <p>経営支援と空き家再生の事業を通じて、九州の「働く」と「住む」に貢献しています。いまは立ち上げの途中です。現場に足を運び、必要なら自分で仕組みをつくれる人を探しています。</p>
         </div>
 
         <!-- アイコンカードをやめて番号付き行リストに（Web DS §4） -->
         <div class="mt-14 border-t border-gray-200 stagger">
           {[
-            { num: '01', label: '採用と不動産、両方に関わる', desc: '採用支援と空き家再生の両方に関わり、事業の立ち上げを一気に経験できます。' },
+            { num: '01', label: '経営支援と空き家再生、両方に関わる', desc: '二つの事業に関わり、立ち上げを一気に経験できます。' },
             { num: '02', label: '裁量の大きさ', desc: '少人数なので、提案から実行まで一人で持てます。意思決定が事業に直結します。' },
-            { num: '03', label: '福岡・熊本が現場', desc: '地場の経営者と直接会い、現場に足を運びながら進めます。' },
+            { num: '03', label: '現場は九州、視野は全国', desc: '地場の経営者と直接会い、現場に足を運びながら進めます。' },
           ].map((item) => (
             <div class="grid grid-cols-[3rem_1fr] items-baseline gap-4 py-6 border-b border-gray-200">
               <span class="font-num text-2xl font-medium text-gray-300">{item.num}</span>

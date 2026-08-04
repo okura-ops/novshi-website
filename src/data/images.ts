@@ -13,11 +13,11 @@ export const IMG: Record<string, SiteImage> = {
   ceoBench: {
     webp: '/images/site/ceo-bench.webp',
     jpg: '/images/site/ceo-bench.jpg',
-    alt: '代表取締役・大倉佑介',
+    alt: '愛犬と遊ぶ代表・大倉佑介',
   },
   aboutPortrait: {
     webp: '/images/site/about-portrait.webp',
     jpg: '/images/site/about-portrait.jpg',
-    alt: '代表取締役・大倉佑介',
+    alt: '公園に立つ代表・大倉佑介と愛犬',
   },
 };
