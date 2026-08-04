@@ -49,6 +49,7 @@ const steps = [
   <div class="bg-white washi border-t border-gray-200 sticky top-16 lg:top-[72px] z-30" id="service-tabs">
     <div class="max-w-[1120px] mx-auto px-5 sm:px-8">
       <div class="flex gap-10">
+        <a href="/" class="relative py-5 text-base lg:text-lg font-bold text-text-muted hover:text-gray-900 transition-colors duration-200">TOP</a>
         <button type="button" data-tab="shien" class="tab-btn relative py-5 text-base lg:text-lg font-bold text-gray-900 transition-colors duration-200" aria-selected="true">
           採用・経営支援
           <img src="/images/brush/line-sumi.png" alt="" aria-hidden="true" width="1118" height="103" class="tab-ink absolute bottom-0 left-0 w-full h-1.5 object-cover select-none" />
@@ -355,53 +356,6 @@ const steps = [
   </section>
   </div>
 
-  <!-- 二つの事業のつながり: 図解（企業・人・家のトライアングル） -->
-  <section class="sec-tight bg-white washi">
-    <div class="max-w-[1120px] mx-auto px-5 sm:px-8">
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-        <div class="lg:col-span-5 fade-in-up">
-          <h2 class="text-xl lg:text-2xl font-bold text-gray-900 mb-5">二つの事業は、つながっています</h2>
-          <p class="text-sm text-text-secondary leading-[1.9] max-w-md">
-            採用支援の顧客から空き家の情報が届き、再生した家は採用した人の社宅になります。住まいが決まると、人は辞めにくくなります。この循環をつくることが、novshiの事業設計です。
-          </p>
-        </div>
-        <div class="lg:col-span-7 fade-in-up">
-          <!-- 循環図: 作図の正円でなく、ロゴの筆致の円相そのものを軌道に使う -->
-          <svg viewBox="0 0 1180 1090" class="w-full max-w-xl mx-auto" role="img" aria-label="事業の循環図。筆で描いた円の上に企業・家・人が並ぶ。1 企業から空き家の情報が届く、2 再生した家が社宅になる、3 働く人が定着して企業に戻る">
-            <image href="/images/site/mark-enso-black.png" x="200" y="50" width="888" height="981" opacity="0.92" />
-            <!-- 進行方向（反時計回り・黒い筆致の上に白で刻む） -->
-            <g stroke="#FFFFFF" stroke-width="9" fill="none" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M -18 -18 L 22 0 L -18 18" transform="translate(240 220) rotate(125)" />
-              <path d="M -18 -18 L 22 0 L -18 18" transform="translate(760 850) rotate(-25)" />
-              <path d="M -18 -18 L 22 0 L -18 18" transform="translate(836 143) rotate(-150)" />
-            </g>
-            <!-- 順序マーカー（辺の中点・凡例と対応） -->
-            <g>
-              <circle cx="302" cy="294" r="42" fill="#FFFFFF" stroke="#1A1A1A" stroke-width="3" />
-              <text x="302" y="311" font-size="46" font-weight="bold" fill="#1A1A1A" text-anchor="middle" class="font-num">1</text>
-              <circle cx="642" cy="886" r="42" fill="#FFFFFF" stroke="#1A1A1A" stroke-width="3" />
-              <text x="642" y="903" font-size="46" font-weight="bold" fill="#1A1A1A" text-anchor="middle" class="font-num">2</text>
-              <circle cx="920" cy="240" r="42" fill="#FFFFFF" stroke="#1A1A1A" stroke-width="3" />
-              <text x="920" y="257" font-size="46" font-weight="bold" fill="#1A1A1A" text-anchor="middle" class="font-num">3</text>
-            </g>
-            <!-- 節点: 円相の上に載る（全て墨で統一） -->
-            <circle cx="642" cy="94" r="76" fill="#1A1A1A" />
-            <text x="642" y="108" font-size="38" font-weight="bold" fill="#fff" text-anchor="middle">企業</text>
-            <circle cx="300" cy="686" r="76" fill="#1A1A1A" />
-            <text x="300" y="700" font-size="38" font-weight="bold" fill="#fff" text-anchor="middle">家</text>
-            <circle cx="1037" cy="489" r="76" fill="#1A1A1A" />
-            <text x="1037" y="503" font-size="38" font-weight="bold" fill="#fff" text-anchor="middle">人</text>
-          </svg>
-          <!-- 凡例: 文字はアートから分離して確実に読ませる -->
-          <div class="mt-6 max-w-md mx-auto space-y-3">
-            <p class="flex items-baseline gap-3 text-[15px] leading-[1.8]"><span class="font-num shrink-0 inline-flex items-center justify-center w-7 h-7 rounded-full border-[1.5px] border-gray-900 text-sm font-bold text-gray-900">1</span><span class="text-gray-900">企業から、空き家の情報が届く</span></p>
-            <p class="flex items-baseline gap-3 text-[15px] leading-[1.8]"><span class="font-num shrink-0 inline-flex items-center justify-center w-7 h-7 rounded-full border-[1.5px] border-gray-900 text-sm font-bold text-gray-900">2</span><span class="text-gray-900">再生した家が、社宅になる</span></p>
-            <p class="flex items-baseline gap-3 text-[15px] leading-[1.8]"><span class="font-num shrink-0 inline-flex items-center justify-center w-7 h-7 rounded-full border-[1.5px] border-gray-900 text-sm font-bold text-gray-900">3</span><span class="text-gray-900">働く人が定着し、企業に返る</span></p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
 
 
   <CTASection />
