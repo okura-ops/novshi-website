@@ -162,6 +162,29 @@
     background: rgba(26, 26, 26, 0.66);
   }
 
+  /* ---- 質感 (Web DS v1.1 §2-4): 和紙は実スキャン素材の低opacity重ね。本文・フォームUIには適用しない ---- */
+  .washi {
+    position: relative;
+  }
+  .washi::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url('/images/brush/washi.webp');
+    background-size: 760px auto;
+    opacity: 0.035;
+    pointer-events: none;
+  }
+
+  /* 構造罫の筆線化 (v1.1)。細い情報罫（リスト行のhairline）はUI罫として残す */
+  .brush-rule {
+    display: block;
+    width: 100%;
+    height: 10px;
+    object-fit: cover;
+    object-position: center;
+  }
+
   /* ---- Section rhythm (Web DS v1.0 §3-2): 均等反復の禁止。4種で緩急 ---- */
   .sec-xl { padding-block: 160px; }
   .sec-lg { padding-block: 120px; }
