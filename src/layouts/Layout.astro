@@ -13,7 +13,9 @@ interface Props {
 }
 
 const { title, description = '株式会社novshi — 九州の中小企業の採用支援・組織改善と、空き家再生。仕事と住まいを支える会社です。', preloadImage, noindex = false } = Astro.props;
-const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://novshi.co.jp');
+// 末尾スラッシュ付きURLはVercelが308でリダイレクトするため、canonical/og:urlはスラッシュなしに正規化する（トップのみ '/'）
+const canonicalPath = Astro.url.pathname.replace(/\/$/, '') || '/';
+const canonicalURL = new URL(canonicalPath, Astro.site || 'https://novshi.co.jp');
 ---
 
 <!doctype html>
