@@ -39,6 +39,28 @@ const steps = [
   { num: '2', title: '支援範囲の設計', desc: '何をどこまで任せるかを文書で確定します。' },
   { num: '3', title: '運用開始', desc: '実務を開始し、月次で数字と論点を報告します。' },
 ];
+// 法人向け社宅（1棟借り上げ）。配布中のチラシ（03_clients/kcs）と同じ事実で揃える。
+// 賃料の具体額はチラシ側にのみ記載する（紹介経由の企業さま向けの条件のため、公開ページには出さない）
+const shatakuPairs = [
+  ['実習生が入れ替わるたび、空室の家賃と原状回復の手配が残る', '清掃・原状回復まで込み', '1棟契約に含みます。空室期間の扱いも都度ご相談できます。'],
+  ['手取りが増えた社員が、1人で住める部屋を見つけられない', '単身で住める戸建を用意', '人数と予算に合わせて、単身用から複数名用まで組みます。'],
+  ['次の物件が見つかる保証がなく、使わない部屋の契約を続けている', '必要な棟数を、必要な期間だけ', '増やす・減らすはそのつどご相談いただけます。'],
+  ['入居のたびに敷金・礼金と家具の費用がかかる', '敷金・礼金なし、備品つき', '食器や調理器具を置いた状態でお渡しします。'],
+  ['早期に辞めてしまう。体調やメンタルの面倒まで見きれない', '母国の暮らしに合わせて直せる', '1棟まるごとなので、台所や水まわりを変えられます。'],
+];
+const shatakuWhy = [
+  { num: '01', label: '自分たちで買って直す', desc: '仲介や転貸を挟みません。あいだで乗る手数料がないぶん、この家賃で出せます。' },
+  { num: '02', label: 'まとめて発注する', desc: '熊本・福岡で100件を超える空き家を直してきました。同じ業者に数をまとめて出すので、1戸あたりの工事費が下がります。' },
+  { num: '03', label: '1棟を1社に貸す', desc: '働く方が個別に大家と契約しません。保証人を理由に断られることも、窓口が分かれることもありません。' },
+];
+const shatakuTerms = [
+  ['対象', '技能実習生・特定技能1号／2号・留学生など、外国籍の従業員の方'],
+  ['契約形態', '御社と当社の1棟借り上げ契約（契約は1本）'],
+  ['初期費用・備品', '敷金・礼金・仲介手数料なしが基本。食器や調理器具は相談のうえ設置します'],
+  ['入替・退去時', '清掃と原状回復は当社で手配。空室期間の扱いは個別にご相談ください'],
+  ['居室の基準', '技能実習は寝室4.5㎡以上／2名以下、特定技能1号は居室7.5㎡以上に対応します'],
+  ['賃料', '物件と人数によって異なります。条件を伺ったうえでお見積りします'],
+];
 ---
 
 <Layout title="サービス | 株式会社novshi" description="採用支援・組織改善と、空き家を社宅に変える事業。九州の中小企業の採用と定着を、代表が直接支えます。">
@@ -311,8 +333,75 @@ const steps = [
         </p>
       </div>
 
+      <!-- 法人向け: 外国人材の社宅（1棟借り上げ）。配布中のチラシと同じ内容を公開ページ版に落としたもの -->
+      <div class="mt-16 pt-12 border-t border-gray-200">
+        <h3 class="text-xl font-bold text-gray-900 mb-4 fade-in-up">外国人材の社宅を、戸建1棟でお貸しします</h3>
+        <p class="text-text-secondary leading-[1.9] max-w-2xl fade-in-up">
+          技能実習生・特定技能人材を受け入れる企業さま向けに、再生した戸建を1棟まるごとお貸ししています。契約は御社と当社の1本だけ。入退去のたびの清掃と原状回復、生活に要る備品の用意まで、こちらで段取りします。
+        </p>
+
+        <!-- 困りごと → novshiの社宅なら -->
+        <div class="mt-12 max-w-4xl">
+          <div class="hidden md:grid grid-cols-[1fr_1.2fr] gap-x-10 pb-3 border-b border-gray-900 fade-in-up">
+            <p class="text-sm font-bold text-text-muted">よくある困りごと</p>
+            <p class="text-sm font-bold text-gray-900">novshiの社宅なら</p>
+          </div>
+          <div class="stagger">
+            {shatakuPairs.map(([trouble, key, detail]) => (
+              <div class="grid grid-cols-1 md:grid-cols-[1fr_1.2fr] gap-x-10 gap-y-2 py-6 border-b border-gray-200">
+                <p class="text-sm text-text-secondary leading-[1.9]">{trouble}</p>
+                <div>
+                  <p class="text-base font-bold text-gray-900 leading-[1.6]">{key}</p>
+                  <p class="mt-1.5 text-sm text-text-secondary leading-[1.9]">{detail}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- なぜこの条件で貸せるのか -->
+        <div class="mt-16">
+          <h4 class="text-lg font-bold text-gray-900 mb-2 fade-in-up">この条件で貸せる理由</h4>
+          <p class="text-text-secondary mb-8 fade-in-up">仕入れから改修まで自社で持っているので、家賃を抑えられます。</p>
+          <div class="stagger max-w-3xl">
+            {shatakuWhy.map((w) => (
+              <div class="grid grid-cols-[3.5rem_11rem_1fr] max-sm:grid-cols-[3.5rem_1fr] items-baseline gap-3 py-5 border-b border-gray-200">
+                <span class="font-num text-2xl font-medium text-gray-300">{w.num}</span>
+                <p class="text-base font-bold text-gray-900">{w.label}</p>
+                <p class="text-sm text-text-secondary leading-[1.9] max-sm:col-span-2 max-sm:pl-14">{w.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- 条件 -->
+        <div class="mt-16">
+          <h4 class="text-lg font-bold text-gray-900 mb-8 fade-in-up">お貸しする条件</h4>
+          <dl class="stagger max-w-3xl">
+            {shatakuTerms.map(([term, desc]) => (
+              <div class="grid grid-cols-1 sm:grid-cols-[10rem_1fr] gap-x-6 gap-y-1 py-5 border-b border-gray-200">
+                <dt class="text-sm font-bold text-gray-900">{term}</dt>
+                <dd class="text-sm text-text-secondary leading-[1.9]">{desc}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+
+        <!-- エリア: 在庫から選ばせる形ではないことを明示する -->
+        <div class="mt-12 bg-[#F2F2F2] p-7 max-w-3xl fade-in-up">
+          <p class="text-base font-bold text-gray-900">掲載の物件になくても、ご希望のエリアで仕入れます。</p>
+          <p class="mt-2 text-sm text-text-secondary leading-[1.9]">
+            いま持っている物件から選んでいただく形ではありません。勤務地と条件を伺ってから、その場所で空き家を探して直します。対象エリアは気にせずご相談ください。登録支援機関・監理団体さまを通じたご紹介も承っています。
+          </p>
+          <div class="mt-5 flex flex-wrap gap-3">
+            <a href="/contact" class="inline-flex items-center justify-center px-6 py-3 text-sm font-semibold text-white bg-[#1A1A1A] rounded-none hover:opacity-85 transition-opacity duration-200">社宅について相談する</a>
+            <a href="/contact?type=doc" class="inline-flex items-center justify-center px-6 py-3 text-sm font-semibold text-gray-900 border border-gray-900 rounded-none hover:bg-white transition-colors duration-200">資料を請求する</a>
+          </div>
+        </div>
+      </div>
+
       <!-- 物件一覧: 情報として掲載（募集中／稼働中のみ。正本=Notion取得物件管理DB） -->
-      <div class="mt-14">
+      <div class="mt-16 pt-12 border-t border-gray-200">
         <h3 class="text-xl font-bold text-gray-900 mb-8 fade-in-up">物件情報</h3>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-10 stagger">
           {PROPERTIES.map((p) => (
