@@ -176,14 +176,13 @@
     pointer-events: none;
   }
   /* 空き家（住まい）の世界観のみ青海波の型押し和紙。
-     縦に敷き詰めると型押しの斑が本文の裏に出て、背景が段違いに見える。
-     §2-4「本文には適用しない」に従い、セクション頭に1枚だけ置いて下へは繰り返さない */
+     opacity 0.05 は型押しの斑が本文の裏で「地色が変わった」ように見えるため 0.02 に下げた
+     （Web DS §2-4「和紙は本文には適用しない」の趣旨。世界観は残しつつ情報の裏では消す）。
+     1枚置き（no-repeat）は下端に切れ目が出るので、従来どおり敷き詰める */
   .washi-seigaiha::before {
     background-image: url('/images/brush/washi-seigaiha.webp');
-    background-size: 100% auto;
-    background-repeat: no-repeat;
-    background-position: center top;
-    opacity: 0.05;
+    background-size: 640px auto;
+    opacity: 0.02;
   }
 
   /* 構造罫の筆線化 (v1.1)。細い情報罫（リスト行のhairline）はUI罫として残す */
