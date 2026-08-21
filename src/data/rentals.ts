@@ -59,6 +59,9 @@ export interface Rental {
   /** 内覧方式 */
   viewing: 'selfbox' | 'remote';
   address: string;
+  /** Notion取得物件管理DBの緯度・経度（地図リンクは住所文字列でなく座標で張る。枝番を地図が解決できない物件があるため） */
+  lat: number;
+  lng: number;
   jimotyUrl: string;
   albumUrl: string;
   /** 申込フォームのプレフィル値（物件名） */
@@ -71,7 +74,7 @@ export function applyUrl(r: Rental): string {
 }
 
 export function mapUrl(r: Rental): string {
-  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent('福岡県' + r.address)}`;
+  return `https://www.google.com/maps/search/?api=1&query=${r.lat},${r.lng}`;
 }
 
 export const RENTALS: Rental[] = [
@@ -113,6 +116,8 @@ export const RENTALS: Rental[] = [
     ],
     viewing: 'selfbox',
     address: '飯塚市潤野1118-3',
+    lat: 33.635185,
+    lng: 130.660812,
     jimotyUrl: 'https://jmty.jp/fukuoka/est-hou/article-1qwb8f',
     albumUrl: 'https://drive.google.com/drive/folders/16QcR43c9rEKzInamGF3gRBH8SUKpdVC1',
     formEntry: '007 潤野｜飯塚市潤野1118-3の一戸建て',
@@ -157,6 +162,8 @@ export const RENTALS: Rental[] = [
     ],
     viewing: 'remote',
     address: '飯塚市伊岐須297-5',
+    lat: 33.652176,
+    lng: 130.665436,
     jimotyUrl: 'https://jmty.jp/fukuoka/est-hou/article-1qz9dg',
     albumUrl: 'https://drive.google.com/drive/folders/1YSIkt2I_-NKVMLLwWv3q3p5CM0LxlPY5',
     formEntry: '006 伊岐須｜飯塚市伊岐須297-5の一戸建て',
@@ -201,6 +208,8 @@ export const RENTALS: Rental[] = [
     ],
     viewing: 'selfbox',
     address: '遠賀郡岡垣町東松原3-12-2',
+    lat: 33.844196,
+    lng: 130.628204,
     jimotyUrl: 'https://jmty.jp/fukuoka/est-hou/article-1qwcts',
     albumUrl: 'https://drive.google.com/drive/folders/1ULJGJLPH1XMqVYdbI__us63UUws1H8SP',
     formEntry: '003 東松原｜遠賀郡岡垣町東松原3-12-2の一戸建て',
@@ -245,6 +254,8 @@ export const RENTALS: Rental[] = [
     ],
     viewing: 'selfbox',
     address: '遠賀郡遠賀町広渡2101-8',
+    lat: 33.857693,
+    lng: 130.676102,
     jimotyUrl: 'https://jmty.jp/fukuoka/est-hou/article-1qwcqa',
     albumUrl: 'https://drive.google.com/drive/folders/1gzpECsab4Lytp7384cNSvlzHf_n48qUT',
     formEntry: '008 広渡｜遠賀郡遠賀町広渡2101-8の一戸建て',
@@ -290,6 +301,8 @@ export const RENTALS: Rental[] = [
     ],
     viewing: 'remote',
     address: 'みやま市瀬高町長田3050-1',
+    lat: 33.180443,
+    lng: 130.509308,
     jimotyUrl: 'https://jmty.jp/fukuoka/est-hou/article-1r783v',
     albumUrl: 'https://drive.google.com/drive/folders/1qSvUTs6AKv1wn2WqQZj4JSP_cEJapWmO',
     formEntry: '005 長田｜みやま市瀬高町長田3050-1の一戸建て',
@@ -337,6 +350,8 @@ export const RENTALS: Rental[] = [
     ],
     viewing: 'remote',
     address: '田川市大字糒2777-3',
+    lat: 33.6617177,
+    lng: 130.794723,
     jimotyUrl: 'https://jmty.jp/fukuoka/est-hou/article-1r783k',
     albumUrl: 'https://drive.google.com/drive/folders/1BGWxLGFLZt54ElhwMF5QzidivyDVu3w4',
     formEntry: '009 糒｜田川市大字糒2777-3の一戸建て',
@@ -383,6 +398,8 @@ export const RENTALS: Rental[] = [
     ],
     viewing: 'selfbox',
     address: '宮若市宮田2644-7',
+    lat: 33.7129565,
+    lng: 130.6558274,
     jimotyUrl: 'https://jmty.jp/fukuoka/est-hou/article-1qwdvg',
     albumUrl: 'https://drive.google.com/drive/folders/1OcVazaGcBwJ_dpB7LV059HtuYTOxIxUX',
     formEntry: '004 宮田｜宮若市宮田2644-7の一戸建て',
@@ -427,6 +444,8 @@ export const RENTALS: Rental[] = [
     ],
     viewing: 'selfbox',
     address: '宮若市宮田2607-41',
+    lat: 33.712017,
+    lng: 130.656418,
     jimotyUrl: 'https://jmty.jp/fukuoka/est-hou/article-1qhv1t',
     albumUrl: 'https://drive.google.com/drive/folders/1sDl6guZ_urZK80SY7I5mqr9_QJtfE4he',
     formEntry: '002 宮田｜宮若市宮田2607-41の一戸建て',
