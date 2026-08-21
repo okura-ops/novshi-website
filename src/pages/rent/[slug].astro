@@ -1,0 +1,239 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { RENTALS, AS_OF, LINE_URL, applyUrl, mapUrl } from '../../data/rentals';
+import type { Rental } from '../../data/rentals';
+
+export function getStaticPaths() {
+  return RENTALS.map((r) => ({ params: { slug: r.slug }, props: { r } }));
+}
+
+interface Props {
+  r: Rental;
+}
+const { r } = Astro.props;
+const rentStr = r.rent.toLocaleString('ja-JP');
+const img = (file: string) => `/images/rent/${r.slug}/${file}.webp`;
+
+const viewingSteps =
+  r.viewing === 'selfbox'
+    ? [
+        'LINEまたはお問い合わせフォームからご連絡ください',
+        '現地内覧（キーボックスを使ったセルフ内覧です。ご都合のよい時間に、おひとりで見ていただけます）',
+        'お申し込み（保証会社の審査があります）',
+        'ご契約・お引き渡し',
+      ]
+    : [
+        'LINEまたはお問い合わせフォームからご連絡ください',
+        '現地内覧（当日は現地にお越しいただき、私どもがビデオ通話で画面越しにご案内します）',
+        'お申し込み（保証会社の審査があります）',
+        'ご契約・お引き渡し',
+      ];
+
+const conditions: [string, string][] = [
+  ['家賃', `${rentStr}円／月${r.rentNote ? `（${r.rentNote}）` : ''}`],
+  ['共益費', '0円'],
+  ['敷金・礼金', '0円'],
+  ['更新料', '0円'],
+  ['ペット', r.pets],
+  ['駐車場', r.parking],
+];
+if (r.otherFee) conditions.push(['その他費用', r.otherFee]);
+
+const overview: [string, string][] = [
+  ['間取り', r.layout],
+  ['構造', r.structure],
+  ['建物面積', r.bldgArea],
+];
+if (r.landArea) overview.push(['土地面積', r.landArea]);
+overview.push(['築年', r.built]);
+if (r.access) overview.push(['交通', r.access]);
+overview.push(['所在地', `福岡県${r.address}`]);
+---
+
+<Layout
+  title={`${r.name}の一戸建て（家賃${rentStr}円）| 入居者募集 | 株式会社novshi`}
+  description={`${r.name}の一戸建て（${r.spec}）。家賃${rentStr}円・初期費用0円。大家が直接お貸しします。`}
+>
+  <section class="bg-white washi border-t border-gray-100">
+    <div class="max-w-[1120px] mx-auto px-5 sm:px-8 pt-10 pb-6">
+      <nav class="text-xs text-text-muted mb-6" aria-label="パンくず">
+        <a href="/rent" class="underline underline-offset-4 hover:text-gray-900">入居者募集の物件一覧</a>
+        <span class="mx-2" aria-hidden="true">/</span>
+        <span>{r.name}</span>
+      </nav>
+      <div class="flex flex-wrap items-baseline gap-x-4 gap-y-2">
+        <span class="text-[11px] font-semibold px-3 py-1.5 bg-[#1A1A1A] text-white">募集中</span>
+        <h1 class="text-2xl lg:text-3xl font-bold text-gray-900">{r.name}の一戸建て</h1>
+      </div>
+      <p class="mt-3 text-text-secondary">{r.spec}</p>
+      <p class="mt-4">
+        <span class="font-num text-3xl lg:text-4xl font-semibold text-gray-900">{rentStr}</span>
+        <span class="text-sm text-text-secondary">　円／月（共益費0円）</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- 写真 -->
+  <section class="bg-white washi">
+    <div class="max-w-[1120px] mx-auto px-5 sm:px-8">
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-2">
+        <a href={img(r.photos[0].file)} target="_blank" rel="noopener" class="col-span-2 md:row-span-2">
+          <img src={img(r.photos[0].file)} alt={r.photos[0].alt} class="w-full h-full aspect-[4/3] object-cover" width="1600" height="1200" />
+        </a>
+        {r.photos.slice(1).map((p) => (
+          <a href={img(p.file)} target="_blank" rel="noopener">
+            <img src={img(p.file)} alt={p.alt} class="w-full aspect-[4/3] object-cover" loading="lazy" width="800" height="600" />
+          </a>
+        ))}
+      </div>
+      <p class="mt-3 text-xs text-text-muted">
+        写真はタップで拡大できます。すべての写真は
+        <a href={r.albumUrl} target="_blank" rel="noopener" class="underline underline-offset-4 hover:text-gray-900">公開アルバム</a>
+        でご覧いただけます。
+      </p>
+    </div>
+  </section>
+
+  <!-- 紹介 -->
+  <section class="bg-white washi">
+    <div class="max-w-[1120px] mx-auto px-5 sm:px-8 py-12">
+      <p class="text-text-secondary leading-[1.9] max-w-2xl">{r.lead}</p>
+      <p class="mt-4 text-sm text-text-secondary leading-[1.9] max-w-2xl">
+        不動産会社を通していないので、仲介手数料がかかりません。その分を入居者様に返す形にして、初期費用を0円にしています。
+      </p>
+    </div>
+  </section>
+
+  <!-- 条件 -->
+  <section class="bg-bg-secondary washi">
+    <div class="max-w-[1120px] mx-auto px-5 sm:px-8 py-12">
+      <h2 class="text-xl font-bold text-gray-900 mb-6">入居条件</h2>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-16 gap-y-8 max-w-4xl">
+        <div>
+          <dl class="text-sm">
+            {conditions.map(([k, v]) => (
+              <div class="grid grid-cols-[7rem_1fr] gap-3 py-3 border-t border-gray-300/70">
+                <dt class="font-bold text-gray-900">{k}</dt>
+                <dd class="text-text-secondary leading-[1.8]">{v}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+        <div>
+          <p class="text-sm font-bold text-gray-900 mb-3">この物件の特典</p>
+          <ul class="space-y-2 text-sm text-text-secondary leading-[1.8]">
+            {r.perks.map((p) => (
+              <li class="pl-5 relative before:content-['—'] before:absolute before:left-0 before:text-gray-400">{p}</li>
+            ))}
+          </ul>
+          <p class="mt-6 text-sm font-bold text-gray-900 mb-3">短期解約違約金</p>
+          <ul class="space-y-1.5 text-sm text-text-secondary leading-[1.8]">
+            {r.penalty.map((p) => (
+              <li>{p}</li>
+            ))}
+          </ul>
+          <p class="mt-2 text-xs text-text-muted leading-[1.8]">
+            初期費用・特典を当社が負担しているため、短期間で退去された場合のみいただきます。2年以上お住まいいただければかかりません。
+          </p>
+        </div>
+      </div>
+      <div class="mt-8 max-w-4xl border-t border-gray-300/70 pt-5">
+        <p class="text-sm font-bold text-gray-900 mb-2">保証会社の費用（入居者様のご負担）</p>
+        <p class="text-sm text-text-secondary leading-[1.9] max-w-2xl">
+          連帯保証人は必要ありません。そのかわり、保証会社の審査をお願いしています。初回は家賃の50%〜1ヶ月分程度、毎月は家賃の1〜3%程度です。ご利用いただく保証会社と審査の結果で決まるため、お申し込みの前に正確な金額をお伝えします。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 概要 -->
+  <section class="bg-white washi">
+    <div class="max-w-[1120px] mx-auto px-5 sm:px-8 py-12">
+      <h2 class="text-xl font-bold text-gray-900 mb-6">物件概要</h2>
+      <dl class="text-sm max-w-3xl">
+        {overview.map(([k, v]) => (
+          <div class="grid grid-cols-[7rem_1fr] gap-3 py-3 border-t border-gray-200">
+            <dt class="font-bold text-gray-900">{k}</dt>
+            <dd class="text-text-secondary leading-[1.8]">{v}</dd>
+          </div>
+        ))}
+        <div class="grid grid-cols-[7rem_1fr] gap-3 py-3 border-t border-b border-gray-200">
+          <dt class="font-bold text-gray-900">設備・インフラ</dt>
+          <dd class="text-text-secondary leading-[1.8]">
+            <ul class="space-y-1">
+              {r.infra.map((i) => (
+                <li>{i}</li>
+              ))}
+            </ul>
+          </dd>
+        </div>
+      </dl>
+      <p class="mt-4 text-sm">
+        <a href={mapUrl(r)} target="_blank" rel="noopener" class="underline underline-offset-4 text-gray-900 hover:opacity-70">Googleマップで場所を見る</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- 先にお伝えしておくこと -->
+  <section class="bg-bg-secondary washi">
+    <div class="max-w-[1120px] mx-auto px-5 sm:px-8 py-12">
+      <h2 class="text-xl font-bold text-gray-900 mb-3">先にお伝えしておくこと</h2>
+      <p class="text-sm text-text-secondary mb-6 max-w-2xl">家賃を抑えて出している理由です。ご内覧の前に必ずお読みください。</p>
+      <ul class="space-y-3 text-sm text-text-secondary leading-[1.9] max-w-2xl">
+        {r.disclosures.map((d) => (
+          <li class="pl-5 relative before:content-['—'] before:absolute before:left-0 before:text-gray-400">{d}</li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- こんな方に -->
+  <section class="bg-white washi">
+    <div class="max-w-[1120px] mx-auto px-5 sm:px-8 py-12">
+      <h2 class="text-xl font-bold text-gray-900 mb-6">こんな方に</h2>
+      <ul class="space-y-2.5 text-sm text-text-secondary leading-[1.8] max-w-2xl">
+        {r.highlights.map((h) => (
+          <li class="pl-5 relative before:content-['—'] before:absolute before:left-0 before:text-gray-400">{h}</li>
+        ))}
+      </ul>
+      <p class="mt-6 text-sm text-text-secondary leading-[1.9] max-w-2xl">
+        高齢の方、外国籍の方、生活保護を受給されている方、ルームシェア、LGBTのカップル、保証人がいない方も歓迎します。日本語・やさしい日本語・英語で対応します。監理団体様、登録支援機関様、居住支援法人様、技能実習生・特定技能の受け入れ企業様からのご相談も受け付けています。
+      </p>
+    </div>
+  </section>
+
+  <!-- 内覧から契約まで -->
+  <section class="bg-bg-secondary washi">
+    <div class="max-w-[1120px] mx-auto px-5 sm:px-8 py-12">
+      <h2 class="text-xl font-bold text-gray-900 mb-6">内覧からご契約まで</h2>
+      <ol class="space-y-4 max-w-2xl">
+        {viewingSteps.map((s, i) => (
+          <li class="grid grid-cols-[2.5rem_1fr] gap-3 items-baseline">
+            <span class="font-num text-2xl font-medium text-gray-300">{i + 1}</span>
+            <p class="text-sm text-text-secondary leading-[1.8]">{s}</p>
+          </li>
+        ))}
+      </ol>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a href={LINE_URL} target="_blank" rel="noopener" class="inline-flex items-center justify-center px-6 py-3 text-sm font-semibold text-white bg-[#06C755] rounded-none hover:opacity-85 transition-opacity duration-200">LINEで内覧を相談する</a>
+        <a href={applyUrl(r)} target="_blank" rel="noopener" class="inline-flex items-center justify-center px-6 py-3 text-sm font-semibold text-white bg-[#1A1A1A] rounded-none hover:opacity-85 transition-opacity duration-200">入居申込フォームへ</a>
+        <a href="/contact" class="inline-flex items-center justify-center px-6 py-3 text-sm font-semibold text-gray-900 border border-gray-900 rounded-none hover:bg-[#F2F2F2] transition-colors duration-200">フォームで問い合わせる</a>
+      </div>
+      <p class="mt-4 text-xs text-text-muted leading-[1.8]">
+        ジモティーでも同じ条件で募集しています（<a href={r.jimotyUrl} target="_blank" rel="noopener" class="underline underline-offset-4 hover:text-gray-900">掲載ページ</a>）。入居申込フォームは、内覧後にお申し込みの意思が固まった方向けです。
+      </p>
+    </div>
+  </section>
+
+  <!-- 事業者情報 -->
+  <section class="bg-white washi border-t border-gray-100">
+    <div class="max-w-[1120px] mx-auto px-5 sm:px-8 py-10">
+      <h2 class="text-sm font-bold text-gray-900 mb-3">事業者情報</h2>
+      <p class="text-sm text-text-secondary leading-[1.9] max-w-2xl">
+        商号：株式会社novshi（ノブシ）／所在地：福岡県福岡市東区香椎照葉6-2-51<br />
+        取引態様：貸主。当社が保有する物件を貸主として直接募集しています（自ら貸主。宅地建物取引業には該当しません）。仲介手数料はかかりません。
+      </p>
+      <p class="mt-4 text-xs text-text-muted">※掲載の条件は{AS_OF}時点のものです。最新の条件・空き状況はお問い合わせください。</p>
+    </div>
+  </section>
+</Layout>

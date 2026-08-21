@@ -1,0 +1,73 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Hero from '../../components/Hero.astro';
+import { RENTALS, OCCUPIED, AS_OF, LINE_URL } from '../../data/rentals';
+---
+
+<Layout
+  title="入居者募集の物件一覧 | 株式会社novshi"
+  description="福岡県内で入居者を募集中の一戸建て一覧。すべて大家（当社）の直接募集で、初期費用0円・仲介手数料なし。"
+>
+  <Hero
+    label="For Tenants"
+    title="入居者募集の物件"
+    subtitle="当社が保有する一戸建てを、大家として直接お貸ししています。不動産会社を通さないので仲介手数料がかからず、その分を初期費用0円という形で入居者様にお返ししています。"
+    compact={true}
+  />
+
+  <section class="sec-lg bg-white washi border-t border-gray-100">
+    <div class="max-w-[1120px] mx-auto px-5 sm:px-8">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-10 stagger">
+        {RENTALS.map((r) => (
+          <a href={`/rent/${r.slug}`} class="flex flex-col group">
+            <div class="relative overflow-hidden">
+              <img
+                src={`/images/rent/${r.slug}/01.webp`}
+                alt={r.photos[0].alt}
+                class="w-full aspect-[4/3] object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+                loading="lazy"
+                width="800"
+                height="600"
+              />
+              <span class="absolute top-0 left-0 text-[11px] font-semibold px-3 py-1.5 bg-[#1A1A1A] text-white">募集中</span>
+            </div>
+            <div class="pt-3">
+              <div class="flex items-baseline justify-between gap-3">
+                <p class="text-sm font-bold text-gray-900">{r.name}</p>
+                <p class="text-sm text-gray-900"><span class="font-num font-semibold">{(r.rent / 10000).toLocaleString('ja-JP')}</span><span class="text-xs text-text-muted">万円／月</span></p>
+              </div>
+              <p class="mt-1 text-xs text-text-muted">{r.spec}</p>
+            </div>
+          </a>
+        ))}
+        {OCCUPIED.map((p) => (
+          <div class="flex flex-col">
+            <div class="relative w-full aspect-[4/3] bg-[#1A1A1A] overflow-hidden">
+              <img aria-hidden="true" src="/images/site/mark-enso-white.png" alt="" width="888" height="981" class="absolute -right-[16%] -bottom-[40%] w-[240px] max-w-none opacity-[0.12] select-none pointer-events-none" loading="lazy" />
+              <span class="absolute top-0 left-0 text-[11px] font-semibold px-3 py-1.5 bg-white text-gray-900">入居中</span>
+            </div>
+            <div class="pt-3 flex items-baseline justify-between gap-3">
+              <p class="text-sm font-bold text-gray-900">{p.name}</p>
+              <p class="text-xs text-text-muted">{p.spec}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div class="mt-14 bg-[#F2F2F2] p-7 max-w-xl fade-in-up">
+        <p class="text-sm font-bold text-gray-900 mb-2">内覧のご希望・空き状況の確認</p>
+        <p class="text-sm text-text-secondary leading-[1.9]">
+          LINEまたはお問い合わせフォームからご連絡ください。高齢の方、外国籍の方、生活保護を受給されている方、保証人がいない方も歓迎します。
+        </p>
+        <div class="mt-4 flex flex-wrap gap-3">
+          <a href={LINE_URL} target="_blank" rel="noopener" class="inline-flex items-center justify-center px-5 py-2.5 text-sm font-semibold text-white bg-[#06C755] rounded-none hover:opacity-85 transition-opacity duration-200">LINEで相談する</a>
+          <a href="/contact" class="inline-flex items-center justify-center px-5 py-2.5 text-sm font-semibold text-gray-900 border border-gray-900 rounded-none hover:bg-[#F2F2F2] transition-colors duration-200">フォームで問い合わせる</a>
+        </div>
+      </div>
+
+      <p class="mt-8 text-xs text-text-muted leading-[1.8]">
+        取引態様：貸主（自ら貸主。宅地建物取引業には該当しません）。掲載の条件は{AS_OF}時点のものです。最新の条件・空き状況はお問い合わせください。
+      </p>
+    </div>
+  </section>
+</Layout>

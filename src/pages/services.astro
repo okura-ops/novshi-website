@@ -2,7 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
 import CTASection from '../components/CTASection.astro';
-import { PROPERTIES } from '../data/properties';
+import { RENTALS, OCCUPIED } from '../data/rentals';
 
 const recruitItems = [
   { title: '採用戦略の設計', desc: '誰を、いつまでに、いくらで採るかを数字で決めます。' },
@@ -335,8 +335,8 @@ const shatakuTerms = [
 
       <!-- 法人向け: 外国人材の社宅（1棟借り上げ）。配布中のチラシと同じ内容を公開ページ版に落としたもの -->
       <div class="mt-16 pt-12 border-t border-gray-200">
-        <h3 class="text-xl font-bold text-gray-900 mb-4 fade-in-up">外国人材の社宅を、戸建1棟でお貸しします</h3>
-        <p class="text-text-secondary leading-[1.9] max-w-2xl fade-in-up">
+        <h3 class="text-xl lg:text-[22px] font-bold text-gray-900 mb-4 fade-in-up">外国人材の社宅を、戸建1棟でお貸しします</h3>
+        <p class="text-base lg:text-lg text-text-secondary leading-[1.9] max-w-2xl fade-in-up">
           技能実習生・特定技能人材を受け入れる企業さま向けに、再生した戸建を1棟まるごとお貸ししています。契約は御社と当社の1本だけ。入退去のたびの清掃と原状回復、生活に要る備品の用意まで、こちらで段取りします。
         </p>
 
@@ -348,11 +348,11 @@ const shatakuTerms = [
           </div>
           <div class="stagger">
             {shatakuPairs.map(([trouble, key, detail]) => (
-              <div class="grid grid-cols-1 md:grid-cols-[1fr_1.2fr] gap-x-10 gap-y-2 py-6 border-b border-gray-200">
-                <p class="text-sm text-text-secondary leading-[1.9]">{trouble}</p>
+              <div class="grid grid-cols-1 md:grid-cols-[1fr_1.2fr] gap-x-10 gap-y-2 py-7 border-b border-gray-200">
+                <p class="text-base text-text-secondary leading-[1.9]">{trouble}</p>
                 <div>
-                  <p class="text-base font-bold text-gray-900 leading-[1.6]">{key}</p>
-                  <p class="mt-1.5 text-sm text-text-secondary leading-[1.9]">{detail}</p>
+                  <p class="text-lg font-bold text-gray-900 leading-[1.6]">{key}</p>
+                  <p class="mt-2 text-base text-text-secondary leading-[1.9]">{detail}</p>
                 </div>
               </div>
             ))}
@@ -361,14 +361,14 @@ const shatakuTerms = [
 
         <!-- なぜこの条件で貸せるのか -->
         <div class="mt-16">
-          <h4 class="text-lg font-bold text-gray-900 mb-2 fade-in-up">この条件で貸せる理由</h4>
-          <p class="text-text-secondary mb-8 fade-in-up">仕入れから改修まで自社で持っているので、家賃を抑えられます。</p>
+          <h4 class="text-xl font-bold text-gray-900 mb-2 fade-in-up">この条件で貸せる理由</h4>
+          <p class="text-base text-text-secondary mb-8 fade-in-up">仕入れから改修まで自社で持っているので、家賃を抑えられます。</p>
           <div class="stagger max-w-3xl">
             {shatakuWhy.map((w) => (
-              <div class="grid grid-cols-[3.5rem_11rem_1fr] max-sm:grid-cols-[3.5rem_1fr] items-baseline gap-3 py-5 border-b border-gray-200">
-                <span class="font-num text-2xl font-medium text-gray-300">{w.num}</span>
-                <p class="text-base font-bold text-gray-900">{w.label}</p>
-                <p class="text-sm text-text-secondary leading-[1.9] max-sm:col-span-2 max-sm:pl-14">{w.desc}</p>
+              <div class="grid grid-cols-[4rem_12rem_1fr] max-sm:grid-cols-[3.5rem_1fr] items-baseline gap-3 py-6 border-b border-gray-200">
+                <span class="font-num text-3xl font-medium text-gray-300">{w.num}</span>
+                <p class="text-lg font-bold text-gray-900">{w.label}</p>
+                <p class="text-base text-text-secondary leading-[1.9] max-sm:col-span-2 max-sm:pl-16">{w.desc}</p>
               </div>
             ))}
           </div>
@@ -376,21 +376,21 @@ const shatakuTerms = [
 
         <!-- 条件 -->
         <div class="mt-16">
-          <h4 class="text-lg font-bold text-gray-900 mb-8 fade-in-up">お貸しする条件</h4>
+          <h4 class="text-xl font-bold text-gray-900 mb-8 fade-in-up">お貸しする条件</h4>
           <dl class="stagger max-w-3xl">
             {shatakuTerms.map(([term, desc]) => (
-              <div class="grid grid-cols-1 sm:grid-cols-[10rem_1fr] gap-x-6 gap-y-1 py-5 border-b border-gray-200">
-                <dt class="text-sm font-bold text-gray-900">{term}</dt>
-                <dd class="text-sm text-text-secondary leading-[1.9]">{desc}</dd>
+              <div class="grid grid-cols-1 sm:grid-cols-[11rem_1fr] gap-x-6 gap-y-1 py-6 border-b border-gray-200">
+                <dt class="text-base font-bold text-gray-900">{term}</dt>
+                <dd class="text-base text-text-secondary leading-[1.9]">{desc}</dd>
               </div>
             ))}
           </dl>
         </div>
 
         <!-- エリア: 在庫から選ばせる形ではないことを明示する -->
-        <div class="mt-12 bg-[#F2F2F2] p-7 max-w-3xl fade-in-up">
-          <p class="text-base font-bold text-gray-900">掲載の物件になくても、ご希望のエリアで仕入れます。</p>
-          <p class="mt-2 text-sm text-text-secondary leading-[1.9]">
+        <div class="mt-12 bg-[#F2F2F2] p-8 lg:p-9 max-w-3xl fade-in-up">
+          <p class="text-lg font-bold text-gray-900">掲載の物件になくても、ご希望のエリアで仕入れます。</p>
+          <p class="mt-2.5 text-base text-text-secondary leading-[1.9]">
             いま持っている物件から選んでいただく形ではありません。勤務地と条件を伺ってから、その場所で空き家を探して直します。対象エリアは気にせずご相談ください。登録支援機関・監理団体さまを通じたご紹介も承っています。
           </p>
           <div class="mt-5 flex flex-wrap gap-3">
@@ -400,33 +400,39 @@ const shatakuTerms = [
         </div>
       </div>
 
-      <!-- 物件一覧: 情報として掲載（募集中／稼働中のみ。正本=Notion取得物件管理DB） -->
+      <!-- 物件一覧: 募集中は /rent/ の詳細ページへリンク（データの正本=src/data/rentals.ts、その上流=Notion取得物件管理DBとジモティー掲載） -->
       <div class="mt-16 pt-12 border-t border-gray-200">
         <h3 class="text-xl font-bold text-gray-900 mb-8 fade-in-up">物件情報</h3>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-10 stagger">
-          {PROPERTIES.map((p) => (
+          {RENTALS.map((r) => (
+            <a href={`/rent/${r.slug}`} class="flex flex-col group">
+              <div class="relative overflow-hidden">
+                <img src={`/images/rent/${r.slug}/01.webp`} alt={r.photos[0].alt} class="w-full aspect-[4/3] object-cover transition-transform duration-300 group-hover:scale-[1.03]" loading="lazy" width="800" height="600" />
+                <span class="absolute top-0 left-0 text-[11px] font-semibold px-3 py-1.5 bg-[#1A1A1A] text-white">募集中</span>
+              </div>
+              <div class="pt-3">
+                <div class="flex items-baseline justify-between gap-3">
+                  <p class="text-sm font-bold text-gray-900">{r.name}</p>
+                  <p class="text-sm text-gray-900"><span class="font-num font-semibold">{(r.rent / 10000).toLocaleString('ja-JP')}</span><span class="text-xs text-text-muted">万円／月</span></p>
+                </div>
+                <p class="mt-1 text-xs text-text-muted">{r.spec}</p>
+              </div>
+            </a>
+          ))}
+          {OCCUPIED.map((p) => (
             <div class="flex flex-col">
-              <div class="relative">
-                {p.img ? (
-                  <img src={`/images/site/${p.img}.webp`} alt={p.alt} class="w-full aspect-[4/3] object-cover" loading="lazy" width="800" height="600" />
-                ) : (
-                  <div class="relative w-full aspect-[4/3] bg-[#1A1A1A] overflow-hidden">
-                    <img aria-hidden="true" src="/images/site/mark-enso-white.png" alt="" width="888" height="981" class="absolute -right-[16%] -bottom-[40%] w-[240px] max-w-none opacity-[0.12] select-none pointer-events-none" loading="lazy" />
-                  </div>
-                )}
-                <span class:list={[
-                  'absolute top-0 left-0 text-[11px] font-semibold px-3 py-1.5',
-                  p.status === '募集中' ? 'bg-[#1A1A1A] text-white' : 'bg-white text-gray-900',
-                ]}>{p.status}</span>
+              <div class="relative w-full aspect-[4/3] bg-[#1A1A1A] overflow-hidden">
+                <img aria-hidden="true" src="/images/site/mark-enso-white.png" alt="" width="888" height="981" class="absolute -right-[16%] -bottom-[40%] w-[240px] max-w-none opacity-[0.12] select-none pointer-events-none" loading="lazy" />
+                <span class="absolute top-0 left-0 text-[11px] font-semibold px-3 py-1.5 bg-white text-gray-900">入居中</span>
               </div>
               <div class="pt-3 flex items-baseline justify-between gap-3">
                 <p class="text-sm font-bold text-gray-900">{p.name}</p>
-                {p.spec && <p class="text-xs text-text-muted">{p.spec}</p>}
+                <p class="text-xs text-text-muted">{p.spec}</p>
               </div>
             </div>
           ))}
         </div>
-        <p class="mt-4 text-xs text-text-muted fade-in-up">賃料・入居条件は物件ごとに異なります。最新の空き状況はLINEでお答えします。</p>
+        <p class="mt-4 text-xs text-text-muted fade-in-up">物件名をタップすると、賃料・入居条件・写真の詳細ページが開きます（<a href="/rent" class="underline underline-offset-4 hover:text-gray-900">入居者募集の物件一覧</a>）。</p>
       </div>
 
       <div class="mt-12 bg-[#F2F2F2] p-7 max-w-xl fade-in-up">
