@@ -1,11 +1,4 @@
 {
-  "trailingSlash": false,
-  "redirects": [
-    {
-      "source": "/(.*)",
-      "has": [{ "type": "host", "value": "www.novshi.co.jp" }],
-      "destination": "https://novshi.co.jp/$1",
-      "permanent": true
-    }
-  ]
+  "cleanUrls": true,
+  "trailingSlash": false
 }
