@@ -15,6 +15,20 @@ Astro + Tailwind の静的サイト。デザインの正本は novshi-hq の
 - Vercelプロジェクトは残っているが**novshi.co.jpの配信はしていない**（切り戻し用に2週間程度残置。
   その後削除予定）。Vercelのプレビューを見て「本番を確認した」と判断しない
 
+### 配信元の確認方法（キャッシュに騙されないこと）
+
+ローカルやパブリックリゾルバの応答は**最大1日古い**。NSやIPを確認するときは権威サーバへ直接聞く。
+
+```sh
+nslookup -norecurse -type=NS novshi.co.jp a.dns.jp   # JPレジストリ＝唯一の正
+curl -s -I https://novshi.co.jp/ | grep -i "^server\|^cf-ray"   # cloudflare + CF-RAY があればCloudflare配信
+```
+
+2026-08-22の切替直後、あるセッションが「apexはVercel、wwwはCloudflare」という混在を観測して
+「NS未切替では」と報告したが、実際は切替済みで、apexのAレコード（TTL 3600）だけが
+ローカルキャッシュに残っていた。**wwwだけ新しく見えたのは、wwwが新規解決だったため。**
+権威サーバに聞けば一意に判定できる。
+
 ### 触ってはいけない/消してはいけないファイル
 
 | ファイル | 役割 |
