@@ -69,8 +69,8 @@ const shatakuRoles = [
 // 室内の実写。外観だけでは「生活できる状態か」が伝わらない（Manus競合調査 §5-4）。
 // altは src/data/rentals.ts の photos に合わせる。改修前後の比較はできないので「改修後」とは書かない
 const shatakuShots = [
-  { src: '/images/rent/006-ikisu/03.webp', alt: '飯塚市伊岐須の戸建の対面キッチン', cap: '台所' },
-  { src: '/images/rent/006-ikisu/05.webp', alt: '飯塚市伊岐須の戸建の2階洋室（2面採光）', cap: '居室' },
+  { src: '/images/rent/006-ikisu/03.webp', alt: '飯塚市伊岐須の戸建の対面キッチン', cap: '対面キッチン' },
+  { src: '/images/rent/006-ikisu/05.webp', alt: '飯塚市伊岐須の戸建の2階洋室（2面採光）', cap: '2階の洋室（2面採光）' },
   { src: '/images/rent/006-ikisu/06.webp', alt: '飯塚市伊岐須の戸建の浴室', cap: '浴室' },
 ];
 const shatakuTerms = [
@@ -88,7 +88,7 @@ const shatakuTerms = [
   <Hero label="Services" title="novshiの事業" subtitle="九州の中小企業の採用と組織を支える仕事と、空き家を働く人の社宅に変える仕事をしています。" compact={true} />
 
   <!-- サービスタブ: 採用・経営支援 ／ 空き家再生 -->
-  <div class="bg-white washi border-t border-gray-200 sticky top-16 lg:top-[72px] z-30" id="service-tabs">
+  <div class="bg-white border-t border-gray-200 sticky top-16 lg:top-[72px] z-30" id="service-tabs">
     <div class="max-w-[1120px] mx-auto px-5 sm:px-8">
       <div class="flex gap-10">
         <button type="button" data-tab="shien" class="tab-btn cursor-pointer relative py-5 text-base lg:text-lg font-bold text-gray-900 transition-colors duration-200 hover:text-gray-900" aria-selected="true">
@@ -107,7 +107,7 @@ const shatakuTerms = [
 
   <div data-panel="shien">
   <!-- 柱1: 採用支援 -->
-  <section id="recruitment" class="sec-xl scroll-mt-32 bg-white border-t border-gray-100 washi">
+  <section id="recruitment" class="sec-xl scroll-mt-32 bg-white border-t border-gray-100">
     <div class="max-w-[1120px] mx-auto px-5 sm:px-8">
       <div class="max-w-2xl fade-in-up">
         {/* TODO:COPY services-recruit-head */}
@@ -158,7 +158,7 @@ const shatakuTerms = [
                 <p class="text-sm font-bold text-gray-900" style="writing-mode: vertical-rl; letter-spacing: 0.18em;">novshiの支援範囲</p>
               </div>
             </div>
-            <p class="mt-4 text-xs text-text-muted">採用戦略は、この順番でしか立てられません。</p>
+            <p class="mt-4 text-sm text-gray-500">採用戦略は、この順番でしか立てられません。</p>
           </div>
         </div>
       </div>
@@ -246,7 +246,7 @@ const shatakuTerms = [
   </section>
 
   <!-- 外国人採用・定着支援 -->
-  <section class="sec-lg bg-bg-secondary washi">
+  <section class="sec-lg bg-bg-secondary">
     <div class="max-w-[1120px] mx-auto px-5 sm:px-8">
       <div class="max-w-3xl fade-in-up">
         <h3 class="text-xl font-bold text-gray-900 mb-4">外国人採用・定着支援</h3>
@@ -271,7 +271,7 @@ const shatakuTerms = [
   </section>
 
   <!-- 柱2: 組織・事業・経営の改善支援 -->
-  <section id="consulting" class="sec-lg bg-white scroll-mt-20 washi">
+  <section id="consulting" class="sec-lg bg-white scroll-mt-20">
     <div class="max-w-[1120px] mx-auto px-5 sm:px-8">
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
         <div class="lg:col-span-7 fade-in-up">
@@ -342,7 +342,7 @@ const shatakuTerms = [
 
   <div data-panel="akiya" class="hidden">
   <!-- 空き家再生×社宅 -->
-  <section id="akiya" class="sec-xl scroll-mt-32 bg-white washi washi-seigaiha">
+  <section id="akiya" class="sec-xl scroll-mt-32 bg-white">
     <div class="max-w-[1120px] mx-auto px-5 sm:px-8">
       <div class="max-w-2xl fade-in-up">
         {/* TODO:COPY services-akiya-head */}
@@ -482,7 +482,7 @@ const shatakuTerms = [
           {shatakuShots.map((s) => (
             <figure>
               <img src={s.src} alt={s.alt} class="w-full aspect-[4/3] object-cover" loading="lazy" width="800" height="600" />
-              <figcaption class="mt-3 text-sm text-text-muted">{s.cap}</figcaption>
+              <figcaption class="mt-3 text-sm text-gray-500">{s.cap}</figcaption>
             </figure>
           ))}
         </div>
@@ -500,10 +500,10 @@ const shatakuTerms = [
               </div>
               <div class="pt-3">
                 <div class="flex items-baseline justify-between gap-3">
-                  <p class="text-sm font-bold text-gray-900">{r.name}</p>
-                  <p class="text-sm text-gray-900"><span class="font-num font-semibold">{(r.rent / 10000).toLocaleString('ja-JP')}</span><span class="text-xs text-text-muted">万円／月</span></p>
+                  <p class="text-base font-bold text-gray-900">{r.name}</p>
+                  <p class="text-base text-gray-900"><span class="font-num font-semibold">{(r.rent / 10000).toLocaleString('ja-JP')}</span><span class="text-sm font-medium">万円／月</span></p>
                 </div>
-                <p class="mt-1 text-xs text-text-muted">{r.spec}</p>
+                <p class="mt-1.5 text-sm text-gray-500">{r.spec}</p>
               </div>
             </a>
           ))}
@@ -514,13 +514,13 @@ const shatakuTerms = [
                 <span class="absolute top-0 left-0 text-[11px] font-semibold px-3 py-1.5 bg-white text-gray-900">入居中</span>
               </div>
               <div class="pt-3 flex items-baseline justify-between gap-3">
-                <p class="text-sm font-bold text-gray-900">{p.name}</p>
-                <p class="text-xs text-text-muted">{p.spec}</p>
+                <p class="text-base font-bold text-gray-900">{p.name}</p>
+                <p class="text-sm text-gray-500">{p.spec}</p>
               </div>
             </div>
           ))}
         </div>
-        <p class="mt-4 text-xs text-text-muted fade-in-up">物件名をタップすると、賃料・入居条件・写真の詳細ページが開きます（<a href="/rent" class="underline underline-offset-4 hover:text-gray-900">入居者募集の物件一覧</a>）。</p>
+        <p class="mt-5 text-sm text-gray-500 fade-in-up">物件名をタップすると、賃料・入居条件・写真の詳細ページが開きます（<a href="/rent" class="underline underline-offset-4 hover:text-gray-900">入居者募集の物件一覧</a>）。</p>
       </div>
 
       <div class="mt-12 bg-[#F2F2F2] p-7 max-w-xl fade-in-up">
