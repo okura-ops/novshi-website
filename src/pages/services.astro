@@ -53,6 +53,26 @@ const shatakuWhy = [
   { num: '02', label: 'まとめて発注する', desc: '熊本・福岡で100件を超える空き家を直してきました。同じ業者に数をまとめて出すので、1戸あたりの工事費が下がります。' },
   { num: '03', label: '1棟を1社に貸す', desc: '働く方が個別に大家と契約しません。保証人を理由に断られることも、窓口が分かれることもありません。' },
 ];
+// 実績帯。検証できる数字だけを置く（Manus競合調査 §5-1。100件超は対外承認済みの表現、
+// 募集中の棟数は下の物件一覧と同じRENTALSから採るのでズレない）
+const shatakuStats = [
+  { num: '100', unit: '件超', label: '熊本・福岡で手がけた空き家再生' },
+  { num: String(RENTALS.length), unit: '棟', label: 'いま募集している自社保有の戸建' },
+  { num: '0', unit: '円', label: '敷金・礼金・仲介手数料' },
+];
+// 役割の図解。誰が何を持つかを文章でなく面で見せる（同 §5-2）
+const shatakuRoles = [
+  { who: '御社', desc: '賃料のお支払いと、どなたが住むかの決定。物件探し・大家との交渉・入退去の手配は発生しません。' },
+  { who: 'novshi', desc: '空き家の仕入れと改修、1棟の貸出、備品の設置、退去後の清掃と原状回復。窓口はここ1つです。' },
+  { who: '働く方', desc: '住むだけ。個別に大家と契約しないので、保証人を理由に断られることがありません。' },
+];
+// 室内の実写。外観だけでは「生活できる状態か」が伝わらない（Manus競合調査 §5-4）。
+// altは src/data/rentals.ts の photos に合わせる。改修前後の比較はできないので「改修後」とは書かない
+const shatakuShots = [
+  { src: '/images/rent/006-ikisu/03.webp', alt: '飯塚市伊岐須の戸建の対面キッチン', cap: '台所' },
+  { src: '/images/rent/006-ikisu/05.webp', alt: '飯塚市伊岐須の戸建の2階洋室（2面採光）', cap: '居室' },
+  { src: '/images/rent/006-ikisu/06.webp', alt: '飯塚市伊岐須の戸建の浴室', cap: '浴室' },
+];
 const shatakuTerms = [
   ['対象', '技能実習生・特定技能1号／2号・留学生など、外国籍の従業員の方'],
   ['契約形態', '御社と当社の1棟借り上げ契約（契約は1本）'],
@@ -333,6 +353,23 @@ const shatakuTerms = [
         </p>
       </div>
 
+      <!-- 実績帯: 説明より先に検証できる数字を置く（Manus競合調査 §5-1／群Cで5/6サイトが採る型） -->
+      <div class="mt-12 bg-[#F2F2F2] px-7 py-9 sm:px-10">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-y-8 stagger">
+          {shatakuStats.map((s, i) => (
+            <div class:list={['sm:px-8', i === 0 && 'sm:pl-0', i === 2 && 'sm:pr-0',
+                              i > 0 && 'sm:border-l sm:border-gray-900/15']}>
+              <span class="block w-10 h-[3px] bg-[#B5502A] mb-4" aria-hidden="true"></span>
+              <p class="leading-none">
+                <span class="font-num text-5xl font-medium text-gray-900">{s.num}</span>
+                <span class="text-lg font-bold text-gray-900 ml-1">{s.unit}</span>
+              </p>
+              <p class="mt-3 text-sm text-text-secondary leading-[1.8]">{s.label}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
       <!-- 法人向け: 外国人材の社宅（1棟借り上げ）。配布中のチラシと同じ内容を公開ページ版に落としたもの -->
       <div class="mt-16 pt-12 border-t border-gray-200">
         <!-- 導入: テキストだけで入らず、写真を面として置く（AI感規範 §4-4-1） -->
@@ -348,8 +385,24 @@ const shatakuTerms = [
           </div>
         </div>
 
+        <!-- 役割の図解: 誰が何を持つかを文章でなく面で示す（Manus競合調査 §5-2／群Aで4/7サイトが図解） -->
+        <div class="mt-14">
+          <h4 class="text-xl font-bold text-gray-900 mb-8 fade-in-up">誰が何を持つか</h4>
+          <div class="flex flex-col md:flex-row md:items-stretch gap-y-6 stagger">
+            {shatakuRoles.map((r, i) => (
+              <>
+                {i > 0 && <div class="hidden md:flex items-center px-4 text-gray-300 text-xl" aria-hidden="true">→</div>}
+                <div class="flex-1 pt-5 border-t border-gray-900">
+                  <p class="text-lg font-bold text-gray-900">{r.who}</p>
+                  <p class="mt-3 text-base text-text-secondary leading-[1.9]">{r.desc}</p>
+                </div>
+              </>
+            ))}
+          </div>
+        </div>
+
         <!-- 困りごと → novshiの社宅なら -->
-        <div class="mt-12 max-w-4xl">
+        <div class="mt-16 max-w-4xl">
           <div class="hidden md:grid grid-cols-[1fr_1.2fr] gap-x-10 pb-3 border-b border-gray-900 fade-in-up">
             <p class="text-sm font-bold text-text-muted">よくある困りごと</p>
             <p class="text-sm font-bold text-gray-900">novshiの社宅なら</p>
@@ -385,14 +438,25 @@ const shatakuTerms = [
         <!-- 条件 -->
         <div class="mt-16">
           <h4 class="text-xl font-bold text-gray-900 mb-8 fade-in-up">お貸しする条件</h4>
-          <dl class="stagger max-w-3xl">
-            {shatakuTerms.map(([term, desc]) => (
-              <div class="grid grid-cols-1 sm:grid-cols-[11rem_1fr] gap-x-6 gap-y-1 py-6 border-b border-gray-200">
-                <dt class="text-base font-bold text-gray-900">{term}</dt>
-                <dd class="text-base text-text-secondary leading-[1.9]">{desc}</dd>
-              </div>
-            ))}
-          </dl>
+          {/* 社内共有・監理団体との確認に引用できるよう、行リストではなく表にする（Manus競合調査 §5-3） */}
+          <div class="max-w-4xl fade-in-up">
+            <table class="w-full border-collapse text-left">
+              <thead>
+                <tr class="bg-[#1A1A1A] text-white">
+                  <th scope="col" class="w-[28%] px-5 py-4 text-sm font-bold">項目</th>
+                  <th scope="col" class="px-5 py-4 text-sm font-bold">内容</th>
+                </tr>
+              </thead>
+              <tbody>
+                {shatakuTerms.map(([term, desc]) => (
+                  <tr class="border-b border-[#D9D9D9]">
+                    <th scope="row" class="px-5 py-5 align-top text-base font-bold text-gray-900">{term}</th>
+                    <td class="px-5 py-5 text-base text-text-secondary leading-[1.7]">{desc}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
 
         <!-- エリア: 在庫から選ばせる形ではないことを明示する -->
@@ -405,6 +469,22 @@ const shatakuTerms = [
             <a href="/contact" class="inline-flex items-center justify-center px-6 py-3 text-sm font-semibold text-white bg-[#1A1A1A] rounded-none hover:opacity-85 transition-opacity duration-200">社宅について相談する</a>
             <a href="/contact?type=doc" class="inline-flex items-center justify-center px-6 py-3 text-sm font-semibold text-gray-900 border border-gray-900 rounded-none hover:bg-white transition-colors duration-200">資料を請求する</a>
           </div>
+        </div>
+      </div>
+
+      <!-- 室内の実写: 外観だけでは生活できる状態か伝わらない（Manus競合調査 §5-4） -->
+      <div class="mt-16 pt-12 border-t border-gray-200">
+        <h3 class="text-xl lg:text-[22px] font-bold text-gray-900 mb-4 fade-in-up">お渡しするのは、この状態です</h3>
+        <p class="text-base text-text-secondary leading-[1.9] max-w-3xl mb-8 fade-in-up">
+          水まわりと居室は、入居した日から使える状態にしてお渡しします。食器や調理器具など生活に要るものも、相談のうえ置いておきます。
+        </p>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-x-6 gap-y-8 stagger">
+          {shatakuShots.map((s) => (
+            <figure>
+              <img src={s.src} alt={s.alt} class="w-full aspect-[4/3] object-cover" loading="lazy" width="800" height="600" />
+              <figcaption class="mt-3 text-sm text-text-muted">{s.cap}</figcaption>
+            </figure>
+          ))}
         </div>
       </div>
 
