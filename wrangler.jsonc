@@ -1,0 +1,15 @@
+// Cloudflare Workers（静的アセット配信）設定 — novshi.co.jp
+// デプロイ: Workers Builds が `npm run build` → `npx wrangler deploy` を実行する
+{
+  "name": "novshi-website",
+  "compatibility_date": "2026-08-01",
+  "assets": {
+    // Astroの静的ビルド出力
+    "directory": "./dist",
+    // 末尾スラッシュなしが正（trailingSlash:'never'・GSC/canonicalと一致）。
+    // /about/ へのアクセスは /about に正規化される
+    "html_handling": "drop-trailing-slash",
+    // dist/404.html（Astro生成）を404応答に使う
+    "not_found_handling": "404-page"
+  }
+}
