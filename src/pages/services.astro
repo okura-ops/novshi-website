@@ -115,7 +115,7 @@ const shatakuTerms = [
         <h2 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-6">採用支援</h2>
         <p class="text-lg font-bold text-gray-900 mb-4">「もう一人の経営者。」</p>
         {/* TODO:COPY services-recruit-lead */}
-        <p class="text-text-secondary leading-[1.9]">
+        <p class="text-gray-700 leading-[1.9]">
           採用担当がいない会社の、採用担当になります。実務代行ではなく、経営者の隣で採否を一緒に決める立場です。
         </p>
       </div>
@@ -124,10 +124,10 @@ const shatakuTerms = [
       <div class="mt-14 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
         <div class="lg:col-span-5 fade-in-up">
           <h3 class="text-xl lg:text-2xl font-bold text-gray-900 mb-5">採用は、経営から逆算する</h3>
-          <p class="text-sm text-text-secondary leading-[1.9] max-w-md">
+          <p class="text-sm text-gray-700 leading-[1.9] max-w-md">
             採用戦略は、単独では立てられません。事業戦略が決まり、それを実行する組織のかたちが決まって、はじめて「誰を、いつ採るか」が決まります。この順番を飛ばした求人は、応募が来ても定着しません。
           </p>
-          <p class="mt-4 text-sm text-text-secondary leading-[1.9] max-w-md">
+          <p class="mt-4 text-sm text-gray-700 leading-[1.9] max-w-md">
             だからnovshiの採用支援は、経営・事業のレイヤーに立てるメンバーのみで行います。求人の書き方ではなく、事業の勝ち筋から採用を設計します。
           </p>
         </div>
@@ -167,7 +167,7 @@ const shatakuTerms = [
         {/* 課題の言語化（RPOサービスページの定石: 悩みを先に置く） */}
         <div class="mt-10">
           <p class="text-sm font-bold text-gray-900 mb-4">こんな状態の会社を支えています</p>
-          <ul class="space-y-2.5 text-sm text-text-secondary leading-[1.8]">
+          <ul class="space-y-2.5 text-sm text-gray-700 leading-[1.8]">
             {troubles.map((t) => (
               <li class="pl-5 relative before:content-['—'] before:absolute before:left-0 before:text-gray-400">{t}</li>
             ))}
@@ -179,7 +179,7 @@ const shatakuTerms = [
         {recruitItems.map((item) => (
           <div class="border-t border-gray-200 py-6">
             <h3 class="text-sm font-bold text-gray-900 mb-1">{item.title}</h3>
-            <p class="text-sm text-text-secondary leading-[1.9]">{item.desc}</p>
+            <p class="text-sm text-gray-700 leading-[1.9]">{item.desc}</p>
           </div>
         ))}
       </div>
@@ -200,7 +200,7 @@ const shatakuTerms = [
           </div>
           <div class="bg-[#F2F2F2] p-8 lg:p-9">
             <p class="text-sm font-bold text-gray-900 mb-5">お客様にお願いすること</p>
-            <ul class="space-y-3 text-sm text-text-secondary leading-[1.8]">
+            <ul class="space-y-3 text-sm text-gray-700 leading-[1.8]">
               <li>採否の最終決定</li>
               <li>労働条件・待遇の決定</li>
               <li>面接の実施（novshiの同席は可能です）</li>
@@ -213,13 +213,13 @@ const shatakuTerms = [
       <div class="mt-16 pt-12 border-t border-gray-200">
         {/* TODO:COPY services-recruit-channels-head */}
         <h3 class="text-xl font-bold text-gray-900 mb-2 fade-in-up">運用する3つのチャネル</h3>
-        <p class="text-text-secondary mb-8 fade-in-up">媒体ごとに役割を分けて使います。</p>
+        <p class="text-gray-700 mb-8 fade-in-up">媒体ごとに役割を分けて使います。</p>
         <div class="stagger max-w-3xl">
           {channels.map((ch) => (
             <div class="grid grid-cols-[3.5rem_10rem_1fr] max-sm:grid-cols-[3.5rem_1fr] items-baseline gap-3 py-5 border-b border-gray-200">
               <span class="font-num text-2xl font-medium text-gray-300">{ch.num}</span>
               <p class="text-base font-bold text-gray-900">{ch.label}</p>
-              <p class="text-sm text-text-secondary leading-[1.9] max-sm:col-span-2 max-sm:pl-14">{ch.desc}</p>
+              <p class="text-sm text-gray-700 leading-[1.9] max-sm:col-span-2 max-sm:pl-14">{ch.desc}</p>
             </div>
           ))}
         </div>
@@ -236,7 +236,7 @@ const shatakuTerms = [
                 <img src="/images/brush/line-sumi.png" alt="" aria-hidden="true" width="1118" height="103" class="brush-rule h-2 mb-5 select-none" />
                 <p class="font-num text-2xl font-medium text-gray-300 leading-none mb-3">{s.num}</p>
                 <p class="text-base font-bold text-gray-900">{s.title}</p>
-                <p class="mt-2 text-sm text-text-secondary leading-[1.8]">{s.desc}</p>
+                <p class="mt-2 text-sm text-gray-700 leading-[1.8]">{s.desc}</p>
               </div>
             </>
           ))}
@@ -251,14 +251,14 @@ const shatakuTerms = [
       <div class="max-w-3xl fade-in-up">
         <h3 class="text-xl font-bold text-gray-900 mb-4">外国人採用・定着支援</h3>
         {/* TODO:COPY services-global-lead */}
-        <p class="text-text-secondary leading-[1.9] mb-8 max-w-xl">
+        <p class="text-gray-700 leading-[1.9] mb-8 max-w-xl">
           外国人採用でよくあるつまずきは、内定後に住まいが決まらないことです。novshiは人材紹介（有料職業紹介事業許可 40-ユ-301708）に、社宅の用意を組み合わせています。
         </p>
         <div class="stagger">
           {globalItems.map((item) => (
             <div class="border-t border-gray-300/70 py-5">
               <h4 class="text-sm font-bold text-gray-900 mb-1">{item.title}</h4>
-              <p class="text-sm text-text-secondary leading-[1.9] max-w-lg">{item.desc}</p>
+              <p class="text-sm text-gray-700 leading-[1.9] max-w-lg">{item.desc}</p>
             </div>
           ))}
         </div>
@@ -279,7 +279,7 @@ const shatakuTerms = [
           <p class="font-num text-5xl lg:text-6xl font-medium text-gray-200 leading-none mb-5" aria-hidden="true">02</p>
           <h2 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-6">組織・事業・経営の改善支援</h2>
           {/* TODO:COPY services-kaizen-lead */}
-          <p class="text-text-secondary leading-[1.9] max-w-xl">
+          <p class="text-gray-700 leading-[1.9] max-w-xl">
             人を起点に、組織・事業・経営の課題を整理し、改善の実行まで担います。入り口はほとんどの場合、採用です。人が採れない理由を追いかけると、評価の仕組みや業務の回し方、投資判断の順序に行き着きます。novshiはそこまで一緒に踏み込みます。
           </p>
         </div>
@@ -294,9 +294,9 @@ const shatakuTerms = [
             <text x="260" y="259" font-size="22" font-weight="bold" fill="#fff" text-anchor="middle">人</text>
           </svg>
           <div class="mt-6 max-w-sm mx-auto space-y-2.5">
-            <p class="text-sm leading-[1.8]"><span class="font-bold text-gray-900">● 組織</span><span class="text-text-secondary">　評価・役割・定着</span></p>
-            <p class="text-sm leading-[1.8]"><span class="font-bold" style="color:#8A8A8A">● 事業</span><span class="text-text-secondary">　業務・営業・仕組み化</span></p>
-            <p class="text-sm leading-[1.8]"><span class="font-bold" style="color:#C0C0C0">● 経営</span><span class="text-text-secondary">　数値管理・投資判断</span></p>
+            <p class="text-sm leading-[1.8]"><span class="font-bold text-gray-900">● 組織</span><span class="text-gray-700">　評価・役割・定着</span></p>
+            <p class="text-sm leading-[1.8]"><span class="font-bold" style="color:#8A8A8A">● 事業</span><span class="text-gray-700">　業務・営業・仕組み化</span></p>
+            <p class="text-sm leading-[1.8]"><span class="font-bold" style="color:#C0C0C0">● 経営</span><span class="text-gray-700">　数値管理・投資判断</span></p>
           </div>
           
         </div>
@@ -306,7 +306,7 @@ const shatakuTerms = [
         {kaizenItems.map((item) => (
           <div class="border-t border-gray-200 py-6">
             <h3 class="text-sm font-bold text-gray-900 mb-1">{item.title}</h3>
-            <p class="text-sm text-text-secondary leading-[1.9]">{item.desc}</p>
+            <p class="text-sm text-gray-700 leading-[1.9]">{item.desc}</p>
           </div>
         ))}
       </div>
@@ -318,15 +318,15 @@ const shatakuTerms = [
         <div class="stagger max-w-3xl">
           <div class="border-t border-gray-200 py-6">
             <p class="text-sm font-bold text-gray-900 mb-1">不動産会社 — 採用から、人事制度の設計へ</p>
-            <p class="text-sm text-text-secondary leading-[1.9]">採用支援として始まり、応募者管理の仕組み（通知の自動化・管理シート）と人事制度の設計まで担当しています。</p>
+            <p class="text-sm text-gray-700 leading-[1.9]">採用支援として始まり、応募者管理の仕組み（通知の自動化・管理シート）と人事制度の設計まで担当しています。</p>
           </div>
           <div class="border-t border-gray-200 py-6">
             <p class="text-sm font-bold text-gray-900 mb-1">求人メディア運営会社 — 営業部門の立て直しへ</p>
-            <p class="text-sm text-text-secondary leading-[1.9]">支社の営業立て直しプロジェクトに外部アドバイザーとして参画。営業データの整備と、月次で数字を追う会議体を設計しています。</p>
+            <p class="text-sm text-gray-700 leading-[1.9]">支社の営業立て直しプロジェクトに外部アドバイザーとして参画。営業データの整備と、月次で数字を追う会議体を設計しています。</p>
           </div>
           <div class="border-t border-gray-200 py-6">
             <p class="text-sm font-bold text-gray-900 mb-1">ITコンサルティング会社 — 採用投資の意思決定へ</p>
-            <p class="text-sm text-text-secondary leading-[1.9]">高額な採用媒体に出稿する前に、無料チャネルで応募の集まり方を検証する設計に変更。数字が出てから投資を判断する形にしました。</p>
+            <p class="text-sm text-gray-700 leading-[1.9]">高額な採用媒体に出稿する前に、無料チャネルで応募の集まり方を検証する設計に変更。数字が出てから投資を判断する形にしました。</p>
           </div>
         </div>
       </div>

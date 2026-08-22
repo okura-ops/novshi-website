@@ -65,10 +65,10 @@ overview.push(['所在地', `福岡県${r.address}`]);
         <span class="text-[11px] font-semibold px-3 py-1.5 bg-[#1A1A1A] text-white">募集中</span>
         <h1 class="text-2xl lg:text-3xl font-bold text-gray-900">{r.name}の一戸建て</h1>
       </div>
-      <p class="mt-3 text-text-secondary">{r.spec}</p>
+      <p class="mt-3 text-gray-700">{r.spec}</p>
       <p class="mt-4">
         <span class="font-num text-3xl lg:text-4xl font-semibold text-gray-900">{rentStr}</span>
-        <span class="text-sm text-text-secondary">　円／月（共益費0円）</span>
+        <span class="text-sm text-gray-700">　円／月（共益費0円）</span>
       </p>
     </div>
   </section>
@@ -97,8 +97,8 @@ overview.push(['所在地', `福岡県${r.address}`]);
   <!-- 紹介 -->
   <section class="bg-white washi">
     <div class="max-w-[1120px] mx-auto px-5 sm:px-8 py-12">
-      <p class="text-text-secondary leading-[1.9] max-w-2xl">{r.lead}</p>
-      <p class="mt-4 text-sm text-text-secondary leading-[1.9] max-w-2xl">
+      <p class="text-gray-700 leading-[1.9] max-w-2xl">{r.lead}</p>
+      <p class="mt-4 text-sm text-gray-700 leading-[1.9] max-w-2xl">
         不動産会社を通していないので、仲介手数料がかかりません。その分を入居者様に返す形にして、初期費用を0円にしています。
       </p>
     </div>
@@ -114,20 +114,20 @@ overview.push(['所在地', `福岡県${r.address}`]);
             {conditions.map(([k, v]) => (
               <div class="grid grid-cols-[7rem_1fr] gap-3 py-3 border-t border-gray-300/70">
                 <dt class="font-bold text-gray-900">{k}</dt>
-                <dd class="text-text-secondary leading-[1.8]">{v}</dd>
+                <dd class="text-gray-700 leading-[1.8]">{v}</dd>
               </div>
             ))}
           </dl>
         </div>
         <div>
           <p class="text-sm font-bold text-gray-900 mb-3">この物件の特典</p>
-          <ul class="space-y-2 text-sm text-text-secondary leading-[1.8]">
+          <ul class="space-y-2 text-sm text-gray-700 leading-[1.8]">
             {r.perks.map((p) => (
               <li class="pl-5 relative before:content-['—'] before:absolute before:left-0 before:text-gray-400">{p}</li>
             ))}
           </ul>
           <p class="mt-6 text-sm font-bold text-gray-900 mb-3">短期解約違約金</p>
-          <ul class="space-y-1.5 text-sm text-text-secondary leading-[1.8]">
+          <ul class="space-y-1.5 text-sm text-gray-700 leading-[1.8]">
             {r.penalty.map((p) => (
               <li>{p}</li>
             ))}
@@ -139,7 +139,7 @@ overview.push(['所在地', `福岡県${r.address}`]);
       </div>
       <div class="mt-8 max-w-4xl border-t border-gray-300/70 pt-5">
         <p class="text-sm font-bold text-gray-900 mb-2">保証会社の費用（入居者様のご負担）</p>
-        <p class="text-sm text-text-secondary leading-[1.9] max-w-2xl">
+        <p class="text-sm text-gray-700 leading-[1.9] max-w-2xl">
           連帯保証人は必要ありません。そのかわり、保証会社の審査をお願いしています。初回は家賃の50%〜1ヶ月分程度、毎月は家賃の1〜3%程度です。ご利用いただく保証会社と審査の結果で決まるため、お申し込みの前に正確な金額をお伝えします。
         </p>
       </div>
@@ -154,12 +154,12 @@ overview.push(['所在地', `福岡県${r.address}`]);
         {overview.map(([k, v]) => (
           <div class="grid grid-cols-[7rem_1fr] gap-3 py-3 border-t border-gray-200">
             <dt class="font-bold text-gray-900">{k}</dt>
-            <dd class="text-text-secondary leading-[1.8]">{v}</dd>
+            <dd class="text-gray-700 leading-[1.8]">{v}</dd>
           </div>
         ))}
         <div class="grid grid-cols-[7rem_1fr] gap-3 py-3 border-t border-b border-gray-200">
           <dt class="font-bold text-gray-900">設備・インフラ</dt>
-          <dd class="text-text-secondary leading-[1.8]">
+          <dd class="text-gray-700 leading-[1.8]">
             <ul class="space-y-1">
               {r.infra.map((i) => (
                 <li>{i}</li>
@@ -179,8 +179,8 @@ overview.push(['所在地', `福岡県${r.address}`]);
   <section class="bg-bg-secondary washi">
     <div class="max-w-[1120px] mx-auto px-5 sm:px-8 py-12">
       <h2 class="text-xl font-bold text-gray-900 mb-3">先にお伝えしておくこと</h2>
-      <p class="text-sm text-text-secondary mb-6 max-w-2xl">家賃を抑えて出している理由です。ご内覧の前に必ずお読みください。</p>
-      <ul class="space-y-3 text-sm text-text-secondary leading-[1.9] max-w-2xl">
+      <p class="text-sm text-gray-700 mb-6 max-w-2xl">家賃を抑えて出している理由です。ご内覧の前に必ずお読みください。</p>
+      <ul class="space-y-3 text-sm text-gray-700 leading-[1.9] max-w-2xl">
         {r.disclosures.map((d) => (
           <li class="pl-5 relative before:content-['—'] before:absolute before:left-0 before:text-gray-400">{d}</li>
         ))}
@@ -192,12 +192,12 @@ overview.push(['所在地', `福岡県${r.address}`]);
   <section class="bg-white washi">
     <div class="max-w-[1120px] mx-auto px-5 sm:px-8 py-12">
       <h2 class="text-xl font-bold text-gray-900 mb-6">こんな方に</h2>
-      <ul class="space-y-2.5 text-sm text-text-secondary leading-[1.8] max-w-2xl">
+      <ul class="space-y-2.5 text-sm text-gray-700 leading-[1.8] max-w-2xl">
         {r.highlights.map((h) => (
           <li class="pl-5 relative before:content-['—'] before:absolute before:left-0 before:text-gray-400">{h}</li>
         ))}
       </ul>
-      <p class="mt-6 text-sm text-text-secondary leading-[1.9] max-w-2xl">
+      <p class="mt-6 text-sm text-gray-700 leading-[1.9] max-w-2xl">
         高齢の方、外国籍の方、生活保護を受給されている方、ルームシェア、LGBTのカップル、保証人がいない方も歓迎します。日本語・やさしい日本語・英語で対応します。監理団体様、登録支援機関様、居住支援法人様、技能実習生・特定技能の受け入れ企業様からのご相談も受け付けています。
       </p>
     </div>
@@ -211,7 +211,7 @@ overview.push(['所在地', `福岡県${r.address}`]);
         {viewingSteps.map((s, i) => (
           <li class="grid grid-cols-[2.5rem_1fr] gap-3 items-baseline">
             <span class="font-num text-2xl font-medium text-gray-300">{i + 1}</span>
-            <p class="text-sm text-text-secondary leading-[1.8]">{s}</p>
+            <p class="text-sm text-gray-700 leading-[1.8]">{s}</p>
           </li>
         ))}
       </ol>
@@ -230,7 +230,7 @@ overview.push(['所在地', `福岡県${r.address}`]);
   <section class="bg-white washi border-t border-gray-100">
     <div class="max-w-[1120px] mx-auto px-5 sm:px-8 py-10">
       <h2 class="text-sm font-bold text-gray-900 mb-3">事業者情報</h2>
-      <p class="text-sm text-text-secondary leading-[1.9] max-w-2xl">
+      <p class="text-sm text-gray-700 leading-[1.9] max-w-2xl">
         商号：株式会社novshi（ノブシ）／所在地：福岡県福岡市東区香椎照葉6-2-51<br />
         取引態様：貸主。当社が保有する物件を貸主として直接募集しています（自ら貸主。宅地建物取引業には該当しません）。仲介手数料はかかりません。
       </p>
