@@ -38,15 +38,18 @@
   --color-accent-dark: #111111;
   --color-text-primary: #1A1A1A;
   --color-text-secondary: #666666;
-  --color-text-muted: #999999;
+  /* #999999 は白地でコントラスト比2.85:1でWCAG AA(4.5:1)に届かず、薄いグレー文字は
+     AI感の型そのもの（anti_ai_visual_design §1-9）。役割は変えず可読性だけ確保する */
+  --color-text-muted: #767676;
   --color-border: #E5E5E5;
   --color-bg-secondary: #F2F2F2;
 
-  /* Fonts — Web DS v1.0 §1: 見出し Zen Kaku Gothic New / 本文 Noto Sans JP 調整版
-     / 欧文・数値 Montserrat (NO Inter) */
-  --font-sans: "Noto Sans JP", "BIZ UDPGothic", "Yu Gothic", system-ui, sans-serif;
-  --font-display: "Zen Kaku Gothic New", "Noto Sans JP", system-ui, sans-serif;
-  --font-en: "Montserrat", "Noto Sans JP", sans-serif;
+  /* Fonts — 本文もZen Kaku Gothic Newへ統一（2026-08-22）。
+     Noto Sans JPは anti_ai_visual_design §3 で「AI感リスク:高（主因）」に分類されている書体で、
+     本文に使っている限り既定値の顔が抜けない。和文1種＋欧文1種の2書体に絞る。 */
+  --font-sans: "Zen Kaku Gothic New", "BIZ UDPGothic", "Yu Gothic", system-ui, sans-serif;
+  --font-display: "Zen Kaku Gothic New", system-ui, sans-serif;
+  --font-en: "Montserrat", "Zen Kaku Gothic New", sans-serif;
 
   /* CV accent — Web DS v1.0 §2（柿渋。A/B判定までは変種ページのみで使用） */
   --color-cv: #B5502A;
@@ -54,7 +57,8 @@
   /* Typography tokens */
   --text-hero: 3.5rem;
   --text-hero--line-height: 1.15;
-  --text-hero--letter-spacing: -0.02em;
+  /* 和文見出しは負字間禁止（Web DS v1.0 §1-3）。-0.02emは規定違反だったので0に戻す */
+  --text-hero--letter-spacing: 0em;
 
   --text-section: 2rem;
   --text-section--line-height: 1.3;
@@ -83,8 +87,10 @@
     font-family: var(--font-sans);
     color: var(--color-text-primary);
     background-color: #ffffff;
-    line-height: 1.9;
-    letter-spacing: 0.05em;
+    /* tokens.md の本文規定は line-height 1.8 / letter-spacing 0.04em。
+       1.9 / 0.05em は規定より広く、行が間延びして「均一に広げた組版」に見えていた */
+    line-height: 1.8;
+    letter-spacing: 0.04em;
     font-size: 16px;
   }
 
