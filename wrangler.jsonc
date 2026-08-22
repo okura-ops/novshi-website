@@ -2,14 +2,20 @@
 // デプロイ: Workers Builds が `npm run build` → `npx wrangler deploy` を実行する
 {
   "name": "novshi-website",
+  "main": "worker/index.js",
   "compatibility_date": "2026-08-01",
   "assets": {
     // Astroの静的ビルド出力
     "directory": "./dist",
+    "binding": "ASSETS",
     // 末尾スラッシュなしが正（trailingSlash:'never'・GSC/canonicalと一致）。
     // /about/ へのアクセスは /about に正規化される
     "html_handling": "drop-trailing-slash",
     // dist/404.html（Astro生成）を404応答に使う
-    "not_found_handling": "404-page"
+    "not_found_handling": "404-page",
+    // 静的ファイルに一致するリクエストでもWorkerを先に通す。
+    // これがないと www 宛のページリクエストがアセットに直接吸われ、
+    // worker/index.js のwww→apexリダイレクトが発火しない
+    "run_worker_first": true
   }
 }
