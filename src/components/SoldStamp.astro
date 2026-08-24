@@ -1,0 +1,33 @@
+---
+/**
+ * 成約済みの物件に押す朱印風スタンプ。写真の上に重ねて使う。
+ * 親要素に `relative` を付けること。
+ *
+ * 色は柿渋 #B5502A（デザインシステム v1.1 §2-1 の差し色）。
+ * 墨・和紙の視覚言語のなかで赤として読める唯一の色なので、赤字スタンプはこれで作る。
+ * 写真側は暗く落として、スタンプの可読性を確保する。
+ */
+interface Props {
+  /** スタンプの文字。既定は「成約済」 */
+  text?: string;
+  /** カード用の小サイズ。詳細ページのメイン写真では false */
+  compact?: boolean;
+}
+const { text = '成約済', compact = false } = Astro.props;
+---
+
+<span
+  aria-hidden="true"
+  class="absolute inset-0 z-10 flex items-center justify-center pointer-events-none select-none"
+>
+  <span class="absolute inset-0 bg-[#1A1A1A]/35"></span>
+  <span
+    class:list={[
+      'relative -rotate-12 border-[3px] border-[#B5502A] text-[#B5502A] font-bold tracking-[0.3em] bg-white/78',
+      compact ? 'text-lg px-4 py-1.5' : 'text-3xl sm:text-4xl px-8 py-3 border-4',
+    ]}
+    style="text-indent:0.3em"
+  >
+    {text}
+  </span>
+</span>

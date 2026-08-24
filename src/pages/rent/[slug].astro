@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import SoldStamp from '../../components/SoldStamp.astro';
 import { RENTALS, AS_OF, LINE_URL, applyUrl, mapUrl } from '../../data/rentals';
 import type { Rental } from '../../data/rentals';
 
@@ -51,8 +52,16 @@ overview.push(['所在地', `福岡県${r.address}`]);
 ---
 
 <Layout
-  title={`${r.name}の一戸建て（家賃${rentStr}円）| 入居者募集 | 株式会社novshi`}
-  description={`${r.name}の一戸建て（${r.spec}）。家賃${rentStr}円・初期費用0円。大家が直接お貸しします。`}
+  title={
+    r.closed
+      ? `${r.name}の一戸建て（成約済み）| 入居者募集 | 株式会社novshi`
+      : `${r.name}の一戸建て（家賃${rentStr}円）| 入居者募集 | 株式会社novshi`
+  }
+  description={
+    r.closed
+      ? `${r.name}の一戸建て（${r.spec}）は${r.closed.since}に入居が決まりました。ほかの募集中の物件をご覧ください。`
+      : `${r.name}の一戸建て（${r.spec}）。家賃${rentStr}円・初期費用0円。大家が直接お貸しします。`
+  }
 >
   <section class="bg-white washi border-t border-gray-100">
     <div class="max-w-[1120px] mx-auto px-5 sm:px-8 pt-10 pb-6">
@@ -62,14 +71,27 @@ overview.push(['所在地', `福岡県${r.address}`]);
         <span>{r.name}</span>
       </nav>
       <div class="flex flex-wrap items-baseline gap-x-4 gap-y-2">
-        <span class="text-[11px] font-semibold px-3 py-1.5 bg-[#1A1A1A] text-white">募集中</span>
+        <span class:list={['text-[11px] font-semibold px-3 py-1.5 text-white', r.closed ? 'bg-[#B5502A]' : 'bg-[#1A1A1A]']}>
+          {r.closed ? r.closed.label : '募集中'}
+        </span>
         <h1 class="text-2xl lg:text-3xl font-bold text-gray-900">{r.name}の一戸建て</h1>
       </div>
       <p class="mt-3 text-gray-700">{r.spec}</p>
-      <p class="mt-4">
-        <span class="font-num text-3xl lg:text-4xl font-semibold text-gray-900">{rentStr}</span>
-        <span class="text-sm text-gray-700">　円／月（共益費0円）</span>
-      </p>
+      {r.closed ? (
+        <div class="mt-5 border-l-4 border-[#B5502A] bg-[#F2F2F2] px-5 py-4 max-w-2xl">
+          <p class="text-sm font-bold text-gray-900">この物件は入居が決まりました（{r.closed.since}〜）</p>
+          <p class="mt-2 text-sm text-gray-700 leading-[1.9]">
+            現在は募集していません。以前の掲載内容は参考として残しています。
+            <a href="/rent" class="underline underline-offset-4 hover:text-gray-900">ほかの募集中の物件</a>
+            をご覧いただくか、お探しの条件をお知らせください。近い条件の物件が空いたときにご連絡します。
+          </p>
+        </div>
+      ) : (
+        <p class="mt-4">
+          <span class="font-num text-3xl lg:text-4xl font-semibold text-gray-900">{rentStr}</span>
+          <span class="text-sm text-gray-700">　円／月（共益費0円）</span>
+        </p>
+      )}
     </div>
   </section>
 
@@ -77,8 +99,9 @@ overview.push(['所在地', `福岡県${r.address}`]);
   <section class="bg-white washi">
     <div class="max-w-[1120px] mx-auto px-5 sm:px-8">
       <div class="grid grid-cols-2 md:grid-cols-3 gap-2">
-        <a href={img(r.photos[0].file)} target="_blank" rel="noopener" class="col-span-2 md:row-span-2">
+        <a href={img(r.photos[0].file)} target="_blank" rel="noopener" class="col-span-2 md:row-span-2 relative">
           <img src={img(r.photos[0].file)} alt={r.photos[0].alt} class="w-full h-full aspect-[4/3] object-cover" width="1600" height="1200" />
+          {r.closed && <SoldStamp />}
         </a>
         {r.photos.slice(1).map((p) => (
           <a href={img(p.file)} target="_blank" rel="noopener">
@@ -203,26 +226,42 @@ overview.push(['所在地', `福岡県${r.address}`]);
     </div>
   </section>
 
-  <!-- 内覧から契約まで -->
+  <!-- 内覧から契約まで（成約済みは申込導線を止め、ほかの物件へ誘導する） -->
   <section class="bg-bg-secondary washi">
     <div class="max-w-[1120px] mx-auto px-5 sm:px-8 py-12">
-      <h2 class="text-xl font-bold text-gray-900 mb-6">内覧からご契約まで</h2>
-      <ol class="space-y-4 max-w-2xl">
-        {viewingSteps.map((s, i) => (
-          <li class="grid grid-cols-[2.5rem_1fr] gap-3 items-baseline">
-            <span class="font-num text-2xl font-medium text-gray-300">{i + 1}</span>
-            <p class="text-sm text-gray-700 leading-[1.8]">{s}</p>
-          </li>
-        ))}
-      </ol>
-      <div class="mt-8 flex flex-wrap gap-3">
-        <a href={LINE_URL} target="_blank" rel="noopener" class="inline-flex items-center justify-center px-6 py-3 text-sm font-semibold text-white bg-[#06C755] rounded-none hover:opacity-85 transition-opacity duration-200">LINEで内覧を相談する</a>
-        <a href={applyUrl(r)} target="_blank" rel="noopener" class="inline-flex items-center justify-center px-6 py-3 text-sm font-semibold text-white bg-[#1A1A1A] rounded-none hover:opacity-85 transition-opacity duration-200">入居申込フォームへ</a>
-        <a href="/contact" class="inline-flex items-center justify-center px-6 py-3 text-sm font-semibold text-gray-900 border border-gray-900 rounded-none hover:bg-[#F2F2F2] transition-colors duration-200">フォームで問い合わせる</a>
-      </div>
-      <p class="mt-4 text-xs text-text-muted leading-[1.8]">
-        ジモティーでも同じ条件で募集しています（<a href={r.jimotyUrl} target="_blank" rel="noopener" class="underline underline-offset-4 hover:text-gray-900">掲載ページ</a>）。入居申込フォームは、内覧後にお申し込みの意思が固まった方向けです。
-      </p>
+      {r.closed ? (
+        <>
+          <h2 class="text-xl font-bold text-gray-900 mb-4">この物件は募集を終了しました</h2>
+          <p class="text-sm text-gray-700 leading-[1.9] max-w-2xl">
+            {r.closed.since}に入居が決まりました。同じエリア・条件で空きが出ることもありますので、お探しの条件をお知らせいただければ、次に募集を始めるときにご連絡します。
+          </p>
+          <div class="mt-8 flex flex-wrap gap-3">
+            <a href="/rent" class="inline-flex items-center justify-center px-6 py-3 text-sm font-semibold text-white bg-[#1A1A1A] rounded-none hover:opacity-85 transition-opacity duration-200">募集中の物件を見る</a>
+            <a href={LINE_URL} target="_blank" rel="noopener" class="inline-flex items-center justify-center px-6 py-3 text-sm font-semibold text-white bg-[#06C755] rounded-none hover:opacity-85 transition-opacity duration-200">LINEで空き状況を相談する</a>
+            <a href="/contact" class="inline-flex items-center justify-center px-6 py-3 text-sm font-semibold text-gray-900 border border-gray-900 rounded-none hover:bg-[#F2F2F2] transition-colors duration-200">フォームで問い合わせる</a>
+          </div>
+        </>
+      ) : (
+        <>
+          <h2 class="text-xl font-bold text-gray-900 mb-6">内覧からご契約まで</h2>
+          <ol class="space-y-4 max-w-2xl">
+            {viewingSteps.map((s, i) => (
+              <li class="grid grid-cols-[2.5rem_1fr] gap-3 items-baseline">
+                <span class="font-num text-2xl font-medium text-gray-300">{i + 1}</span>
+                <p class="text-sm text-gray-700 leading-[1.8]">{s}</p>
+              </li>
+            ))}
+          </ol>
+          <div class="mt-8 flex flex-wrap gap-3">
+            <a href={LINE_URL} target="_blank" rel="noopener" class="inline-flex items-center justify-center px-6 py-3 text-sm font-semibold text-white bg-[#06C755] rounded-none hover:opacity-85 transition-opacity duration-200">LINEで内覧を相談する</a>
+            <a href={applyUrl(r)} target="_blank" rel="noopener" class="inline-flex items-center justify-center px-6 py-3 text-sm font-semibold text-white bg-[#1A1A1A] rounded-none hover:opacity-85 transition-opacity duration-200">入居申込フォームへ</a>
+            <a href="/contact" class="inline-flex items-center justify-center px-6 py-3 text-sm font-semibold text-gray-900 border border-gray-900 rounded-none hover:bg-[#F2F2F2] transition-colors duration-200">フォームで問い合わせる</a>
+          </div>
+          <p class="mt-4 text-xs text-text-muted leading-[1.8]">
+            ジモティーでも同じ条件で募集しています（<a href={r.jimotyUrl} target="_blank" rel="noopener" class="underline underline-offset-4 hover:text-gray-900">掲載ページ</a>）。入居申込フォームは、内覧後にお申し込みの意思が固まった方向けです。
+          </p>
+        </>
+      )}
     </div>
   </section>
 

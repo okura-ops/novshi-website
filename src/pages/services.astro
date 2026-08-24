@@ -2,7 +2,8 @@
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
 import CTASection from '../components/CTASection.astro';
-import { RENTALS, OCCUPIED } from '../data/rentals';
+import { AVAILABLE, RENTALS_ORDERED, OCCUPIED } from '../data/rentals';
+import SoldStamp from '../components/SoldStamp.astro';
 
 const recruitItems = [
   { title: '採用戦略の設計', desc: '誰を、いつまでに、いくらで採るかを数字で決めます。' },
@@ -57,7 +58,7 @@ const shatakuWhy = [
 // 募集中の棟数は下の物件一覧と同じRENTALSから採るのでズレない）
 const shatakuStats = [
   { num: '100', unit: '件超', label: '熊本・福岡で手がけた空き家再生' },
-  { num: String(RENTALS.length), unit: '棟', label: 'いま募集している自社保有の戸建' },
+  { num: String(AVAILABLE.length), unit: '棟', label: 'いま募集している自社保有の戸建' },
   { num: '0', unit: '円', label: '敷金・礼金・仲介手数料' },
 ];
 // 役割の図解。誰が何を持つかを文章でなく面で見せる（同 §5-2）
@@ -492,16 +493,23 @@ const shatakuTerms = [
       <div class="mt-16 pt-12 border-t border-gray-200">
         <h3 class="text-xl font-bold text-gray-900 mb-8 fade-in-up">物件情報</h3>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-10 stagger">
-          {RENTALS.map((r) => (
+          {RENTALS_ORDERED.map((r) => (
             <a href={`/rent/${r.slug}`} class="flex flex-col group">
               <div class="relative overflow-hidden">
                 <img src={`/images/rent/${r.slug}/01.webp`} alt={r.photos[0].alt} class="w-full aspect-[4/3] object-cover transition-transform duration-300 group-hover:scale-[1.03]" loading="lazy" width="800" height="600" />
-                <span class="absolute top-0 left-0 text-[11px] font-semibold px-3 py-1.5 bg-[#1A1A1A] text-white">募集中</span>
+                {r.closed && <SoldStamp compact={true} />}
+                <span class:list={['absolute top-0 left-0 z-20 text-[11px] font-semibold px-3 py-1.5 text-white', r.closed ? 'bg-[#B5502A]' : 'bg-[#1A1A1A]']}>
+                  {r.closed ? r.closed.label : '募集中'}
+                </span>
               </div>
               <div class="pt-3">
                 <div class="flex items-baseline justify-between gap-3">
                   <p class="text-base font-bold text-gray-900">{r.name}</p>
-                  <p class="text-base text-gray-900"><span class="font-num font-semibold">{(r.rent / 10000).toLocaleString('ja-JP')}</span><span class="text-sm font-medium">万円／月</span></p>
+                  {r.closed ? (
+                    <p class="text-sm text-gray-500">{r.closed.since}〜</p>
+                  ) : (
+                    <p class="text-base text-gray-900"><span class="font-num font-semibold">{(r.rent / 10000).toLocaleString('ja-JP')}</span><span class="text-sm font-medium">万円／月</span></p>
+                  )}
                 </div>
                 <p class="mt-1.5 text-sm text-gray-500">{r.spec}</p>
               </div>

@@ -1,7 +1,8 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import Hero from '../../components/Hero.astro';
-import { RENTALS, OCCUPIED, AS_OF, LINE_URL } from '../../data/rentals';
+import SoldStamp from '../../components/SoldStamp.astro';
+import { RENTALS_ORDERED, OCCUPIED, AS_OF, LINE_URL } from '../../data/rentals';
 ---
 
 <Layout
@@ -18,7 +19,7 @@ import { RENTALS, OCCUPIED, AS_OF, LINE_URL } from '../../data/rentals';
   <section class="sec-lg bg-white washi border-t border-gray-100">
     <div class="max-w-[1120px] mx-auto px-5 sm:px-8">
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-10 stagger">
-        {RENTALS.map((r) => (
+        {RENTALS_ORDERED.map((r) => (
           <a href={`/rent/${r.slug}`} class="flex flex-col group">
             <div class="relative overflow-hidden">
               <img
@@ -29,12 +30,19 @@ import { RENTALS, OCCUPIED, AS_OF, LINE_URL } from '../../data/rentals';
                 width="800"
                 height="600"
               />
-              <span class="absolute top-0 left-0 text-[11px] font-semibold px-3 py-1.5 bg-[#1A1A1A] text-white">募集中</span>
+              {r.closed && <SoldStamp compact={true} />}
+              <span class:list={['absolute top-0 left-0 z-20 text-[11px] font-semibold px-3 py-1.5 text-white', r.closed ? 'bg-[#B5502A]' : 'bg-[#1A1A1A]']}>
+                {r.closed ? r.closed.label : '募集中'}
+              </span>
             </div>
             <div class="pt-3">
               <div class="flex items-baseline justify-between gap-3">
                 <p class="text-sm font-bold text-gray-900">{r.name}</p>
-                <p class="text-sm text-gray-900"><span class="font-num font-semibold">{(r.rent / 10000).toLocaleString('ja-JP')}</span><span class="text-xs text-text-muted">万円／月</span></p>
+                {r.closed ? (
+                  <p class="text-xs text-text-muted">{r.closed.since}〜</p>
+                ) : (
+                  <p class="text-sm text-gray-900"><span class="font-num font-semibold">{(r.rent / 10000).toLocaleString('ja-JP')}</span><span class="text-xs text-text-muted">万円／月</span></p>
+                )}
               </div>
               <p class="mt-1 text-xs text-text-muted">{r.spec}</p>
             </div>

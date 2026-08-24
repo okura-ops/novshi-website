@@ -56,6 +56,17 @@ export interface Rental {
   highlights: string[];
   /** 先にお伝えしておくこと（ジモティー掲載の開示事項。落とさない） */
   disclosures: string[];
+  /**
+   * 成約済み（入居が決まった物件）。設定するとページと写真は残したまま、
+   * 写真に成約スタンプを重ね、申込導線を止める。一覧では末尾に回る。
+   * 募集を再開するときはこのフィールドを消す。
+   */
+  closed?: {
+    /** 状態ラベル（一覧カード・詳細の見出しに出す） */
+    label: string;
+    /** 入居時期（詳細ページの注記に出す） */
+    since: string;
+  };
   /** 内覧方式 */
   viewing: 'selfbox' | 'remote';
   address: string;
@@ -135,6 +146,7 @@ export const RENTALS: Rental[] = [
     code: '006',
     name: '飯塚市伊岐須',
     spec: '戸建 5DK・76.18㎡（2階建）',
+    closed: { label: '入居中', since: '2026年9月' },
     rent: 63000,
     perks: ['初月家賃無料（63,000円分）', '初期費用0円（敷金・礼金・仲介手数料・鍵交換・火災保険）'],
     pets: '大型犬・多頭飼いもご相談ください（1頭につき＋5,000円／月）',
@@ -369,6 +381,7 @@ export const RENTALS: Rental[] = [
     code: '004',
     name: '宮若市宮田（2644）',
     spec: '戸建 4K・73.78㎡（平屋2棟連結）',
+    closed: { label: '入居中', since: '2026年9月' },
     rent: 35000,
     perks: ['初月家賃無料', 'DIY代として現金50,000円', '初期費用0円（敷金・礼金・仲介手数料・鍵交換・火災保険）'],
     pets: '多頭飼い・大型犬OK（追加費用なし）',
@@ -462,3 +475,12 @@ export const RENTALS: Rental[] = [
 
 /** 稼働中（入居中）の物件。一覧に情報として載せる */
 export const OCCUPIED = [{ name: '嘉麻市鴨生', spec: '戸建・入居中' }];
+
+/** 募集中（成約済みを除く）。棟数表示・募集導線はこちらを使う */
+export const AVAILABLE: Rental[] = RENTALS.filter((r) => !r.closed);
+
+/** 成約済み（入居中）。ページと写真は残し、成約スタンプを重ねて出す */
+export const CLOSED: Rental[] = RENTALS.filter((r) => r.closed);
+
+/** 一覧の表示順。募集中を先に出し、成約済みを末尾へ回す */
+export const RENTALS_ORDERED: Rental[] = [...AVAILABLE, ...CLOSED];
