@@ -111,14 +111,9 @@
     letter-spacing: -0.01em;
   }
 
-  /* 欧文セクションラベル（小さく・広く） */
-  .eyebrow {
-    font-family: var(--font-en);
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-  }
+  /* .eyebrow は撤去（2026-08-28）。見出しの上に置く英字の小ラベルは全媒体で禁止。
+     正本: novshi-hq/design/anti_ai_visual_design.md §1 #10。
+     区分が要る場合は「普通の大きさ・普通の字間の和文見出し」を置く（MVV等）。 */
 
   ::selection {
     background-color: #1A1A1A;
