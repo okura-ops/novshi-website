@@ -4,22 +4,22 @@ import Hero from '../components/Hero.astro';
 import CTASection from '../components/CTASection.astro';
 ---
 
-<Layout title="採用情報 | 株式会社novshi" description="novshiの採用情報。少人数で採用・組織支援と空き家再生を進めています。カジュアル面談を受け付けています。">
-  <Hero title="novshiで働く" subtitle="少人数で、経営支援と空き家再生を進めています。" compact={true} />
+<Layout title="採用情報 | 株式会社novshi" description="novshiの採用情報。少人数で採用・組織支援と空き家活用を進めています。カジュアル面談を受け付けています。">
+  <Hero title="novshiで働く" subtitle="少人数で、経営支援と空き家活用を進めています。" compact={true} />
 
   <section class="sec-lg bg-white border-t border-gray-100 washi">
     <div class="max-w-[1120px] mx-auto px-5 sm:px-8">
       <div class="max-w-2xl fade-in-up">
         {/* TODO:COPY careers-intro */}
         <div class="space-y-6 text-gray-700 leading-[1.9]">
-          <p>novshiは少人数の会社です。一人が経営支援と空き家再生の両方に関わります。</p>
-          <p>経営支援と空き家再生の事業を通じて、九州の「働く」と「住む」に貢献しています。いまは立ち上げの途中です。現場に足を運び、必要なら自分で仕組みをつくれる人を探しています。</p>
+          <p>novshiは少人数の会社です。一人が経営支援と空き家活用の両方に関わります。</p>
+          <p>経営支援と空き家活用の事業を通じて、九州の「働く」と「住む」に貢献しています。いまは立ち上げの途中です。現場に足を運び、必要なら自分で仕組みをつくれる人を探しています。</p>
         </div>
 
         <!-- アイコンカードをやめて番号付き行リストに（Web DS §4） -->
         <div class="mt-14 border-t border-gray-200 stagger">
           {[
-            { num: '01', label: '経営支援と空き家再生、両方に関わる', desc: '二つの事業に関わり、立ち上げを一気に経験できます。' },
+            { num: '01', label: '経営支援と空き家活用、両方に関わる', desc: '二つの事業に関わり、立ち上げを一気に経験できます。' },
             { num: '02', label: '裁量の大きさ', desc: '少人数なので、提案から実行まで一人で持てます。意思決定が事業に直結します。' },
             { num: '03', label: '現場は九州、視野は全国', desc: '地場の経営者と直接会い、現場に足を運びながら進めます。' },
           ].map((item) => (

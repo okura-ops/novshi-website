@@ -20,7 +20,7 @@ const channels = [
 ];
 const globalItems = [
   { title: '人材紹介', desc: '職種要件との適合を確認してから紹介します。' },
-  { title: '住まいの確保', desc: '社宅として貸せる住居を自社で用意します。空き家再生事業が受け皿です。' },
+  { title: '住まいの確保', desc: '社宅として貸せる住居を自社で用意します。空き家活用の事業が受け皿です。' },
   { title: '定着フォロー', desc: '入社後の生活相談を受け、気になる変化を企業へ共有します。' },
 ];
 const kaizenItems = [
@@ -57,7 +57,7 @@ const shatakuWhy = [
 // 実績帯。検証できる数字だけを置く（Manus競合調査 §5-1。100件超は対外承認済みの表現、
 // 募集中の棟数は下の物件一覧と同じRENTALSから採るのでズレない）
 const shatakuStats = [
-  { num: '100', unit: '件超', label: '熊本・福岡で手がけた空き家再生' },
+  { num: '100', unit: '件超', label: '熊本・福岡で手がけた空き家の活用' },
   { num: String(AVAILABLE.length), unit: '棟', label: 'いま募集している自社保有の戸建' },
   { num: '0', unit: '円', label: '敷金・礼金・仲介手数料' },
 ];
@@ -88,7 +88,7 @@ const shatakuTerms = [
   {/* TODO:COPY services-hero */}
   <Hero title="novshiの事業" subtitle="九州の中小企業の採用と組織を支える仕事と、空き家を働く人の社宅に変える仕事をしています。" compact={true} />
 
-  <!-- サービスタブ: 採用・経営支援 ／ 空き家再生 -->
+  <!-- サービスタブ: 採用・経営支援 ／ 空き家活用 -->
   <div class="bg-white border-t border-gray-200 sticky top-16 lg:top-[72px] z-30" id="service-tabs">
     <div class="max-w-[1120px] mx-auto px-5 sm:px-8">
       <div class="flex gap-10">
@@ -97,7 +97,7 @@ const shatakuTerms = [
           <img src="/images/brush/line-sumi.png" alt="" aria-hidden="true" width="1118" height="103" class="tab-ink absolute bottom-0 left-0 w-full h-1.5 object-cover select-none" />
         </button>
         <button type="button" data-tab="akiya" class="tab-btn cursor-pointer relative py-5 text-base lg:text-lg font-bold text-text-muted transition-colors duration-200 hover:text-gray-900" aria-selected="false">
-          空き家再生
+          空き家活用
           <img src="/images/brush/line-sumi.png" alt="" aria-hidden="true" width="1118" height="103" class="tab-ink absolute bottom-0 left-0 w-full h-1.5 object-cover select-none hidden" />
         </button>
       </div>
@@ -342,12 +342,12 @@ const shatakuTerms = [
   </div>
 
   <div data-panel="akiya" class="hidden">
-  <!-- 空き家再生×社宅 -->
+  <!-- 空き家活用×社宅 -->
   <section id="akiya" class="sec-xl scroll-mt-32 bg-white">
     <div class="max-w-[1120px] mx-auto px-5 sm:px-8">
       <div class="max-w-2xl fade-in-up">
         {/* TODO:COPY services-akiya-head */}
-        <h2 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-6">空き家再生×社宅</h2>
+        <h2 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-6">空き家活用×社宅</h2>
         {/* TODO:COPY services-akiya-lead */}
         <p class="text-gray-700 leading-[1.9]">
           空き家を買い取り、改修し、介護・建設・飲食の現場で働く人や外国人材の社宅として長期で貸します。物件の情報は、採用支援で付き合いのある地場企業から届きます。社宅は採用した人材の定着に使われます。
@@ -378,7 +378,7 @@ const shatakuTerms = [
           <div class="lg:col-span-6 fade-in-up">
             <h3 class="text-xl lg:text-[22px] font-bold text-gray-900 mb-4">外国人材の社宅を、戸建1棟でお貸しします</h3>
             <p class="text-base lg:text-lg text-gray-700 leading-[1.9]">
-              技能実習生・特定技能人材を受け入れる企業さま向けに、再生した戸建を1棟まるごとお貸ししています。契約は御社と当社の1本だけ。入退去のたびの清掃と原状回復、生活に要る備品の用意まで、こちらで段取りします。
+              技能実習生・特定技能人材を受け入れる企業さま向けに、改修した戸建を1棟まるごとお貸ししています。契約は御社と当社の1本だけ。入退去のたびの清掃と原状回復、生活に要る備品の用意まで、こちらで段取りします。
             </p>
           </div>
           <div class="lg:col-span-6 fade-in-up">
@@ -551,7 +551,7 @@ const shatakuTerms = [
   <CTASection />
 
   <script>
-    // サービスタブ切替（#recruitment/#consulting=採用・経営支援、#akiya=空き家再生）
+    // サービスタブ切替（#recruitment/#consulting=採用・経営支援、#akiya=空き家活用）
     const btns = document.querySelectorAll('.tab-btn');
     const panels: Record<string, HTMLElement | null> = {
       shien: document.querySelector('[data-panel="shien"]'),

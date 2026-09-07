@@ -12,7 +12,7 @@ interface Props {
   noindex?: boolean;
 }
 
-const { title, description = '株式会社novshi — 九州の中小企業の採用支援・組織改善と、空き家再生。仕事と住まいを支える会社です。', preloadImage, noindex = false } = Astro.props;
+const { title, description = '株式会社novshi — 九州の中小企業の採用支援・組織改善と、空き家活用。仕事と住まいを支える会社です。', preloadImage, noindex = false } = Astro.props;
 // 公開URLは末尾スラッシュなしが正（配信側が /about/ → /about に転送する）。
 // build.format:'file' では Astro.url.pathname が /about.html を返すため、
 // canonical/og:url を作る前に index.html・.html・末尾スラッシュを落とす（トップは '/'）
@@ -59,7 +59,7 @@ const canonicalURL = new URL(canonicalPath, Astro.site || 'https://novshi.co.jp'
       "alternateName": "novshi Inc.",
       "url": "https://novshi.co.jp",
       "logo": "https://novshi.co.jp/logo-black.png",
-      "description": "九州の中小企業の採用支援・組織改善と、空き家再生。仕事と住まいを支える会社です。",
+      "description": "九州の中小企業の採用支援・組織改善と、空き家活用。仕事と住まいを支える会社です。",
       "foundingDate": "2025-10",
       "founder": { "@type": "Person", "name": "大倉佑介" },
       "address": { "@type": "PostalAddress", "postalCode": "813-0017", "addressRegion": "福岡県", "addressLocality": "福岡市東区", "streetAddress": "香椎照葉6-2-51", "addressCountry": "JP" },

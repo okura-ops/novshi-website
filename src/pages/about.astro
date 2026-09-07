@@ -11,7 +11,7 @@ const timelineItems = [
   { period: '—', company: '総合商社', role: '事業投資', detail: '事業投資の実務を通じて、事業のつくり方を学ぶ' },
   { period: '—', company: '人材サービス大手', role: '中途採用の営業 → 求人検索サービスの事業企画', detail: '1,000社以上の採用に関わる' },
   { period: '—', company: 'スタートアップ', role: '人事・経営企画・事業開発', detail: 'エンジニア採用、組織づくり、経営企画を担当' },
-  { period: '2025.10', company: '株式会社novshi 創業', role: '代表取締役', detail: '九州で、採用支援と空き家再生の二事業を立ち上げる' },
+  { period: '2025.10', company: '株式会社novshi 創業', role: '代表取締役', detail: '九州で、採用支援と空き家活用の二事業を立ち上げる' },
 ];
 ---
 
@@ -29,7 +29,7 @@ const timelineItems = [
             ['代表者', '大倉 佑介'],
             ['設立', '2025年10月'],
             ['所在地', '〒813-0017 福岡県福岡市東区香椎照葉6-2-51'],
-            ['事業内容', '採用支援 / 組織・事業・経営の改善支援 / 空き家再生×社宅事業'],
+            ['事業内容', '採用支援 / 組織・事業・経営の改善支援 / 空き家活用×社宅事業'],
             ['許認可', '有料職業紹介事業許可 40-ユ-301708'],
           ].map(([label, value]) => (
             <div class="flex flex-col sm:flex-row py-4 gap-1 sm:gap-0">
@@ -80,7 +80,7 @@ const timelineItems = [
           <p class="text-base font-bold text-gray-900 mb-6">ミッション</p>
           {/* TODO:COPY about-mission */}
           <h3 class="text-4xl lg:text-[3.5rem] lg:leading-[1.25] font-bold text-gray-900">
-            豊かさを、描きなおす。
+            豊かさの探究者である。
           </h3>
         </div>
 
@@ -89,8 +89,9 @@ const timelineItems = [
           <p class="text-base font-bold text-gray-900 mb-6">ビジョン</p>
           {/* TODO:COPY about-vision */}
           <h3 class="text-2xl lg:text-[2.25rem] lg:leading-[1.3] font-bold text-gray-900">
-            九州に、人が来る理由を<span class="whitespace-nowrap"><span class="font-num">1,000</span>つくる。</span>
+            ひとつのモノサシで、価値が決まらない社会へ。
           </h3>
+          <p class="mt-4 text-base lg:text-lg font-bold text-gray-500">Trust Your Own Way.</p>
         </div>
 
         <!-- Values: 均等3カラムカードをやめて行リストに -->
@@ -99,9 +100,9 @@ const timelineItems = [
           {/* TODO:COPY about-values */}
           <div class="border-t border-gray-200 max-w-3xl">
             {[
-              { num: '01', value: '志ドリブン', desc: '利益ではなく志が意思決定の起点。何のためにやるのかを常に問い続ける。' },
-              { num: '02', value: '見えにくい価値を、見に行く', desc: '数字だけでなく、現場の声や背景にある課題まで見に行く。' },
-              { num: '03', value: '利益は燃料、目的地ではない', desc: '利益は事業を続けるための手段であって、目的ではない。' },
+              { num: '01', value: 'あるものから始める。', desc: '買う前に、雇う前に、つくる前に、すでに何を持っているかを見る。足すのは、そのあと。' },
+              { num: '02', value: '多様な目で見る。', desc: '価値は見る人との関係で決まる。暮らす人、働く人、経営者。目を増やすと、まだ名前のついていない良さが見つかる。' },
+              { num: '03', value: '利益は、進むために。', desc: '稼ぐことから逃げない。ただし燃料を積むことが目的になった時点で、進む先を見失う。' },
             ].map((item) => (
               <div class="grid grid-cols-[3rem_1fr] items-baseline gap-4 py-6 border-b border-gray-200">
                 <span class="font-num text-2xl font-medium text-gray-300">{item.num}</span>
