@@ -100,14 +100,15 @@ const timelineItems = [
           {/* TODO:COPY about-values */}
           <div class="border-t border-gray-200 max-w-3xl">
             {[
-              { num: '01', value: 'あるものから始める。', desc: '買う前に、雇う前に、つくる前に、すでに何を持っているかを見る。足すのは、そのあと。' },
-              { num: '02', value: '多様な目で見る。', desc: '価値は見る人との関係で決まる。暮らす人、働く人、経営者。目を増やすと、まだ名前のついていない良さが見つかる。' },
-              { num: '03', value: '利益は、進むために。', desc: '稼ぐことから逃げない。ただし燃料を積むことが目的になった時点で、進む先を見失う。' },
+              { num: '01', value: 'あるものから始める。', en: 'Pockets First.', desc: '買う前に、雇う前に、つくる前に、すでに何を持っているかを見る。足すのは、そのあと。' },
+              { num: '02', value: '多様な目で見る。', en: 'Whose Eyes?', desc: '価値は見る人との関係で決まる。暮らす人、働く人、経営者。目を増やすと、まだ名前のついていない良さが見つかる。' },
+              { num: '03', value: '利益は、進むために。', en: 'Fuel, Not a Goal.', desc: '稼ぐことから逃げない。ただし燃料を積むことが目的になった時点で、進む先を見失う。' },
             ].map((item) => (
               <div class="grid grid-cols-[3rem_1fr] items-baseline gap-4 py-6 border-b border-gray-200">
                 <span class="font-num text-2xl font-medium text-gray-300">{item.num}</span>
                 <div>
                   <h4 class="text-base lg:text-lg font-bold text-gray-900 mb-1">{item.value}</h4>
+                  <p class="text-sm font-bold text-gray-500 mb-2">{item.en}</p>
                   <p class="text-sm text-gray-700 leading-[1.9]">{item.desc}</p>
                 </div>
               </div>
