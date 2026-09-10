@@ -37,11 +37,24 @@ export interface ResaleProperty {
   lead?: string;
   highlights?: string[];
   disclosures?: string[];
+  /** 入居者の属性。氏名・国籍・勤務先名は書かない（「製造業勤務・法人契約」程度まで） */
   tenantProfile?: string;
   leaseType?: string;
+  leaseTerm?: string;
+  deposit?: string;
   guarantor?: string;
+  /** 保証会社の保証内容（滞納時の代位弁済の範囲・保証期間・更新料の負担） */
+  guarantorScope?: string;
+  paymentRecord?: string;
   leaseStart?: string;
   pmScope?: string;
+  /** Appendixの地図2枚。広域(span0.22)と周辺(span0.010)をセットで置く */
+  maps?: { wide: string; area: string };
+  /** 稼働の実績。空室リスクに対する事実の反証をここに集める */
+  occupancyRecord?: { label: string; value: string }[];
+  /** 敷地と地域（生活施設・交通・学校医療） */
+  neighborhood?: { label: string; value: string }[];
+  siteNote?: string;
   roadFrontage?: string;
   zoning?: string;
   buildingCoverage?: string;
@@ -69,10 +82,52 @@ export const RESALE: ResaleProperty[] = [
     "bldgArea": "65.84㎡",
     "landArea": "307.91㎡（約93坪）",
     "access": "スーパー（フードウェイ稲築店）まで車3分・900m／JR後藤寺線 下鴨生駅まで車3分・1.5km",
-    "tenantProfile": "個人・入居中",
+    "tenantProfile": "個人契約",
     "lead": "当社が最初に取得し、賃貸付けまで終えた1棟です。土地が約93坪あり、庭と駐車スペースを広く取れます。",
     "lat": 33.6046818,
-    "lng": 130.7316885
+    "lng": 130.7316885,
+    "leaseType": "確認中（賃貸借契約書で確認のうえ記載します）",
+    "leaseTerm": "確認中（賃貸借契約書で確認のうえ記載します）",
+    "deposit": "確認中（賃貸借契約書で確認のうえ記載します）",
+    "guarantor": "確認中（賃貸借契約書で確認のうえ記載します）",
+    "paymentRecord": "滞納なし",
+    "maps": {
+      "wide": "飯塚市と田川市の間、嘉麻市の北部です（中心が本物件）",
+      "area": "小学校・病院・スーパーが同じ生活圏にあります"
+    },
+    "occupancyRecord": [
+      {
+        "label": "入居",
+        "value": "取得以来、空室期間なし"
+      },
+      {
+        "label": "家賃の入金",
+        "value": "滞納なし"
+      },
+      {
+        "label": "募集にかけた期間",
+        "value": "募集を行わず、取得時から入居中です"
+      }
+    ],
+    "neighborhood": [
+      {
+        "label": "敷地の余裕",
+        "value": "土地307.91㎡に対し建物65.84㎡。駐車と庭に使える面積が残ります"
+      },
+      {
+        "label": "生活施設",
+        "value": "フードウェイ稲築店まで車3分・900m。ゆめマート稲築、TRIAL GO稲築店も同じ岩崎地区"
+      },
+      {
+        "label": "交通",
+        "value": "JR後藤寺線 下鴨生駅まで車3分・1.5km"
+      },
+      {
+        "label": "学校・医療",
+        "value": "嘉麻市立稲築東小学校、ユーアイ西野病院が徒歩圏"
+      }
+    ],
+    "siteNote": "所要時間はGoogleマップで本物件の座標から実測した車での所要時間です（2026年8月16日取得）。"
   },
   {
     "code": "006",
@@ -137,7 +192,49 @@ export const RESALE: ResaleProperty[] = [
         "file": "06",
         "alt": "浴室"
       }
-    ]
+    ],
+    "tenantProfile": "確認中（賃貸借契約書で確認のうえ記載します）",
+    "leaseType": "確認中（賃貸借契約書で確認のうえ記載します）",
+    "leaseTerm": "確認中（賃貸借契約書で確認のうえ記載します）",
+    "deposit": "確認中（賃貸借契約書で確認のうえ記載します）",
+    "guarantor": "確認中（賃貸借契約書で確認のうえ記載します）",
+    "maps": {
+      "wide": "福岡市と北九州市のほぼ中間、飯塚市の中心部に近い場所です（中心が本物件）",
+      "area": "九州工業大学 情報工学部とスーパーが徒歩圏にあります"
+    },
+    "occupancyRecord": [
+      {
+        "label": "募集から成約まで",
+        "value": "18日（2026年8月6日に募集を開始し、8月24日に入居者が決まりました）"
+      },
+      {
+        "label": "入居開始",
+        "value": "2026年9月25日"
+      },
+      {
+        "label": "空室期間",
+        "value": "取得から入居まで、募集期間を含めて約2か月です"
+      }
+    ],
+    "neighborhood": [
+      {
+        "label": "敷地の余裕",
+        "value": "敷地内に車を2〜3台とめられます"
+      },
+      {
+        "label": "生活施設",
+        "value": "ハローデイ九工大前店まで約850m。ゆめマート花瀬・ミスターマックス飯塚花瀬店も市内にあります"
+      },
+      {
+        "label": "交通",
+        "value": "JR新飯塚駅まで車11分・3.9km"
+      },
+      {
+        "label": "学校・医療",
+        "value": "九州工業大学 情報工学部まで約1.0km。学生・教職員の住宅需要があるエリアです"
+      }
+    ],
+    "siteNote": "所要時間はGoogleマップで本物件の座標から実測したものです（2026年8月16日取得）。"
   },
   {
     "code": "007",
@@ -174,7 +271,7 @@ export const RESALE: ResaleProperty[] = [
       "洪水ハザードマップの浸水想定区域に入っています",
       "過去に雨漏りの報告があります。現状で漏れているところは確認していません"
     ],
-    "tenantProfile": "個人",
+    "tenantProfile": "個人契約",
     "leaseStart": "2026年10月",
     "lat": 33.635185,
     "lng": 130.660812,
@@ -203,7 +300,40 @@ export const RESALE: ResaleProperty[] = [
         "file": "06",
         "alt": "裏庭とテラス"
       }
-    ]
+    ],
+    "leaseType": "確認中（賃貸借契約書で確認のうえ記載します）",
+    "leaseTerm": "確認中（賃貸借契約書で確認のうえ記載します）",
+    "deposit": "確認中（賃貸借契約書で確認のうえ記載します）",
+    "guarantor": "確認中（賃貸借契約書で確認のうえ記載します）",
+    "maps": {
+      "wide": "福岡市と北九州市のほぼ中間、飯塚市の南部です（中心が本物件）",
+      "area": "周辺は住宅地です"
+    },
+    "occupancyRecord": [
+      {
+        "label": "募集の開始",
+        "value": "2026年8月2日"
+      },
+      {
+        "label": "入居開始",
+        "value": "2026年10月1日"
+      }
+    ],
+    "neighborhood": [
+      {
+        "label": "敷地の余裕",
+        "value": "土地130.19㎡に対し建物78.32㎡。駐車1台分を確保しています"
+      },
+      {
+        "label": "生活施設",
+        "value": "未計測"
+      },
+      {
+        "label": "交通",
+        "value": "未計測"
+      }
+    ],
+    "siteNote": "生活施設・交通は未計測です。実測のうえ差し替えます。"
   },
   {
     "code": "008",
@@ -267,7 +397,41 @@ export const RESALE: ResaleProperty[] = [
         "file": "06",
         "alt": "2階からの眺望"
       }
-    ]
+    ],
+    "tenantProfile": "確認中（賃貸借契約書で確認のうえ記載します）",
+    "leaseType": "確認中（賃貸借契約書で確認のうえ記載します）",
+    "leaseTerm": "確認中（賃貸借契約書で確認のうえ記載します）",
+    "deposit": "確認中（賃貸借契約書で確認のうえ記載します）",
+    "guarantor": "確認中（賃貸借契約書で確認のうえ記載します）",
+    "maps": {
+      "wide": "北九州市と福岡市の通勤圏の中間、遠賀郡遠賀町です（中心が本物件）",
+      "area": "周辺は住宅地です"
+    },
+    "occupancyRecord": [
+      {
+        "label": "募集から成約まで",
+        "value": "29日（2026年8月2日に募集を開始し、8月31日に入居者が決まりました）"
+      },
+      {
+        "label": "入居開始",
+        "value": "2026年11月1日"
+      }
+    ],
+    "neighborhood": [
+      {
+        "label": "敷地の余裕",
+        "value": "土地270.6㎡に対し建物105.89㎡。カーポートのほかに庭が残ります"
+      },
+      {
+        "label": "生活施設",
+        "value": "未計測"
+      },
+      {
+        "label": "交通",
+        "value": "未計測"
+      }
+    ],
+    "siteNote": "生活施設・交通は未計測です。実測のうえ差し替えます。"
   }
 ];
 
