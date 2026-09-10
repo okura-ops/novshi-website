@@ -13,9 +13,9 @@ export default defineConfig({
   build: {
     format: 'file'
   },
-  // /partners/ は再販協力業者向けの非公開ページ。sitemapに載せない
+  // /partners/ と /proposal/ は非公開ページ。sitemapに載せない
   // （Layoutのnoindex・robots.txtのDisallowと三点セットで維持する）
-  integrations: [sitemap({ filter: (page) => !page.includes('/partners/') })],
+  integrations: [sitemap({ filter: (page) => !page.includes('/partners/') && !page.includes('/proposal/') })],
   vite: {
     plugins: [tailwindcss()]
   }

@@ -1,0 +1,364 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { PROPOSALS, PROPOSAL_AS_OF } from '../../data/proposals';
+import type { ProposalData, ProposalFitStatus } from '../../data/proposals';
+
+export function getStaticPaths() {
+  return PROPOSALS.map((proposal) => ({ params: { slug: proposal.slug }, props: { proposal } }));
+}
+
+interface Props {
+  proposal: ProposalData;
+}
+
+const { proposal } = Astro.props;
+
+const yen = (value: number) => value.toLocaleString('ja-JP');
+const man = (value: number) => `${(value / 10000).toFixed(1)}万円`;
+const rentRange = `${man(proposal.rent.min)}〜${man(proposal.rent.max)}`;
+const upgradeTotal = proposal.upgrades.reduce((sum, option) => sum + option.monthlyIncrease, 0);
+
+const statusLabel: Record<ProposalFitStatus, string> = {
+  fit: '合う',
+  checking: '確認中',
+};
+---
+
+<Layout
+  title={`${proposal.title}についてのご提案 | 株式会社novshi`}
+  description={`${proposal.title}について、買えた場合に住みたいと思われるかを伺うための非公開ページです。`}
+  noindex={true}
+>
+  <section class="relative overflow-hidden bg-[#FBFAF7] washi border-t border-gray-100">
+    <div class="relative max-w-[1120px] mx-auto px-5 sm:px-8 pt-8 pb-12 lg:pt-14 lg:pb-16">
+      <div class="grid grid-cols-1 lg:grid-cols-[1.08fr_0.92fr] gap-9 lg:gap-14 items-center">
+        <div>
+          <p class="text-sm font-bold text-[#B5502A]">{proposal.recipient.label}</p>
+          <h1 class="mt-3 text-[2rem] leading-[1.35] sm:text-4xl lg:text-[3rem] lg:leading-[1.25] font-bold text-gray-900">
+            {proposal.title}、<br class="hidden sm:block" />買えたら住みたいと思われますか。
+          </h1>
+          <p class="mt-5 text-base text-gray-700 leading-[1.95] max-w-2xl">
+            {proposal.recipient.context}
+          </p>
+          <p class="mt-4 text-base text-gray-700 leading-[1.95] max-w-2xl">
+            {proposal.lead}
+          </p>
+
+          <div class="mt-7 grid grid-cols-2 gap-3 sm:grid-cols-4">
+            <div class="border border-gray-200 bg-white/80 px-4 py-4">
+              <p class="text-xs font-bold text-gray-500">家賃の見込み</p>
+              <p class="mt-1 font-num text-[1.35rem] leading-none text-[#B5502A]">{rentRange}</p>
+            </div>
+            <div class="border border-gray-200 bg-white/80 px-4 py-4">
+              <p class="text-xs font-bold text-gray-500">間取り</p>
+              <p class="mt-1 text-base font-bold text-gray-900">平屋4DK</p>
+            </div>
+            <div class="border border-gray-200 bg-white/80 px-4 py-4">
+              <p class="text-xs font-bold text-gray-500">ペット</p>
+              <p class="mt-1 text-base font-bold text-gray-900">飼育可にできます</p>
+            </div>
+            <div class="border border-gray-200 bg-white/80 px-4 py-4">
+              <p class="text-xs font-bold text-gray-500">駐車</p>
+              <p class="mt-1 text-base font-bold text-gray-900">2台は確認中</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="relative bg-white border border-gray-200 p-5 sm:p-7">
+          <svg viewBox="0 0 520 360" role="img" aria-labelledby="proposal-hero-art-title proposal-hero-art-desc" class="w-full h-auto">
+            <title id="proposal-hero-art-title">平屋での暮らしを表した線画</title>
+            <desc id="proposal-hero-art-desc">実際の外観ではなく、平屋、犬、車、庭を抽象化した線画です。</desc>
+            <rect x="28" y="278" width="464" height="2" fill="#1A1A1A" opacity="0.18" />
+            <path d="M90 184 L162 126 L236 184" fill="none" stroke="#1A1A1A" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M119 181 H217 V268 H119 Z" fill="none" stroke="#1A1A1A" stroke-width="6" stroke-linejoin="round" />
+            <path d="M146 268 V217 H185 V268" fill="none" stroke="#1A1A1A" stroke-width="6" stroke-linejoin="round" />
+            <path d="M114 181 H222" stroke="#B5502A" stroke-width="5" stroke-linecap="round" />
+            <path d="M298 238 C304 214 322 200 346 201 C369 202 386 218 392 240" fill="none" stroke="#1A1A1A" stroke-width="6" stroke-linecap="round" />
+            <path d="M289 240 H405 L421 265 H274 Z" fill="none" stroke="#1A1A1A" stroke-width="6" stroke-linejoin="round" />
+            <circle cx="304" cy="268" r="14" fill="none" stroke="#1A1A1A" stroke-width="6" />
+            <circle cx="389" cy="268" r="14" fill="none" stroke="#1A1A1A" stroke-width="6" />
+            <path d="M323 222 H371" stroke="#B5502A" stroke-width="5" stroke-linecap="round" />
+            <path d="M311 174 C299 158 309 137 329 139 C332 116 365 114 371 137 C393 134 406 156 393 174 Z" fill="none" stroke="#1A1A1A" stroke-width="6" stroke-linejoin="round" />
+            <path d="M352 174 V239" stroke="#1A1A1A" stroke-width="6" stroke-linecap="round" />
+            <path d="M352 204 C333 196 321 195 306 201" fill="none" stroke="#B5502A" stroke-width="5" stroke-linecap="round" />
+            <path d="M78 264 C81 244 96 235 113 242 C122 230 141 235 145 250 C160 250 169 262 164 276" fill="none" stroke="#B5502A" stroke-width="5" stroke-linecap="round" />
+            <path d="M247 252 C260 232 290 232 304 252" fill="none" stroke="#1A1A1A" stroke-width="5" stroke-linecap="round" />
+            <circle cx="268" cy="231" r="17" fill="none" stroke="#1A1A1A" stroke-width="5" />
+            <path d="M252 227 L241 215 M284 227 L295 215" stroke="#1A1A1A" stroke-width="5" stroke-linecap="round" />
+            <path d="M263 239 H273" stroke="#B5502A" stroke-width="4" stroke-linecap="round" />
+          </svg>
+          <p class="mt-3 text-xs text-text-muted leading-[1.8]">
+            この線画は暮らしの要素を抽象化したものです。実際の外観・間取りではありません。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-white washi">
+    <div class="max-w-[1120px] mx-auto px-5 sm:px-8 py-9">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-3">
+        {proposal.requiredNotices.map((notice, index) => (
+          <div class="border-l-4 border-[#B5502A] bg-[#F2F2F2] px-5 py-4">
+            <div class="flex gap-3">
+              <svg viewBox="0 0 32 32" aria-hidden="true" class="mt-0.5 h-7 w-7 shrink-0">
+                <circle cx="16" cy="16" r="13" fill="none" stroke="#B5502A" stroke-width="2.5" />
+                <path d="M16 8 V18" stroke="#1A1A1A" stroke-width="2.5" stroke-linecap="round" />
+                <circle cx="16" cy="23" r="1.7" fill="#1A1A1A" />
+              </svg>
+              <p class="text-sm font-bold leading-[1.75] text-gray-900">{notice}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-[#1A1A1A] text-white">
+    <div class="max-w-[1120px] mx-auto px-5 sm:px-8 py-12 lg:py-16">
+      <div class="grid grid-cols-1 lg:grid-cols-[0.95fr_1.05fr] gap-10 lg:gap-14 items-start">
+        <div>
+          <h2 class="text-2xl lg:text-3xl font-bold text-white">ご希望との照らし合わせ</h2>
+          <p class="mt-4 text-sm text-white/75 leading-[1.95] max-w-md">
+            合うところと、まだ確認しているところを分けて見られるようにしました。特に駐車台数と入居時期は、買えるかどうかが分かってから確定します。
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          {proposal.fitItems.map((item) => (
+            <div class="bg-white text-gray-900 p-5">
+              <div class="flex items-center justify-between gap-3">
+                <h3 class="text-base font-bold text-gray-900">{item.label}</h3>
+                <span class:list={[
+                  'inline-flex items-center px-3 py-1 text-xs font-bold',
+                  item.status === 'fit' ? 'bg-[#B5502A] text-white' : 'border border-[#B5502A] text-[#B5502A] bg-white',
+                ]}>
+                  {statusLabel[item.status]}
+                </span>
+              </div>
+              <p class="mt-3 text-sm text-gray-700 leading-[1.85]">{item.summary}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-[#FBFAF7] washi">
+    <div class="max-w-[1120px] mx-auto px-5 sm:px-8 py-12 lg:py-16">
+      <div class="max-w-2xl">
+        <h2 class="text-2xl lg:text-3xl font-bold text-gray-900">暮らしとして見たときのよさ</h2>
+        <p class="mt-5 text-base text-gray-700 leading-[1.95]">
+          数字だけを見ると、築年や水回りの古さが先に目に入ります。いっぽうで、今回の家は「飯塚市潤野」「平屋」「4DK」「ペットを当社で判断できる」という点が、ご希望に近い候補です。
+        </p>
+      </div>
+
+      <div class="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="bg-white border border-gray-200 p-5">
+          <svg viewBox="0 0 64 64" aria-hidden="true" class="h-12 w-12">
+            <path d="M12 31 L32 15 L52 31" fill="none" stroke="#1A1A1A" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M18 29 V50 H46 V29" fill="none" stroke="#1A1A1A" stroke-width="3.5" stroke-linejoin="round" />
+            <path d="M24 38 H40 M24 45 H40" stroke="#B5502A" stroke-width="3" stroke-linecap="round" />
+          </svg>
+          <h3 class="mt-4 text-base font-bold text-gray-900">平屋の4DK</h3>
+          <p class="mt-2 text-sm text-gray-700 leading-[1.85]">階段の上り下りがなく、部屋数にも余裕があります。</p>
+        </div>
+        <div class="bg-white border border-gray-200 p-5">
+          <svg viewBox="0 0 64 64" aria-hidden="true" class="h-12 w-12">
+            <circle cx="32" cy="27" r="13" fill="none" stroke="#1A1A1A" stroke-width="3.5" />
+            <path d="M21 23 L13 15 M43 23 L51 15" stroke="#1A1A1A" stroke-width="3.5" stroke-linecap="round" />
+            <path d="M26 42 C20 44 17 49 16 55 M38 42 C44 44 47 49 48 55" fill="none" stroke="#1A1A1A" stroke-width="3.5" stroke-linecap="round" />
+            <path d="M28 32 H36" stroke="#B5502A" stroke-width="3" stroke-linecap="round" />
+          </svg>
+          <h3 class="mt-4 text-base font-bold text-gray-900">犬と暮らす前提で考えられます</h3>
+          <p class="mt-2 text-sm text-gray-700 leading-[1.85]">当社が貸主になれば、飼育の可否はこちらで決められます。</p>
+        </div>
+        <div class="bg-white border border-gray-200 p-5">
+          <svg viewBox="0 0 64 64" aria-hidden="true" class="h-12 w-12">
+            <path d="M10 35 H28 L33 46 H7 Z" fill="none" stroke="#1A1A1A" stroke-width="3.5" stroke-linejoin="round" />
+            <circle cx="15" cy="48" r="5" fill="none" stroke="#1A1A1A" stroke-width="3.5" />
+            <circle cx="29" cy="48" r="5" fill="none" stroke="#1A1A1A" stroke-width="3.5" />
+            <path d="M34 30 H52 L58 46 H31 Z" fill="none" stroke="#B5502A" stroke-width="3.5" stroke-linejoin="round" />
+            <circle cx="39" cy="48" r="5" fill="none" stroke="#B5502A" stroke-width="3.5" />
+            <circle cx="53" cy="48" r="5" fill="none" stroke="#B5502A" stroke-width="3.5" />
+          </svg>
+          <h3 class="mt-4 text-base font-bold text-gray-900">駐車は確認中です</h3>
+          <p class="mt-2 text-sm text-gray-700 leading-[1.85]">軽自動車2台が停まるか、仲介会社に問い合わせています。</p>
+        </div>
+        <div class="bg-white border border-gray-200 p-5">
+          <svg viewBox="0 0 64 64" aria-hidden="true" class="h-12 w-12">
+            <path d="M33 9 C24 21 19 30 19 39 C19 48 25 55 33 55 C41 55 47 48 47 39 C47 30 42 21 33 9 Z" fill="none" stroke="#1A1A1A" stroke-width="3.5" stroke-linejoin="round" />
+            <path d="M28 41 C30 45 35 47 39 43" fill="none" stroke="#B5502A" stroke-width="3" stroke-linecap="round" />
+          </svg>
+          <h3 class="mt-4 text-base font-bold text-gray-900">水回りは正直に確認します</h3>
+          <p class="mt-2 text-sm text-gray-700 leading-[1.85]">汲み取りのままにするか、浄化槽に切り替えるかを見ます。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-white washi">
+    <div class="max-w-[1120px] mx-auto px-5 sm:px-8 py-12 lg:py-16">
+      <div class="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <h2 class="text-2xl lg:text-3xl font-bold text-gray-900">家のこと</h2>
+          <p class="mt-3 text-sm text-gray-700 leading-[1.9] max-w-2xl">
+            当社が確かめた事実です。まだ見に行けていない項目は「確認中」と書いています。
+          </p>
+        </div>
+        <p class="text-xs text-text-muted">情報確認日：{PROPOSAL_AS_OF}</p>
+      </div>
+
+      <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-5 gap-y-6">
+        {proposal.facts.map((group) => (
+          <div class="border-t border-gray-900 pt-4">
+            <h3 class="text-base font-bold text-gray-900">{group.title}</h3>
+            <ul class="mt-3 space-y-2 text-sm text-gray-700 leading-[1.8]">
+              {group.items.map((item) => (
+                <li class="pl-5 relative before:content-[''] before:absolute before:left-0 before:top-[0.72em] before:h-[1px] before:w-3 before:bg-[#B5502A]">
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-[#1A1A1A] text-white">
+    <div class="max-w-[1120px] mx-auto px-5 sm:px-8 py-12 lg:py-16">
+      <div class="grid grid-cols-1 lg:grid-cols-[0.85fr_1.15fr] gap-9 lg:gap-14 items-start">
+        <div>
+          <h2 class="text-2xl lg:text-3xl font-bold text-white">お家賃の見込み</h2>
+          <p class="mt-4 text-sm text-white/75 leading-[1.95] max-w-md">
+            まだ買えていない家なので、ここでは見込みだけお伝えします。買えたあとに状態を見て、工事内容と合わせて確定します。
+          </p>
+        </div>
+        <div>
+          <p class="font-num text-[3rem] leading-none sm:text-[4.4rem] text-white">{rentRange}</p>
+          <p class="mt-4 text-base text-white/85 leading-[1.9]">{proposal.rent.note}</p>
+          <div class="mt-7 grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div class="border border-white/18 px-5 py-4">
+              <p class="text-sm text-white/60">入居できる日の見込み</p>
+              <p class="mt-1 text-lg font-bold text-white">{proposal.moveInEstimate}</p>
+            </div>
+            <div class="border border-white/18 px-5 py-4">
+              <p class="text-sm text-white/60">共通している前提</p>
+              <p class="mt-1 text-lg font-bold text-white">買えたあとに確定</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-[#FBFAF7] washi">
+    <div class="max-w-[1120px] mx-auto px-5 sm:px-8 py-12 lg:py-16">
+      <div class="grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-9 lg:gap-14 items-start">
+        <div>
+          <h2 class="text-2xl lg:text-3xl font-bold text-gray-900">必要なものだけ選べます</h2>
+          <p class="mt-4 text-base text-gray-700 leading-[1.95]">
+            きれいにしすぎると、そのぶん家賃は上がります。逆に、使えるところはそのままでよければ家賃を抑えられます。必要なものだけ選んだ場合の月額目安を、下で試せます。
+          </p>
+          <p class="mt-4 text-xs text-text-muted leading-[1.8]">
+            これは確定額ではありません。買えたあと、工事の必要性を見てから決めます。
+          </p>
+        </div>
+
+        <div
+          class="bg-white border border-gray-200 p-5 sm:p-6"
+          data-rent-calculator
+          data-base-min={proposal.rent.min}
+          data-base-max={proposal.rent.max}
+        >
+          <div class="border-b border-gray-200 pb-5">
+            <p class="text-sm font-bold text-gray-900">選んだ工事の上乗せ</p>
+            <p class="mt-2 font-num text-3xl text-[#B5502A]" data-upgrade-total>0円／月</p>
+            <p class="mt-2 text-sm text-gray-700">
+              選んだ後の家賃目安：<span class="font-bold text-gray-900" data-upgrade-rent>{yen(proposal.rent.min)}円〜{yen(proposal.rent.max)}円／月</span>
+            </p>
+          </div>
+
+          <div class="mt-5 space-y-3">
+            {proposal.upgrades.map((option) => (
+              <label class="grid grid-cols-[auto_1fr_auto] gap-3 items-start border border-gray-200 px-4 py-3 cursor-pointer hover:border-[#B5502A] transition-colors">
+                <input
+                  type="checkbox"
+                  class="mt-1 h-5 w-5 accent-[#B5502A]"
+                  value={option.monthlyIncrease}
+                  data-upgrade-option
+                />
+                <span class="text-sm font-bold leading-[1.7] text-gray-900">{option.label}</span>
+                <span class="font-num text-sm text-[#B5502A] whitespace-nowrap">＋{yen(option.monthlyIncrease)}円</span>
+              </label>
+            ))}
+          </div>
+
+          <p class="mt-5 text-xs text-text-muted leading-[1.8]">
+            すべて選ぶと上乗せは最大で{yen(upgradeTotal)}円／月です。実際には、必要なものだけ選ぶ前提で考えます。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-white washi">
+    <div class="max-w-[1120px] mx-auto px-5 sm:px-8 py-12 lg:py-16">
+      <div class="grid grid-cols-1 lg:grid-cols-[0.95fr_1.05fr] gap-10 lg:gap-14 items-start">
+        <div>
+          <h2 class="text-2xl lg:text-3xl font-bold text-gray-900">LINEで聞かせてください</h2>
+          <p class="mt-4 text-base text-gray-700 leading-[1.95] max-w-md">
+            この家を買いにいくかどうかを考えるために、率直な感想が知りたいです。迷う点があれば、そのまま教えてください。
+          </p>
+        </div>
+        <div class="border-t border-gray-900">
+          <ol class="divide-y divide-gray-200">
+            {proposal.questions.map((question, index) => (
+              <li class="grid grid-cols-[2.5rem_1fr] gap-3 py-5">
+                <span class="font-num text-2xl text-gray-300">{index + 1}</span>
+                <p class="text-base font-bold text-gray-900 leading-[1.75]">{question}</p>
+              </li>
+            ))}
+          </ol>
+          <div class="mt-8 bg-[#F2F2F2] px-5 py-5">
+            <p class="text-sm text-gray-700 leading-[1.9]">
+              差出人：{proposal.sender.company}　{proposal.sender.person}
+            </p>
+            <p class="mt-2 text-xs text-text-muted leading-[1.8]">
+              このページは、特定の方に向けて候補を確認するための非公開ページです。募集広告ではありません。
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const root = document.querySelector('[data-rent-calculator]');
+
+    if (root) {
+      const baseMin = Number(root.getAttribute('data-base-min') || '0');
+      const baseMax = Number(root.getAttribute('data-base-max') || '0');
+      const checkboxes = Array.from(root.querySelectorAll('input[data-upgrade-option]'));
+      const totalEl = root.querySelector('[data-upgrade-total]');
+      const rentEl = root.querySelector('[data-upgrade-rent]');
+      const formatYen = (value) => `${value.toLocaleString('ja-JP')}円`;
+
+      const updateRent = () => {
+        const total = checkboxes.reduce((sum, checkbox) => {
+          if (!(checkbox instanceof HTMLInputElement)) return sum;
+          return checkbox.checked ? sum + Number(checkbox.value) : sum;
+        }, 0);
+
+        if (totalEl) totalEl.textContent = `${formatYen(total)}／月`;
+        if (rentEl) rentEl.textContent = `${formatYen(baseMin + total)}〜${formatYen(baseMax + total)}／月`;
+      };
+
+      checkboxes.forEach((checkbox) => {
+        checkbox.addEventListener('change', updateRent);
+      });
+      updateRent();
+    }
+  </script>
+</Layout>

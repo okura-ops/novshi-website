@@ -54,7 +54,9 @@ export interface ProposalData {
 
 export const PROPOSALS: ProposalData[] = [
   {
-    slug: 'junno-hiraya',
+    // slugは推測されない文字列にする。認証を掛けないので、URLを知る人だけが開ける状態は
+    // noindex・robots.txtのDisallow・この推測不能なslugの3つで担保する
+    slug: 'junno-hiraya-k7q3md',
     title: '潤野の平屋',
     shortName: '潤野',
     recipient: {
