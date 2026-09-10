@@ -17,6 +17,8 @@ const yen = (value: number) => value.toLocaleString('ja-JP');
 const man = (value: number) => `${(value / 10000).toFixed(1)}万円`;
 const rentRange = `${man(proposal.rent.min)}〜${man(proposal.rent.max)}`;
 const upgradeTotal = proposal.upgrades.reduce((sum, option) => sum + option.monthlyIncrease, 0);
+// 許諾の記録が無い写真は出さない。データに入っていても、permissionNote が空なら落とす
+const photos = (proposal.photos ?? []).filter((photo) => photo.permissionNote.trim() !== '');
 
 const statusLabel: Record<ProposalFitStatus, string> = {
   fit: '合う',
@@ -225,6 +227,44 @@ const statusLabel: Record<ProposalFitStatus, string> = {
       </div>
     </div>
   </section>
+
+  {/*
+    写真の節。権利処理が済んだ写真だけを出す。
+    掲載サイトの写真をスクリーンショットで持ち込まない（src/data/proposals.ts の ProposalPhoto を読む）。
+  */}
+  {photos.length > 0 && (
+    <section class="bg-[#FBFAF7] washi">
+      <div class="max-w-[1120px] mx-auto px-5 sm:px-8 py-12 lg:py-16">
+        <h2 class="text-2xl lg:text-3xl font-bold text-gray-900">家のようす</h2>
+        <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-8">
+          {photos.map((photo) => (
+            <figure class="flex flex-col gap-3">
+              <img
+                src={photo.src}
+                alt={photo.alt}
+                loading="lazy"
+                class="w-full rounded-sm border border-gray-200 bg-white object-cover"
+              />
+              {photo.caption && (
+                <figcaption class="text-sm text-gray-700 leading-[1.9]">{photo.caption}</figcaption>
+              )}
+            </figure>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  {photos.length === 0 && proposal.photoPending && (
+    <section class="bg-[#FBFAF7] washi">
+      <div class="max-w-[1120px] mx-auto px-5 sm:px-8 py-10 lg:py-12">
+        <h2 class="text-2xl lg:text-3xl font-bold text-gray-900">家のようす</h2>
+        <p class="mt-4 text-sm lg:text-base text-gray-700 leading-[1.9] max-w-2xl">
+          {proposal.photoPending}
+        </p>
+      </div>
+    </section>
+  )}
 
   <section class="bg-[#1A1A1A] text-white">
     <div class="max-w-[1120px] mx-auto px-5 sm:px-8 py-12 lg:py-16">

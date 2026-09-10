@@ -28,6 +28,34 @@ export interface ProposalUpgradeOption {
   monthlyIncrease: number;
 }
 
+/**
+ * 物件の写真。
+ *
+ * **ここに置いてよいのは、当社に使用する権利がある写真だけ。**
+ * 掲載サイト（ふれんず等）の写真をスクリーンショットで取り込むことはしない。
+ * 掲載写真は仲介会社・撮影者の著作物で、複製して当社サイトで公衆送信すると
+ * 著作権の侵害になる（ふれんず利用規約 第3条も同旨）。
+ *
+ * 入れてよいのは次の3つ。`source` に必ずどれかを記録する。
+ *   - `broker-permitted` … 仲介会社から提供を受け、入居希望者への説明に使う許諾を得た写真
+ *   - `own` … 当社が内覧時・取得後に自分で撮った写真
+ *   - `owner-permitted` … 売主から提供を受け、使用許諾を得た写真
+ *
+ * `permissionNote` には、誰からいつ許諾を得たかを書く（口頭なら口頭と書く）。
+ * 空のままの写真はページに出さない実装にしてある。
+ */
+export type ProposalPhotoSource = 'broker-permitted' | 'own' | 'owner-permitted';
+
+export interface ProposalPhoto {
+  /** public/images/proposal/{slug}/ 配下のパス */
+  src: string;
+  /** 何が写っているか。読み上げにも使うので具体的に書く */
+  alt: string;
+  caption?: string;
+  source: ProposalPhotoSource;
+  permissionNote: string;
+}
+
 export interface ProposalData {
   slug: string;
   title: string;
@@ -38,6 +66,10 @@ export interface ProposalData {
   highlights: string[];
   facts: ProposalFactGroup[];
   fitItems: ProposalFitItem[];
+  /** 権利処理が済んだ写真だけ。空なら写真の節ごと出さない（上の ProposalPhoto の注記を読む） */
+  photos?: ProposalPhoto[];
+  /** 写真がまだ無い時に、その理由を相手へ伝える一文 */
+  photoPending?: string;
   rent: {
     min: number;
     max: number;
@@ -120,6 +152,10 @@ export const PROPOSALS: ProposalData[] = [
         items: ['閑静な住宅街です', 'スーパー・コンビニが近くにあります'],
       },
     ],
+    // 写真は仲介会社（おうち屋 飯塚店）へ提供と使用許諾を依頼中。
+    // 許諾が取れたら public/images/proposal/junno-hiraya-k7q3md/ に置いて photos に足す。
+    photoPending:
+      'お写真は、いま仲介会社にお願いしているところです。届きしだいこのページに追加します。実際に見に行かれる場合は、現地でご案内できるよう手配します。',
     fitItems: [
       {
         label: 'エリア',
