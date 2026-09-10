@@ -15,7 +15,7 @@ export default defineConfig({
   },
   // /partners/ と /proposal/ は非公開ページ。sitemapに載せない
   // （Layoutのnoindex・robots.txtのDisallowと三点セットで維持する）
-  integrations: [sitemap({ filter: (page) => !page.includes('/partners/') && !page.includes('/proposal/') })],
+  integrations: [sitemap({ filter: (page) => !page.includes('/partners') && !page.includes('/proposal/') })],
   vite: {
     plugins: [tailwindcss()]
   }

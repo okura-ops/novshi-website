@@ -1,0 +1,31 @@
+---
+/**
+ * /partners で切られたときの受け口。
+ *
+ * 業者がURLを短くしたり、末尾を落として打ち直すと /partners に来る。
+ * ここが無いと404で行き止まりになり、非公開ページなので探す手段が無い。
+ * 静的サイトなのでサーバー側リダイレクトは打てず、location.replace とリンクの2段で受ける。
+ */
+import Layout from '../../layouts/Layout.astro';
+const DEST = '/partners/inventory';
+---
+
+<Layout title="収益物件一覧 | 株式会社novshi" noindex={true} bare={true}>
+  <section class="min-h-[60vh] flex items-center">
+    <div class="max-w-[1120px] mx-auto px-5 sm:px-8 py-20">
+      <h1 class="text-xl lg:text-2xl font-bold text-gray-900">収益物件一覧へ移動します</h1>
+      <p class="mt-4 text-sm text-gray-700 leading-[1.9]">
+        自動で切り替わらない場合は、こちらからお進みください。
+      </p>
+      <p class="mt-6">
+        <a href={DEST} class="inline-block bg-[#1A1A1A] text-white text-sm font-semibold px-6 py-3 hover:bg-[#333333] transition-colors">
+          収益物件一覧を見る
+        </a>
+      </p>
+    </div>
+  </section>
+</Layout>
+
+<script is:inline>
+  location.replace('/partners/inventory');
+</script>
