@@ -115,6 +115,13 @@ export const man1 = (v: number) => v.toFixed(1);
 /** %の表示。小数第1位 */
 export const pct = (v: number) => v.toFixed(1);
 
+/** 写真のURL。photoBase が無ければ入居者募集と同じ /images/rent/{slug} を見る。
+ *  入れ子のテンプレートリテラルを .astro のフロントマターに書くとコンパイルが落ちるので、ここに置く。 */
+export function photoUrl(p: ResaleProperty, file: string): string {
+  const base = p.photoBase ?? '/images/rent/' + p.slug;
+  return base + '/' + file + '.webp';
+}
+
 /** 座標から地図リンクを作る。住所文字列では作らない（枝番を地図が解決できない物件がある） */
 export const mapUrl = (p: ResaleProperty) =>
   p.lat && p.lng ? `https://www.google.com/maps/search/?api=1&query=${p.lat},${p.lng}` : null;

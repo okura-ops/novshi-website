@@ -10,9 +10,15 @@ interface Props {
   preloadImage?: string;
   /** 試作・非公開ページ用: 検索避け */
   noindex?: boolean;
+  /**
+   * サイト共通のヘッダー・フッターを出さない。
+   * 非公開の業者向けページ（/partners/）で使う。共通ナビを出すと、
+   * 業者がサービス紹介や採用情報へ迷い込み、戻る導線が無くなるため。
+   */
+  bare?: boolean;
 }
 
-const { title, description = '株式会社novshi — 九州の中小企業の採用支援・組織改善と、空き家活用。仕事と住まいを支える会社です。', preloadImage, noindex = false } = Astro.props;
+const { title, description = '株式会社novshi — 九州の中小企業の採用支援・組織改善と、空き家活用。仕事と住まいを支える会社です。', preloadImage, noindex = false, bare = false } = Astro.props;
 // 公開URLは末尾スラッシュなしが正（配信側が /about/ → /about に転送する）。
 // build.format:'file' では Astro.url.pathname が /about.html を返すため、
 // canonical/og:url を作る前に index.html・.html・末尾スラッシュを落とす（トップは '/'）
@@ -68,11 +74,11 @@ const canonicalURL = new URL(canonicalPath, Astro.site || 'https://novshi.co.jp'
     <title>{title}</title>
   </head>
   <body class="min-h-screen flex flex-col">
-    <Header />
+    {!bare && <Header />}
     <main class="flex-1">
       <slot />
     </main>
-    <Footer />
+    {!bare && <Footer />}
     <script>
       const observer = new IntersectionObserver(
         (entries) => {

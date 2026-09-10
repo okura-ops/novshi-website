@@ -1,8 +1,10 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
+import PartnerHeader from '../../../components/PartnerHeader.astro';
+import PartnerFooter from '../../../components/PartnerFooter.astro';
 import { RESALE, AS_OF } from '../../../data/resale';
 import type { ResaleProperty } from '../../../data/resale';
-import { economics, man, pct, mapUrl, CONTACT, ACQ_COST_RATE, LOAN } from '../../../lib/resaleCalc';
+import { economics, man, pct, mapUrl, photoUrl, CONTACT, ACQ_COST_RATE, LOAN } from '../../../lib/resaleCalc';
 
 export function getStaticPaths() {
   return RESALE.map((p) => ({ params: { slug: p.slug }, props: { p } }));
@@ -14,7 +16,7 @@ interface Props {
 const { p } = Astro.props;
 const e = economics(p);
 const leased = p.status === 'leased';
-const img = (file: string) => `/images/rent/${p.slug}/${file}.webp`;
+const img = (file: string) => photoUrl(p, file);
 const map = mapUrl(p);
 
 /** 入居ステータスは3語しか使わない（入居中／入居者確定／募集中）。
@@ -51,7 +53,9 @@ if (p.rebuildable) legal.push(['再建築', p.rebuildable]);
   title={`${p.name}（${man(p.price)}万円・表面${pct(e.grossYield)}%）| 収益物件 | 株式会社novshi`}
   description={messageLine}
   noindex={true}
+  bare={true}
 >
+  <PartnerHeader current={p.name} />
   <!-- 1. 物件概要 -->
   <section class="bg-white washi border-t border-gray-100">
     <div class="max-w-[1120px] mx-auto px-5 sm:px-8 pt-10 pb-8">
@@ -508,6 +512,7 @@ if (p.rebuildable) legal.push(['再建築', p.rebuildable]);
       </div>
     </div>
   </section>
+  <PartnerFooter />
 </Layout>
 
 <style is:global>

@@ -1,0 +1,26 @@
+---
+/**
+ * 業者向けページ（/partners/）専用のヘッダー。
+ * サイト共通のナビ（サービス・会社概要・採用）は出さない。業者がそこへ迷い込むと
+ * 戻る導線が無く、非公開ページのURLを打ち直す羽目になるため。
+ */
+interface Props {
+  /** 物件名。詳細ページで渡すと「一覧に戻る」を出す */
+  current?: string;
+}
+const { current } = Astro.props;
+---
+
+<header class="sticky top-0 z-40 bg-white/95 backdrop-blur border-b border-gray-200 print:hidden">
+  <div class="max-w-[1120px] mx-auto px-5 sm:px-8 h-14 flex items-center justify-between gap-4">
+    <a href="/partners/inventory" class="flex items-center gap-3 min-w-0" aria-label="収益物件一覧へ">
+      <img src="/logo-black.png" alt="株式会社novshi" width="96" height="24" class="h-5 w-auto" />
+      <span class="text-xs text-text-muted whitespace-nowrap">収益物件一覧</span>
+    </a>
+    {current ? (
+      <a href="/partners/inventory" class="text-xs text-gray-700 underline underline-offset-4 hover:text-gray-900 whitespace-nowrap">← 一覧に戻る</a>
+    ) : (
+      <a href="mailto:okura@novshi.co.jp" class="text-xs text-gray-700 underline underline-offset-4 hover:text-gray-900 whitespace-nowrap">お問い合わせ</a>
+    )}
+  </div>
+</header>

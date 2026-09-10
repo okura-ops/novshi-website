@@ -1,17 +1,20 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
-import { RESALE_ORDERED, LEASED, VACANT, AS_OF } from '../../../data/resale';
-import { economics, man, pct, CONTACT } from '../../../lib/resaleCalc';
+import PartnerHeader from '../../../components/PartnerHeader.astro';
+import PartnerFooter from '../../../components/PartnerFooter.astro';
+import { RESALE_ORDERED, VACANT, AS_OF } from '../../../data/resale';
+import { economics, man, pct, photoUrl, CONTACT } from '../../../lib/resaleCalc';
 
 const rows = RESALE_ORDERED.map((p) => ({ p, e: economics(p) }));
-const totalPrice = RESALE_ORDERED.reduce((s, p) => s + p.price, 0);
 ---
 
 <Layout
   title="収益物件一覧（再販協力パートナー向け）| 株式会社novshi"
   description="株式会社novshiが取得・改修し、賃貸付けまで終えた福岡県内の戸建を、収益物件として媒介業者の皆さまにご紹介しています。"
   noindex={true}
+  bare={true}
 >
+  <PartnerHeader />
   <!-- ヘッダー -->
   <section class="bg-[#1A1A1A] text-white">
     <div class="max-w-[1120px] mx-auto px-5 sm:px-8 py-12 lg:py-16">
@@ -22,28 +25,6 @@ const totalPrice = RESALE_ORDERED.reduce((s, p) => s + p.price, 0);
         当社が福岡県内で取得し、改修して入居者を付けた一戸建てです。所有が移った後も賃貸管理は当社が続けますので、
         買主様は稼働している状態をそのまま引き継ぐ形になります。売買は媒介業者の皆さまを通じてお願いしています。
       </p>
-      <div class="mt-8 flex flex-wrap gap-x-10 gap-y-4 border-t border-white/15 pt-6">
-        <div>
-          <p class="text-[11px] text-white/60">掲載中</p>
-          <p class="font-en text-3xl font-semibold">{RESALE_ORDERED.length}<span class="text-base ml-1">棟</span></p>
-        </div>
-        <div>
-          <p class="text-[11px] text-white/60">価格帯</p>
-          <p class="font-en text-3xl font-semibold">
-            {man(Math.min(...RESALE_ORDERED.map((p) => p.price)))}<span class="text-base mx-1">〜</span>{man(Math.max(...RESALE_ORDERED.map((p) => p.price)))}<span class="text-base ml-1">万円</span>
-          </p>
-        </div>
-        <div>
-          <p class="text-[11px] text-white/60">表面利回り</p>
-          <p class="font-en text-3xl font-semibold">
-            {pct(Math.min(...rows.map((r) => r.e.grossYield)))}<span class="text-base mx-1">〜</span>{pct(Math.max(...rows.map((r) => r.e.grossYield)))}<span class="text-base ml-1">%</span>
-          </p>
-        </div>
-        <div>
-          <p class="text-[11px] text-white/60">合計</p>
-          <p class="font-en text-3xl font-semibold">{man(totalPrice)}<span class="text-base ml-1">万円</span></p>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -112,7 +93,7 @@ const totalPrice = RESALE_ORDERED.reduce((s, p) => s + p.price, 0);
             <div class="relative aspect-[16/9] bg-[#1A1A1A] overflow-hidden">
               {p.photos && p.photos.length > 0 ? (
                 <img
-                  src={`/images/rent/${p.slug}/${p.photos[0].file}.webp`}
+                  src={photoUrl(p, p.photos[0].file)}
                   alt={p.photos[0].alt}
                   class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
                   loading="lazy"
@@ -162,7 +143,7 @@ const totalPrice = RESALE_ORDERED.reduce((s, p) => s + p.price, 0);
 
       {VACANT.length === 0 && (
         <p class="mt-8 text-sm text-text-muted leading-[1.9]">
-          現在は入居中の{LEASED.length}棟のみを掲載しています。未入居の物件は募集期間が一定を超えたものから順にこの一覧へ加えます。
+          このほかの保有物件についても、条件が合えばご紹介できます。お探しの利回り・価格帯・エリアをお知らせください。
         </p>
       )}
     </div>
@@ -214,4 +195,5 @@ const totalPrice = RESALE_ORDERED.reduce((s, p) => s + p.price, 0);
       </div>
     </div>
   </section>
+  <PartnerFooter />
 </Layout>
