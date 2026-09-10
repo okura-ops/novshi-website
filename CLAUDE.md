@@ -60,6 +60,37 @@ curl -s -I https://novshi.co.jp/ | grep -i "^server\|^cf-ray"   # cloudflare + C
 
 HP以外にやることが2つある。①ジモティー掲載の取り下げ ②Notion「取得物件管理」DBの入居日を入れて公開ステータスを「募集終了」にする。3つが揃って初めて問い合わせが止まる。
 
+## 非公開ページ（`/partners/`）の作法
+
+再販協力業者向けの収益物件シートを `/partners/inventory/` に置いている。生成と価格の正本は
+novshi-hq の `.claude/skills/resale-partner-sheet/` と `docs/operations/resale_pricing_rule.md`。
+ここには**このリポジトリ側で守ること**だけを書く。
+
+- `src/data/resale.ts` は自動生成物。手で編集しない
+- URLを短く切られたときの受け口として `src/pages/partners/index.astro` を置いている
+- 検索避けは3点セットで維持する。`Layout` の `noindex`、`robots.txt` の `Disallow: /partners/`、`astro.config.mjs` のsitemap `filter` のどれか1つが欠けると漏れる。filterは `/partners/` ではなく `/partners` で判定すること（受け口ページのパスに末尾スラッシュが無く、一度素通りした）
+- サイト共通のヘッダー・フッターは出さず、`Layout` に `bare={true}` を渡して `PartnerHeader` / `PartnerFooter` を使う。共通ナビがあると業者がサービス紹介や採用情報へ迷い込み、非公開URLなので戻れなくなる
+- PDFはページと同時に差し替える。`/partners/pdf/{slug}.pdf` は詳細ページのDLボタンが指す先で、novshi-hq の `resale_page_pdf.py --publish` が置く。画面だけ更新してPDFを置き忘れると、業者が買主へ古い価格の資料を送ることになるので、置いたあとに `npm run build` をもう一度回す
+
+## OGP画像は本文と別管理
+
+`public/og-image.png` はコピーを**焼き付けた画像**なので、サイト本文のMVVやキャッチを直しても
+勝手には直らない。2026-09-10まで旧コピー「豊かさを、描きなおす。」が残ったままで、
+リンクのプレビューだけ古いことを言い続けていた。
+
+MVV・キャッチを改訂したら novshi-hq の `scripts/print/build_og_image.py` を回して差し替える。
+差し替え後、X・Facebook・Slackはカードをキャッシュするので、各社のデバッガで再取得させる。
+
+## Astroの実装で踏む落とし穴（2026-09-10に全部踏んだ）
+
+いずれもエラーメッセージが原因を指さないので、先に知っておかないと時間を溶かす。
+
+| 症状 | 原因 | 対処 |
+|:---|:---|:---|
+| `Unexpected "export"` でビルドが落ちる。指されている行は正常 | **フロントマターに入れ子のテンプレートリテラル**を書いた（`` `${a ?? `/x/${b}`}` ``） | 文字列連結にするか、`src/lib/` のヘルパーへ出す |
+| コンポーネントに渡したpropが `undefined` になる、または挙動が壊れる | **`slot` はAstroの予約属性**。prop名に使えない | prop名を変えるか、コンポーネントを分ける |
+| 暗い背景の上で見出しだけ見えない | `global.css` の `@layer base` が `h1〜h6` に `color` を固定している。親の `text-white` は継承されない | 見出しに `text-white` を明示する。`<p>` は継承するので不要 |
+
 ## 変更後に必ず確認すること
 
 ```sh
@@ -81,3 +112,6 @@ curl -s https://novshi.co.jp/about | grep canonical    # .html が付いてい�
 このリポジトリは複数のClaude Codeセッションが同じ作業ツリーを共有する。
 作業を始める前に `git status` と `git log --oneline -5` で他セッターの変更を確認し、
 ファイルを丸ごと上書き（Write）する前に必ず現在の内容を読み直す。
+
+**`git add -A src` のようなディレクトリ単位のaddを使わない。** 2026-09-10に、別セッションが編集中だった
+`src/data/proposals.ts` を巻き込んでコミットした。触ったファイルをパスで列挙して add する。
