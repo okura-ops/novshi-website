@@ -408,10 +408,10 @@ export const RESALE: ResaleProperty[] = [
         "alt": "裏庭とテラス"
       }
     ],
-    "leaseType": "確認中（賃貸借契約書で確認のうえ記載します）",
-    "leaseTerm": "確認中（賃貸借契約書で確認のうえ記載します）",
-    "deposit": "確認中（賃貸借契約書で確認のうえ記載します）",
-    "guarantor": "確認中（賃貸借契約書で確認のうえ記載します）",
+    "leaseType": "普通建物賃貸借の予定（締結時に確定します）",
+    "leaseTerm": "締結時に確定します",
+    "deposit": "敷金0円・礼金0円・更新料0円の予定",
+    "guarantor": "日本セーフティー株式会社（申込済み）",
     "maps": {
       "wide": "福岡市と北九州市のほぼ中間、飯塚市の南部です（中心が本物件）",
       "area": "周辺は住宅地です"
@@ -440,7 +440,9 @@ export const RESALE: ResaleProperty[] = [
         "value": "JR新飯塚駅まで車15分・4.5km"
       }
     ],
-    "siteNote": "所要時間はGoogleマップで本物件の座標から実測した車での所要時間です（2026年9月10日取得）。学校・医療は未調査です。"
+    "siteNote": "所要時間はGoogleマップで本物件の座標から実測した車での所要時間です（2026年9月10日取得）。学校・医療は未調査です。",
+    "contractStatus": "締結手続き中",
+    "guarantorScope": "保証料は借主負担です。プランと保証内容は締結時に確定します"
   },
   {
     "code": "008",
@@ -615,10 +617,10 @@ export const RESALE: ResaleProperty[] = [
     "lng": 130.815643,
     "leaseStart": "2026年9月",
     "tenantProfile": "個人",
-    "leaseType": "確認中（賃貸借契約書で確認のうえ記載します）",
-    "leaseTerm": "確認中（賃貸借契約書で確認のうえ記載します）",
-    "deposit": "確認中（賃貸借契約書で確認のうえ記載します）",
-    "guarantor": "確認中（賃貸借契約書で確認のうえ記載します）",
+    "leaseType": "普通建物賃貸借の予定（締結時に確定します）",
+    "leaseTerm": "締結時に確定します",
+    "deposit": "敷金0円・礼金0円・更新料0円の予定",
+    "guarantor": "株式会社Casa（申込済み）",
     "photoBase": "/images/partners/015-suehiromachi-omoya/photos",
     "photos": [
       {
@@ -637,7 +639,9 @@ export const RESALE: ResaleProperty[] = [
         "file": "04",
         "alt": "高台からの眺望と敷地（八幡東区の市街地）"
       }
-    ]
+    ],
+    "contractStatus": "締結手続き中",
+    "guarantorScope": "保証料は借主負担です。プランと保証内容は締結時に確定します"
   },
   {
     "code": "015b",
@@ -713,10 +717,10 @@ export const RESALE: ResaleProperty[] = [
     "lng": 130.815643,
     "leaseStart": "2026年9月",
     "tenantProfile": "個人",
-    "leaseType": "確認中（賃貸借契約書で確認のうえ記載します）",
-    "leaseTerm": "確認中（賃貸借契約書で確認のうえ記載します）",
-    "deposit": "確認中（賃貸借契約書で確認のうえ記載します）",
-    "guarantor": "確認中（賃貸借契約書で確認のうえ記載します）",
+    "leaseType": "普通建物賃貸借の予定（締結時に確定します）",
+    "leaseTerm": "締結時に確定します",
+    "deposit": "敷金0円・礼金0円・更新料0円の予定",
+    "guarantor": "株式会社Casa（申込済み）",
     "photoBase": "/images/partners/015-suehiromachi-all/photos",
     "photos": [
       {
@@ -739,7 +743,9 @@ export const RESALE: ResaleProperty[] = [
         "file": "05",
         "alt": "高台からの眺望と敷地（八幡東区の市街地）"
       }
-    ]
+    ],
+    "contractStatus": "締結手続き中",
+    "guarantorScope": "保証料は借主負担です。プランと保証内容は締結時に確定します"
   }
 ];
 

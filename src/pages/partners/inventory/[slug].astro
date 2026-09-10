@@ -23,6 +23,13 @@ const map = mapUrl(p);
     契約は締結していても入居日が来ていない物件を「入居中」とは書かない。 */
 const moved = p.occupancy === '入居中';
 const statusLabel = p.occupancy === '募集中' ? '未入居（想定賃料）' : p.occupancy;
+/** 賃貸借契約が未締結の物件は「契約書に基づく」と書けない。合意済みの賃料として書く */
+const signed = !p.contractStatus;
+const rentBasis = !leased
+  ? '想定・募集賃料'
+  : signed
+    ? '賃貸借契約書に基づく契約賃料'
+    : `入居者と合意した賃料（賃貸借契約は${p.contractStatus}）`;
 
 /** 1ページ目のメッセージライン。結論を先に言う（見出しを名詞で置かない） */
 const messageLine = !leased
@@ -99,6 +106,17 @@ if (p.rebuildable) legal.push(['再建築', p.rebuildable]);
 
       <p class="mt-3 text-xs text-text-muted">
         ※1 実質利回り＝（年間賃料−年間運営費）÷（販売価格×1.08）。購入諸費用は登記・不動産取得税・仲介手数料・火災保険で8%を標準としています。
+      </p>
+
+      <p class="mt-6 print:hidden">
+        <a
+          href={`/partners/pdf/${p.slug}.pdf`}
+          class="inline-flex items-center gap-2 bg-[#1A1A1A] text-white text-sm font-semibold px-5 py-3 hover:bg-[#333333] transition-colors"
+          download={`novshi_${p.slug}_${AS_OF.replace(/[年月]/g, '').replace('日', '')}.pdf`}
+        >
+          この物件の資料をPDFでダウンロード
+        </a>
+        <span class="block mt-2 text-xs text-text-muted">このページと同じ内容です。買主様への送付にお使いください（{AS_OF}時点）。</span>
       </p>
 
       <p class="mt-6 text-sm text-gray-700">
@@ -231,7 +249,7 @@ if (p.rebuildable) legal.push(['再建築', p.rebuildable]);
                 <th class="py-3 pr-4 text-left font-semibold text-gray-900 whitespace-nowrap">月額賃料</th>
                 <td class="py-3 text-gray-700">
                   <span class="font-num font-semibold">{p.rentMonthly.toFixed(1)}</span> 万円
-                  <span class="text-text-muted">（{!leased ? '想定・募集賃料' : '賃貸借契約書に基づく契約賃料'}）</span>
+                  <span class="text-text-muted">（{rentBasis}）</span>
                 </td>
               </tr>
               <tr class="border-b border-gray-200 align-top">
@@ -505,7 +523,7 @@ if (p.rebuildable) legal.push(['再建築', p.rebuildable]);
         <div>
           <h3 class="text-sm font-bold text-gray-900">出典と注記</h3>
           <ul class="mt-3 space-y-2 text-xs text-text-muted leading-[1.9]">
-            <li>・{!leased ? '賃料は募集賃料であり、実績ではありません。' : `賃料は賃貸借契約書に基づく契約賃料です。${p.rentStart ? `賃料の発生は${p.rentStart}からです。` : ''}`}掲載の数値は{AS_OF}時点のものです。</li>
+            <li>・{!leased ? '賃料は募集賃料であり、実績ではありません。' : signed ? '賃料は賃貸借契約書に基づく契約賃料です。' : `賃料は入居者と合意した金額で、賃貸借契約は${p.contractStatus}です。`}{p.rentStart ? `賃料の発生は${p.rentStart}からです。` : ''}掲載の数値は{AS_OF}時点のものです。</li>
             <li>・運営費（※2）は標準的な前提を置いた想定額です。固定資産税は課税明細、保険料は見積で確定します。</li>
             <li>・レバレッジ後の数値はLTV{LOAN.ltv * 100}%・金利{LOAN.rate * 100}%・期間{LOAN.years}年の仮置きによる試算です。</li>
             <li>・購入諸費用は販売価格の{ACQ_COST_RATE * 100}%で試算しています。買主様の条件により変わります。</li>

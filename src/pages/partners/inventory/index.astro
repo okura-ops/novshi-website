@@ -141,6 +141,20 @@ const rows = RESALE_ORDERED.map((p) => ({ p, e: economics(p) }));
         ))}
       </div>
 
+      <div class="mt-8 border-t border-gray-200 pt-6">
+        <p class="text-sm font-bold text-gray-900">資料をまとめてダウンロード</p>
+        <p class="mt-2 text-xs text-text-muted leading-[1.9]">各ページと同じ内容のPDFです。買主様への送付にお使いください（{AS_OF}時点）。</p>
+        <ul class="mt-4 flex flex-wrap gap-x-6 gap-y-2">
+          {rows.map(({ p }) => (
+            <li>
+              <a href={`/partners/pdf/${p.slug}.pdf`} download class="text-sm text-gray-700 underline underline-offset-4 hover:text-gray-900">
+                {p.name}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
       {VACANT.length === 0 && (
         <p class="mt-8 text-sm text-text-muted leading-[1.9]">
           このほかの保有物件についても、条件が合えばご紹介できます。お探しの利回り・価格帯・エリアをお知らせください。
