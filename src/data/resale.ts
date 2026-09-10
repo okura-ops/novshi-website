@@ -14,8 +14,10 @@ export interface ResaleProperty {
   code: string;
   slug: string;
   name: string;
-  /** leased = 入居中・入居者確定（賃料は実績） / vacant = 未入居（賃料は想定） */
+  /** leased = 賃貸借契約が締結済（賃料は契約賃料） / vacant = 未入居（賃料は想定） */
   status: 'leased' | 'vacant';
+  /** 入居ステータス。入居日が来る前は「入居者確定」で、「入居中」とは書かない */
+  occupancy: '入居中' | '入居者確定' | '募集中';
   rentMonthly: number;
   rentAnnual: number;
   /** 表示価格（万円） */
@@ -57,6 +59,7 @@ export const RESALE: ResaleProperty[] = [
     "slug": "001-kamou",
     "name": "001 鴨生",
     "status": "leased",
+    "occupancy": "入居中",
     "rentMonthly": 4.2,
     "rentAnnual": 50.4,
     "price": 390,
@@ -76,6 +79,7 @@ export const RESALE: ResaleProperty[] = [
     "slug": "006-ikisu",
     "name": "006 伊岐須",
     "status": "leased",
+    "occupancy": "入居者確定",
     "rentMonthly": 6.3,
     "rentAnnual": 75.6,
     "price": 590,
@@ -140,6 +144,7 @@ export const RESALE: ResaleProperty[] = [
     "slug": "007-junono",
     "name": "007 潤野",
     "status": "leased",
+    "occupancy": "入居者確定",
     "rentMonthly": 5.0,
     "rentAnnual": 60.0,
     "price": 470,
@@ -205,6 +210,7 @@ export const RESALE: ResaleProperty[] = [
     "slug": "008-hirowatari",
     "name": "008 広渡",
     "status": "leased",
+    "occupancy": "入居者確定",
     "rentMonthly": 4.5,
     "rentAnnual": 54.0,
     "price": 420,

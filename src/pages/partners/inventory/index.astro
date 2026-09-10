@@ -79,8 +79,8 @@ const totalPrice = RESALE_ORDERED.reduce((s, p) => s + p.price, 0);
           </thead>
           <tbody>
             <tr class="border-b border-gray-200">
-              <td class="px-4 py-3 font-bold whitespace-nowrap">入居中</td>
-              <td class="px-4 py-3 text-gray-700">賃貸借契約書の契約賃料（実績）</td>
+              <td class="px-4 py-3 font-bold whitespace-nowrap">入居中<br class="hidden sm:block" />入居者確定</td>
+              <td class="px-4 py-3 text-gray-700">賃貸借契約書の契約賃料</td>
               <td class="px-4 py-3 text-gray-700 whitespace-nowrap">年間賃料 ÷ <span class="font-num font-semibold">13%</span></td>
             </tr>
             <tr class="border-b border-gray-200">
@@ -128,7 +128,7 @@ const totalPrice = RESALE_ORDERED.reduce((s, p) => s + p.price, 0);
                 'absolute top-0 left-0 text-[11px] font-semibold px-3 py-1.5',
                 p.status === 'leased' ? 'bg-[#1A1A1A] text-white' : 'bg-white text-gray-900',
               ]}>
-                {p.status === 'leased' ? '入居中' : '未入居（想定賃料）'}
+                {p.occupancy === '募集中' ? '未入居（想定賃料）' : p.occupancy}
               </span>
             </div>
 
