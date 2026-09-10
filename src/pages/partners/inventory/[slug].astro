@@ -1,0 +1,468 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { RESALE, AS_OF } from '../../../data/resale';
+import type { ResaleProperty } from '../../../data/resale';
+import { economics, man, pct, mapUrl, CONTACT, ACQ_COST_RATE, LOAN } from '../../../lib/resaleCalc';
+
+export function getStaticPaths() {
+  return RESALE.map((p) => ({ params: { slug: p.slug }, props: { p } }));
+}
+
+interface Props {
+  p: ResaleProperty;
+}
+const { p } = Astro.props;
+const e = economics(p);
+const leased = p.status === 'leased';
+const img = (file: string) => `/images/rent/${p.slug}/${file}.webp`;
+const map = mapUrl(p);
+
+/** 1ページ目のメッセージライン。結論を先に言う（見出しを名詞で置かない） */
+const messageLine = leased
+  ? `入居中の戸建を${man(p.price)}万円で。年間の契約賃料${e.rentAnnual.toFixed(1)}万円に対し、表面利回りは${pct(e.grossYield)}%です。`
+  : `未入居の戸建を${man(p.price)}万円で。想定年間賃料${e.rentAnnual.toFixed(1)}万円に対し、想定表面利回りは${pct(e.grossYield)}%です。`;
+
+const overview: [string, string][] = [];
+if (p.layout) overview.push(['間取り', p.layout]);
+if (p.structure) overview.push(['構造', p.structure]);
+if (p.bldgArea) overview.push(['建物面積', p.bldgArea]);
+if (p.landArea) overview.push(['土地面積', p.landArea]);
+if (p.built) overview.push(['築年', p.built]);
+if (p.parking) overview.push(['駐車場', p.parking]);
+if (p.access) overview.push(['交通・周辺', p.access]);
+if (p.address) overview.push(['所在地', `福岡県${p.address}`]);
+
+const legal: [string, string][] = [];
+if (p.roadFrontage) legal.push(['接道', p.roadFrontage]);
+if (p.zoning) legal.push(['用途地域', p.zoning]);
+if (p.buildingCoverage) legal.push(['建ぺい率', p.buildingCoverage]);
+if (p.floorAreaRatio) legal.push(['容積率', p.floorAreaRatio]);
+if (p.rebuildable) legal.push(['再建築', p.rebuildable]);
+---
+
+<Layout
+  title={`${p.name}（${man(p.price)}万円・表面${pct(e.grossYield)}%）| 収益物件 | 株式会社novshi`}
+  description={messageLine}
+  noindex={true}
+>
+  <!-- 1. 物件概要 -->
+  <section class="bg-white washi border-t border-gray-100">
+    <div class="max-w-[1120px] mx-auto px-5 sm:px-8 pt-10 pb-8">
+      <nav class="text-xs text-text-muted mb-6" aria-label="パンくず">
+        <a href="/partners/inventory" class="underline underline-offset-4 hover:text-gray-900">収益物件一覧</a>
+        <span class="mx-2" aria-hidden="true">/</span>
+        <span>{p.name}</span>
+      </nav>
+
+      <div class="flex flex-wrap items-baseline gap-x-4 gap-y-2">
+        <span class:list={[
+          'text-[11px] font-semibold px-3 py-1.5',
+          leased ? 'bg-[#1A1A1A] text-white' : 'bg-[#F2F2F2] text-gray-900 border border-gray-300',
+        ]}>
+          {leased ? '入居中' : '未入居（想定賃料）'}
+        </span>
+        <h1 class="text-2xl lg:text-3xl font-bold text-gray-900">{p.name}</h1>
+        {p.area && <span class="text-sm text-text-muted">{p.area}</span>}
+      </div>
+
+      <p class="mt-5 text-base lg:text-lg text-gray-900 leading-[1.9] max-w-3xl font-medium">{messageLine}</p>
+
+      <div class="mt-7 grid grid-cols-2 sm:grid-cols-4 gap-6 border-t border-b border-gray-200 py-6">
+        <div>
+          <p class="text-[11px] text-text-muted">販売価格</p>
+          <p class="font-num text-3xl lg:text-4xl font-semibold text-gray-900">{man(p.price)}<span class="text-sm ml-1">万円</span></p>
+        </div>
+        <div>
+          <p class="text-[11px] text-text-muted">{leased ? '表面利回り' : '想定表面利回り'}</p>
+          <p class="font-num text-3xl lg:text-4xl font-semibold text-[#B5502A]">{pct(e.grossYield)}<span class="text-sm ml-1">%</span></p>
+        </div>
+        <div>
+          <p class="text-[11px] text-text-muted">実質利回り<span class="align-super text-[9px]">※1</span></p>
+          <p class="font-num text-3xl lg:text-4xl font-semibold text-gray-900">{pct(e.netYield)}<span class="text-sm ml-1">%</span></p>
+        </div>
+        <div>
+          <p class="text-[11px] text-text-muted">{leased ? '月額賃料（実績）' : '月額賃料（想定）'}</p>
+          <p class="font-num text-3xl lg:text-4xl font-semibold text-gray-900">{p.rentMonthly.toFixed(1)}<span class="text-sm ml-1">万円</span></p>
+        </div>
+      </div>
+
+      <p class="mt-3 text-xs text-text-muted">
+        ※1 実質利回り＝（年間賃料−年間運営費）÷（販売価格×1.08）。購入諸費用は登記・不動産取得税・仲介手数料・火災保険で8%を標準としています。
+      </p>
+
+      <p class="mt-6 text-sm text-gray-700">
+        <span class="font-semibold text-gray-900">取引態様：売主</span>
+        <span class="text-text-muted">（媒介業者様を通じてお取引いただきます。当社は宅地建物取引業者ではありません）</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- 写真 -->
+  {p.photos && p.photos.length > 0 ? (
+    <section class="bg-white washi">
+      <div class="max-w-[1120px] mx-auto px-5 sm:px-8">
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-2">
+          <a href={img(p.photos[0].file)} target="_blank" rel="noopener" class="col-span-2 md:row-span-2">
+            <img src={img(p.photos[0].file)} alt={p.photos[0].alt} class="w-full h-full aspect-[4/3] object-cover" width="1600" height="1200" />
+          </a>
+          {p.photos.slice(1).map((ph) => (
+            <a href={img(ph.file)} target="_blank" rel="noopener">
+              <img src={img(ph.file)} alt={ph.alt} class="w-full aspect-[4/3] object-cover" loading="lazy" width="800" height="600" />
+            </a>
+          ))}
+        </div>
+        <p class="mt-3 text-xs text-text-muted">写真はタップで拡大できます。撮影時点の状態です。</p>
+      </div>
+    </section>
+  ) : (
+    <section class="bg-white washi">
+      <div class="max-w-[1120px] mx-auto px-5 sm:px-8">
+        <div class="border border-dashed border-gray-300 bg-[#F2F2F2] aspect-[16/6] flex items-center justify-center">
+          <p class="text-sm text-text-muted">写真は準備中です。現地撮影後に差し替えます。</p>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- 2. 物件の内容 -->
+  <section class="sec-md bg-white washi">
+    <div class="max-w-[1120px] mx-auto px-5 sm:px-8">
+      {p.lead && <p class="text-gray-700 leading-[1.9] max-w-3xl">{p.lead}</p>}
+
+      <div class="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-x-12 gap-y-8">
+        <div>
+          <h2 class="text-base font-bold text-gray-900 border-b border-gray-900 pb-2">物件の概要</h2>
+          <table class="mt-4 w-full text-sm border-collapse">
+            <tbody>
+              {overview.map(([k, v]) => (
+                <tr class="border-b border-gray-200 align-top">
+                  <th class="py-3 pr-4 text-left font-semibold text-gray-900 w-[100px] whitespace-nowrap">{k}</th>
+                  <td class="py-3 text-gray-700 leading-[1.9]">{v}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          {map && (
+            <p class="mt-3 text-xs">
+              <a href={map} target="_blank" rel="noopener" class="underline underline-offset-4 text-gray-700 hover:text-gray-900">地図で位置を見る</a>
+            </p>
+          )}
+        </div>
+
+        <div>
+          {p.infra && p.infra.length > 0 && (
+            <>
+              <h2 class="text-base font-bold text-gray-900 border-b border-gray-900 pb-2">設備</h2>
+              <ul class="mt-4 space-y-2 text-sm text-gray-700 leading-[1.9]">
+                {p.infra.map((i) => <li>・{i}</li>)}
+              </ul>
+            </>
+          )}
+          {legal.length > 0 && (
+            <>
+              <h2 class="mt-8 text-base font-bold text-gray-900 border-b border-gray-900 pb-2">法的な条件</h2>
+              <table class="mt-4 w-full text-sm border-collapse">
+                <tbody>
+                  {legal.map(([k, v]) => (
+                    <tr class="border-b border-gray-200 align-top">
+                      <th class="py-3 pr-4 text-left font-semibold text-gray-900 w-[100px] whitespace-nowrap">{k}</th>
+                      <td class="py-3 text-gray-700">{v}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </>
+          )}
+        </div>
+      </div>
+
+      {p.highlights && p.highlights.length > 0 && (
+        <div class="mt-10">
+          <h2 class="text-base font-bold text-gray-900 border-b border-gray-900 pb-2">この物件の見どころ</h2>
+          <ul class="mt-4 space-y-2 text-sm text-gray-700 leading-[1.9] max-w-3xl">
+            {p.highlights.map((h) => <li>・{h}</li>)}
+          </ul>
+        </div>
+      )}
+
+      {p.disclosures && p.disclosures.length > 0 && (
+        <div class="mt-10 border-l-4 border-gray-300 bg-[#F2F2F2] px-5 py-4 max-w-3xl">
+          <h2 class="text-sm font-bold text-gray-900">先にお伝えしておくこと</h2>
+          <ul class="mt-3 space-y-2 text-sm text-gray-700 leading-[1.9]">
+            {p.disclosures.map((d) => <li>・{d}</li>)}
+          </ul>
+        </div>
+      )}
+    </div>
+  </section>
+
+  <!-- 3. 入居の状況と収支 -->
+  <section class="sec-lg bg-gray-50 border-t border-gray-200">
+    <div class="max-w-[1120px] mx-auto px-5 sm:px-8">
+      <h2 class="text-xl lg:text-2xl font-bold text-gray-900">
+        {leased
+          ? `月${p.rentMonthly.toFixed(1)}万円で入居中、運営費を引いた手取りは年${e.noi.toFixed(1)}万円です`
+          : `想定賃料は月${p.rentMonthly.toFixed(1)}万円、運営費を引いた手取りは年${e.noi.toFixed(1)}万円の見込みです`}
+      </h2>
+
+      <div class="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-x-12 gap-y-10">
+        <div>
+          <h3 class="text-base font-bold text-gray-900 border-b border-gray-900 pb-2">賃貸の条件</h3>
+          <table class="mt-4 w-full text-sm border-collapse">
+            <tbody>
+              <tr class="border-b border-gray-200 align-top">
+                <th class="py-3 pr-4 text-left font-semibold text-gray-900 w-[120px] whitespace-nowrap">入居ステータス</th>
+                <td class="py-3 text-gray-700">{leased ? '入居中' : '未入居（募集中）'}</td>
+              </tr>
+              <tr class="border-b border-gray-200 align-top">
+                <th class="py-3 pr-4 text-left font-semibold text-gray-900 whitespace-nowrap">月額賃料</th>
+                <td class="py-3 text-gray-700">
+                  <span class="font-num font-semibold">{p.rentMonthly.toFixed(1)}</span> 万円
+                  <span class="text-text-muted">（{leased ? '実績・賃貸借契約書に基づく契約賃料' : '想定・募集賃料'}）</span>
+                </td>
+              </tr>
+              <tr class="border-b border-gray-200 align-top">
+                <th class="py-3 pr-4 text-left font-semibold text-gray-900 whitespace-nowrap">共益費</th>
+                <td class="py-3 text-gray-700">0円</td>
+              </tr>
+              {p.leaseStart && (
+                <tr class="border-b border-gray-200 align-top">
+                  <th class="py-3 pr-4 text-left font-semibold text-gray-900 whitespace-nowrap">入居時期</th>
+                  <td class="py-3 text-gray-700">{p.leaseStart}</td>
+                </tr>
+              )}
+              {p.tenantProfile && (
+                <tr class="border-b border-gray-200 align-top">
+                  <th class="py-3 pr-4 text-left font-semibold text-gray-900 whitespace-nowrap">入居者</th>
+                  <td class="py-3 text-gray-700">{p.tenantProfile}</td>
+                </tr>
+              )}
+              {p.leaseType && (
+                <tr class="border-b border-gray-200 align-top">
+                  <th class="py-3 pr-4 text-left font-semibold text-gray-900 whitespace-nowrap">契約種別</th>
+                  <td class="py-3 text-gray-700">{p.leaseType}</td>
+                </tr>
+              )}
+              {p.guarantor && (
+                <tr class="border-b border-gray-200 align-top">
+                  <th class="py-3 pr-4 text-left font-semibold text-gray-900 whitespace-nowrap">保証</th>
+                  <td class="py-3 text-gray-700">{p.guarantor}</td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
+
+        <div>
+          <h3 class="text-base font-bold text-gray-900 border-b border-gray-900 pb-2">年間の収支</h3>
+          <table class="mt-4 w-full text-sm border-collapse">
+            <tbody>
+              <tr class="border-b border-gray-200">
+                <th class="py-3 pr-4 text-left font-semibold text-gray-900">年間賃料</th>
+                <td class="py-3 text-right font-num text-gray-900">{e.rentAnnual.toFixed(1)} 万円</td>
+              </tr>
+              {e.opexBreakdown.map((o) => (
+                <tr class="border-b border-gray-100">
+                  <th class="py-2.5 pr-4 text-left font-normal text-gray-700">
+                    <span class="text-text-muted mr-1">−</span>{o.label}
+                    <span class="block text-[11px] text-text-muted leading-snug">{o.note}</span>
+                  </th>
+                  <td class="py-2.5 text-right font-num text-gray-700 align-top">{o.amount.toFixed(1)} 万円</td>
+                </tr>
+              ))}
+              <tr class="border-b-2 border-gray-900">
+                <th class="py-3 pr-4 text-left font-semibold text-gray-900">運営費 合計</th>
+                <td class="py-3 text-right font-num text-gray-900">{e.opexTotal.toFixed(1)} 万円</td>
+              </tr>
+              <tr class="bg-[#1A1A1A] text-white">
+                <th class="py-3 px-3 text-left font-semibold">NOI（運営費を引いた手取り）</th>
+                <td class="py-3 px-3 text-right font-num font-semibold">{e.noi.toFixed(1)} 万円</td>
+              </tr>
+              <tr class="border-b border-gray-200">
+                <th class="py-3 pr-4 text-left font-semibold text-gray-900">NOI利回り（対販売価格）</th>
+                <td class="py-3 text-right font-num text-gray-900">{pct(e.noiYield)} %</td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="mt-3 text-xs text-text-muted leading-[1.9]">
+            ※2 運営費は標準的な前提を置いた想定額です。固定資産税は課税明細で、保険料は見積で確定します。減価償却・借入金利・税金は含めていません。
+          </p>
+        </div>
+      </div>
+
+      <!-- 数字のぶれ方 -->
+      <div class="mt-10">
+        <h3 class="text-base font-bold text-gray-900 border-b border-gray-900 pb-2">数字のぶれ方</h3>
+        <div class="mt-4 overflow-x-auto">
+          <table class="w-full text-sm border-collapse min-w-[560px]">
+            <thead>
+              <tr class="bg-[#F2F2F2] text-left">
+                <th class="px-4 py-3 font-semibold text-gray-900">前提</th>
+                <th class="px-4 py-3 font-semibold text-gray-900 text-right">NOI</th>
+                <th class="px-4 py-3 font-semibold text-gray-900 text-right">NOI利回り</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="border-b border-gray-200">
+                <td class="px-4 py-3 text-gray-700">基準（空室なし）</td>
+                <td class="px-4 py-3 text-right font-num text-gray-900">{e.noi.toFixed(1)} 万円</td>
+                <td class="px-4 py-3 text-right font-num text-gray-900">{pct(e.noiYield)} %</td>
+              </tr>
+              {e.vacancy.map((v) => (
+                <tr class="border-b border-gray-200">
+                  <td class="px-4 py-3 text-gray-700">年間{v.months}ヶ月の空室（空室率{v.months === 1.2 ? '10' : '20'}%相当）</td>
+                  <td class="px-4 py-3 text-right font-num text-gray-700">{v.noi.toFixed(1)} 万円</td>
+                  <td class="px-4 py-3 text-right font-num text-gray-700">{pct(v.noiYield)} %</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p class="mt-4 text-sm text-gray-700 leading-[1.9] max-w-3xl">
+          融資を使う場合は、LTV{LOAN.ltv * 100}%・金利{LOAN.rate * 100}%・期間{LOAN.years}年の仮置きで年間返済{e.ads.toFixed(1)}万円、
+          手取りは年{e.cashFlow.toFixed(1)}万円、自己資金{man(e.equity)}万円に対して{pct(e.cashOnCash)}%、DSCRは{e.dscr.toFixed(2)}です。
+          金利が1%上がると手取りは年{e.cashFlowRatePlus1.toFixed(1)}万円になります。実際の条件は金融機関により変わります。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. 売却後の管理と税金 -->
+  <section class="sec-lg bg-white washi">
+    <div class="max-w-[1120px] mx-auto px-5 sm:px-8">
+      <h2 class="text-xl lg:text-2xl font-bold text-gray-900">所有者が変わっても、入居者の窓口は当社のままです</h2>
+      <div class="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-x-12 gap-y-8">
+        <div>
+          <h3 class="text-base font-bold text-gray-900 border-b border-gray-900 pb-2">売却後の賃貸管理</h3>
+          <p class="mt-4 text-sm text-gray-700 leading-[1.9]">
+            当社は自社で仕入れ・改修・客付け・管理まで行っています。売却後も賃貸管理を継続して受託しますので、
+            買主様は入居者対応・集金・退去精算をご自身で抱える必要がありません。
+          </p>
+          <ul class="mt-4 space-y-2 text-sm text-gray-700 leading-[1.9]">
+            <li>・管理料：賃料の5%＋消費税</li>
+            <li>・範囲：家賃の集金と送金、入居者からの一次対応、退去の立会いと精算、次の募集</li>
+            <li>・退去が出た場合の募集：当社が行います</li>
+          </ul>
+          {p.pmScope && <p class="mt-4 text-sm text-gray-700 leading-[1.9]">{p.pmScope}</p>}
+        </div>
+        <div>
+          <h3 class="text-base font-bold text-gray-900 border-b border-gray-900 pb-2">税務上の一般的な取扱い</h3>
+          <p class="mt-4 text-sm text-gray-700 leading-[1.9]">
+            木造住宅の法定耐用年数は22年です。築22年を超えた建物は、一般に法定耐用年数の20%＝4年で償却する扱いになります。
+            償却の対象になるのは建物部分で、その金額は売買契約で定める建物の価格によって変わります。
+          </p>
+          <p class="mt-4 text-sm text-gray-700 leading-[1.9]">
+            個人の方が5年以内に売却した場合の譲渡所得は短期譲渡として課税され、5年を超えると長期譲渡になります。
+          </p>
+          <p class="mt-4 text-xs text-text-muted leading-[1.9]">
+            ここに書いたのは一般的な取扱いです。実際の適用は買主様の属性や取得の仕方によって変わりますので、顧問税理士にご確認ください。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. 取引条件と注記 -->
+  <section class="sec-lg bg-gray-50 border-t border-gray-200">
+    <div class="max-w-[1120px] mx-auto px-5 sm:px-8">
+      <h2 class="text-xl lg:text-2xl font-bold text-gray-900">売買代金{man(p.price)}万円、契約から引渡しまで約6週間です</h2>
+      <div class="mt-6 overflow-x-auto">
+        <table class="w-full text-sm border-collapse min-w-[560px]">
+          <tbody>
+            {[
+              ['売買代金', `${man(p.price)}万円`],
+              ['取引態様', '売主（媒介業者様を通じてお取引いただきます。当社は宅地建物取引業者ではありません）'],
+              ['売主', `${CONTACT.company}（${CONTACT.address}）`],
+              ['引渡し', '契約から概ね6週間'],
+              ['賃貸借契約', '買主様へ承継していただきます。敷金も引渡し時に承継します'],
+              ['契約不適合責任', '個別にご相談ください。築古のため免責の範囲を契約書で定めます'],
+              ['売却後の管理', `当社が継続受託（管理料 賃料の5%＋消費税）`],
+            ].map(([k, v]) => (
+              <tr class="border-b border-gray-200 align-top">
+                <th class="px-4 py-3 text-left font-semibold text-gray-900 bg-white w-[160px] whitespace-nowrap">{k}</th>
+                <td class="px-4 py-3 text-gray-700 leading-[1.9]">{v}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <div class="mt-10 grid grid-cols-1 lg:grid-cols-2 gap-x-12 gap-y-8 border-t border-gray-200 pt-8">
+        <div>
+          <h3 class="text-base font-bold text-gray-900">お問い合わせ</h3>
+          <p class="mt-3 text-sm text-gray-700 leading-[1.9]">
+            {CONTACT.company}　{CONTACT.person}<br />
+            <a href={`mailto:${CONTACT.mail}`} class="underline underline-offset-4 hover:text-gray-900">{CONTACT.mail}</a><br />
+            {CONTACT.address}
+          </p>
+          <p class="mt-4 text-sm">
+            <a href="/partners/inventory" class="underline underline-offset-4 text-gray-700 hover:text-gray-900">ほかの物件を見る</a>
+          </p>
+        </div>
+        <div>
+          <h3 class="text-sm font-bold text-gray-900">出典と注記</h3>
+          <ul class="mt-3 space-y-2 text-xs text-text-muted leading-[1.9]">
+            <li>・{leased ? '賃料は賃貸借契約書に基づく契約賃料です。' : '賃料は募集賃料であり、実績ではありません。'}掲載の数値は{AS_OF}時点のものです。</li>
+            <li>・運営費（※2）は標準的な前提を置いた想定額です。固定資産税は課税明細、保険料は見積で確定します。</li>
+            <li>・レバレッジ後の数値はLTV{LOAN.ltv * 100}%・金利{LOAN.rate * 100}%・期間{LOAN.years}年の仮置きによる試算です。</li>
+            <li>・購入諸費用は販売価格の{ACQ_COST_RATE * 100}%で試算しています。買主様の条件により変わります。</li>
+            <li>・将来の収益・売却価格を保証するものではありません。</li>
+            <li>・本ページは重要事項説明ではありません。重要事項説明は媒介業者様が実施します。</li>
+            <li>・写真は撮影時点の状態です。</li>
+            <li>・税務の記載は一般的な取扱いです。適用は顧問税理士にご確認ください。</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style is:global>
+  /* 印刷（＝PDF書き出し）用。novshi-hq scripts/properties/resale_page_pdf.py がこの経路で刷る。
+     業者が客先へ持っていく紙は、画面と同じ内容が1本で出ることを優先する。 */
+  @media print {
+    @page {
+      size: A4;
+      margin: 12mm 12mm 14mm;
+    }
+    header,
+    footer,
+    nav[aria-label='パンくず'] {
+      display: none !important;
+    }
+    body {
+      font-size: 10.5pt;
+      line-height: 1.7;
+    }
+    section {
+      padding-top: 10px !important;
+      padding-bottom: 14px !important;
+      break-inside: auto;
+    }
+    /* セクションの見出しと直後の表を引き離さない */
+    h1, h2, h3 {
+      break-after: avoid;
+    }
+    table, ul {
+      break-inside: avoid;
+    }
+    /* 画面用の背景色は刷らない。写真とヘッダー行の黒は print-color-adjust で残す */
+    .washi::before,
+    .washi::after {
+      display: none !important;
+    }
+    .bg-gray-50 {
+      background: #ffffff !important;
+    }
+    a[href^='http']::after {
+      content: ' (' attr(href) ')';
+      font-size: 8pt;
+      color: #666;
+      word-break: break-all;
+    }
+    a[href^='mailto']::after,
+    a[href^='/']::after {
+      content: none;
+    }
+  }
+</style>

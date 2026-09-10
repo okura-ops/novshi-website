@@ -1,4 +1,5 @@
 User-agent: *
+Disallow: /partners/
 Allow: /
 
 Sitemap: https://novshi.co.jp/sitemap-index.xml

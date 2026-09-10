@@ -1,0 +1,217 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { RESALE_ORDERED, LEASED, VACANT, AS_OF } from '../../../data/resale';
+import { economics, man, pct, CONTACT } from '../../../lib/resaleCalc';
+
+const rows = RESALE_ORDERED.map((p) => ({ p, e: economics(p) }));
+const totalPrice = RESALE_ORDERED.reduce((s, p) => s + p.price, 0);
+---
+
+<Layout
+  title="収益物件一覧（再販協力パートナー向け）| 株式会社novshi"
+  description="株式会社novshiが取得・改修し、賃貸付けまで終えた福岡県内の戸建を、収益物件として媒介業者の皆さまにご紹介しています。"
+  noindex={true}
+>
+  <!-- ヘッダー -->
+  <section class="bg-[#1A1A1A] text-white">
+    <div class="max-w-[1120px] mx-auto px-5 sm:px-8 py-12 lg:py-16">
+      <h1 class="text-2xl lg:text-4xl font-bold leading-[1.3] text-white">
+        賃貸付けまで終えた戸建を、<br class="hidden sm:block" />収益物件としてご紹介しています
+      </h1>
+      <p class="mt-5 text-sm lg:text-base text-white/80 leading-[1.9] max-w-3xl">
+        当社が福岡県内で取得し、改修して入居者を付けた一戸建てです。所有が移った後も賃貸管理は当社が続けますので、
+        買主様は稼働している状態をそのまま引き継ぐ形になります。売買は媒介業者の皆さまを通じてお願いしています。
+      </p>
+      <div class="mt-8 flex flex-wrap gap-x-10 gap-y-4 border-t border-white/15 pt-6">
+        <div>
+          <p class="text-[11px] text-white/60">掲載中</p>
+          <p class="font-en text-3xl font-semibold">{RESALE_ORDERED.length}<span class="text-base ml-1">棟</span></p>
+        </div>
+        <div>
+          <p class="text-[11px] text-white/60">価格帯</p>
+          <p class="font-en text-3xl font-semibold">
+            {man(Math.min(...RESALE_ORDERED.map((p) => p.price)))}<span class="text-base mx-1">〜</span>{man(Math.max(...RESALE_ORDERED.map((p) => p.price)))}<span class="text-base ml-1">万円</span>
+          </p>
+        </div>
+        <div>
+          <p class="text-[11px] text-white/60">表面利回り</p>
+          <p class="font-en text-3xl font-semibold">
+            {pct(Math.min(...rows.map((r) => r.e.grossYield)))}<span class="text-base mx-1">〜</span>{pct(Math.max(...rows.map((r) => r.e.grossYield)))}<span class="text-base ml-1">%</span>
+          </p>
+        </div>
+        <div>
+          <p class="text-[11px] text-white/60">合計</p>
+          <p class="font-en text-3xl font-semibold">{man(totalPrice)}<span class="text-base ml-1">万円</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 取引の前提 -->
+  <section class="bg-white washi border-b border-gray-200">
+    <div class="max-w-[1120px] mx-auto px-5 sm:px-8 py-8">
+      <div class="border-l-4 border-[#B5502A] bg-[#F2F2F2] px-5 py-4">
+        <p class="text-sm font-bold text-gray-900">媒介業者を通じてお取引いただきます。当社は宅地建物取引業者ではありません。</p>
+        <p class="mt-2 text-sm text-gray-700 leading-[1.9]">
+          本ページは媒介をお願いする皆さま向けの物件情報で、重要事項説明ではありません。重要事項説明は媒介業者様が実施します。
+          買主様のご紹介、価格のご相談、資料のご請求は、下記の連絡先まで直接お寄せください。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 価格の考え方 -->
+  <section class="sec-md bg-white washi">
+    <div class="max-w-[1120px] mx-auto px-5 sm:px-8">
+      <h2 class="text-xl lg:text-2xl font-bold text-gray-900">価格の考え方</h2>
+      <p class="mt-4 text-gray-700 leading-[1.9] max-w-3xl">
+        価格は物件ごとの言い値ではなく、賃料からの収益還元で機械的に決めています。
+        同じ物差しで並んでいますので、複数棟をまとめてご覧いただくときも比較しやすいはずです。
+      </p>
+      <div class="mt-6 overflow-x-auto">
+        <table class="w-full text-sm border-collapse min-w-[560px]">
+          <thead>
+            <tr class="bg-[#1A1A1A] text-white text-left">
+              <th class="px-4 py-3 font-semibold">区分</th>
+              <th class="px-4 py-3 font-semibold">賃料の扱い</th>
+              <th class="px-4 py-3 font-semibold whitespace-nowrap">価格の基準</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-b border-gray-200">
+              <td class="px-4 py-3 font-bold whitespace-nowrap">入居中</td>
+              <td class="px-4 py-3 text-gray-700">賃貸借契約書の契約賃料（実績）</td>
+              <td class="px-4 py-3 text-gray-700 whitespace-nowrap">年間賃料 ÷ <span class="font-num font-semibold">13%</span></td>
+            </tr>
+            <tr class="border-b border-gray-200">
+              <td class="px-4 py-3 font-bold whitespace-nowrap">未入居</td>
+              <td class="px-4 py-3 text-gray-700">募集賃料（想定。実績とは分けて表示します）</td>
+              <td class="px-4 py-3 text-gray-700 whitespace-nowrap">想定年間賃料 ÷ <span class="font-num font-semibold">16%</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-4 text-xs text-text-muted leading-[1.9]">
+        端数は10万円単位に切り上げています。個別の事情で基準どおりに置けない物件は、この一覧に載せていません。
+        価格のご相談は個別に承ります。
+      </p>
+    </div>
+  </section>
+
+  <!-- 物件一覧 -->
+  <section class="sec-lg bg-gray-50 border-t border-gray-200">
+    <div class="max-w-[1120px] mx-auto px-5 sm:px-8">
+      <div class="flex items-baseline justify-between flex-wrap gap-2">
+        <h2 class="text-xl lg:text-2xl font-bold text-gray-900">物件一覧</h2>
+        <p class="text-xs text-text-muted">{AS_OF}時点</p>
+      </div>
+
+      <div class="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {rows.map(({ p, e }) => (
+          <a href={`/partners/inventory/${p.slug}`} class="group flex flex-col bg-white border border-gray-200 hover:border-gray-900 transition-colors">
+            <div class="relative aspect-[16/9] bg-[#1A1A1A] overflow-hidden">
+              {p.photos && p.photos.length > 0 ? (
+                <img
+                  src={`/images/rent/${p.slug}/${p.photos[0].file}.webp`}
+                  alt={p.photos[0].alt}
+                  class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+                  loading="lazy"
+                  width="1600"
+                  height="900"
+                />
+              ) : (
+                <div class="w-full h-full flex items-center justify-center">
+                  <p class="text-xs text-white/60">写真は準備中です（現地撮影後に差し替えます）</p>
+                </div>
+              )}
+              <span class:list={[
+                'absolute top-0 left-0 text-[11px] font-semibold px-3 py-1.5',
+                p.status === 'leased' ? 'bg-[#1A1A1A] text-white' : 'bg-white text-gray-900',
+              ]}>
+                {p.status === 'leased' ? '入居中' : '未入居（想定賃料）'}
+              </span>
+            </div>
+
+            <div class="p-5 flex-1 flex flex-col">
+              <div class="flex items-baseline justify-between gap-3">
+                <h3 class="text-base font-bold text-gray-900">{p.name}</h3>
+                <p class="text-xs text-text-muted">{p.area}</p>
+              </div>
+              <p class="mt-1 text-xs text-text-muted">{[p.layout, p.bldgArea, p.built].filter(Boolean).join('｜')}</p>
+
+              <div class="mt-4 grid grid-cols-3 gap-3 border-t border-gray-200 pt-4">
+                <div>
+                  <p class="text-[11px] text-text-muted">価格</p>
+                  <p class="font-num text-xl font-semibold text-gray-900">{man(p.price)}<span class="text-xs ml-0.5">万円</span></p>
+                </div>
+                <div>
+                  <p class="text-[11px] text-text-muted">表面利回り</p>
+                  <p class="font-num text-xl font-semibold text-[#B5502A]">{pct(e.grossYield)}<span class="text-xs ml-0.5">%</span></p>
+                </div>
+                <div>
+                  <p class="text-[11px] text-text-muted">月額賃料</p>
+                  <p class="font-num text-xl font-semibold text-gray-900">{p.rentMonthly.toFixed(1)}<span class="text-xs ml-0.5">万円</span></p>
+                </div>
+              </div>
+
+              <p class="mt-4 text-xs text-gray-700 underline underline-offset-4 group-hover:text-gray-900">物件の詳細と収支を見る</p>
+            </div>
+          </a>
+        ))}
+      </div>
+
+      {VACANT.length === 0 && (
+        <p class="mt-8 text-sm text-text-muted leading-[1.9]">
+          現在は入居中の{LEASED.length}棟のみを掲載しています。未入居の物件は募集期間が一定を超えたものから順にこの一覧へ加えます。
+        </p>
+      )}
+    </div>
+  </section>
+
+  <!-- 取引条件 -->
+  <section class="sec-lg bg-white washi">
+    <div class="max-w-[1120px] mx-auto px-5 sm:px-8">
+      <h2 class="text-xl lg:text-2xl font-bold text-gray-900">お取引の条件</h2>
+      <div class="mt-6 overflow-x-auto">
+        <table class="w-full text-sm border-collapse min-w-[560px]">
+          <tbody>
+            {[
+              ['取引態様', '売主（媒介業者様を通じてお取引いただきます。当社は宅地建物取引業者ではありません）'],
+              ['売主', `${CONTACT.company}（${CONTACT.address}）`],
+              ['引渡し', '契約から概ね6週間。入居者様との賃貸借契約は買主様へ承継していただきます'],
+              ['売却後の賃貸管理', '当社が継続して受託します（管理料は賃料の5%＋消費税）。所有者様が変わっても入居者様の窓口は当社のままです'],
+              ['契約不適合責任', '個別にご相談ください。築古のため免責の範囲を契約書で定めます'],
+              ['敷金', '入居者様からお預かりしている敷金は、引渡し時に買主様へ承継します'],
+            ].map(([k, v]) => (
+              <tr class="border-b border-gray-200 align-top">
+                <th class="px-4 py-3 text-left font-semibold text-gray-900 bg-[#F2F2F2] w-[180px] whitespace-nowrap">{k}</th>
+                <td class="px-4 py-3 text-gray-700 leading-[1.9]">{v}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <div class="mt-10 border-t border-gray-200 pt-8">
+        <h3 class="text-base font-bold text-gray-900">お問い合わせ</h3>
+        <p class="mt-3 text-sm text-gray-700 leading-[1.9]">
+          {CONTACT.company}　{CONTACT.person}<br />
+          <a href={`mailto:${CONTACT.mail}`} class="underline underline-offset-4 hover:text-gray-900">{CONTACT.mail}</a><br />
+          {CONTACT.address}
+        </p>
+      </div>
+
+      <div class="mt-10 border-t border-gray-200 pt-8">
+        <h3 class="text-sm font-bold text-gray-900">ご確認ください</h3>
+        <ul class="mt-3 space-y-2 text-xs text-text-muted leading-[1.9]">
+          <li>・本ページに記載の数値は{AS_OF}時点のもので、将来の収益を保証するものではありません。</li>
+          <li>・運営費・融資条件・空室率は標準的な前提を置いた試算です。実際の数値は買主様の条件により変わります。</li>
+          <li>・本ページは重要事項説明ではありません。重要事項説明は媒介業者様が実施します。</li>
+          <li>・写真は撮影時点の状態です。現況と異なる場合があります。</li>
+          <li>・税務の取扱いは一般的なものです。適用は顧問税理士にご確認ください。</li>
+          <li>・本ページは検索エンジンに登録していません。URLの共有は買主候補の範囲でお願いします。</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</Layout>
