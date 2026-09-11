@@ -7,7 +7,7 @@
  */
 
 /** 掲載条件の基準日（ページ下部に表示） */
-export const AS_OF = '2026年9月10日';
+export const AS_OF = '2026年9月11日';
 
 /** 入居申込フォーム（全物件共通1本・物件名はプレフィルで識別） */
 const APPLY_FORM_BASE =
@@ -94,6 +94,7 @@ export const RENTALS: Rental[] = [
     code: '007',
     name: '飯塚市潤野',
     spec: '戸建 4DK・78.32㎡（2階建）',
+    closed: { label: '入居中', since: '2026年10月' },
     rent: 50000,
     perks: ['初期費用0円（敷金・礼金・仲介手数料・鍵交換・火災保険）'],
     pets: '多頭飼い・大型犬OK（追加費用なし）',

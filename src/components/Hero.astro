@@ -1,7 +1,7 @@
 ---
 interface Props {
   title: string;
-  /** トップ用: 見出し2行目（円相との衝突を避けるため明示改行） */
+  /** トップ用: 見出しの後半。md未満でだけ改行する（狭い幅で1行に収まらないため） */
   title2?: string;
   subtitle?: string;
   showCTA?: boolean;
@@ -31,7 +31,10 @@ const { title, title2, subtitle, showCTA = false, compact = false } = Astro.prop
   <!-- Homepage hero: 円相グラフィック型（2026-08-03大倉確定）.
        ロゴマーク実物（筆致の円相＋刀の貫き）を右に断ち切りで特大配置。写真は使わない.
        書体=Zen Kaku Gothic New / CTA=黒（A1×B1確定）.
-       2026-09-07: Tagline改訂（2行目が11字に伸びた）で円相と衝突したため、字送りをlg 3.05rem / xl 3.4remへ縮小（1024pxで円相の内側に触れるため2段階にした） -->
+       2026-09-07: Tagline改訂（2行目が11字に伸びた）で円相と衝突したため、字送りをlg 3.05rem / xl 3.4remへ縮小（1024pxで円相の内側に触れるため2段階にした）
+       2026-09-11: 見出しをTaglineからMission「豊かさの探究者である。」へ差し替え（大倉指示）。
+       あわせて title2 の改行を md:hidden にした。keep-all と overflow-hidden の組み合わせで、
+       390px幅では1行が箱をはみ出して切れていたため（本番で「新しい豊かさをつく」までしか出ていなかった） -->
   <section class="relative bg-white overflow-hidden washi">
     <img
       aria-hidden="true"
@@ -45,10 +48,10 @@ const { title, title2, subtitle, showCTA = false, compact = false } = Astro.prop
 
     <div class="relative z-10 max-w-[1120px] mx-auto px-5 sm:px-8 min-h-[74vh] lg:min-h-[82vh] flex flex-col justify-center py-20">
       <h1
-        class="text-[2.6rem] leading-[1.3] sm:text-[3.25rem] lg:text-[3.05rem] xl:text-[3.4rem] lg:leading-[1.25] font-bold text-gray-900 fade-in-up"
+        class="text-[clamp(1.9rem,9vw,2.6rem)] leading-[1.3] sm:text-[3.25rem] lg:text-[3.05rem] xl:text-[3.4rem] lg:leading-[1.25] font-bold text-gray-900 fade-in-up"
         style="word-break: keep-all;"
       >
-        {title}{title2 && <><br />{title2}</>}
+        {title}{title2 && <><br class="md:hidden" />{title2}</>}
       </h1>
       <img src="/images/brush/underline-kakishibu.png" alt="" aria-hidden="true" width="900" height="66" class="w-[210px] lg:w-[250px] h-auto mt-4 fade-in-up select-none" />
 
