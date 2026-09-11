@@ -39,13 +39,20 @@ const multi = properties.length > 1;
 // これが無いと、冒頭の一覧からアンカーで飛んだ先がヘッダーの下に隠れる
 const asOfList = [...new Set(properties.map((property) => property.asOf))].join('・');
 
-const headline = multi
-  ? `候補が${properties.length}軒あります。<br class="hidden sm:block" />買えたら住みたい家はありますか。`
-  : `${properties[0].title}、<br class="hidden sm:block" />買えたら住みたいと思われますか。`;
+// トーン：こちらから物件を売り込むのではなく、うかがった条件で探した結果を持ち帰る形にする。
+// 「買えたら住みたいですか」と聞くと、相手が判定する側／当社がお伺いを立てる側になってしまう
+const headline = `ご希望に近い家を、<br class="hidden sm:block" />${properties.length}軒見つけました。`;
 
-const pageTitle = multi
-  ? `飯塚市の候補${properties.length}軒についてのご提案`
-  : `${properties[0].title}についてのご提案`;
+const pageTitle = `ご希望に近い候補${properties.length}軒`;
+
+// うかがっている条件。ここがずれていると探すものが丸ごと変わるので、先頭に出して確かめてもらう
+const brief = [
+  { label: 'エリア', value: proposal.recipient.searchArea },
+  { label: 'お住まい', value: proposal.recipient.household },
+  { label: 'ペット', value: proposal.recipient.pets },
+  { label: 'お車', value: proposal.recipient.vehicles },
+  { label: 'ご予算', value: proposal.recipient.rentBudget },
+].filter((item) => item.value.trim() !== '');
 
 const statusLabel: Record<ProposalFitStatus, string> = {
   fit: '合う',
@@ -84,7 +91,7 @@ const HIGHLIGHT_ICONS: Record<ProposalHighlightIcon, string> = {
 
 <Layout
   title={`${pageTitle} | 株式会社novshi`}
-  description="買えた場合に住みたいと思われるかを伺うための非公開ページです。"
+  description="うかがっているご希望に沿って探した候補をお伝えする、非公開のページです。"
   noindex={true}
 >
   <section class="relative overflow-hidden bg-[#FBFAF7] washi border-t border-gray-100">
@@ -101,6 +108,21 @@ const HIGHLIGHT_ICONS: Record<ProposalHighlightIcon, string> = {
           <p class="mt-4 text-base text-gray-700 leading-[1.95] max-w-2xl">
             {proposal.lead}
           </p>
+
+          <div class="mt-7 border border-gray-200 bg-white/80 px-5 py-5">
+            <p class="text-sm font-bold text-gray-900">うかがっているご希望</p>
+            <dl class="mt-4 grid grid-cols-2 gap-x-5 gap-y-4 sm:grid-cols-3">
+              {brief.map((item) => (
+                <div>
+                  <dt class="text-xs font-bold text-gray-500">{item.label}</dt>
+                  <dd class="mt-1 text-sm font-bold text-gray-900 leading-[1.6]">{item.value}</dd>
+                </div>
+              ))}
+            </dl>
+            <p class="mt-4 text-xs text-text-muted leading-[1.8]">
+              違っていたら教えてください。ここがずれていると、お探しするものが変わります。
+            </p>
+          </div>
         </div>
 
         <div class="relative bg-white border border-gray-200 p-5 sm:p-7">
@@ -135,7 +157,7 @@ const HIGHLIGHT_ICONS: Record<ProposalHighlightIcon, string> = {
       {/* 候補の一覧。複数ある時は、まずここで見比べてから下の詳しい説明へ入ってもらう */}
       <div class="mt-10 lg:mt-14">
         <h2 class="text-lg font-bold text-gray-900">
-          {multi ? `今回の候補（${properties.length}軒）` : '今回の候補'}
+          {multi ? `見つかった家（${properties.length}軒）` : '見つかった家'}
         </h2>
         <div class:list={[
           'mt-4 grid grid-cols-1 gap-4',
@@ -228,7 +250,7 @@ const HIGHLIGHT_ICONS: Record<ProposalHighlightIcon, string> = {
                 ご希望との照らし合わせ{multi && <span class="ml-2 text-lg text-white/60">／{property.shortName}</span>}
               </h3>
               <p class="mt-4 text-sm text-white/75 leading-[1.95] max-w-md">
-                合うところと、まだ確認しているところを分けて見られるようにしました。「確認中」は、買えるかどうかが分かってから確定します。
+                うかがった条件を1つずつ当てました。合っているところと、まだ当社が確かめきれていないところを分けています。「確認中」は仲介会社に問い合わせている最中です。
               </p>
             </div>
 
@@ -408,9 +430,7 @@ const HIGHLIGHT_ICONS: Record<ProposalHighlightIcon, string> = {
         <div>
           <h2 class="text-2xl lg:text-3xl font-bold text-gray-900">LINEで聞かせてください</h2>
           <p class="mt-4 text-base text-gray-700 leading-[1.95] max-w-md">
-            {multi
-              ? 'どちらの家を買いにいくか（あるいは、どちらも見送るか）を決めるために、率直な感想が知りたいです。迷う点があれば、そのまま教えてください。'
-              : 'この家を買いにいくかどうかを考えるために、率直な感想が知りたいです。迷う点があれば、そのまま教えてください。'}
+            探し方が合っているかを知りたいです。「違う」と分かるほうが、次に見つかるまでが早くなります。遠慮なくそのまま書いてください。
           </p>
         </div>
         <div class="border-t border-gray-900">
@@ -427,7 +447,7 @@ const HIGHLIGHT_ICONS: Record<ProposalHighlightIcon, string> = {
               差出人：{proposal.sender.company}　{proposal.sender.person}
             </p>
             <p class="mt-2 text-xs text-text-muted leading-[1.8]">
-              このページは、特定の方に向けて候補を確認するための非公開ページです。募集広告ではありません。
+              このページは、うかがったご希望に沿って探した候補をお伝えするための非公開ページです。募集広告ではありません。
               掲載内容の確認日は{asOfList}です。
             </p>
           </div>
