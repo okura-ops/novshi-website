@@ -1,9 +1,17 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { PROPOSALS, PROPOSAL_AS_OF } from '../../data/proposals';
-import type { ProposalData, ProposalFitStatus } from '../../data/proposals';
+import { PROPOSALS } from '../../data/proposals';
+import type { ProposalData, ProposalFitStatus, ProposalHighlightIcon } from '../../data/proposals';
 
 export function getStaticPaths() {
+  // 1ページ＝1人。物件は中に1〜3件（matching-rules.md）。4件以上並べると相手が選べなくなる
+  for (const proposal of PROPOSALS) {
+    if (proposal.properties.length < 1 || proposal.properties.length > 3) {
+      throw new Error(
+        `提案ページ ${proposal.slug} の物件は1〜3件にしてください（いまは${proposal.properties.length}件）`,
+      );
+    }
+  }
   return PROPOSALS.map((proposal) => ({ params: { slug: proposal.slug }, props: { proposal } }));
 }
 
@@ -15,20 +23,66 @@ const { proposal } = Astro.props;
 
 const yen = (value: number) => value.toLocaleString('ja-JP');
 const man = (value: number) => `${(value / 10000).toFixed(1)}万円`;
-const rentRange = `${man(proposal.rent.min)}〜${man(proposal.rent.max)}`;
+const rentRange = (rent: { min: number; max: number }) => `${man(rent.min)}〜${man(rent.max)}`;
+
 const upgradeTotal = proposal.upgrades.reduce((sum, option) => sum + option.monthlyIncrease, 0);
+
 // 許諾の記録が無い写真は出さない。データに入っていても、permissionNote が空なら落とす
-const photos = (proposal.photos ?? []).filter((photo) => photo.permissionNote.trim() !== '');
+const properties = proposal.properties.map((property, index) => ({
+  ...property,
+  index,
+  visiblePhotos: (property.photos ?? []).filter((photo) => photo.permissionNote.trim() !== ''),
+}));
+
+const multi = properties.length > 1;
+const asOfList = [...new Set(properties.map((property) => property.asOf))].join('・');
+
+const headline = multi
+  ? `候補が${properties.length}軒あります。<br class="hidden sm:block" />買えたら住みたい家はありますか。`
+  : `${properties[0].title}、<br class="hidden sm:block" />買えたら住みたいと思われますか。`;
+
+const pageTitle = multi
+  ? `飯塚市の候補${properties.length}軒についてのご提案`
+  : `${properties[0].title}についてのご提案`;
 
 const statusLabel: Record<ProposalFitStatus, string> = {
   fit: '合う',
   checking: '確認中',
 };
+
+// 「暮らしとして見たときのよさ」のアイコン。線画のトーンをページ内でそろえる
+const HIGHLIGHT_ICONS: Record<ProposalHighlightIcon, string> = {
+  house: `<path d="M12 31 L32 15 L52 31" fill="none" stroke="#1A1A1A" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M18 29 V50 H46 V29" fill="none" stroke="#1A1A1A" stroke-width="3.5" stroke-linejoin="round" />
+    <path d="M24 38 H40 M24 45 H40" stroke="#B5502A" stroke-width="3" stroke-linecap="round" />`,
+  pet: `<circle cx="32" cy="27" r="13" fill="none" stroke="#1A1A1A" stroke-width="3.5" />
+    <path d="M21 23 L13 15 M43 23 L51 15" stroke="#1A1A1A" stroke-width="3.5" stroke-linecap="round" />
+    <path d="M26 42 C20 44 17 49 16 55 M38 42 C44 44 47 49 48 55" fill="none" stroke="#1A1A1A" stroke-width="3.5" stroke-linecap="round" />
+    <path d="M28 32 H36" stroke="#B5502A" stroke-width="3" stroke-linecap="round" />`,
+  car: `<path d="M10 35 H28 L33 46 H7 Z" fill="none" stroke="#1A1A1A" stroke-width="3.5" stroke-linejoin="round" />
+    <circle cx="15" cy="48" r="5" fill="none" stroke="#1A1A1A" stroke-width="3.5" />
+    <circle cx="29" cy="48" r="5" fill="none" stroke="#1A1A1A" stroke-width="3.5" />
+    <path d="M34 30 H52 L58 46 H31 Z" fill="none" stroke="#B5502A" stroke-width="3.5" stroke-linejoin="round" />
+    <circle cx="39" cy="48" r="5" fill="none" stroke="#B5502A" stroke-width="3.5" />
+    <circle cx="53" cy="48" r="5" fill="none" stroke="#B5502A" stroke-width="3.5" />`,
+  water: `<path d="M33 9 C24 21 19 30 19 39 C19 48 25 55 33 55 C41 55 47 48 47 39 C47 30 42 21 33 9 Z" fill="none" stroke="#1A1A1A" stroke-width="3.5" stroke-linejoin="round" />
+    <path d="M28 41 C30 45 35 47 39 43" fill="none" stroke="#B5502A" stroke-width="3" stroke-linecap="round" />`,
+  land: `<path d="M6 46 H58" stroke="#1A1A1A" stroke-width="3.5" stroke-linecap="round" />
+    <path d="M14 46 V30 H30 V46" fill="none" stroke="#1A1A1A" stroke-width="3.5" stroke-linejoin="round" />
+    <path d="M10 32 L22 22 L34 32" fill="none" stroke="#1A1A1A" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M46 46 V33" stroke="#B5502A" stroke-width="3.5" stroke-linecap="round" />
+    <path d="M46 33 C39 33 37 27 41 23 C45 19 51 21 51 27 C55 25 58 29 55 33 Z" fill="none" stroke="#B5502A" stroke-width="3" stroke-linejoin="round" />`,
+  town: `<path d="M8 52 H56" stroke="#1A1A1A" stroke-width="3.5" stroke-linecap="round" />
+    <path d="M13 52 V34 H25 V52" fill="none" stroke="#1A1A1A" stroke-width="3.5" stroke-linejoin="round" />
+    <path d="M9 36 L19 27 L29 36" fill="none" stroke="#1A1A1A" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M35 52 V38 H49 V52" fill="none" stroke="#B5502A" stroke-width="3.5" stroke-linejoin="round" />
+    <path d="M31 40 L42 31 L53 40" fill="none" stroke="#B5502A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />`,
+};
 ---
 
 <Layout
-  title={`${proposal.title}についてのご提案 | 株式会社novshi`}
-  description={`${proposal.title}について、買えた場合に住みたいと思われるかを伺うための非公開ページです。`}
+  title={`${pageTitle} | 株式会社novshi`}
+  description="買えた場合に住みたいと思われるかを伺うための非公開ページです。"
   noindex={true}
 >
   <section class="relative overflow-hidden bg-[#FBFAF7] washi border-t border-gray-100">
@@ -37,7 +91,7 @@ const statusLabel: Record<ProposalFitStatus, string> = {
         <div>
           <p class="text-sm font-bold text-[#B5502A]">{proposal.recipient.label}</p>
           <h1 class="mt-3 text-[2rem] leading-[1.35] sm:text-4xl lg:text-[3rem] lg:leading-[1.25] font-bold text-gray-900">
-            {proposal.title}、<br class="hidden sm:block" />買えたら住みたいと思われますか。
+            <Fragment set:html={headline} />
           </h1>
           <p class="mt-5 text-base text-gray-700 leading-[1.95] max-w-2xl">
             {proposal.recipient.context}
@@ -45,25 +99,6 @@ const statusLabel: Record<ProposalFitStatus, string> = {
           <p class="mt-4 text-base text-gray-700 leading-[1.95] max-w-2xl">
             {proposal.lead}
           </p>
-
-          <div class="mt-7 grid grid-cols-2 gap-3 sm:grid-cols-4">
-            <div class="border border-gray-200 bg-white/80 px-4 py-4">
-              <p class="text-xs font-bold text-gray-500">家賃の見込み</p>
-              <p class="mt-1 font-num text-[1.35rem] leading-none text-[#B5502A]">{rentRange}</p>
-            </div>
-            <div class="border border-gray-200 bg-white/80 px-4 py-4">
-              <p class="text-xs font-bold text-gray-500">間取り</p>
-              <p class="mt-1 text-base font-bold text-gray-900">平屋4DK</p>
-            </div>
-            <div class="border border-gray-200 bg-white/80 px-4 py-4">
-              <p class="text-xs font-bold text-gray-500">ペット</p>
-              <p class="mt-1 text-base font-bold text-gray-900">飼育可にできます</p>
-            </div>
-            <div class="border border-gray-200 bg-white/80 px-4 py-4">
-              <p class="text-xs font-bold text-gray-500">駐車</p>
-              <p class="mt-1 text-base font-bold text-gray-900">2台は確認中</p>
-            </div>
-          </div>
         </div>
 
         <div class="relative bg-white border border-gray-200 p-5 sm:p-7">
@@ -94,13 +129,52 @@ const statusLabel: Record<ProposalFitStatus, string> = {
           </p>
         </div>
       </div>
+
+      {/* 候補の一覧。複数ある時は、まずここで見比べてから下の詳しい説明へ入ってもらう */}
+      <div class="mt-10 lg:mt-14">
+        <h2 class="text-lg font-bold text-gray-900">
+          {multi ? `今回の候補（${properties.length}軒）` : '今回の候補'}
+        </h2>
+        <div class:list={[
+          'mt-4 grid grid-cols-1 gap-4',
+          multi ? 'md:grid-cols-2' : '',
+        ]}>
+          {properties.map((property) => (
+            <a
+              href={`#${property.key}`}
+              class="group block bg-white border border-gray-200 p-5 sm:p-6 transition-colors hover:border-[#B5502A]"
+            >
+              <div class="flex items-baseline gap-3">
+                {multi && (
+                  <span class="font-num text-sm text-gray-400">{property.index + 1}</span>
+                )}
+                <h3 class="text-xl font-bold text-gray-900 group-hover:text-[#B5502A]">{property.title}</h3>
+              </div>
+              <p class="mt-3 text-sm text-gray-700 leading-[1.85]">{property.tagline}</p>
+              <div class="mt-5 flex flex-wrap items-end gap-x-6 gap-y-3">
+                <div>
+                  <p class="text-xs font-bold text-gray-500">家賃の見込み</p>
+                  <p class="mt-1 font-num text-[1.35rem] leading-none text-[#B5502A]">{rentRange(property.rent)}</p>
+                </div>
+                {property.chips.map((chip) => (
+                  <div>
+                    <p class="text-xs font-bold text-gray-500">{chip.label}</p>
+                    <p class="mt-1 text-sm font-bold text-gray-900">{chip.value}</p>
+                  </div>
+                ))}
+              </div>
+              <p class="mt-5 text-sm font-bold text-[#B5502A]">この家のことを読む →</p>
+            </a>
+          ))}
+        </div>
+      </div>
     </div>
   </section>
 
   <section class="bg-white washi">
     <div class="max-w-[1120px] mx-auto px-5 sm:px-8 py-9">
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-3">
-        {proposal.requiredNotices.map((notice, index) => (
+        {proposal.requiredNotices.map((notice) => (
           <div class="border-l-4 border-[#B5502A] bg-[#F2F2F2] px-5 py-4">
             <div class="flex gap-3">
               <svg viewBox="0 0 32 32" aria-hidden="true" class="mt-0.5 h-7 w-7 shrink-0">
@@ -116,213 +190,196 @@ const statusLabel: Record<ProposalFitStatus, string> = {
     </div>
   </section>
 
-  <section class="bg-[#1A1A1A] text-white">
-    <div class="max-w-[1120px] mx-auto px-5 sm:px-8 py-12 lg:py-16">
-      <div class="grid grid-cols-1 lg:grid-cols-[0.95fr_1.05fr] gap-10 lg:gap-14 items-start">
-        <div>
-          <h2 class="text-2xl lg:text-3xl font-bold text-white">ご希望との照らし合わせ</h2>
-          <p class="mt-4 text-sm text-white/75 leading-[1.95] max-w-md">
-            合うところと、まだ確認しているところを分けて見られるようにしました。特に駐車台数と入居時期は、買えるかどうかが分かってから確定します。
-          </p>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          {proposal.fitItems.map((item) => (
-            <div class="bg-white text-gray-900 p-5">
-              <div class="flex items-center justify-between gap-3">
-                <h3 class="text-base font-bold text-gray-900">{item.label}</h3>
-                <span class:list={[
-                  'inline-flex items-center px-3 py-1 text-xs font-bold',
-                  item.status === 'fit' ? 'bg-[#B5502A] text-white' : 'border border-[#B5502A] text-[#B5502A] bg-white',
-                ]}>
-                  {statusLabel[item.status]}
-                </span>
-              </div>
-              <p class="mt-3 text-sm text-gray-700 leading-[1.85]">{item.summary}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="bg-[#FBFAF7] washi">
-    <div class="max-w-[1120px] mx-auto px-5 sm:px-8 py-12 lg:py-16">
-      <div class="max-w-2xl">
-        <h2 class="text-2xl lg:text-3xl font-bold text-gray-900">暮らしとして見たときのよさ</h2>
-        <p class="mt-5 text-base text-gray-700 leading-[1.95]">
-          数字だけを見ると、築年や水回りの古さが先に目に入ります。いっぽうで、今回の家は「飯塚市潤野」「平屋」「4DK」「ペットを当社で判断できる」という点が、ご希望に近い候補です。
-        </p>
-      </div>
-
-      <div class="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div class="bg-white border border-gray-200 p-5">
-          <svg viewBox="0 0 64 64" aria-hidden="true" class="h-12 w-12">
-            <path d="M12 31 L32 15 L52 31" fill="none" stroke="#1A1A1A" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
-            <path d="M18 29 V50 H46 V29" fill="none" stroke="#1A1A1A" stroke-width="3.5" stroke-linejoin="round" />
-            <path d="M24 38 H40 M24 45 H40" stroke="#B5502A" stroke-width="3" stroke-linecap="round" />
-          </svg>
-          <h3 class="mt-4 text-base font-bold text-gray-900">平屋の4DK</h3>
-          <p class="mt-2 text-sm text-gray-700 leading-[1.85]">階段の上り下りがなく、部屋数にも余裕があります。</p>
-        </div>
-        <div class="bg-white border border-gray-200 p-5">
-          <svg viewBox="0 0 64 64" aria-hidden="true" class="h-12 w-12">
-            <circle cx="32" cy="27" r="13" fill="none" stroke="#1A1A1A" stroke-width="3.5" />
-            <path d="M21 23 L13 15 M43 23 L51 15" stroke="#1A1A1A" stroke-width="3.5" stroke-linecap="round" />
-            <path d="M26 42 C20 44 17 49 16 55 M38 42 C44 44 47 49 48 55" fill="none" stroke="#1A1A1A" stroke-width="3.5" stroke-linecap="round" />
-            <path d="M28 32 H36" stroke="#B5502A" stroke-width="3" stroke-linecap="round" />
-          </svg>
-          <h3 class="mt-4 text-base font-bold text-gray-900">犬と暮らす前提で考えられます</h3>
-          <p class="mt-2 text-sm text-gray-700 leading-[1.85]">当社が貸主になれば、飼育の可否はこちらで決められます。</p>
-        </div>
-        <div class="bg-white border border-gray-200 p-5">
-          <svg viewBox="0 0 64 64" aria-hidden="true" class="h-12 w-12">
-            <path d="M10 35 H28 L33 46 H7 Z" fill="none" stroke="#1A1A1A" stroke-width="3.5" stroke-linejoin="round" />
-            <circle cx="15" cy="48" r="5" fill="none" stroke="#1A1A1A" stroke-width="3.5" />
-            <circle cx="29" cy="48" r="5" fill="none" stroke="#1A1A1A" stroke-width="3.5" />
-            <path d="M34 30 H52 L58 46 H31 Z" fill="none" stroke="#B5502A" stroke-width="3.5" stroke-linejoin="round" />
-            <circle cx="39" cy="48" r="5" fill="none" stroke="#B5502A" stroke-width="3.5" />
-            <circle cx="53" cy="48" r="5" fill="none" stroke="#B5502A" stroke-width="3.5" />
-          </svg>
-          <h3 class="mt-4 text-base font-bold text-gray-900">駐車は確認中です</h3>
-          <p class="mt-2 text-sm text-gray-700 leading-[1.85]">軽自動車2台が停まるか、仲介会社に問い合わせています。</p>
-        </div>
-        <div class="bg-white border border-gray-200 p-5">
-          <svg viewBox="0 0 64 64" aria-hidden="true" class="h-12 w-12">
-            <path d="M33 9 C24 21 19 30 19 39 C19 48 25 55 33 55 C41 55 47 48 47 39 C47 30 42 21 33 9 Z" fill="none" stroke="#1A1A1A" stroke-width="3.5" stroke-linejoin="round" />
-            <path d="M28 41 C30 45 35 47 39 43" fill="none" stroke="#B5502A" stroke-width="3" stroke-linecap="round" />
-          </svg>
-          <h3 class="mt-4 text-base font-bold text-gray-900">水回りは正直に確認します</h3>
-          <p class="mt-2 text-sm text-gray-700 leading-[1.85]">汲み取りのままにするか、浄化槽に切り替えるかを見ます。</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="bg-white washi">
-    <div class="max-w-[1120px] mx-auto px-5 sm:px-8 py-12 lg:py-16">
-      <div class="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-        <div>
-          <h2 class="text-2xl lg:text-3xl font-bold text-gray-900">家のこと</h2>
-          <p class="mt-3 text-sm text-gray-700 leading-[1.9] max-w-2xl">
-            当社が確かめた事実です。まだ見に行けていない項目は「確認中」と書いています。
-          </p>
-        </div>
-        <p class="text-xs text-text-muted">情報確認日：{PROPOSAL_AS_OF}</p>
-      </div>
-
-      <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-5 gap-y-6">
-        {proposal.facts.map((group) => (
-          <div class="border-t border-gray-900 pt-4">
-            <h3 class="text-base font-bold text-gray-900">{group.title}</h3>
-            <ul class="mt-3 space-y-2 text-sm text-gray-700 leading-[1.8]">
-              {group.items.map((item) => (
-                <li class="pl-5 relative before:content-[''] before:absolute before:left-0 before:top-[0.72em] before:h-[1px] before:w-3 before:bg-[#B5502A]">
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  {/*
-    写真の節。権利処理が済んだ写真だけを出す。
-    掲載サイトの写真をスクリーンショットで持ち込まない（src/data/proposals.ts の ProposalPhoto を読む）。
-  */}
-  {photos.length > 0 && (
-    <section class="bg-[#FBFAF7] washi">
-      <div class="max-w-[1120px] mx-auto px-5 sm:px-8 py-12 lg:py-16">
-        <h2 class="text-2xl lg:text-3xl font-bold text-gray-900">家のようす</h2>
-        <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-8">
-          {photos.map((photo) => (
-            <figure class="flex flex-col gap-3">
-              <img
-                src={photo.src}
-                alt={photo.alt}
-                loading="lazy"
-                class="w-full rounded-sm border border-gray-200 bg-white object-cover"
-              />
-              {photo.caption && (
-                <figcaption class="text-sm text-gray-700 leading-[1.9]">{photo.caption}</figcaption>
+  {properties.map((property) => (
+    <article id={property.key} class="scroll-mt-4">
+      <section class="bg-[#FBFAF7] washi border-t border-gray-200">
+        <div class="max-w-[1120px] mx-auto px-5 sm:px-8 py-10 lg:py-14">
+          <div class="grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr] gap-7 lg:gap-14 items-end">
+            <div>
+              {multi && (
+                <p class="font-num text-sm text-[#B5502A]">
+                  候補 {property.index + 1} / {properties.length}
+                </p>
               )}
-            </figure>
-          ))}
-        </div>
-      </div>
-    </section>
-  )}
-
-  {photos.length === 0 && proposal.photoPending && (
-    <section class="bg-[#FBFAF7] washi">
-      <div class="max-w-[1120px] mx-auto px-5 sm:px-8 py-10 lg:py-12">
-        <h2 class="text-2xl lg:text-3xl font-bold text-gray-900">家のようす</h2>
-        <p class="mt-4 text-sm lg:text-base text-gray-700 leading-[1.9] max-w-2xl">
-          {proposal.photoPending}
-        </p>
-      </div>
-    </section>
-  )}
-
-  <section class="bg-[#1A1A1A] text-white">
-    <div class="max-w-[1120px] mx-auto px-5 sm:px-8 py-12 lg:py-16">
-      <div class="grid grid-cols-1 lg:grid-cols-[0.85fr_1.15fr] gap-9 lg:gap-14 items-start">
-        <div>
-          <h2 class="text-2xl lg:text-3xl font-bold text-white">お家賃の見込み</h2>
-          <p class="mt-4 text-sm text-white/75 leading-[1.95] max-w-md">
-            まだ買えていない家なので、ここでは見込みだけお伝えします。買えたあとに状態を見て、工事内容と合わせて確定します。
-          </p>
-        </div>
-        <div>
-          <p class="font-num text-[3rem] leading-none sm:text-[4.4rem] text-white">{rentRange}</p>
-          <p class="mt-4 text-base text-white/85 leading-[1.9]">{proposal.rent.note}</p>
-          <div class="mt-7 grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <div class="border border-white/18 px-5 py-4">
-              <p class="text-sm text-white/60">入居できる日の見込み</p>
-              <p class="mt-1 text-lg font-bold text-white">{proposal.moveInEstimate}</p>
+              <h2 class="mt-2 text-[1.75rem] leading-[1.35] lg:text-[2.5rem] lg:leading-[1.25] font-bold text-gray-900">
+                {property.title}
+              </h2>
+              <p class="mt-4 text-base text-gray-700 leading-[1.95] max-w-xl">{property.tagline}</p>
             </div>
-            <div class="border border-white/18 px-5 py-4">
-              <p class="text-sm text-white/60">共通している前提</p>
-              <p class="mt-1 text-lg font-bold text-white">買えたあとに確定</p>
+            <div class="bg-white border border-gray-200 px-6 py-6">
+              <p class="text-sm font-bold text-gray-500">お家賃の見込み</p>
+              <p class="mt-2 font-num text-[2.6rem] leading-none text-[#B5502A]">{rentRange(property.rent)}</p>
+              <p class="mt-4 text-sm text-gray-700 leading-[1.9]">{property.rent.note}</p>
+              <p class="mt-4 border-t border-gray-200 pt-4 text-sm text-gray-700">
+                入居できる日の見込み：<span class="font-bold text-gray-900">{property.moveInEstimate}</span>
+              </p>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  </section>
+      </section>
 
-  <section class="bg-[#FBFAF7] washi">
+      <section class="bg-[#1A1A1A] text-white">
+        <div class="max-w-[1120px] mx-auto px-5 sm:px-8 py-12 lg:py-16">
+          <div class="grid grid-cols-1 lg:grid-cols-[0.95fr_1.05fr] gap-10 lg:gap-14 items-start">
+            <div>
+              <h3 class="text-2xl lg:text-3xl font-bold text-white">
+                ご希望との照らし合わせ{multi && <span class="ml-2 text-lg text-white/60">／{property.shortName}</span>}
+              </h3>
+              <p class="mt-4 text-sm text-white/75 leading-[1.95] max-w-md">
+                合うところと、まだ確認しているところを分けて見られるようにしました。「確認中」は、買えるかどうかが分かってから確定します。
+              </p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {property.fitItems.map((item) => (
+                <div class="bg-white text-gray-900 p-5">
+                  <div class="flex items-center justify-between gap-3">
+                    <h4 class="text-base font-bold text-gray-900">{item.label}</h4>
+                    <span class:list={[
+                      'inline-flex items-center px-3 py-1 text-xs font-bold',
+                      item.status === 'fit' ? 'bg-[#B5502A] text-white' : 'border border-[#B5502A] text-[#B5502A] bg-white',
+                    ]}>
+                      {statusLabel[item.status]}
+                    </span>
+                  </div>
+                  <p class="mt-3 text-sm text-gray-700 leading-[1.85]">{item.summary}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="bg-white washi">
+        <div class="max-w-[1120px] mx-auto px-5 sm:px-8 py-12 lg:py-16">
+          <h3 class="text-2xl lg:text-3xl font-bold text-gray-900">
+            暮らしとして見たときのよさ{multi && <span class="ml-2 text-lg text-gray-400">／{property.shortName}</span>}
+          </h3>
+
+          <div class="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            {property.highlights.map((highlight) => (
+              <div class="bg-[#FBFAF7] border border-gray-200 p-5">
+                <svg viewBox="0 0 64 64" aria-hidden="true" class="h-12 w-12">
+                  <Fragment set:html={HIGHLIGHT_ICONS[highlight.icon]} />
+                </svg>
+                <h4 class="mt-4 text-base font-bold text-gray-900">{highlight.title}</h4>
+                <p class="mt-2 text-sm text-gray-700 leading-[1.85]">{highlight.body}</p>
+              </div>
+            ))}
+          </div>
+
+          <div class="mt-12 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <h3 class="text-2xl lg:text-3xl font-bold text-gray-900">家のこと</h3>
+              <p class="mt-3 text-sm text-gray-700 leading-[1.9] max-w-2xl">
+                当社が確かめた事実です。まだ見に行けていない項目は「確認中」と書いています。
+              </p>
+            </div>
+            <p class="text-xs text-text-muted">情報確認日：{property.asOf}</p>
+          </div>
+
+          <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-5 gap-y-6">
+            {property.facts.map((group) => (
+              <div class="border-t border-gray-900 pt-4">
+                <h4 class="text-base font-bold text-gray-900">{group.title}</h4>
+                <ul class="mt-3 space-y-2 text-sm text-gray-700 leading-[1.8]">
+                  {group.items.map((item) => (
+                    <li class="pl-5 relative before:content-[''] before:absolute before:left-0 before:top-[0.72em] before:h-[1px] before:w-3 before:bg-[#B5502A]">
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/*
+        写真の節。権利処理が済んだ写真だけを出す。
+        掲載サイトの写真をスクリーンショットで持ち込まない（src/data/proposals.ts の ProposalPhoto を読む）。
+      */}
+      {property.visiblePhotos.length > 0 && (
+        <section class="bg-[#FBFAF7] washi">
+          <div class="max-w-[1120px] mx-auto px-5 sm:px-8 py-12 lg:py-16">
+            <h3 class="text-2xl lg:text-3xl font-bold text-gray-900">
+              家のようす{multi && <span class="ml-2 text-lg text-gray-400">／{property.shortName}</span>}
+            </h3>
+            <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-8">
+              {property.visiblePhotos.map((photo) => (
+                <figure class="flex flex-col gap-3">
+                  <img
+                    src={photo.src}
+                    alt={photo.alt}
+                    loading="lazy"
+                    class="w-full rounded-sm border border-gray-200 bg-white object-cover"
+                  />
+                  {photo.caption && (
+                    <figcaption class="text-sm text-gray-700 leading-[1.9]">{photo.caption}</figcaption>
+                  )}
+                </figure>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {property.visiblePhotos.length === 0 && property.photoPending && (
+        <section class="bg-[#FBFAF7] washi">
+          <div class="max-w-[1120px] mx-auto px-5 sm:px-8 py-10 lg:py-12">
+            <h3 class="text-2xl lg:text-3xl font-bold text-gray-900">
+              家のようす{multi && <span class="ml-2 text-lg text-gray-400">／{property.shortName}</span>}
+            </h3>
+            <p class="mt-4 text-sm lg:text-base text-gray-700 leading-[1.9] max-w-2xl">
+              {property.photoPending}
+            </p>
+          </div>
+        </section>
+      )}
+    </article>
+  ))}
+
+  <section class="bg-white washi border-t border-gray-200">
     <div class="max-w-[1120px] mx-auto px-5 sm:px-8 py-12 lg:py-16">
       <div class="grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-9 lg:gap-14 items-start">
         <div>
           <h2 class="text-2xl lg:text-3xl font-bold text-gray-900">必要なものだけ選べます</h2>
           <p class="mt-4 text-base text-gray-700 leading-[1.95]">
-            きれいにしすぎると、そのぶん家賃は上がります。逆に、使えるところはそのままでよければ家賃を抑えられます。必要なものだけ選んだ場合の月額目安を、下で試せます。
+            きれいにしすぎると、そのぶん家賃は上がります。逆に、使えるところはそのままでよければ家賃を抑えられます。
+            {multi
+              ? '工事の内容と上乗せ額は、どちらの家でも同じです。選んだ場合の月額目安を、下で試せます。'
+              : '必要なものだけ選んだ場合の月額目安を、下で試せます。'}
           </p>
           <p class="mt-4 text-xs text-text-muted leading-[1.8]">
             これは確定額ではありません。買えたあと、工事の必要性を見てから決めます。
           </p>
         </div>
 
-        <div
-          class="bg-white border border-gray-200 p-5 sm:p-6"
-          data-rent-calculator
-          data-base-min={proposal.rent.min}
-          data-base-max={proposal.rent.max}
-        >
+        <div class="bg-[#FBFAF7] border border-gray-200 p-5 sm:p-6" data-rent-calculator>
           <div class="border-b border-gray-200 pb-5">
             <p class="text-sm font-bold text-gray-900">選んだ工事の上乗せ</p>
             <p class="mt-2 font-num text-3xl text-[#B5502A]" data-upgrade-total>0円／月</p>
-            <p class="mt-2 text-sm text-gray-700">
-              選んだ後の家賃目安：<span class="font-bold text-gray-900" data-upgrade-rent>{yen(proposal.rent.min)}円〜{yen(proposal.rent.max)}円／月</span>
-            </p>
+          </div>
+
+          <div class="border-b border-gray-200 py-5 space-y-3">
+            {properties.map((property) => (
+              <div
+                class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1"
+                data-rent-row
+                data-base-min={property.rent.min}
+                data-base-max={property.rent.max}
+              >
+                <p class="text-sm font-bold text-gray-900">{property.shortName}の家賃目安</p>
+                <p class="font-num text-base text-gray-900" data-rent-value>
+                  {yen(property.rent.min)}〜{yen(property.rent.max)}円／月
+                </p>
+              </div>
+            ))}
           </div>
 
           <div class="mt-5 space-y-3">
             {proposal.upgrades.map((option) => (
-              <label class="grid grid-cols-[auto_1fr_auto] gap-3 items-start border border-gray-200 px-4 py-3 cursor-pointer hover:border-[#B5502A] transition-colors">
+              <label class="grid grid-cols-[auto_1fr_auto] gap-3 items-start border border-gray-200 bg-white px-4 py-3 cursor-pointer hover:border-[#B5502A] transition-colors">
                 <input
                   type="checkbox"
                   class="mt-1 h-5 w-5 accent-[#B5502A]"
@@ -343,13 +400,15 @@ const statusLabel: Record<ProposalFitStatus, string> = {
     </div>
   </section>
 
-  <section class="bg-white washi">
+  <section class="bg-[#FBFAF7] washi">
     <div class="max-w-[1120px] mx-auto px-5 sm:px-8 py-12 lg:py-16">
       <div class="grid grid-cols-1 lg:grid-cols-[0.95fr_1.05fr] gap-10 lg:gap-14 items-start">
         <div>
           <h2 class="text-2xl lg:text-3xl font-bold text-gray-900">LINEで聞かせてください</h2>
           <p class="mt-4 text-base text-gray-700 leading-[1.95] max-w-md">
-            この家を買いにいくかどうかを考えるために、率直な感想が知りたいです。迷う点があれば、そのまま教えてください。
+            {multi
+              ? 'どちらの家を買いにいくか（あるいは、どちらも見送るか）を決めるために、率直な感想が知りたいです。迷う点があれば、そのまま教えてください。'
+              : 'この家を買いにいくかどうかを考えるために、率直な感想が知りたいです。迷う点があれば、そのまま教えてください。'}
           </p>
         </div>
         <div class="border-t border-gray-900">
@@ -367,6 +426,7 @@ const statusLabel: Record<ProposalFitStatus, string> = {
             </p>
             <p class="mt-2 text-xs text-text-muted leading-[1.8]">
               このページは、特定の方に向けて候補を確認するための非公開ページです。募集広告ではありません。
+              掲載内容の確認日は{asOfList}です。
             </p>
           </div>
         </div>
@@ -378,11 +438,9 @@ const statusLabel: Record<ProposalFitStatus, string> = {
     const root = document.querySelector('[data-rent-calculator]');
 
     if (root) {
-      const baseMin = Number(root.getAttribute('data-base-min') || '0');
-      const baseMax = Number(root.getAttribute('data-base-max') || '0');
       const checkboxes = Array.from(root.querySelectorAll('input[data-upgrade-option]'));
+      const rows = Array.from(root.querySelectorAll('[data-rent-row]'));
       const totalEl = root.querySelector('[data-upgrade-total]');
-      const rentEl = root.querySelector('[data-upgrade-rent]');
       const formatYen = (value) => `${value.toLocaleString('ja-JP')}円`;
 
       const updateRent = () => {
@@ -392,7 +450,15 @@ const statusLabel: Record<ProposalFitStatus, string> = {
         }, 0);
 
         if (totalEl) totalEl.textContent = `${formatYen(total)}／月`;
-        if (rentEl) rentEl.textContent = `${formatYen(baseMin + total)}〜${formatYen(baseMax + total)}／月`;
+
+        rows.forEach((row) => {
+          const baseMin = Number(row.getAttribute('data-base-min') || '0');
+          const baseMax = Number(row.getAttribute('data-base-max') || '0');
+          const valueEl = row.querySelector('[data-rent-value]');
+          if (valueEl) {
+            valueEl.textContent = `${formatYen(baseMin + total)}〜${formatYen(baseMax + total)}／月`;
+          }
+        });
       };
 
       checkboxes.forEach((checkbox) => {
