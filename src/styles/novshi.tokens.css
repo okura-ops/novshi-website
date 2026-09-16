@@ -1,0 +1,119 @@
+/*
+  novshi design tokens (CSS custom properties)
+  生成元: DESIGN.md v5（2026-09-16）。値の正本は design/tokens.md / design/typography.md /
+  05_content/brand/novshi_web_design_system_v1_1.md。ここは機械向けの書き出し。
+  検査: python scripts/design/check_design_md.py（本ファイルの hex が DESIGN.md の集合に収まるか）
+  使い方: Web は src/styles/global.css の @theme と対応させる。ダッシュボードは :root に取り込む。
+  ダッシュボードの注意色 #C08A2E / 警告色 #B3261E は本ファイルに含めない（ダッシュボード側の例外色）。
+*/
+:root {
+  /* 1. 色 */
+  --nv-ink: #1A1A1A;
+  --nv-text-secondary: #666666;
+  --nv-text-tertiary: #999999;
+  --nv-text-muted-web: #767676;   /* Webで #999999 の代わりに使う薄文字（AA確保） */
+  --nv-border: #E5E5E5;
+  --nv-bg-alt: #F2F2F2;
+  --nv-bg: #FFFFFF;
+  --nv-accent: #B5502A;           /* 柿渋。1画面1〜2箇所・面積5%以内 */
+  --nv-line-cv: #06C755;          /* 個人入居者向けLINE CVボタンのみ */
+  --nv-veil: rgba(26, 26, 26, 0.60);
+  --nv-veil-strong: rgba(26, 26, 26, 0.66);
+
+  /* 2. 書体（Web） */
+  --nv-font-sans: "Zen Kaku Gothic New", "BIZ UDPGothic", "Yu Gothic", system-ui, sans-serif;
+  --nv-font-en: "Montserrat", "Zen Kaku Gothic New", sans-serif;
+  --nv-font-doc: "Noto Sans JP", "BIZ UDPGothic", "Yu Gothic", "Meiryo", sans-serif; /* 資料・帳票用の名前参照 */
+
+  --nv-text-display: clamp(2rem, 4vw, 3.5rem);   /* 32〜56px */
+  --nv-text-display-lh: 1.3;
+  --nv-text-display-ls: 0.02em;
+  --nv-text-h1: 2.5rem;            /* 40px（SP 28px） */
+  --nv-text-h1-lh: 1.35;
+  --nv-text-h1-ls: 0.03em;
+  --nv-text-h2: 2rem;              /* 32px（SP 24px） */
+  --nv-text-h2-lh: 1.4;
+  --nv-text-h2-ls: 0.04em;
+  --nv-text-h3: 1.375rem;          /* 22px（情報セクションは20px、SP 18px） */
+  --nv-text-h3-lh: 1.5;
+  --nv-text-h3-ls: 0.04em;
+  --nv-text-body: 1rem;            /* 16px（SP 15px） */
+  --nv-text-body-lh: 1.8;
+  --nv-text-body-ls: 0.04em;
+  --nv-text-body-s: 0.875rem;      /* 14px */
+  --nv-text-body-s-lh: 1.7;
+  --nv-text-caption: 0.8125rem;    /* 13px。これより小さくしない */
+  --nv-text-caption-lh: 1.6;
+  --nv-text-num-xl: clamp(3rem, 5vw, 4rem);   /* 実績数値 56〜64px Montserrat 700 */
+  --nv-text-num-xl-ls: -0.01em;
+  --nv-text-num-sec: clamp(3rem, 5vw, 4rem);  /* 章番号 48〜64px Montserrat 400〜600、色は --nv-border */
+
+  /* 3. 余白（8px基準の階段） */
+  --nv-space-1: 4px;
+  --nv-space-2: 8px;
+  --nv-space-3: 12px;
+  --nv-space-4: 16px;
+  --nv-space-6: 24px;
+  --nv-space-8: 32px;
+  --nv-space-10: 40px;
+  --nv-space-14: 56px;
+  --nv-space-20: 80px;
+  --nv-space-30: 120px;
+  --nv-space-40: 160px;
+
+  --nv-section-xl: 160px;          /* SP 80px */
+  --nv-section-lg: 120px;          /* SP 64px */
+  --nv-section-tight: 72px;        /* 56〜80px の帯。SP 40〜44px */
+  --nv-section-flush: 0px;
+
+  --nv-container: 1200px;
+  --nv-container-pad: 24px;        /* SP 20px */
+  --nv-measure: 768px;             /* 本文の折返し幅 */
+  --nv-measure-wide: 896px;        /* 表・カード列 */
+  --nv-gutter: 24px;               /* SP 16px */
+
+  /* 角丸 */
+  --nv-radius-none: 0px;           /* Webのボタン・面 */
+  --nv-radius-card: 2px;           /* 資料のカード */
+  --nv-radius-control: 4px;        /* 入力欄。資料のボタン・チップ */
+  --nv-radius-pill: 9999px;        /* タグだけ例外 */
+
+  /* 影（Primaryボタンの1本だけ） */
+  --nv-shadow-none: none;
+  --nv-shadow-cta: 0 2px 4px rgba(0, 0, 0, 0.10);
+
+  /* 4. 部品 */
+  --nv-btn-pad-web: 16px 40px;
+  --nv-btn-pad-doc: 16px 32px;
+  --nv-input-pad: 12px 16px;
+  --nv-card-pad: 32px;
+  --nv-cell-pad: 16px;
+  --nv-header-h: 72px;             /* SP 60px */
+
+  /* 動き */
+  --nv-motion-hover: 0.2s;
+  --nv-motion-reveal: 0.6s;
+  --nv-motion-ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (max-width: 1023px) {
+  :root {
+    --nv-section-xl: 80px;
+    --nv-section-lg: 64px;
+    --nv-section-tight: 44px;
+    --nv-container-pad: 20px;
+    --nv-gutter: 16px;
+    --nv-text-h1: 1.75rem;         /* 28px */
+    --nv-text-h2: 1.5rem;          /* 24px */
+    --nv-text-h3: 1.125rem;        /* 18px */
+    --nv-text-body: 0.9375rem;     /* 15px */
+    --nv-header-h: 60px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --nv-motion-hover: 0s;
+    --nv-motion-reveal: 0s;
+  }
+}

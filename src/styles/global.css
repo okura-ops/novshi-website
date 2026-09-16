@@ -1,7 +1,11 @@
 @import "tailwindcss";
+/* novshi-hq/design/novshi.tokens.css の写し（2026-09-16接続）。手で編集せず、
+   novshi-hq 側で `python scripts/design/check_design_md.py --sync` を回して配る。
+   一致は同スクリプトが検査する。 */
+@import "./novshi.tokens.css";
 
 /* ===== v4 Design System: Monotone (Black / Gray / White) ===== */
-/* Source of truth: 05_content/brand/novshi_design_system_v4.md            */
+/* Source of truth: novshi-hq/DESIGN.md（1枚版）→ design/tokens.md            */
 /* Ink #1A1A1A / Secondary #666666 / Border #E5E5E5 / Pale #F2F2F2 / White  */
 
 @theme {
@@ -31,28 +35,11 @@
   --color-gray-700: #333333;
   --color-gray-900: #1A1A1A;
 
-  /* Semantic — monotone */
-  --color-accent: #1A1A1A;
+  /* Semantic — monotone（サイト固有の派生。accent-hover / accent-dark は墨の階調。
+     色・書体・角丸の本体は下の @theme inline で novshi.tokens.css から引く） */
   --color-accent-hover: #333333;
-  --color-accent-light: #F2F2F2;
   --color-accent-dark: #111111;
-  --color-text-primary: #1A1A1A;
-  --color-text-secondary: #666666;
-  /* #999999 は白地でコントラスト比2.85:1でWCAG AA(4.5:1)に届かず、薄いグレー文字は
-     AI感の型そのもの（anti_ai_visual_design §1-9）。役割は変えず可読性だけ確保する */
-  --color-text-muted: #767676;
-  --color-border: #E5E5E5;
-  --color-bg-secondary: #F2F2F2;
-
-  /* Fonts — 本文もZen Kaku Gothic Newへ統一（2026-08-22）。
-     Noto Sans JPは anti_ai_visual_design §3 で「AI感リスク:高（主因）」に分類されている書体で、
-     本文に使っている限り既定値の顔が抜けない。和文1種＋欧文1種の2書体に絞る。 */
-  --font-sans: "Zen Kaku Gothic New", "BIZ UDPGothic", "Yu Gothic", system-ui, sans-serif;
   --font-display: "Zen Kaku Gothic New", system-ui, sans-serif;
-  --font-en: "Montserrat", "Zen Kaku Gothic New", sans-serif;
-
-  /* CV accent — Web DS v1.0 §2（柿渋。A/B判定までは変種ページのみで使用） */
-  --color-cv: #B5502A;
 
   /* Typography tokens */
   --text-hero: 3.5rem;
@@ -67,13 +54,35 @@
   --text-body: 1rem;
   --text-body--line-height: 1.75;
 
-  /* Radius — cards 2px, buttons/chips 4px, no soft corners */
-  --radius-sm: 2px;
-  --radius-md: 4px;
-  --radius-lg: 4px;
-  --radius-xl: 2px;
-  --radius-2xl: 2px;
-  --radius-3xl: 2px;
+}
+
+/* 値は novshi.tokens.css（novshi-hq の正本の写し）から引く。
+   Tailwind v4 で @theme の値に他のCSS変数を使うときは inline が要る。
+   --color-text-muted: #999999 は白地でコントラスト比2.85:1でWCAG AA(4.5:1)に届かず、薄いグレー文字は
+     AI感の型そのもの（anti_ai_visual_design §1-9）。役割は変えず可読性だけ確保する（#767676）。
+   --font-sans: 本文もZen Kaku Gothic Newへ統一（2026-08-22）。Noto Sans JPは anti_ai_visual_design §3 で
+     「AI感リスク:高（主因）」に分類されている書体で、本文に使っている限り既定値の顔が抜けないため。
+   --color-cv: 柿渋（Web DS v1.0 §2。A/B判定までは変種ページのみで使用）。
+   Radius: cards 2px, controls 4px, buttons 0（web v1.1 §7-1）。soft corners は作らない。 */
+@theme inline {
+  --color-accent: var(--nv-ink);
+  --color-accent-light: var(--nv-bg-alt);
+  --color-text-primary: var(--nv-ink);
+  --color-text-secondary: var(--nv-text-secondary);
+  --color-text-muted: var(--nv-text-muted-web);
+  --color-border: var(--nv-border);
+  --color-bg-secondary: var(--nv-bg-alt);
+  --color-cv: var(--nv-accent);
+
+  --font-sans: var(--nv-font-sans);
+  --font-en: var(--nv-font-en);
+
+  --radius-sm: var(--nv-radius-card);
+  --radius-md: var(--nv-radius-control);
+  --radius-lg: var(--nv-radius-control);
+  --radius-xl: var(--nv-radius-card);
+  --radius-2xl: var(--nv-radius-card);
+  --radius-3xl: var(--nv-radius-card);
 }
 
 @layer base {
@@ -196,15 +205,11 @@
   }
 
   /* ---- Section rhythm (Web DS v1.0 §3-2): 均等反復の禁止。4種で緩急 ---- */
-  .sec-xl { padding-block: 160px; }
-  .sec-lg { padding-block: 120px; }
-  .sec-tight { padding-block: 72px; }
+  /* 値（PC 160/120/72・SP 80/64/44）は novshi.tokens.css が幅ごとに持つ */
+  .sec-xl { padding-block: var(--nv-section-xl); }
+  .sec-lg { padding-block: var(--nv-section-lg); }
+  .sec-tight { padding-block: var(--nv-section-tight); }
   .sec-flush { padding-block: 0; }
-  @media (max-width: 1023px) {
-    .sec-xl { padding-block: 80px; }
-    .sec-lg { padding-block: 64px; }
-    .sec-tight { padding-block: 44px; }
-  }
 
   /* ---- Card hover: border emphasis, NO drop shadow ---- */
   .card-lift {
